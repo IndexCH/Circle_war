@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unity 新手教学友好版代码讲解</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      line-height: 1.7;
+      color: #233026;
+      background: #f4efd9;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    header {
+      padding: 28px 32px;
+      background: #27352a;
+      color: #f8f0d4;
+      border: 3px solid #74694e;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 28px 0 12px;
+      padding: 8px 12px;
+      color: #f8f0d4;
+      background: #3d4d3f;
+      font-size: 22px;
+    }
+
+    h3 {
+      margin: 18px 0 8px;
+      font-size: 18px;
+      color: #27352a;
+    }
+
+    section {
+      margin-top: 22px;
+      padding: 22px 26px;
+      background: rgba(255, 252, 238, 0.88);
+      border: 2px solid #b6aa89;
+    }
+
+    ul, ol {
+      padding-left: 24px;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    code {
+      padding: 2px 5px;
+      background: #ebe2c2;
+      border: 1px solid #d2c49d;
+      border-radius: 3px;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: 16px;
+      background: #1f2a22;
+      color: #f4efd9;
+      border: 2px solid #6f765f;
+    }
+
+    pre code {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+    }
+
+    .note {
+      padding: 12px 14px;
+      background: #efe3bd;
+      border-left: 6px solid #8a6d2f;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      padding: 14px;
+      background: #fbf7e7;
+      border: 1px solid #c6b994;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-right: 6px;
+      padding: 2px 8px;
+      background: #d9c98f;
+      color: #27352a;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Unity 新手教学友好版代码讲解</h1>
+      <p>主题：用 Game 视图做圆形地图窗口，而不是用复杂 UI RecyclerView。</p>
+    </header>
+
+    <section>
+      <h2>本次重构前的问题</h2>
+      <ul>
+        <li>旧版本使用 UGUI、RecyclerView、ViewHolder、Adapter 等概念，新手需要同时理解很多抽象。</li>
+        <li>圆圈、人物和背景都放在 Canvas 里，和普通 2D 游戏物体的学习路径不一致。</li>
+        <li>代码里有泛型、继承、接口、事件系统等内容，老师很难按 Unity 基础顺序讲清楚。</li>
+        <li>报错时堆栈会进入第三方包，新手不知道应该先看哪一段自己的代码。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>本次重构后的代码阅读顺序</h2>
+      <ol>
+        <li>先看 <code>CircleMapRecyclerViewDemo.Start</code>：游戏开始时调用 <code>Build</code>。</li>
+        <li>再看 <code>Build</code>：它按顺序创建背景、圆圈、12 个可见段位、人物。</li>
+        <li>然后看 <code>CreateRoadData</code>：这里创建 30 段真实道路数据。</li>
+        <li>接着看 <code>RefreshVisibleSegments</code>：这里把 30 段数据投影到 12 个圆圈位置。</li>
+        <li>最后看 <code>StepForward</code> 和 <code>StepBackward</code>：它们控制前进、后退和进入大地图。</li>
+      </ol>
+      <p class="note">课堂上可以先把“数据层”和“表现层”画成两条线：数据层有 30 段，表现层只有 12 个 SpriteRenderer。</p>
+    </section>
+
+    <section>
+      <h2>每个脚本的职责说明</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>CircleMapRecyclerViewDemo</h3>
+          <p>负责整个圆形地图：加载资源、生成道路数据、创建场景物体、读取键盘输入、控制前进后退。</p>
+        </div>
+        <div class="card">
+          <h3>CircleMapSegment</h3>
+          <p>只负责一个可见段位：显示图片、颜色、名字，并在玩家位置对应的格子上放大。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>核心变量解释</h2>
+      <ul>
+        <li><code>roadDataList</code>：真实道路数据列表，暂时有 30 段。</li>
+        <li><code>visibleSegmentList</code>：圆圈上实际创建出来的 12 个显示物体。</li>
+        <li><code>currentRoadSegmentIndex</code>：玩家当前走到第几段道路。</li>
+        <li><code>circleRotatingRoot</code>：圆圈和段位的父物体，旋转它就能让整个圆圈转起来。</li>
+        <li><code>PlayerVisibleSlotIndex</code>：人物固定在 6 点钟方位，对应圆圈底部的可见槽位。</li>
+        <li><code>FrontEntryVisibleSlotIndex</code>：12 点钟附近的前方入口，新道路会从这里出现。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>核心方法解释</h2>
+      <h3>Build：按教学顺序搭场景</h3>
+      <pre><code>public void Build()
+{
+    ClearOldMapObjects();
+    CreateIconSprites();
+    CreateRoadData();
+    CreateBackground();
+    CreateCircleRoot();
+    CreateRing();
+    CreateVisibleSegments();
+    CreatePlayer();
+}</code></pre>
+      <p>这段代码像搭积木一样，从背景到人物一步一步创建。老师可以让学生在每个方法里打断点，看场景里多了什么物体。</p>
+
+      <h3>RefreshVisibleSegments：数据层和表现层分开</h3>
+      <pre><code>int roadSegmentIndex = GetRoadDataIndexForVisibleSlot(visibleSlotIndex);
+
+if (roadSegmentIndex &lt; 0)
+{
+    visibleSegment.ShowEmptyLand(emptySegmentSprite, "起点后方空地");
+}
+else
+{
+    CircleRoadSegmentData roadData = roadDataList[roadSegmentIndex];
+    visibleSegment.ShowRoadData(...);
+}</code></pre>
+      <p>这里的重点是：12 个可见物体不会增加，只是每次把不同的道路数据交给它们显示。</p>
+
+      <h3>StepForward：前进一段</h3>
+      <pre><code>int nextRoadSegmentIndex = currentRoadSegmentIndex + 1;
+
+if (nextRoadSegmentIndex &gt;= roadDataList.Count)
+{
+    EnterBigMap();
+    return;
+}
+
+MoveToRoadSegment(nextRoadSegmentIndex, true);</code></pre>
+      <p>当玩家超过第 30 段时，不再继续生成小圆圈内容，而是切换到大地图占位画面。</p>
+    </section>
+
+    <section>
+      <h2>Unity 生命周期讲解</h2>
+      <ul>
+        <li><span class="tag">Start</span> 游戏物体启用后调用一次。这里用来搭建演示场景。</li>
+        <li><span class="tag">Update</span> 每一帧调用一次。这里不写复杂逻辑，只调用读取输入和转动圆圈。</li>
+        <li><span class="tag">OnDestroy</span> 物体销毁时调用。这里释放运行时生成的 Sprite 和 Texture。</li>
+      </ul>
+      <p>本课暂时没有使用 <code>OnTriggerEnter</code>。如果以后给段位加碰撞器，玩家进入某个区域时，就可以用它触发采集、战斗或事件。</p>
+    </section>
+
+    <section>
+      <h2>新手容易犯错的地方</h2>
+      <ul>
+        <li>把 UI 的像素大小直接拿来当世界单位。Game 视图里应该用米一样的世界单位。</li>
+        <li>忘记设置 <code>SpriteRenderer.sortingOrder</code>，导致人物被背景挡住。</li>
+        <li>把 30 段数据都创建成 30 个物体。这里为了讲“窗口”，只创建 12 个显示物体。</li>
+        <li>起点还允许后退。代码里用 <code>currentRoadSegmentIndex &lt;= 0</code> 挡住了这个情况。</li>
+        <li>使用旧版 <code>Input.GetKeyDown</code> 时，项目输入设置必须支持旧输入系统。本项目已调为 Both。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>课堂提问</h2>
+      <ol>
+        <li>为什么真实道路有 30 段，但场景里只创建 12 个段位物体？</li>
+        <li>如果玩家在第 0 段，为什么不能后退？</li>
+        <li><code>Time.deltaTime</code> 为什么要乘在旋转速度上？</li>
+        <li>如果想把第 10 段改成敌人，应该改数据层还是表现层？</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>课后练习</h2>
+      <ol>
+        <li>给资源点、敌人、设施分别换成不同的真实图片。</li>
+        <li>把 <code>totalRoadSegmentCount</code> 从 30 改成 60，观察代码是否还能工作。</li>
+        <li>给 <code>CircleMapSegment</code> 增加鼠标悬停高亮。</li>
+        <li>把 <code>EnterBigMap</code> 的占位文字换成真正的大地图场景切换。</li>
+      </ol>
+    </section>
+  </div>
+</body>
+</html>

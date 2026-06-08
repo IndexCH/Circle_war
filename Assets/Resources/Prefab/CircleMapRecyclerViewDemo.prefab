@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6652024066050173371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6652024066050173372}
+  - component: {fileID: 6652024066050173373}
+  m_Layer: 0
+  m_Name: CircleMapRecyclerViewDemo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6652024066050173372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 2
+  m_GameObject: {fileID: 6652024066050173371}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6652024066050173373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6652024066050173371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760ad13cd7dd4bd4bb4860e6a42e2f25, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  backgroundSpritePath: "Scence/\u76D0\u78B1\u5730/Gemini_Generated_Image_ckvihockvihockvi"
+  ringSpritePath: "Scence/\u76D0\u78B1\u5730/Gemini_Generated_Image_wwab5bwwab5bwwab (1) (1)"
+  playerPrefabPath: Prefab/frame_006
+  circleCenterPosition: {x: 0, y: -0.2}
+  circleRadius: 2.7
+  segmentWorldSize: {x: 0.55, y: 0.55}
+  totalRoadSegmentCount: 30
+  visibleSegmentCount: 12
+  circleRotateSpeed: 8
+  playerWorldSize: {x: 0.8, y: 1.2}
+  playerBottomOffset: 0.25
+  animatePlayer: 1
+  buildOnStart: 1
+  enableLegacyKeyboardInput: 1
+  printMoveLog: 1
