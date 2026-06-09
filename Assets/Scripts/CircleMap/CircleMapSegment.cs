@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CircleWar.UI
+namespace CircleWar
 {
     /*
      * 这个脚本只负责“圆圈上的一个可见段位”。
@@ -62,7 +62,7 @@ namespace CircleWar.UI
         {
             roadSegmentIndex = newRoadSegmentIndex;
             roadSegmentName = newRoadSegmentName;
-            SetSpriteAndColor(iconSprite, segmentColor);
+            SetSpriteAndColor(iconSprite, Color.white);
             SetSelected(isPlayerSlot);
         }
 
@@ -103,10 +103,12 @@ namespace CircleWar.UI
                 return;
             }
 
-            float scaleX = targetWorldSize.x / spriteSize.x;
-            float scaleY = targetWorldSize.y / spriteSize.y;
-            normalScale = new Vector3(scaleX, scaleY, 1f);
-            selectedScale = new Vector3(scaleX * 1.18f, scaleY * 1.18f, 1f);
+            float widthScale = targetWorldSize.x / spriteSize.x;
+            float heightScale = targetWorldSize.y / spriteSize.y;
+            float uniformScale = Mathf.Min(widthScale, heightScale);
+
+            normalScale = new Vector3(uniformScale, uniformScale, 1f);
+            selectedScale = new Vector3(uniformScale * 1.18f, uniformScale * 1.18f, 1f);
         }
     }
 }

@@ -44,12 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 760ad13cd7dd4bd4bb4860e6a42e2f25, type: 3}
   m_Name:
   m_EditorClassIdentifier:
-  backgroundSpritePath: "Scence/\u76D0\u78B1\u5730/Gemini_Generated_Image_ckvihockvihockvi"
-  ringSpritePath: "Scence/\u76D0\u78B1\u5730/Gemini_Generated_Image_wwab5bwwab5bwwab (1) (1)"
-  playerPrefabPath: Prefab/frame_006
+  mapRoot: {fileID: 0}
+  circleRotatingRoot: {fileID: 0}
+  segmentRoot: {fileID: 0}
+  backgroundRenderer: {fileID: 0}
+  ringRenderer: {fileID: 0}
+  playerObject: {fileID: 0}
+  bigMapObject: {fileID: 0}
   circleCenterPosition: {x: 0, y: -0.2}
   circleRadius: 2.7
-  segmentWorldSize: {x: 0.55, y: 0.55}
+  segmentWorldSize: {x: 2, y: 2}
+  segmentAnchorInset: 0.22
   totalRoadSegmentCount: 30
   visibleSegmentCount: 12
   circleRotateSpeed: 8

@@ -1,254 +1,283 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Unity 新手教学友好版代码讲解</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>圆形地图代码课：写给 Unity 新手</title>
+<style>
     body {
-      margin: 0;
-      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
-      line-height: 1.7;
-      color: #233026;
-      background: #f4efd9;
+        margin: 0;
+        padding: 0;
+        background: #f4f1ea;
+        color: #2c2a26;
+        font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+        line-height: 1.8;
     }
-
     .page {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 32px 0 56px;
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 32px 24px 80px 24px;
     }
-
-    header {
-      padding: 28px 32px;
-      background: #27352a;
-      color: #f8f0d4;
-      border: 3px solid #74694e;
-    }
-
     h1 {
-      margin: 0 0 8px;
-      font-size: 34px;
-      letter-spacing: 0;
+        font-size: 30px;
+        color: #3a5a40;
+        border-bottom: 4px solid #a3b18a;
+        padding-bottom: 12px;
     }
-
     h2 {
-      margin: 28px 0 12px;
-      padding: 8px 12px;
-      color: #f8f0d4;
-      background: #3d4d3f;
-      font-size: 22px;
+        font-size: 22px;
+        color: #3a5a40;
+        margin-top: 40px;
+        border-left: 6px solid #a3b18a;
+        padding-left: 12px;
     }
-
     h3 {
-      margin: 18px 0 8px;
-      font-size: 18px;
-      color: #27352a;
+        font-size: 18px;
+        color: #5a4a32;
+        margin-top: 24px;
     }
-
-    section {
-      margin-top: 22px;
-      padding: 22px 26px;
-      background: rgba(255, 252, 238, 0.88);
-      border: 2px solid #b6aa89;
+    p, li {
+        font-size: 16px;
     }
-
-    ul, ol {
-      padding-left: 24px;
+    .lead {
+        background: #e9e4d6;
+        padding: 16px 20px;
+        border-radius: 10px;
+        border: 1px solid #d8d0bd;
     }
-
-    li {
-      margin: 6px 0;
-    }
-
     code {
-      padding: 2px 5px;
-      background: #ebe2c2;
-      border: 1px solid #d2c49d;
-      border-radius: 3px;
+        background: #ece6d8;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 14px;
+        color: #6b4423;
     }
-
     pre {
-      overflow-x: auto;
-      padding: 16px;
-      background: #1f2a22;
-      color: #f4efd9;
-      border: 2px solid #6f765f;
+        background: #2d2a24;
+        color: #f0ece0;
+        padding: 16px 18px;
+        border-radius: 10px;
+        overflow-x: auto;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 14px;
+        line-height: 1.6;
     }
-
-    pre code {
-      padding: 0;
-      border: 0;
-      background: transparent;
-      color: inherit;
-    }
-
-    .note {
-      padding: 12px 14px;
-      background: #efe3bd;
-      border-left: 6px solid #8a6d2f;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-    }
-
+    pre .cmt { color: #8aa37b; }
+    pre .key { color: #d9a05b; }
     .card {
-      padding: 14px;
-      background: #fbf7e7;
-      border: 1px solid #c6b994;
+        background: #ffffff;
+        border: 1px solid #ddd6c4;
+        border-radius: 10px;
+        padding: 4px 22px;
+        margin: 16px 0;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-
-    .tag {
-      display: inline-block;
-      margin-right: 6px;
-      padding: 2px 8px;
-      background: #d9c98f;
-      color: #27352a;
-      font-weight: bold;
+    .tip {
+        background: #eef3e7;
+        border-left: 6px solid #588157;
+        padding: 12px 18px;
+        border-radius: 6px;
+        margin: 16px 0;
     }
-  </style>
+    .warn {
+        background: #faf0e6;
+        border-left: 6px solid #bc6c25;
+        padding: 12px 18px;
+        border-radius: 6px;
+        margin: 16px 0;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        background: #fff;
+    }
+    th, td {
+        border: 1px solid #ddd6c4;
+        padding: 10px 12px;
+        text-align: left;
+        font-size: 15px;
+    }
+    th {
+        background: #a3b18a;
+        color: #fff;
+    }
+    ol.steps li {
+        margin-bottom: 8px;
+    }
+    .q {
+        font-weight: bold;
+        color: #3a5a40;
+    }
+    .badge {
+        display: inline-block;
+        background: #588157;
+        color: #fff;
+        font-size: 13px;
+        padding: 2px 10px;
+        border-radius: 12px;
+        margin-right: 6px;
+    }
+    footer {
+        margin-top: 60px;
+        text-align: center;
+        color: #8a8270;
+        font-size: 13px;
+    }
+</style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <h1>Unity 新手教学友好版代码讲解</h1>
-      <p>主题：用 Game 视图做圆形地图窗口，而不是用复杂 UI RecyclerView。</p>
-    </header>
+<div class="page">
 
-    <section>
-      <h2>本次重构前的问题</h2>
-      <ul>
-        <li>旧版本使用 UGUI、RecyclerView、ViewHolder、Adapter 等概念，新手需要同时理解很多抽象。</li>
-        <li>圆圈、人物和背景都放在 Canvas 里，和普通 2D 游戏物体的学习路径不一致。</li>
-        <li>代码里有泛型、继承、接口、事件系统等内容，老师很难按 Unity 基础顺序讲清楚。</li>
-        <li>报错时堆栈会进入第三方包，新手不知道应该先看哪一段自己的代码。</li>
-      </ul>
-    </section>
+<h1>圆形地图代码课：写给 Unity 新手</h1>
 
-    <section>
-      <h2>本次重构后的代码阅读顺序</h2>
-      <ol>
-        <li>先看 <code>CircleMapRecyclerViewDemo.Start</code>：游戏开始时调用 <code>Build</code>。</li>
-        <li>再看 <code>Build</code>：它按顺序创建背景、圆圈、12 个可见段位、人物。</li>
-        <li>然后看 <code>CreateRoadData</code>：这里创建 30 段真实道路数据。</li>
-        <li>接着看 <code>RefreshVisibleSegments</code>：这里把 30 段数据投影到 12 个圆圈位置。</li>
-        <li>最后看 <code>StepForward</code> 和 <code>StepBackward</code>：它们控制前进、后退和进入大地图。</li>
-      </ol>
-      <p class="note">课堂上可以先把“数据层”和“表现层”画成两条线：数据层有 30 段，表现层只有 12 个 SpriteRenderer。</p>
-    </section>
+<p class="lead">
+这节课我们一起读懂一个小项目：屏幕中间有一个圆圈，圆圈上排着 12 个格子，人物站在圆圈最低点不动。
+你按方向键，圆圈就会转一格，看起来就像人物在沿着一条路往前走。这条路一共 30 段，走完就进入“大地图”。<br><br>
+我们的目标不是写得多酷，而是<strong>每一行代码你都能看懂、能讲出来、能自己改</strong>。
+</p>
 
-    <section>
-      <h2>每个脚本的职责说明</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>CircleMapRecyclerViewDemo</h3>
-          <p>负责整个圆形地图：加载资源、生成道路数据、创建场景物体、读取键盘输入、控制前进后退。</p>
-        </div>
-        <div class="card">
-          <h3>CircleMapSegment</h3>
-          <p>只负责一个可见段位：显示图片、颜色、名字，并在玩家位置对应的格子上放大。</p>
-        </div>
-      </div>
-    </section>
+<h2>一、重构前有什么问题？</h2>
+<div class="card">
+<p>原来所有逻辑都挤在一个 700 多行的脚本里。它一个人干了太多活：</p>
+<ul>
+    <li>用代码画图片</li>
+    <li>计算 30 段路的数据</li>
+    <li>搭建场景（背景、圆圈、格子、人物）</li>
+    <li>读键盘、转圆圈、进大地图</li>
+</ul>
+<p>这就像一个人既当厨师、又当服务员、又当收银员。出问题时你根本不知道该看哪一段。
+对新手来说，最大的麻烦是：<strong>“数据”和“画面”混在一起，分不清谁是谁</strong>。</p>
+</div>
 
-    <section>
-      <h2>核心变量解释</h2>
-      <ul>
-        <li><code>roadDataList</code>：真实道路数据列表，暂时有 30 段。</li>
-        <li><code>visibleSegmentList</code>：圆圈上实际创建出来的 12 个显示物体。</li>
-        <li><code>currentRoadSegmentIndex</code>：玩家当前走到第几段道路。</li>
-        <li><code>circleRotatingRoot</code>：圆圈和段位的父物体，旋转它就能让整个圆圈转起来。</li>
-        <li><code>PlayerVisibleSlotIndex</code>：人物固定在 6 点钟方位，对应圆圈底部的可见槽位。</li>
-        <li><code>FrontEntryVisibleSlotIndex</code>：12 点钟附近的前方入口，新道路会从这里出现。</li>
-      </ul>
-    </section>
+<div class="tip">
+<strong>这次重构做了两件最重要的事：</strong><br>
+1. <strong>数据和表现分开</strong>：先算清楚“路上有哪些段”，再单独去管“怎么把它画出来”。<br>
+2. <strong>一个大脚本拆成几个小脚本</strong>：每个脚本只干一件事，名字一看就知道它负责什么。
+</div>
 
-    <section>
-      <h2>核心方法解释</h2>
-      <h3>Build：按教学顺序搭场景</h3>
-      <pre><code>public void Build()
+<h2>二、重构后的代码阅读顺序</h2>
+<p>建议按下面的顺序读，从“最简单的数据”一步步读到“总指挥”：</p>
+<ol class="steps">
+    <li><span class="badge">数据</span><code>CircleRoadSegmentData.cs</code> —— 先搞清楚“一段路”长什么样。</li>
+    <li><span class="badge">资源</span><code>CircleSegmentSpriteFactory.cs</code> —— 看看图片是怎么用代码画出来的。</li>
+    <li><span class="badge">数据</span><code>CircleRoadMapBuilder.cs</code> —— 看 30 段路是按什么规则造出来的。</li>
+    <li><span class="badge">表现</span><code>CircleMapSegment.cs</code> —— 看“一个格子”怎么把图片显示出来。</li>
+    <li><span class="badge">总指挥</span><code>CircleMapRecyclerViewDemo.cs</code> —— 最后看它怎么把上面这些串起来。</li>
+</ol>
+
+<h2>三、每个脚本负责什么？</h2>
+<table>
+    <tr><th>脚本</th><th>它负责什么</th><th>一句话比喻</th></tr>
+    <tr><td>CircleRoadSegmentData</td><td>记录一段路的名字、图片、颜色</td><td>一张“格子卡片”</td></tr>
+    <tr><td>CircleSegmentSpriteFactory</td><td>用代码生成圆点图片，并负责清理</td><td>画图片的小工厂</td></tr>
+    <tr><td>CircleRoadMapBuilder</td><td>按规则造出 30 段路的数据</td><td>关卡设计师</td></tr>
+    <tr><td>CircleMapSegment</td><td>把交给它的一段数据显示成画面</td><td>一个会换装的格子</td></tr>
+    <tr><td>CircleMapRecyclerViewDemo</td><td>搭场景、收键盘、转圆圈、刷新显示</td><td>总指挥</td></tr>
+</table>
+
+<div class="warn">
+<strong>为什么数据类不是 MonoBehaviour？</strong><br>
+<code>MonoBehaviour</code> 是“能挂在 GameObject 上的脚本”。
+但像 <code>CircleRoadSegmentData</code> 这种只用来存数据的类，不需要挂到物体上，
+所以它就是一个普通 C# 类。新手记住：<em>只有要挂到物体上、要用 Start/Update 的脚本，才需要继承 MonoBehaviour。</em>
+</div>
+
+<h2>四、核心变量解释</h2>
+<div class="card">
+<h3>总指挥里几个最关键的变量</h3>
+<ul>
+    <li><code>currentRoadSegmentIndex</code>：玩家现在走到第几段（从 0 开始）。</li>
+    <li><code>targetCircleAngle</code>：圆圈“想要”转到的角度，圆圈每帧慢慢转过去。</li>
+    <li><code>roadSegmentList</code>：整条路的<strong>数据</strong>（30 段），和屏幕上的格子是两回事。</li>
+    <li><code>visibleSegmentList</code>：屏幕上真实存在的 <strong>12 个格子</strong>。</li>
+    <li><code>hasEnteredBigMap</code>：是否已经走完全程、切到了大地图。</li>
+</ul>
+</div>
+
+<div class="tip">
+<strong>核心思想：12 个格子，30 段数据。</strong><br>
+我们不会真的造出 30 个物体，而是只造 12 个格子，转动时不断告诉它们“现在改显示哪一段数据”。
+这就是为什么数据和表现要分开——同一个格子，换不同数据，就能表现不同的路。
+</div>
+
+<h2>五、核心方法解释</h2>
+
+<h3>1. 数据怎么造出来（CircleRoadMapBuilder）</h3>
+<p>用一连串简单的 <code>if</code> 决定第几段是什么类型。故意不写得“聪明”，就是为了能一条条念出来：</p>
+<pre><span class="cmt">// 前 7 段都是树林路，作为平缓开局</span>
+<span class="key">if</span> (index &lt;= 6)
 {
-    ClearOldMapObjects();
-    CreateIconSprites();
-    CreateRoadData();
-    CreateBackground();
-    CreateCircleRoot();
-    CreateRing();
-    CreateVisibleSegments();
-    CreatePlayer();
-}</code></pre>
-      <p>这段代码像搭积木一样，从背景到人物一步一步创建。老师可以让学生在每个方法里打断点，看场景里多了什么物体。</p>
-
-      <h3>RefreshVisibleSegments：数据层和表现层分开</h3>
-      <pre><code>int roadSegmentIndex = GetRoadDataIndexForVisibleSlot(visibleSlotIndex);
-
-if (roadSegmentIndex &lt; 0)
-{
-    visibleSegment.ShowEmptyLand(emptySegmentSprite, "起点后方空地");
-}
-else
-{
-    CircleRoadSegmentData roadData = roadDataList[roadSegmentIndex];
-    visibleSegment.ShowRoadData(...);
-}</code></pre>
-      <p>这里的重点是：12 个可见物体不会增加，只是每次把不同的道路数据交给它们显示。</p>
-
-      <h3>StepForward：前进一段</h3>
-      <pre><code>int nextRoadSegmentIndex = currentRoadSegmentIndex + 1;
-
-if (nextRoadSegmentIndex &gt;= roadDataList.Count)
-{
-    EnterBigMap();
-    return;
+    <span class="key">return new</span> CircleRoadSegmentData("树林道路 " + index, spriteFactory.treeSegmentSprite, ...);
 }
 
-MoveToRoadSegment(nextRoadSegmentIndex, true);</code></pre>
-      <p>当玩家超过第 30 段时，不再继续生成小圆圈内容，而是切换到大地图占位画面。</p>
-    </section>
+<span class="cmt">// 中间段：每 6 段一个循环，轮流出现不同类型</span>
+<span class="key">int</span> patternIndex = index % 6;
+<span class="key">if</span> (patternIndex == 0) { <span class="cmt">// 采集资源点 ...</span> }
+<span class="key">if</span> (patternIndex == 1) { <span class="cmt">// 沿路探索 ...</span> }</pre>
 
-    <section>
-      <h2>Unity 生命周期讲解</h2>
-      <ul>
-        <li><span class="tag">Start</span> 游戏物体启用后调用一次。这里用来搭建演示场景。</li>
-        <li><span class="tag">Update</span> 每一帧调用一次。这里不写复杂逻辑，只调用读取输入和转动圆圈。</li>
-        <li><span class="tag">OnDestroy</span> 物体销毁时调用。这里释放运行时生成的 Sprite 和 Texture。</li>
-      </ul>
-      <p>本课暂时没有使用 <code>OnTriggerEnter</code>。如果以后给段位加碰撞器，玩家进入某个区域时，就可以用它触发采集、战斗或事件。</p>
-    </section>
+<h3>2. 圆圈怎么平滑旋转（RotateCircleTowardTarget）</h3>
+<pre><span class="key">float</span> currentAngle = circleRotatingRoot.localEulerAngles.z;
+<span class="key">float</span> newAngle = Mathf.LerpAngle(currentAngle, targetCircleAngle, Time.deltaTime * circleRotateSpeed);
+circleRotatingRoot.localEulerAngles = <span class="key">new</span> Vector3(0f, 0f, newAngle);</pre>
+<p>每一帧只往目标角度靠近一点点，于是看起来就是平滑转动，而不是“啪”地一下跳过去。</p>
 
-    <section>
-      <h2>新手容易犯错的地方</h2>
-      <ul>
-        <li>把 UI 的像素大小直接拿来当世界单位。Game 视图里应该用米一样的世界单位。</li>
-        <li>忘记设置 <code>SpriteRenderer.sortingOrder</code>，导致人物被背景挡住。</li>
-        <li>把 30 段数据都创建成 30 个物体。这里为了讲“窗口”，只创建 12 个显示物体。</li>
-        <li>起点还允许后退。代码里用 <code>currentRoadSegmentIndex &lt;= 0</code> 挡住了这个情况。</li>
-        <li>使用旧版 <code>Input.GetKeyDown</code> 时，项目输入设置必须支持旧输入系统。本项目已调为 Both。</li>
-      </ul>
-    </section>
+<h3>3. 格子怎么换显示（CircleMapSegment）</h3>
+<p>总指挥把一段数据“递给”格子，格子负责换图片、换颜色、决定要不要放大（玩家所在格子会放大一点）。
+格子自己<strong>不知道</strong>整条路有 30 段，它只管显示别人给它的那一段。这就是“各管各的”。</p>
 
-    <section>
-      <h2>课堂提问</h2>
-      <ol>
-        <li>为什么真实道路有 30 段，但场景里只创建 12 个段位物体？</li>
-        <li>如果玩家在第 0 段，为什么不能后退？</li>
-        <li><code>Time.deltaTime</code> 为什么要乘在旋转速度上？</li>
-        <li>如果想把第 10 段改成敌人，应该改数据层还是表现层？</li>
-      </ol>
-    </section>
+<h2>六、Unity 生命周期讲解</h2>
+<table>
+    <tr><th>方法</th><th>什么时候被调用</th><th>本项目里用来做什么</th></tr>
+    <tr><td><code>Start()</code></td><td>游戏开始时，只调用一次</td><td>开局自动搭建整个场景</td></tr>
+    <tr><td><code>Update()</code></td><td>每一帧都调用</td><td>读键盘 + 让圆圈转一点</td></tr>
+    <tr><td><code>Awake()</code></td><td>比 Start 更早，物体一创建就调用</td><td>格子脚本自己找好 SpriteRenderer</td></tr>
+    <tr><td><code>OnDestroy()</code></td><td>物体被销毁时</td><td>清理代码生成的图片</td></tr>
+</table>
 
-    <section>
-      <h2>课后练习</h2>
-      <ol>
-        <li>给资源点、敌人、设施分别换成不同的真实图片。</li>
-        <li>把 <code>totalRoadSegmentCount</code> 从 30 改成 60，观察代码是否还能工作。</li>
-        <li>给 <code>CircleMapSegment</code> 增加鼠标悬停高亮。</li>
-        <li>把 <code>EnterBigMap</code> 的占位文字换成真正的大地图场景切换。</li>
-      </ol>
-    </section>
-  </div>
+<div class="tip">
+<strong>Update 里为什么这么干净？</strong><br>
+看总指挥的 <code>Update</code>，里面只有两行：<code>ReadKeyboardInput();</code> 和 <code>RotateCircleTowardTarget();</code>。
+这是好习惯：<em>Update 只写“要做哪几件事”，具体怎么做，藏进各自的小方法里。</em>这样一眼就能看懂每帧在干嘛。
+</div>
+
+<h2>七、新手容易犯错的地方</h2>
+<div class="warn">
+<ul>
+    <li><strong>把 deltaTime 忘了：</strong>移动/旋转不乘 <code>Time.deltaTime</code>，在不同帧率的电脑上速度会不一样。</li>
+    <li><strong>代码生成的图片忘了删：</strong><code>new Texture2D</code>、<code>Sprite.Create</code> 出来的东西 Unity 不会自动回收，要自己 <code>Destroy</code>，否则内存会越用越多。</li>
+    <li><strong>分不清数据和表现：</strong>记住 <code>roadSegmentList</code> 是数据（30 段），<code>visibleSegmentList</code> 是画面（12 个格子）。</li>
+    <li><strong>GetComponent 找不到组件：</strong>人物图片常在子物体上，所以要用 <code>GetComponentInChildren</code> 而不是 <code>GetComponent</code>。</li>
+    <li><strong>sortingOrder 顺序搞反：</strong>数字越小越靠后。背景设成 -20，人物设成 20，人物才会盖在背景上面。</li>
+</ul>
+</div>
+
+<h2>八、课堂提问</h2>
+<div class="card">
+<p class="q">Q1：为什么屏幕上只有 12 个格子，却能表现 30 段路？</p>
+<p>因为转动时我们只是不停地把不同数据“塞”给这 12 个格子去显示。</p>
+<p class="q">Q2：<code>CircleRoadSegmentData</code> 为什么不继承 MonoBehaviour？</p>
+<p>因为它只是存数据，不需要挂在 GameObject 上，也不需要 Start/Update。</p>
+<p class="q">Q3：如果删掉 <code>Time.deltaTime</code> 会发生什么？</p>
+<p>圆圈旋转速度会随帧率变化，高帧率电脑转得飞快，低帧率电脑转得很慢。</p>
+<p class="q">Q4：总指挥的 <code>Update</code> 为什么只有两行？</p>
+<p>因为每帧要做的具体事情都被拆进了小方法，Update 只负责“按顺序喊它们干活”。</p>
+</div>
+
+<h2>九、课后练习</h2>
+<div class="card">
+<ol class="steps">
+    <li><strong>改颜色：</strong>在 <code>CircleRoadMapBuilder</code> 里把“遭遇敌人”那段的颜色改成你喜欢的颜色，运行看看变化。</li>
+    <li><strong>改路长：</strong>在 Inspector 把 <code>totalRoadSegmentCount</code> 从 30 改成 15，观察提前进入大地图。</li>
+    <li><strong>加按键：</strong>在 <code>ReadKeyboardInput</code> 里加一个按 <code>R</code> 键调用 <code>Build()</code> 重新开始的功能。</li>
+    <li><strong>加新格子类型：</strong>在工厂里再生成一种颜色的圆点，并在 Builder 里让某些段用上它。</li>
+    <li><strong>试着讲一遍：</strong>对着同桌，用自己的话把“12 个格子表现 30 段数据”讲清楚。</li>
+</ol>
+</div>
+
+<footer>圆形地图教学课件 · 面向 Unity 新手 · 可直接用浏览器打开</footer>
+
+</div>
 </body>
 </html>
