@@ -164,7 +164,7 @@
     <li><span class="badge">资源</span><code>CircleSegmentSpriteFactory.cs</code> —— 看看图片是怎么用代码画出来的。</li>
     <li><span class="badge">数据</span><code>CircleRoadMapBuilder.cs</code> —— 看 30 段路是按什么规则造出来的。</li>
     <li><span class="badge">表现</span><code>CircleMapSegment.cs</code> —— 看“一个格子”怎么把图片显示出来。</li>
-    <li><span class="badge">总指挥</span><code>CircleMapRecyclerViewDemo.cs</code> —— 最后看它怎么把上面这些串起来。</li>
+    <li><span class="badge">总指挥</span><code>CircleMapRecyclerView.cs</code> —— 最后看它怎么把上面这些小模块串起来。</li>
 </ol>
 
 <h2>三、每个脚本负责什么？</h2>
@@ -174,8 +174,13 @@
     <tr><td>CircleSegmentSpriteFactory</td><td>用代码生成圆点图片，并负责清理</td><td>画图片的小工厂</td></tr>
     <tr><td>CircleRoadMapBuilder</td><td>按规则造出 30 段路的数据</td><td>关卡设计师</td></tr>
     <tr><td>CircleMapSegment</td><td>把交给它的一段数据显示成画面</td><td>一个会换装的格子</td></tr>
-    <tr><td>CircleMapRecyclerViewDemo</td><td>搭场景、收键盘、转圆圈、刷新显示</td><td>总指挥</td></tr>
+    <tr><td>CircleMapRecyclerView</td><td>搭场景、收键盘、转圆圈、刷新显示</td><td>总指挥</td></tr>
+    <tr><td>CircleMapRecyclerViewDemo</td><td>保留给老师参考的 demo 版本</td><td>旧讲义示例</td></tr>
 </table>
+
+<div class="tip">
+新增章节：<code>CircleMapRecyclerViewLesson.html</code> 专门讲“如何从小模块拼出完整圆形地图”。建议放在几个小模块课件之后讲。
+</div>
 
 <div class="warn">
 <strong>为什么数据类不是 MonoBehaviour？</strong><br>
