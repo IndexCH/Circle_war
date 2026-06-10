@@ -111,7 +111,6 @@ namespace CircleWar
 
         private void OnDestroy()
         {
-            spriteFactory.DestroyAllSegmentSprites();
         }
 
         public void Build()
@@ -137,8 +136,6 @@ namespace CircleWar
 
         private void PrepareSpriteModule()
         {
-            spriteFactory.DestroyAllSegmentSprites();
-            spriteFactory.CreateAllSegmentSprites();
         }
 
         private void PrepareRoadDataModule()
@@ -432,7 +429,7 @@ namespace CircleWar
 
                 if (roadSegmentIndex < 0)
                 {
-                    visibleSegment.ShowEmptyLand(spriteFactory.emptySegmentSprite, "起点后方空地");
+                    visibleSegment.ShowEmptyLand(spriteFactory.GetSegmentSprite("plant_blue_berry_grass"), "起点后方空地");
                     continue;
                 }
 
@@ -441,7 +438,7 @@ namespace CircleWar
                     visibleSegment.ShowRoadData(
                         roadSegmentIndex,
                         "通向大地图",
-                        spriteFactory.exitSegmentSprite,
+                        spriteFactory.GetSegmentSprite("wall_ruin_corner_ore"),
                         new Color(1f, 0.83f, 0.32f, 1f),
                         false);
                     continue;

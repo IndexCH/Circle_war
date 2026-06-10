@@ -123,21 +123,15 @@ namespace CircleWar
 
         private void OnDestroy()
         {
-            spriteFactory.DestroyAllSegmentSprites();
         }
 
         public void Build()
         {
-            spriteFactory.DestroyAllSegmentSprites();
-            spriteFactory.CreateAllSegmentSprites();
             BuildRoadData();
 
-            if (!CheckSceneReferences())
-            {
-                return;
-            }
-
-            PrepareSceneObjects();
+            PrepareExistingSceneObjects();
+            PrepareBackgroundAndRingSorting();
+            PrepareVisibleSegments();
 
             currentRoadSegmentIndex = 0;
             hasEnteredBigMap = false;
@@ -148,42 +142,24 @@ namespace CircleWar
             SetCircleAngleImmediately(targetCircleAngle);
         }
 
-        private bool CheckSceneReferences()
+        private void PrepareExistingSceneObjects()
         {
-            bool hasRequiredObjects = true;
-            hasRequiredObjects &= CheckRequiredObject(mapRoot, "Map Root");
-            hasRequiredObjects &= CheckRequiredObject(circleRotatingRoot, "Circle Rotating Root");
-            hasRequiredObjects &= CheckRequiredObject(segmentRoot, "Visible Segment Root");
-            hasRequiredObjects &= CheckRequiredObject(backgroundRenderer, "Background SpriteRenderer");
-            hasRequiredObjects &= CheckRequiredObject(ringRenderer, "Circle Ring SpriteRenderer");
-            hasRequiredObjects &= CheckRequiredObject(playerObject, "Player");
-
-            return hasRequiredObjects;
-        }
-
-        private bool CheckRequiredObject(Object objectValue, string objectName)
-        {
-            if (objectValue != null)
+            if (mapRoot != null)
             {
-                return true;
+                mapRoot.gameObject.SetActive(true);
             }
 
-            Debug.LogError(objectName + " 没有拖引用。请在 Inspector 里把场景里的对应物体拖到这个脚本字段上。", this);
-            return false;
-        }
+            if (circleRotatingRoot != null)
+            {
+                circleRotatingRoot.gameObject.SetActive(true);
+                circleRotatingRoot.position = new Vector3(circleCenterPosition.x, circleCenterPosition.y, 0f);
+            }
 
-        private void PrepareSceneObjects()
-        {
-            mapRoot.gameObject.SetActive(true);
-            circleRotatingRoot.gameObject.SetActive(true);
-            playerObject.SetActive(true);
-
-            circleRotatingRoot.position = new Vector3(circleCenterPosition.x, circleCenterPosition.y, 0f);
-
-            PrepareBackground();
-            PrepareRing();
-            PreparePlayer();
-            PrepareVisibleSegments();
+            if (playerObject != null)
+            {
+                playerObject.SetActive(true);
+                PreparePlayer();
+            }
 
             if (bigMapObject != null)
             {
@@ -191,18 +167,17 @@ namespace CircleWar
             }
         }
 
-        private void PrepareBackground()
+        private void PrepareBackgroundAndRingSorting()
         {
-            backgroundRenderer.sortingOrder = -20;
-            FitSpriteToCamera(backgroundRenderer.transform, backgroundRenderer);
-        }
+            if (backgroundRenderer != null)
+            {
+                backgroundRenderer.sortingOrder = -20;
+            }
 
-        private void PrepareRing()
-        {
-            ringRenderer.sortingOrder = -5;
-
-            float ringDiameter = circleRadius * 2f;
-            SetSpriteWorldSize(ringRenderer.transform, ringRenderer, new Vector2(ringDiameter, ringDiameter));
+            if (ringRenderer != null)
+            {
+                ringRenderer.sortingOrder = -5;
+            }
         }
 
         private void PreparePlayer()
@@ -403,7 +378,7 @@ namespace CircleWar
 
                 if (roadSegmentIndex < 0)
                 {
-                    visibleSegment.ShowEmptyLand(spriteFactory.emptySegmentSprite, "起点后方空地");
+                    visibleSegment.ShowEmptyLand(spriteFactory.GetSegmentSprite("plant_blue_berry_grass"), "起点后方空地");
                     continue;
                 }
 
@@ -412,7 +387,7 @@ namespace CircleWar
                     visibleSegment.ShowRoadData(
                         roadSegmentIndex,
                         "通向大地图",
-                        spriteFactory.exitSegmentSprite,
+                        spriteFactory.GetSegmentSprite("wall_ruin_corner_ore"),
                         new Color(1f, 0.83f, 0.32f, 1f),
                         false);
                     continue;
