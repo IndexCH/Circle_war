@@ -6,9 +6,21 @@ namespace CircleWar
     {
         private const string GeneratedAssetsResourceFolder = "Scence/盐碱地/GeneratedAssets";
 
-        public Sprite GetSegmentSprite(string spriteName)
+        private Sprite[] segmentSprites;
+
+        public Sprite GetSegmentSprite()
         {
-            return Resources.Load<Sprite>(GeneratedAssetsResourceFolder + "/" + spriteName);
+            if (segmentSprites == null)
+            {
+                segmentSprites = Resources.LoadAll<Sprite>(GeneratedAssetsResourceFolder);
+            }
+
+            if (segmentSprites.Length == 0)
+            {
+                return null;
+            }
+
+            return segmentSprites[Random.Range(0, segmentSprites.Length)];
         }
     }
 }
