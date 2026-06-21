@@ -5,284 +5,1249 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>圆形地图代码课：写给 Unity 新手</title>
 <style>
+    :root {
+        --paper: #f7f2e8;
+        --paper-deep: #ede3d0;
+        --ink: #27231f;
+        --muted: #6b6257;
+        --green: #315f4c;
+        --green-soft: #dbe8dc;
+        --blue: #315f7c;
+        --blue-soft: #dce8f1;
+        --clay: #a85c3a;
+        --clay-soft: #f3dfd3;
+        --line: #d6c9b4;
+        --code-bg: #282520;
+        --code-text: #f4ecd8;
+        --white: #fffdfa;
+        --shadow: 0 18px 46px rgba(70, 54, 32, 0.14);
+        --radius: 8px;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
     body {
         margin: 0;
-        padding: 0;
-        background: #f4f1ea;
-        color: #2c2a26;
-        font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+        background:
+            linear-gradient(90deg, rgba(49, 95, 76, 0.06), transparent 28%, rgba(168, 92, 58, 0.05)),
+            var(--paper);
+        color: var(--ink);
+        font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
         line-height: 1.8;
+        overflow-x: hidden;
     }
-    .page {
-        max-width: 920px;
+
+    a {
+        color: inherit;
+    }
+
+    .shell {
+        width: min(1120px, calc(100% - 32px));
         margin: 0 auto;
-        padding: 32px 24px 80px 24px;
     }
-    h1 {
-        font-size: 30px;
-        color: #3a5a40;
-        border-bottom: 4px solid #a3b18a;
-        padding-bottom: 12px;
+
+    .hero {
+        padding: 34px 0 22px;
     }
-    h2 {
-        font-size: 22px;
-        color: #3a5a40;
-        margin-top: 40px;
-        border-left: 6px solid #a3b18a;
-        padding-left: 12px;
+
+    .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.75fr);
+        gap: 28px;
+        align-items: stretch;
     }
+
+    .eyebrow {
+        margin: 0 0 8px;
+        color: var(--clay);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0;
+    }
+
+    h1,
+    h2,
     h3 {
-        font-size: 18px;
-        color: #5a4a32;
-        margin-top: 24px;
+        line-height: 1.28;
+        letter-spacing: 0;
     }
-    p, li {
+
+    h1 {
+        margin: 0;
+        max-width: 820px;
+        color: var(--green);
+        font-size: clamp(30px, 5vw, 54px);
+        overflow-wrap: anywhere;
+    }
+
+    h2 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 48px 0 18px;
+        color: var(--green);
+        font-size: clamp(22px, 3vw, 30px);
+    }
+
+    h2::before {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        height: 30px;
+        border-radius: 3px;
+        background: var(--clay);
+        flex: 0 0 auto;
+    }
+
+    h3 {
+        margin: 24px 0 10px;
+        color: #45392e;
+        font-size: 19px;
+    }
+
+    p,
+    li {
         font-size: 16px;
+        overflow-wrap: anywhere;
     }
+
+    p {
+        margin: 10px 0;
+    }
+
     .lead {
-        background: #e9e4d6;
-        padding: 16px 20px;
-        border-radius: 10px;
-        border: 1px solid #d8d0bd;
+        max-width: 820px;
+        margin: 18px 0 0;
+        color: #433c34;
+        font-size: 18px;
     }
-    code {
-        background: #ece6d8;
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-family: Consolas, "Courier New", monospace;
-        font-size: 14px;
-        color: #6b4423;
+
+    .hero-note {
+        display: grid;
+        align-content: center;
+        gap: 12px;
+        min-height: 250px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 253, 250, 0.78);
+        box-shadow: var(--shadow);
     }
-    pre {
-        background: #2d2a24;
-        color: #f0ece0;
-        padding: 16px 18px;
-        border-radius: 10px;
+
+    .hero-note strong {
+        color: var(--green);
+    }
+
+    .mini-map {
+        position: relative;
+        width: min(260px, 76vw);
+        aspect-ratio: 1;
+        margin: 0 auto;
+        border-radius: 50%;
+        border: 18px solid #c5b184;
+        background: radial-gradient(circle, transparent 47%, rgba(49, 95, 76, 0.14) 49%, transparent 51%);
+    }
+
+    .mini-map .dot {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 34px;
+        height: 34px;
+        margin: -17px;
+        border: 2px solid rgba(39, 35, 31, 0.15);
+        border-radius: 50%;
+        background: var(--white);
+        transform: rotate(calc(var(--i) * 30deg - 90deg)) translateX(92px) rotate(calc(-1 * (var(--i) * 30deg - 90deg)));
+        display: grid;
+        place-items: center;
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .mini-map .player {
+        position: absolute;
+        left: 50%;
+        bottom: 24px;
+        width: 30px;
+        height: 38px;
+        border-radius: 14px 14px 10px 10px;
+        background: var(--clay);
+        transform: translateX(-50%);
+        box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.14);
+    }
+
+    nav.toc {
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        margin: 18px 0 28px;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(247, 242, 232, 0.96);
+        backdrop-filter: blur(8px);
         overflow-x: auto;
-        font-family: Consolas, "Courier New", monospace;
+        white-space: nowrap;
+    }
+
+    nav.toc a {
+        display: inline-block;
+        margin: 0 4px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        color: var(--green);
+        text-decoration: none;
         font-size: 14px;
-        line-height: 1.6;
+        font-weight: 700;
     }
-    pre .cmt { color: #8aa37b; }
-    pre .key { color: #d9a05b; }
-    .card {
-        background: #ffffff;
-        border: 1px solid #ddd6c4;
-        border-radius: 10px;
-        padding: 4px 22px;
+
+    nav.toc a:hover,
+    nav.toc a:focus-visible {
+        outline: 2px solid var(--clay);
+        outline-offset: 2px;
+        background: var(--green-soft);
+    }
+
+    main {
+        padding-bottom: 72px;
+    }
+
+    section {
+        scroll-margin-top: 88px;
+    }
+
+    .panel {
         margin: 16px 0;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        padding: 20px 22px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 253, 250, 0.84);
     }
-    .tip {
-        background: #eef3e7;
-        border-left: 6px solid #588157;
-        padding: 12px 18px;
+
+    .note {
+        margin: 18px 0;
+        padding: 14px 18px;
+        border-left: 6px solid var(--green);
         border-radius: 6px;
-        margin: 16px 0;
+        background: var(--green-soft);
     }
+
     .warn {
-        background: #faf0e6;
-        border-left: 6px solid #bc6c25;
-        padding: 12px 18px;
+        margin: 18px 0;
+        padding: 14px 18px;
+        border-left: 6px solid var(--clay);
         border-radius: 6px;
-        margin: 16px 0;
+        background: var(--clay-soft);
     }
+
+    .blue {
+        border-left-color: var(--blue);
+        background: var(--blue-soft);
+    }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .role {
+        min-height: 100%;
+    }
+
+    .role .tag {
+        display: inline-block;
+        margin-bottom: 8px;
+        padding: 2px 9px;
+        border-radius: 999px;
+        background: var(--green);
+        color: var(--white);
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .role .tag.alt {
+        background: var(--blue);
+    }
+
+    .role .tag.hot {
+        background: var(--clay);
+    }
+
     table {
         width: 100%;
+        margin: 14px 0;
         border-collapse: collapse;
-        margin: 16px 0;
-        background: #fff;
+        background: var(--white);
     }
-    th, td {
-        border: 1px solid #ddd6c4;
-        padding: 10px 12px;
+
+    th,
+    td {
+        padding: 11px 12px;
+        border: 1px solid var(--line);
         text-align: left;
+        vertical-align: top;
         font-size: 15px;
     }
+
     th {
-        background: #a3b18a;
-        color: #fff;
+        background: var(--green);
+        color: var(--white);
+        font-weight: 700;
     }
-    ol.steps li {
-        margin-bottom: 8px;
+
+    code {
+        padding: 2px 6px;
+        border-radius: 4px;
+        background: #eadfcb;
+        color: #69412b;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.92em;
     }
-    .q {
-        font-weight: bold;
-        color: #3a5a40;
+
+    pre {
+        margin: 14px 0;
+        padding: 16px 18px;
+        border-radius: var(--radius);
+        background: var(--code-bg);
+        color: var(--code-text);
+        overflow-x: auto;
+        line-height: 1.62;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 14px;
+        max-width: 100%;
     }
-    .badge {
-        display: inline-block;
-        background: #588157;
-        color: #fff;
+
+    .comment {
+        color: #a9c59c;
+    }
+
+    .keyword {
+        color: #edbd78;
+    }
+
+    .type {
+        color: #93c8da;
+    }
+
+    .flow {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(130px, 1fr));
+        gap: 10px;
+        margin: 16px 0;
+    }
+
+    .step {
+        position: relative;
+        min-height: 118px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--white);
+    }
+
+    .step b {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--green);
+    }
+
+    .step small {
+        color: var(--muted);
+    }
+
+    .diagram {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        align-items: center;
+    }
+
+    .stack {
+        display: grid;
+        gap: 10px;
+    }
+
+    .stack-row {
+        display: grid;
+        grid-template-columns: 86px 1fr;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .stack-label {
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .stack-value {
+        padding: 10px 12px;
+        border-radius: 6px;
+        background: var(--white);
+        border: 1px solid var(--line);
+    }
+
+    .sim {
+        display: grid;
+        grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1fr);
+        gap: 18px;
+        align-items: center;
+        margin-top: 12px;
+    }
+
+    .sim-board {
+        position: relative;
+        width: min(320px, 78vw);
+        aspect-ratio: 1;
+        margin: 0 auto;
+        border-radius: 50%;
+        border: 20px solid #c9b580;
+        background: #efe4cb;
+        transition: transform 240ms ease;
+    }
+
+    .sim-slot {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 42px;
+        height: 42px;
+        margin: -21px;
+        border-radius: 50%;
+        border: 2px solid #cdbd99;
+        background: #fffaf0;
+        color: var(--green);
+        display: grid;
+        place-items: center;
         font-size: 13px;
-        padding: 2px 10px;
-        border-radius: 12px;
-        margin-right: 6px;
+        font-weight: 800;
+        transform: rotate(calc(var(--i) * 30deg - 90deg)) translateX(118px) rotate(calc(-1 * (var(--i) * 30deg - 90deg)));
     }
+
+    .sim-player {
+        position: absolute;
+        left: 50%;
+        bottom: 34px;
+        width: 34px;
+        height: 44px;
+        transform: translateX(-50%);
+        border-radius: 16px 16px 11px 11px;
+        background: var(--clay);
+        box-shadow: inset 0 -10px 0 rgba(0, 0, 0, 0.16);
+    }
+
+    .sim-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 12px 0;
+    }
+
+    button {
+        min-height: 40px;
+        padding: 8px 14px;
+        border: 1px solid #9b714d;
+        border-radius: 6px;
+        background: var(--clay);
+        color: var(--white);
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    button.secondary {
+        background: var(--green);
+        border-color: var(--green);
+    }
+
+    button:hover,
+    button:focus-visible {
+        outline: 2px solid var(--blue);
+        outline-offset: 2px;
+        filter: brightness(1.05);
+    }
+
+    .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .stat {
+        padding: 11px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--line);
+        background: var(--white);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 14px;
+    }
+
+    .qa {
+        display: grid;
+        gap: 12px;
+    }
+
+    .qa details {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--white);
+        padding: 12px 14px;
+    }
+
+    .qa summary {
+        cursor: pointer;
+        color: var(--green);
+        font-weight: 700;
+    }
+
     footer {
-        margin-top: 60px;
+        padding: 32px 0 54px;
+        color: var(--muted);
         text-align: center;
-        color: #8a8270;
-        font-size: 13px;
+        font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+        .hero-grid,
+        .grid-2,
+        .grid-3,
+        .diagram,
+        .sim {
+            grid-template-columns: 1fr;
+        }
+
+        .flow {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-note {
+            min-height: auto;
+        }
+    }
+
+    @media (max-width: 560px) {
+        .shell {
+            width: min(360px, calc(100% - 20px));
+            margin-left: 10px;
+            margin-right: auto;
+        }
+
+        .hero {
+            padding-top: 24px;
+        }
+
+        .panel {
+            padding: 16px;
+        }
+
+        th,
+        td {
+            padding: 9px;
+            font-size: 14px;
+        }
+
+        pre {
+            font-size: 13px;
+        }
+
+        h1 {
+            font-size: 28px;
+        }
+
+        .stack-row,
+        .stat-grid {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
 </head>
 <body>
-<div class="page">
+<header class="hero">
+    <div class="shell hero-grid">
+        <div>
+            <p class="eyebrow">Unity 代码阅读课 · 适合刚学完 MonoBehaviour 的同学</p>
+            <h1>圆形地图代码课：从一段路的数据读到整张地图的转动</h1>
+            <p class="lead">
+                这份课件带你读懂当前项目里的圆形地图代码。你只需要知道 GameObject、Transform、Inspector、Prefab、Scene、Start、Update，
+                再加上一点 C# 的变量、if、for、List、方法和类，就能按顺序看懂。
+            </p>
+        </div>
+        <aside class="hero-note" aria-label="圆形地图示意">
+            <div class="mini-map" aria-hidden="true">
+                <span class="dot" style="--i:0">0</span>
+                <span class="dot" style="--i:1">1</span>
+                <span class="dot" style="--i:2">2</span>
+                <span class="dot" style="--i:3">3</span>
+                <span class="dot" style="--i:4">4</span>
+                <span class="dot" style="--i:5">5</span>
+                <span class="dot" style="--i:6">6</span>
+                <span class="dot" style="--i:7">7</span>
+                <span class="dot" style="--i:8">8</span>
+                <span class="dot" style="--i:9">9</span>
+                <span class="dot" style="--i:10">10</span>
+                <span class="dot" style="--i:11">11</span>
+                <span class="player"></span>
+            </div>
+            <p><strong>一句话先抓主线：</strong>玩家看起来在往前走，代码里其实是圆环在旋转，12 个可见格子不断换显示内容。</p>
+        </aside>
+    </div>
+</header>
 
-<h1>圆形地图代码课：写给 Unity 新手</h1>
+<nav class="shell toc" aria-label="课件目录">
+    <a href="#goal">项目目标</a>
+    <a href="#order">阅读顺序</a>
+    <a href="#data">数据脚本</a>
+    <a href="#sprites">资源脚本</a>
+    <a href="#builder">道路生成</a>
+    <a href="#segment">显示格子</a>
+    <a href="#view">总控制器</a>
+    <a href="#sim">小模拟</a>
+    <a href="#mistakes">常见误区</a>
+    <a href="#practice">练习</a>
+</nav>
 
-<p class="lead">
-这节课我们一起读懂一个小项目：屏幕中间有一个圆圈，圆圈上排着 12 个格子，人物站在圆圈最低点不动。
-你按方向键，圆圈就会转一格，看起来就像人物在沿着一条路往前走。这条路一共 30 段，走完就进入“大地图”。<br><br>
-我们的目标不是写得多酷，而是<strong>每一行代码你都能看懂、能讲出来、能自己改</strong>。
-</p>
+<main class="shell">
+    <section id="goal">
+        <h2>一、这个项目到底在做什么</h2>
+        <div class="panel">
+            <p>
+                场景里有背景、圆环、玩家和一圈小图标。玩家固定在圆环下方，你按住 <code>D</code> 或右方向键，圆环向一个方向转；
+                按住 <code>A</code> 或左方向键，圆环反方向转。视觉效果像玩家沿着圆形道路移动。
+            </p>
+            <p>
+                对新手最重要的不是先背所有方法，而是分清两件事：
+            </p>
+            <div class="grid-2">
+                <article class="panel role">
+                    <span class="tag">数据</span>
+                    <h3>整条路有哪些段</h3>
+                    <p><code>roadSegmentList</code> 保存整条路的数据。默认有 30 段，每段可以叫“树林道路”“遭遇敌人”“采集资源点”等。</p>
+                </article>
+                <article class="panel role">
+                    <span class="tag alt">画面</span>
+                    <h3>屏幕上看得到哪些格子</h3>
+                    <p><code>visibleSegmentList</code> 保存屏幕上真实创建出来的格子。默认只有 12 个，它们会重复使用。</p>
+                </article>
+            </div>
+            <div class="note">
+                记住这句话：<strong>30 段是数据，12 个是显示位置。</strong>圆形地图不是把 30 个物体都摆出来，而是让 12 个格子随着移动换图片。
+            </div>
+        </div>
+    </section>
 
-<h2>一、重构前有什么问题？</h2>
-<div class="card">
-<p>原来所有逻辑都挤在一个 700 多行的脚本里。它一个人干了太多活：</p>
-<ul>
-    <li>用代码画图片</li>
-    <li>计算 30 段路的数据</li>
-    <li>搭建场景（背景、圆圈、格子、人物）</li>
-    <li>读键盘、转圆圈、进大地图</li>
-</ul>
-<p>这就像一个人既当厨师、又当服务员、又当收银员。出问题时你根本不知道该看哪一段。
-对新手来说，最大的麻烦是：<strong>“数据”和“画面”混在一起，分不清谁是谁</strong>。</p>
-</div>
+    <section id="order">
+        <h2>二、建议按这个顺序读代码</h2>
+        <div class="flow" aria-label="代码阅读顺序">
+            <div class="step">
+                <b>1. 数据</b>
+                <code>CircleRoadSegmentData</code>
+                <small>一段路要记录什么</small>
+            </div>
+            <div class="step">
+                <b>2. 资源</b>
+                <code>CircleSegmentSpriteFactory</code>
+                <small>格子图片从哪里来</small>
+            </div>
+            <div class="step">
+                <b>3. 生成</b>
+                <code>CircleRoadMapBuilder</code>
+                <small>30 段路怎么造出来</small>
+            </div>
+            <div class="step">
+                <b>4. 显示</b>
+                <code>CircleMapSegment</code>
+                <small>一个格子怎么显示图片</small>
+            </div>
+            <div class="step">
+                <b>5. 总控制</b>
+                <code>CircleMapView</code>
+                <small>启动、输入、刷新、旋转</small>
+            </div>
+        </div>
+        <div class="warn">
+            不建议一开始就直接啃 <code>CircleMapView</code>。它是总控制器，里面会调用前面 4 个脚本。先读小脚本，再读总控制器，会轻松很多。
+        </div>
+    </section>
 
-<div class="tip">
-<strong>这次重构做了两件最重要的事：</strong><br>
-1. <strong>数据和表现分开</strong>：先算清楚“路上有哪些段”，再单独去管“怎么把它画出来”。<br>
-2. <strong>一个大脚本拆成几个小脚本</strong>：每个脚本只干一件事，名字一看就知道它负责什么。
-</div>
-
-<h2>二、重构后的代码阅读顺序</h2>
-<p>建议按下面的顺序读，从“最简单的数据”一步步读到“总指挥”：</p>
-<ol class="steps">
-    <li><span class="badge">数据</span><code>CircleRoadSegmentData.cs</code> —— 先搞清楚“一段路”长什么样。</li>
-    <li><span class="badge">资源</span><code>CircleSegmentSpriteFactory.cs</code> —— 看看图片是怎么用代码画出来的。</li>
-    <li><span class="badge">数据</span><code>CircleRoadMapBuilder.cs</code> —— 看 30 段路是按什么规则造出来的。</li>
-    <li><span class="badge">表现</span><code>CircleMapSegment.cs</code> —— 看“一个格子”怎么把图片显示出来。</li>
-    <li><span class="badge">总指挥</span><code>CircleMapRecyclerView.cs</code> —— 最后看它怎么把上面这些小模块串起来。</li>
-</ol>
-
-<h2>三、每个脚本负责什么？</h2>
-<table>
-    <tr><th>脚本</th><th>它负责什么</th><th>一句话比喻</th></tr>
-    <tr><td>CircleRoadSegmentData</td><td>记录一段路的名字、图片、颜色</td><td>一张“格子卡片”</td></tr>
-    <tr><td>CircleSegmentSpriteFactory</td><td>用代码生成圆点图片，并负责清理</td><td>画图片的小工厂</td></tr>
-    <tr><td>CircleRoadMapBuilder</td><td>按规则造出 30 段路的数据</td><td>关卡设计师</td></tr>
-    <tr><td>CircleMapSegment</td><td>把交给它的一段数据显示成画面</td><td>一个会换装的格子</td></tr>
-    <tr><td>CircleMapRecyclerView</td><td>搭场景、收键盘、转圆圈、刷新显示</td><td>总指挥</td></tr>
-    <tr><td>CircleMapRecyclerViewDemo</td><td>保留给老师参考的 demo 版本</td><td>旧讲义示例</td></tr>
-</table>
-
-<div class="tip">
-新增章节：<code>CircleMapRecyclerViewLesson.html</code> 专门讲“如何从小模块拼出完整圆形地图”。建议放在几个小模块课件之后讲。
-</div>
-
-<div class="warn">
-<strong>为什么数据类不是 MonoBehaviour？</strong><br>
-<code>MonoBehaviour</code> 是“能挂在 GameObject 上的脚本”。
-但像 <code>CircleRoadSegmentData</code> 这种只用来存数据的类，不需要挂到物体上，
-所以它就是一个普通 C# 类。新手记住：<em>只有要挂到物体上、要用 Start/Update 的脚本，才需要继承 MonoBehaviour。</em>
-</div>
-
-<h2>四、核心变量解释</h2>
-<div class="card">
-<h3>总指挥里几个最关键的变量</h3>
-<ul>
-    <li><code>currentRoadSegmentIndex</code>：玩家现在走到第几段（从 0 开始）。</li>
-    <li><code>targetCircleAngle</code>：圆圈“想要”转到的角度，圆圈每帧慢慢转过去。</li>
-    <li><code>roadSegmentList</code>：整条路的<strong>数据</strong>（30 段），和屏幕上的格子是两回事。</li>
-    <li><code>visibleSegmentList</code>：屏幕上真实存在的 <strong>12 个格子</strong>。</li>
-    <li><code>hasEnteredBigMap</code>：是否已经走完全程、切到了大地图。</li>
-</ul>
-</div>
-
-<div class="tip">
-<strong>核心思想：12 个格子，30 段数据。</strong><br>
-我们不会真的造出 30 个物体，而是只造 12 个格子，转动时不断告诉它们“现在改显示哪一段数据”。
-这就是为什么数据和表现要分开——同一个格子，换不同数据，就能表现不同的路。
-</div>
-
-<h2>五、核心方法解释</h2>
-
-<h3>1. 数据怎么造出来（CircleRoadMapBuilder）</h3>
-<p>用一连串简单的 <code>if</code> 决定第几段是什么类型。故意不写得“聪明”，就是为了能一条条念出来：</p>
-<pre><span class="cmt">// 前 7 段都是树林路，作为平缓开局</span>
-<span class="key">if</span> (index &lt;= 6)
+    <section id="data">
+        <h2>三、数据脚本：一段路只是一张小卡片</h2>
+        <div class="diagram">
+            <div>
+                <p>
+                    <code>CircleRoadSegmentData</code> 是普通 C# 类，不继承 <code>MonoBehaviour</code>。
+                    它不用挂在 GameObject 上，也没有 <code>Start()</code> 和 <code>Update()</code>。
+                </p>
+                <p>
+                    它的工作很朴素：记录一段路的名字，以及这一段属于什么内容类型。
+                </p>
+            </div>
+            <div class="stack">
+                <div class="stack-row">
+                    <div class="stack-label">类</div>
+                    <div class="stack-value"><code>CircleRoadSegmentData</code>：保存一段路的数据</div>
+                </div>
+                <div class="stack-row">
+                    <div class="stack-label">名字</div>
+                    <div class="stack-value"><code>segmentName</code>：例如“遭遇敌人 15”</div>
+                </div>
+                <div class="stack-row">
+                    <div class="stack-label">类型</div>
+                    <div class="stack-value"><code>contentType</code>：None、Monster、Npc、Resource</div>
+                </div>
+            </div>
+        </div>
+        <pre><span class="keyword">public enum</span> <span class="type">SegmentContentType</span>
 {
-    <span class="key">return new</span> CircleRoadSegmentData("树林道路 " + index, spriteFactory.treeSegmentSprite, ...);
+    None,
+    Monster,
+    Npc,
+    Resource
 }
 
-<span class="cmt">// 中间段：每 6 段一个循环，轮流出现不同类型</span>
-<span class="key">int</span> patternIndex = index % 6;
-<span class="key">if</span> (patternIndex == 0) { <span class="cmt">// 采集资源点 ...</span> }
-<span class="key">if</span> (patternIndex == 1) { <span class="cmt">// 沿路探索 ...</span> }</pre>
+<span class="keyword">public class</span> <span class="type">CircleRoadSegmentData</span>
+{
+    <span class="keyword">public string</span> segmentName;
+    <span class="keyword">public</span> <span class="type">SegmentContentType</span> contentType = SegmentContentType.None;
 
-<h3>2. 圆圈怎么平滑旋转（RotateCircleTowardTarget）</h3>
-<pre><span class="key">float</span> currentAngle = circleRotatingRoot.localEulerAngles.z;
-<span class="key">float</span> newAngle = Mathf.LerpAngle(currentAngle, targetCircleAngle, Time.deltaTime * circleRotateSpeed);
-circleRotatingRoot.localEulerAngles = <span class="key">new</span> Vector3(0f, 0f, newAngle);</pre>
-<p>每一帧只往目标角度靠近一点点，于是看起来就是平滑转动，而不是“啪”地一下跳过去。</p>
+    <span class="keyword">public</span> CircleRoadSegmentData(<span class="keyword">string</span> newSegmentName)
+    {
+        segmentName = newSegmentName;
+    }
+}</pre>
+        <div class="note">
+            新手判断技巧：如果一个脚本只是存数据，不需要挂到物体上，也不需要每帧执行，就可以是普通类。
+        </div>
+    </section>
 
-<h3>3. 格子怎么换显示（CircleMapSegment）</h3>
-<p>总指挥把一段数据“递给”格子，格子负责换图片、换颜色、决定要不要放大（玩家所在格子会放大一点）。
-格子自己<strong>不知道</strong>整条路有 30 段，它只管显示别人给它的那一段。这就是“各管各的”。</p>
+    <section id="sprites">
+        <h2>四、资源脚本：从 Resources 文件夹拿图片</h2>
+        <div class="panel">
+            <p>
+                <code>CircleSegmentSpriteFactory</code> 的名字里有 Factory，可以先把它理解成“图片小仓库”。
+                它第一次被问“给我一张路段图片”时，会去 <code>Resources</code> 目录加载图片。
+            </p>
+            <pre><span class="keyword">private const string</span> GeneratedAssetsResourceFolder =
+    <span class="comment">"Scence/盐碱地/GeneratedAssets"</span>;
 
-<h2>六、Unity 生命周期讲解</h2>
-<table>
-    <tr><th>方法</th><th>什么时候被调用</th><th>本项目里用来做什么</th></tr>
-    <tr><td><code>Start()</code></td><td>游戏开始时，只调用一次</td><td>开局自动搭建整个场景</td></tr>
-    <tr><td><code>Update()</code></td><td>每一帧都调用</td><td>读键盘 + 让圆圈转一点</td></tr>
-    <tr><td><code>Awake()</code></td><td>比 Start 更早，物体一创建就调用</td><td>格子脚本自己找好 SpriteRenderer</td></tr>
-    <tr><td><code>OnDestroy()</code></td><td>物体被销毁时</td><td>清理代码生成的图片</td></tr>
-</table>
+<span class="keyword">public</span> <span class="type">Sprite</span> GetSegmentSprite()
+{
+    <span class="keyword">if</span> (segmentSprites == <span class="keyword">null</span>)
+    {
+        segmentSprites = Resources.LoadAll&lt;Sprite&gt;(GeneratedAssetsResourceFolder);
+    }
 
-<div class="tip">
-<strong>Update 里为什么这么干净？</strong><br>
-看总指挥的 <code>Update</code>，里面只有两行：<code>ReadKeyboardInput();</code> 和 <code>RotateCircleTowardTarget();</code>。
-这是好习惯：<em>Update 只写“要做哪几件事”，具体怎么做，藏进各自的小方法里。</em>这样一眼就能看懂每帧在干嘛。
-</div>
+    <span class="keyword">if</span> (segmentSprites.Length == 0)
+    {
+        <span class="keyword">return null</span>;
+    }
 
-<h2>七、新手容易犯错的地方</h2>
-<div class="warn">
-<ul>
-    <li><strong>把 deltaTime 忘了：</strong>移动/旋转不乘 <code>Time.deltaTime</code>，在不同帧率的电脑上速度会不一样。</li>
-    <li><strong>代码生成的图片忘了删：</strong><code>new Texture2D</code>、<code>Sprite.Create</code> 出来的东西 Unity 不会自动回收，要自己 <code>Destroy</code>，否则内存会越用越多。</li>
-    <li><strong>分不清数据和表现：</strong>记住 <code>roadSegmentList</code> 是数据（30 段），<code>visibleSegmentList</code> 是画面（12 个格子）。</li>
-    <li><strong>GetComponent 找不到组件：</strong>人物图片常在子物体上，所以要用 <code>GetComponentInChildren</code> 而不是 <code>GetComponent</code>。</li>
-    <li><strong>sortingOrder 顺序搞反：</strong>数字越小越靠后。背景设成 -20，人物设成 20，人物才会盖在背景上面。</li>
-</ul>
-</div>
+    <span class="keyword">return</span> segmentSprites[Random.Range(0, segmentSprites.Length)];
+}</pre>
+            <table>
+                <tr>
+                    <th>代码</th>
+                    <th>新手解释</th>
+                </tr>
+                <tr>
+                    <td><code>Resources.LoadAll&lt;Sprite&gt;(...)</code></td>
+                    <td>从 Unity 的 Resources 目录里一次性加载多个 Sprite。</td>
+                </tr>
+                <tr>
+                    <td><code>segmentSprites == null</code></td>
+                    <td>说明还没加载过，第一次才去加载，后面直接复用数组。</td>
+                </tr>
+                <tr>
+                    <td><code>segmentSprites.Length == 0</code></td>
+                    <td>如果文件夹里没有 Sprite，就返回 <code>null</code>，避免随机取图时报错。</td>
+                </tr>
+                <tr>
+                    <td><code>Random.Range</code></td>
+                    <td>从已经加载的图片里随机挑一张，所以每个格子看起来可能不同。</td>
+                </tr>
+            </table>
+            <div class="warn">
+                路径里的 <code>Scence</code> 是当前项目实际使用的文件夹名字。讲课时不要顺手改成别的拼写，否则代码会找不到资源。
+            </div>
+        </div>
+    </section>
 
-<h2>八、课堂提问</h2>
-<div class="card">
-<p class="q">Q1：为什么屏幕上只有 12 个格子，却能表现 30 段路？</p>
-<p>因为转动时我们只是不停地把不同数据“塞”给这 12 个格子去显示。</p>
-<p class="q">Q2：<code>CircleRoadSegmentData</code> 为什么不继承 MonoBehaviour？</p>
-<p>因为它只是存数据，不需要挂在 GameObject 上，也不需要 Start/Update。</p>
-<p class="q">Q3：如果删掉 <code>Time.deltaTime</code> 会发生什么？</p>
-<p>圆圈旋转速度会随帧率变化，高帧率电脑转得飞快，低帧率电脑转得很慢。</p>
-<p class="q">Q4：总指挥的 <code>Update</code> 为什么只有两行？</p>
-<p>因为每帧要做的具体事情都被拆进了小方法，Update 只负责“按顺序喊它们干活”。</p>
-</div>
+    <section id="builder">
+        <h2>五、道路生成：用 for 和 if 造出 30 段路</h2>
+        <div class="panel">
+            <p>
+                <code>CircleRoadMapBuilder</code> 不负责显示，也不负责读键盘。它只负责回答一个问题：
+                “如果我要一条 30 段的路，每一段应该叫什么，是什么类型？”
+            </p>
+            <pre><span class="keyword">public</span> List&lt;CircleRoadSegmentData&gt; BuildRoadSegmentList(
+    <span class="keyword">int</span> totalRoadSegmentCount,
+    CircleSegmentSpriteFactory spriteFactory)
+{
+    List&lt;CircleRoadSegmentData&gt; roadSegmentList =
+        <span class="keyword">new</span> List&lt;CircleRoadSegmentData&gt;();
 
-<h2>九、课后练习</h2>
-<div class="card">
-<ol class="steps">
-    <li><strong>改颜色：</strong>在 <code>CircleRoadMapBuilder</code> 里把“遭遇敌人”那段的颜色改成你喜欢的颜色，运行看看变化。</li>
-    <li><strong>改路长：</strong>在 Inspector 把 <code>totalRoadSegmentCount</code> 从 30 改成 15，观察提前进入大地图。</li>
-    <li><strong>加按键：</strong>在 <code>ReadKeyboardInput</code> 里加一个按 <code>R</code> 键调用 <code>Build()</code> 重新开始的功能。</li>
-    <li><strong>加新格子类型：</strong>在工厂里再生成一种颜色的圆点，并在 Builder 里让某些段用上它。</li>
-    <li><strong>试着讲一遍：</strong>对着同桌，用自己的话把“12 个格子表现 30 段数据”讲清楚。</li>
-</ol>
-</div>
+    <span class="keyword">for</span> (<span class="keyword">int</span> index = 0; index &lt; totalRoadSegmentCount; index++)
+    {
+        roadSegmentList.Add(CreateRoadSegmentByIndex(index, totalRoadSegmentCount, spriteFactory));
+    }
 
-<footer>圆形地图教学课件 · 面向 Unity 新手 · 可直接用浏览器打开</footer>
+    <span class="keyword">return</span> roadSegmentList;
+}</pre>
+            <p>
+                这里的 <code>for</code> 很适合新手理解：从第 0 段开始，一段一段创建，直到达到总数量。
+            </p>
+        </div>
+        <div class="panel">
+            <h3>每段内容怎么决定</h3>
+            <pre><span class="keyword">if</span> (index &lt;= 6)
+{
+    <span class="keyword">return new</span> CircleRoadSegmentData(<span class="comment">"树林道路 "</span>);
+}
 
-</div>
+<span class="keyword">if</span> (index == totalRoadSegmentCount - 1)
+{
+    <span class="keyword">return new</span> CircleRoadSegmentData(<span class="comment">"年度危机 / 进入大地图"</span> + index);
+}
+
+<span class="keyword">int</span> patternIndex = index % 6;</pre>
+            <table>
+                <tr>
+                    <th>规则</th>
+                    <th>解释</th>
+                </tr>
+                <tr>
+                    <td><code>index &lt;= 6</code></td>
+                    <td>前 7 段都是树林道路，作为开局缓冲。</td>
+                </tr>
+                <tr>
+                    <td><code>index == totalRoadSegmentCount - 1</code></td>
+                    <td>最后一段是特殊结尾，名字里写着进入大地图。</td>
+                </tr>
+                <tr>
+                    <td><code>index % 6</code></td>
+                    <td>取余数，让中间路段每 6 段循环一次。</td>
+                </tr>
+            </table>
+            <div class="note blue">
+                <code>spriteFactory</code> 目前作为参数传进来，但这个脚本当前主要只设置名字和内容类型。课堂上可以告诉学生：函数参数不一定每一版都会马上用满，项目迭代时常会留下后续扩展位置。
+            </div>
+        </div>
+    </section>
+
+    <section id="segment">
+        <h2>六、显示格子：拿到 Sprite，然后把底部对齐</h2>
+        <div class="panel">
+            <p>
+                <code>CircleMapSegment</code> 是挂在每个可见格子上的脚本。它不关心整条路有多少段，也不关心玩家按了什么键。
+                总控制器给它一张 Sprite，它就把这张图交给自己的 <code>SpriteRenderer</code>。
+            </p>
+            <pre><span class="keyword">public void</span> Setup(<span class="type">SpriteRenderer</span> renderer)
+{
+    segmentSpriteRenderer = renderer;
+}
+
+<span class="keyword">public void</span> Show(<span class="type">Sprite</span> sprite)
+{
+    segmentSpriteRenderer.sprite = sprite;
+    AlignSpriteBottomCenter();
+}</pre>
+            <p>
+                <code>Setup</code> 像是“登记一下我要控制哪个 SpriteRenderer”。<code>Show</code> 像是“这次请显示这张图片”。
+            </p>
+        </div>
+        <div class="panel">
+            <h3>为什么还要底部居中</h3>
+            <p>
+                不同资源图片的大小和中心点可能不一样。如果直接显示，有的图标会像漂在空中，有的会压到圆环里。
+                <code>AlignSpriteBottomCenter()</code> 会用 Sprite 的边界计算“底部中心”，再移动子物体，让图标像稳稳站在格子点上。
+            </p>
+            <pre><span class="type">Bounds</span> bounds = segmentSpriteRenderer.sprite.bounds;
+<span class="type">Vector3</span> bottomCenter = <span class="keyword">new</span> Vector3(bounds.center.x, bounds.min.y, 0f);
+
+segmentSpriteRenderer.transform.localPosition = <span class="keyword">new</span> Vector3(
+    -bottomCenter.x * scale.x,
+    -bottomCenter.y * scale.y,
+    0f);</pre>
+            <div class="warn">
+                这个脚本当前只做“显示 Sprite”和“底部对齐”。如果以后要加高亮、颜色、文字，那是新功能；读当前代码时先不要把这些想进去。
+            </div>
+        </div>
+    </section>
+
+    <section id="view">
+        <h2>七、总控制器：CircleMapView 把所有东西串起来</h2>
+        <div class="panel">
+            <p>
+                <code>CircleMapView</code> 是场景里真正挂在 GameObject 上的主脚本。它负责初始化、读输入、移动进度、刷新可见格子、旋转圆环和设置遮罩。
+                当前场景 <code>SampleScene</code> 里挂载的就是这个脚本。
+            </p>
+            <table>
+                <tr>
+                    <th>Inspector 字段</th>
+                    <th>作用</th>
+                </tr>
+                <tr>
+                    <td><code>backgroundRenderer</code></td>
+                    <td>背景图的 SpriteRenderer，用来设置遮罩显示方式。</td>
+                </tr>
+                <tr>
+                    <td><code>circleRingRenderer</code></td>
+                    <td>圆环图的 SpriteRenderer，用它的 bounds 计算半径。</td>
+                </tr>
+                <tr>
+                    <td><code>backgroundCircleMask</code></td>
+                    <td>圆形 SpriteMask，让背景只在圆里显示。</td>
+                </tr>
+                <tr>
+                    <td><code>totalRoadSegmentCount</code></td>
+                    <td>整条路的数据段数，默认 30。</td>
+                </tr>
+                <tr>
+                    <td><code>visibleSegmentCount</code></td>
+                    <td>屏幕上创建几个可见格子，默认 12。</td>
+                </tr>
+                <tr>
+                    <td><code>moveSpeed</code></td>
+                    <td>按住键时，<code>currentRoadPosition</code> 每秒变化的速度。</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="panel">
+            <h3>Start：开局只做一次</h3>
+            <pre><span class="keyword">private void</span> Start()
+{
+    circleRotatingRoot = circleRingRenderer.transform.parent;
+    BuildBlackMask();
+    BuildRoadSegmentList();
+    BuildVisibleSegments();
+    TryRefreshVisibleSegments();
+    ApplyCircleRotation();
+}</pre>
+            <p>
+                <code>Start()</code> 像上课前布置教室：先找到圆环父物体，设置遮罩，准备道路数据，创建 12 个可见格子，刷新显示，最后把圆环角度摆好。
+            </p>
+        </div>
+
+        <div class="panel">
+            <h3>Update：每一帧读输入和转圆环</h3>
+            <pre><span class="keyword">float</span> moveInput = 0f;
+
+<span class="keyword">if</span> (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+{
+    moveInput += 1f;
+}
+
+<span class="keyword">if</span> (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+{
+    moveInput -= 1f;
+}</pre>
+            <p>
+                这里用的是 <code>Input.GetKey</code>，意思是“只要按住键，就一直生效”。所以移动不是一格一格跳，而是连续变化。
+            </p>
+            <pre>currentRoadPosition = Mathf.Clamp(
+    currentRoadPosition + moveInput * moveSpeed * Time.deltaTime,
+    0f,
+    maxPosition);</pre>
+            <table>
+                <tr>
+                    <th>代码</th>
+                    <th>解释</th>
+                </tr>
+                <tr>
+                    <td><code>currentRoadPosition</code></td>
+                    <td>玩家在道路上的当前位置，可以是小数，例如 3.4，方便连续移动。</td>
+                </tr>
+                <tr>
+                    <td><code>Time.deltaTime</code></td>
+                    <td>上一帧到这一帧经过的时间，让不同帧率下移动速度更接近。</td>
+                </tr>
+                <tr>
+                    <td><code>Mathf.Clamp</code></td>
+                    <td>把位置限制在 0 到最后一段之间，避免走出道路范围。</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="panel">
+            <h3>什么时候刷新 12 个格子</h3>
+            <pre><span class="keyword">int</span> anchorIndex = Mathf.FloorToInt(currentRoadPosition);
+<span class="keyword">if</span> (anchorIndex == lastDisplayedAnchorIndex)
+{
+    <span class="keyword">return</span>;
+}
+
+lastDisplayedAnchorIndex = anchorIndex;
+RefreshVisibleSegments(anchorIndex);</pre>
+            <p>
+                <code>currentRoadPosition</code> 可以是 2.1、2.2、2.8。只要它还没跨到 3，就没必要重新给 12 个格子换内容。
+                <code>lastDisplayedAnchorIndex</code> 就是用来记住“上一次已经刷新到第几段了”。
+            </p>
+        </div>
+
+        <div class="panel">
+            <h3>12 个格子怎么摆到圆上</h3>
+            <pre><span class="keyword">private const float</span> CircleStartAngle = -90f;
+
+<span class="keyword">private</span> Vector3 GetLocalPositionOnCircle(<span class="keyword">int</span> index)
+{
+    <span class="keyword">float</span> angle = CircleStartAngle + index * GetOneSegmentAngle();
+    <span class="keyword">float</span> radius = circleRingRenderer.bounds.size.x / 2f - segmentInsetFromRing;
+
+    <span class="keyword">return new</span> Vector3(
+        Mathf.Cos(angle * Mathf.Deg2Rad) * radius,
+        Mathf.Sin(angle * Mathf.Deg2Rad) * radius,
+        0f);
+}</pre>
+            <p>
+                <code>CircleStartAngle</code> 是起始角度。当前值是 -90 度，也就是从圆的正下方开始摆第 0 个格子。
+                后面的格子每次加上 <code>GetOneSegmentAngle()</code>，所以 12 个格子会平均分布到圆上。
+            </p>
+        </div>
+
+        <div class="panel">
+            <h3>最绕的一段：GetRoadOffsetFromPlayer</h3>
+            <p>
+                这个方法负责把“可见格子编号”换算成“相对玩家前后几段”。默认有 12 个可见格子，玩家附近最多看前方 6 格。
+            </p>
+            <pre><span class="keyword">private int</span> GetRoadOffsetFromPlayer(<span class="keyword">int</span> visibleSlotIndex, <span class="keyword">int</span> anchorRoadIndex)
+{
+    <span class="keyword">int</span> playerSlotIndex = anchorRoadIndex % visibleSegmentCount;
+    <span class="keyword">int</span> offset = visibleSlotIndex - playerSlotIndex;
+
+    <span class="keyword">if</span> (offset &lt; 0)
+    {
+        offset += visibleSegmentCount;
+    }
+
+    <span class="keyword">if</span> (offset &gt; FrontVisibleSlotCount)
+    {
+        offset -= visibleSegmentCount;
+    }
+
+    <span class="keyword">return</span> offset;
+}</pre>
+            <div class="note">
+                新手可以先把它想成钟表：12 个格子是钟表上的座位。玩家当前所在的座位会随着走到第几段变化。
+                方法最后返回的 <code>offset</code> 可能是正数，也可能是负数，表示这个格子在玩家前方还是后方。
+            </div>
+        </div>
+
+        <div class="panel">
+            <h3>圆环为什么会转</h3>
+            <pre><span class="keyword">private void</span> ApplyCircleRotation()
+{
+    <span class="keyword">float</span> angle = -currentRoadPosition * GetOneSegmentAngle();
+    circleRotatingRoot.localEulerAngles = <span class="keyword">new</span> Vector3(0f, 0f, angle);
+}</pre>
+            <p>
+                <code>GetOneSegmentAngle()</code> 返回 <code>360f / visibleSegmentCount</code>。
+                如果有 12 个可见格子，那么每格就是 30 度。当前位置越往前，圆环旋转角度越大。
+            </p>
+        </div>
+
+        <div class="panel">
+            <h3>BuildBlackMask：让背景只出现在圆里</h3>
+            <pre><span class="type">Bounds</span> ringBounds = circleRingRenderer.bounds;
+<span class="type">Vector2</span> maskSize = backgroundCircleMask.sprite.bounds.size;
+
+backgroundCircleMask.transform.position = ringBounds.center;
+backgroundCircleMask.transform.localScale = <span class="keyword">new</span> Vector3(
+    ringBounds.size.x / maskSize.x,
+    ringBounds.size.y / maskSize.y,
+    1f);
+
+backgroundRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;</pre>
+            <p>
+                这段代码用圆环的大小去调整遮罩大小，再告诉背景：只显示在遮罩里面。
+                你可以把 <code>SpriteMask</code> 想成一张只允许画面通过的圆形纸模。
+            </p>
+        </div>
+    </section>
+
+    <section id="sim">
+        <h2>八、动手玩：小模拟盘</h2>
+        <div class="panel sim">
+            <div>
+                <div class="sim-board" id="simBoard" aria-label="圆形地图模拟盘">
+                    <span class="sim-slot" style="--i:0">0</span>
+                    <span class="sim-slot" style="--i:1">1</span>
+                    <span class="sim-slot" style="--i:2">2</span>
+                    <span class="sim-slot" style="--i:3">3</span>
+                    <span class="sim-slot" style="--i:4">4</span>
+                    <span class="sim-slot" style="--i:5">5</span>
+                    <span class="sim-slot" style="--i:6">6</span>
+                    <span class="sim-slot" style="--i:7">7</span>
+                    <span class="sim-slot" style="--i:8">8</span>
+                    <span class="sim-slot" style="--i:9">9</span>
+                    <span class="sim-slot" style="--i:10">10</span>
+                    <span class="sim-slot" style="--i:11">11</span>
+                    <span class="sim-player"></span>
+                </div>
+            </div>
+            <div>
+                <p>
+                    点击按钮，观察圆环旋转角度和当前整数段的变化。这个小模拟只演示核心思想：
+                    <strong>位置变化时，圆环角度跟着变化；跨过整数段时，显示内容才需要刷新。</strong>
+                </p>
+                <div class="sim-controls">
+                    <button type="button" id="backBtn">向后一点</button>
+                    <button type="button" id="forwardBtn">向前一点</button>
+                    <button type="button" class="secondary" id="resetBtn">重置</button>
+                </div>
+                <div class="stat-grid">
+                    <div class="stat" id="positionStat">currentRoadPosition = 0.0</div>
+                    <div class="stat" id="anchorStat">anchorIndex = 0</div>
+                    <div class="stat" id="angleStat">angle = 0°</div>
+                    <div class="stat" id="refreshStat">lastDisplayedAnchorIndex = 0</div>
+                </div>
+                <div class="note">
+                    对照源码：这个模拟里的 <code>anchorIndex</code> 对应 <code>Mathf.FloorToInt(currentRoadPosition)</code>。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mistakes">
+        <h2>九、新手最容易混淆的地方</h2>
+        <div class="grid-2">
+            <article class="panel role">
+                <span class="tag hot">误区 1</span>
+                <h3>把数据当成物体</h3>
+                <p><code>CircleRoadSegmentData</code> 不是 GameObject，它只是数据。能不能在场景里看到，取决于别的脚本怎么显示它。</p>
+            </article>
+            <article class="panel role">
+                <span class="tag hot">误区 2</span>
+                <h3>以为 30 段就要创建 30 个格子</h3>
+                <p>当前代码只创建 <code>visibleSegmentCount</code> 个格子，默认 12 个。它们像窗口一样显示附近的路段。</p>
+            </article>
+            <article class="panel role">
+                <span class="tag hot">误区 3</span>
+                <h3>忘记 Inspector 引用</h3>
+                <p><code>backgroundRenderer</code>、<code>circleRingRenderer</code>、<code>backgroundCircleMask</code> 都需要在场景中正确引用。</p>
+            </article>
+            <article class="panel role">
+                <span class="tag hot">误区 4</span>
+                <h3>忽略 Time.deltaTime</h3>
+                <p>移动速度乘上 <code>Time.deltaTime</code>，是为了让不同帧率下的移动更稳定。</p>
+            </article>
+        </div>
+        <div class="warn">
+            还有一个真实项目里的小细节：<code>CreateSegment</code> 会新建一个 <code>Image</code> 子物体，再把 <code>SpriteRenderer</code> 加到子物体上。
+            所以底部对齐时移动的是图片子物体，而不是整个格子。
+        </div>
+    </section>
+
+    <section id="practice">
+        <h2>十、课堂提问和课后练习</h2>
+        <div class="grid-2">
+            <div class="panel">
+                <h3>课堂提问</h3>
+                <div class="qa">
+                    <details>
+                        <summary>为什么 <code>CircleRoadSegmentData</code> 不继承 <code>MonoBehaviour</code>？</summary>
+                        <p>因为它只是存数据，不需要挂在 GameObject 上，也不需要 Unity 自动调用生命周期方法。</p>
+                    </details>
+                    <details>
+                        <summary>为什么默认有 30 段路，却只创建 12 个可见格子？</summary>
+                        <p>因为 12 个格子只是显示窗口。玩家移动时，格子换 Sprite，就能表现更长的路。</p>
+                    </details>
+                    <details>
+                        <summary><code>currentRoadPosition</code> 为什么是 float？</summary>
+                        <p>因为移动是连续的，不是只能停在整数段。这样圆环能平滑旋转。</p>
+                    </details>
+                    <details>
+                        <summary><code>lastDisplayedAnchorIndex</code> 帮我们省了什么？</summary>
+                        <p>它避免每一帧都刷新 12 个格子。只有跨过整数段时，才重新分配显示内容。</p>
+                    </details>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>课后练习</h3>
+                <ol>
+                    <li>在 Inspector 把 <code>moveSpeed</code> 改成 0.5、3、8，观察圆环转动速度。</li>
+                    <li>把 <code>visibleSegmentCount</code> 改成 8 或 16，观察每格角度和布局变化。</li>
+                    <li>在 <code>Update()</code> 里临时加一行日志，打印 <code>currentRoadPosition</code>，对照本页小模拟。</li>
+                    <li>阅读 <code>CircleRoadMapBuilder</code>，把某个 <code>patternIndex</code> 对应的名字改成你自己的事件名字。</li>
+                    <li>在资源文件夹里临时移走所有路段 Sprite，观察 <code>GetSegmentSprite()</code> 返回 <code>null</code> 后会发生什么。</li>
+                </ol>
+            </div>
+        </div>
+        <div class="note">
+            讲课建议：先让学生用自己的话解释“数据列表”和“可见格子列表”的区别。只要这一步能讲清楚，后面的旋转和刷新就顺了。
+        </div>
+    </section>
+</main>
+
+<footer>
+    圆形地图代码课 · 当前代码版本：Unity 6000.4.4f1 · 单文件 HTML，可直接用浏览器打开
+</footer>
+
+<script>
+    (function () {
+        var position = 0;
+        var maxPosition = 29;
+        var visibleSegmentCount = 12;
+        var lastDisplayedAnchorIndex = 0;
+
+        var board = document.getElementById("simBoard");
+        var positionStat = document.getElementById("positionStat");
+        var anchorStat = document.getElementById("anchorStat");
+        var angleStat = document.getElementById("angleStat");
+        var refreshStat = document.getElementById("refreshStat");
+
+        function clamp(value, min, max) {
+            return Math.max(min, Math.min(max, value));
+        }
+
+        function render() {
+            var oneSegmentAngle = 360 / visibleSegmentCount;
+            var angle = -position * oneSegmentAngle;
+            var anchorIndex = Math.floor(position);
+
+            if (anchorIndex !== lastDisplayedAnchorIndex) {
+                lastDisplayedAnchorIndex = anchorIndex;
+            }
+
+            board.style.transform = "rotate(" + angle + "deg)";
+            positionStat.textContent = "currentRoadPosition = " + position.toFixed(1);
+            anchorStat.textContent = "anchorIndex = " + anchorIndex;
+            angleStat.textContent = "angle = " + angle.toFixed(1) + "°";
+            refreshStat.textContent = "lastDisplayedAnchorIndex = " + lastDisplayedAnchorIndex;
+        }
+
+        document.getElementById("backBtn").addEventListener("click", function () {
+            position = clamp(position - 0.5, 0, maxPosition);
+            render();
+        });
+
+        document.getElementById("forwardBtn").addEventListener("click", function () {
+            position = clamp(position + 0.5, 0, maxPosition);
+            render();
+        });
+
+        document.getElementById("resetBtn").addEventListener("click", function () {
+            position = 0;
+            lastDisplayedAnchorIndex = 0;
+            render();
+        });
+
+        render();
+    })();
+</script>
 </body>
 </html>

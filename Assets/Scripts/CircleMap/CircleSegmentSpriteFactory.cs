@@ -21,6 +21,8 @@ namespace CircleWar
             }
 
             return segmentSprites[Random.Range(0, segmentSprites.Length)];
+
+            //TODO: 根据contentType返回对应的sprite
         }
     }
 }

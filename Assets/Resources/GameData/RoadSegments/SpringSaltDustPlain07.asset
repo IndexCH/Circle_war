@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
+  m_Name: SpringSaltDustPlain07
+  m_EditorClassIdentifier: 
+  definitionId: road_y1_spring_salt_dust_plain_07
+  displayName: 盐尘平原：松软盐壳滚动声
+  description: 玩家听见远处有硬物压过湿盐壳的声音。滚石晶体会从空旷地带快速接近。
+  roadIndex: 7
+  season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
+  region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
+  contentType: 1
+  mapSprite: {fileID: 0}
+  character: {fileID: 0}
+  gameEvent: {fileID: 0}
+  enemy: {fileID: 11400000, guid: b4a552b6e48f49849b12565f82edae03, type: 2}
+  boss: {fileID: 0}
+  facilityModule: {fileID: 0}
+  rewards:
+  - resourceId: industry
+    amount: 1
+  costs: []

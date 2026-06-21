@@ -6,6 +6,8 @@ namespace CircleWar
     {
         private SpriteRenderer segmentSpriteRenderer;
 
+        //Todo 添加NPC
+
         public void Setup(SpriteRenderer renderer)
         {
             segmentSpriteRenderer = renderer;
@@ -13,6 +15,7 @@ namespace CircleWar
 
         public void Show(Sprite sprite)
         {
+            segmentSpriteRenderer.enabled = sprite != null;
             segmentSpriteRenderer.sprite = sprite;
             AlignSpriteBottomCenter();
         }

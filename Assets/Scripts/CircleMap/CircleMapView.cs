@@ -6,20 +6,24 @@ namespace CircleWar
     public sealed class CircleMapView : MonoBehaviour
     {
         private const float CircleStartAngle = -90f;
-        private const int FrontVisibleSlotCount = 6;
+        private const string RoadSegmentDefinitionResourceFolder = "GameData/RoadSegments";
 
         [SerializeField] private SpriteRenderer backgroundRenderer, circleRingRenderer;
         [SerializeField] private SpriteMask backgroundCircleMask;
 
-        [SerializeField] private int totalRoadSegmentCount = 30;
-        [SerializeField] private int visibleSegmentCount = 12;
+        [SerializeField] private int totalRoadSegmentCount = 20;
+        [SerializeField] private int visibleSegmentCount = 8;
         [SerializeField] private float segmentInsetFromRing = 0.22f;
         [SerializeField] private float moveSpeed = 1.5f;
+
+        [SerializeField] private float segmentScale = 0.4f;
+        [SerializeField] private List<RoadSegmentDefinition> roadSegmentDefinitions = new List<RoadSegmentDefinition>();
 
         private readonly CircleRoadMapBuilder roadMapBuilder = new CircleRoadMapBuilder();
         private readonly CircleSegmentSpriteFactory spriteFactory = new CircleSegmentSpriteFactory();
         private readonly List<CircleRoadSegmentData> roadSegmentList = new List<CircleRoadSegmentData>();
         private readonly List<CircleMapSegment> visibleSegmentList = new List<CircleMapSegment>();
+        private readonly List<RoadSegmentDefinition> loadedRoadSegmentDefinitions = new List<RoadSegmentDefinition>();
 
         private Transform circleRotatingRoot;
         private float currentRoadPosition;
@@ -83,47 +87,71 @@ namespace CircleWar
         {
             for (int slotIndex = 0; slotIndex < visibleSegmentList.Count; slotIndex++)
             {
-                int roadSegmentIndex = anchorRoadIndex + GetRoadOffsetFromPlayer(slotIndex, anchorRoadIndex);
+                int roadSegmentIndex = GetRoadIndexForVisibleSlot(slotIndex, anchorRoadIndex);
                 CircleMapSegment segment = visibleSegmentList[slotIndex];
 
                 if (roadSegmentIndex < 0)
                 {
-                    segment.Show(spriteFactory.GetSegmentSprite());
+                    segment.Show(null);
                     continue;
                 }
 
                 if (roadSegmentIndex >= roadSegmentList.Count)
                 {
-                    segment.Show(spriteFactory.GetSegmentSprite());
+                    segment.Show(null);
                     continue;
                 }
 
-                segment.Show(spriteFactory.GetSegmentSprite());
+                segment.Show(roadSegmentList[roadSegmentIndex].sprite);
             }
         }
 
-        private int GetRoadOffsetFromPlayer(int visibleSlotIndex, int anchorRoadIndex)
+        private int GetRoadIndexForVisibleSlot(int visibleSlotIndex, int anchorRoadIndex)
         {
-            int playerSlotIndex = anchorRoadIndex % visibleSegmentCount;
-            int offset = visibleSlotIndex - playerSlotIndex;
+            // 12 点是唯一的刷新口：D 前进时新节点从这里进入，经过 6 点后再沿左半圈回到 12 点回收。
+            int halfCircleSlotCount = GetHalfCircleSlotCount();
+            int playerSlotIndex = PositiveModulo(anchorRoadIndex, visibleSegmentCount);
+            int slotOffsetFromPlayer = PositiveModulo(visibleSlotIndex - playerSlotIndex, visibleSegmentCount);
 
-            if (offset < 0)
+            if (slotOffsetFromPlayer <= halfCircleSlotCount)
             {
-                offset += visibleSegmentCount;
+                return anchorRoadIndex + slotOffsetFromPlayer;
             }
 
-            if (offset > FrontVisibleSlotCount)
-            {
-                offset -= visibleSegmentCount;
-            }
-
-            return offset;
+            return anchorRoadIndex - (visibleSegmentCount - slotOffsetFromPlayer);
         }
 
+        private int GetHalfCircleSlotCount()
+        {
+            return visibleSegmentCount / 2;
+        }
+
+        private int PositiveModulo(int value, int modulo)
+        {
+            int result = value % modulo;
+            return result < 0 ? result + modulo : result;
+        }
+
+        // 构建道路段落列表DataList
         private void BuildRoadSegmentList()
         {
             roadSegmentList.Clear();
-            roadSegmentList.AddRange(roadMapBuilder.BuildRoadSegmentList(totalRoadSegmentCount, spriteFactory));
+            roadSegmentList.AddRange(roadMapBuilder.BuildRoadSegmentList(totalRoadSegmentCount, spriteFactory, GetRoadSegmentDefinitions()));
+        }
+
+        private IReadOnlyList<RoadSegmentDefinition> GetRoadSegmentDefinitions()
+        {
+            if (roadSegmentDefinitions != null && roadSegmentDefinitions.Count > 0)
+            {
+                return roadSegmentDefinitions;
+            }
+
+            if (loadedRoadSegmentDefinitions.Count == 0)
+            {
+                loadedRoadSegmentDefinitions.AddRange(Resources.LoadAll<RoadSegmentDefinition>(RoadSegmentDefinitionResourceFolder));
+            }
+
+            return loadedRoadSegmentDefinitions;
         }
 
         private void BuildVisibleSegments()
@@ -135,11 +163,13 @@ namespace CircleWar
                 CircleMapSegment segment = CreateSegment(index);
                 segment.transform.localPosition = GetLocalPositionOnCircle(index);
                 segment.transform.localEulerAngles = new Vector3(0f, 0f, index * GetOneSegmentAngle());
-                segment.transform.localScale = new Vector3(0.2f, 0.2f, 1f);
+                segment.transform.localScale = new Vector3(segmentScale, segmentScale, 1f);
                 visibleSegmentList.Add(segment);
             }
         }
 
+
+        // 创建道路段落列表(还没有解决位置和角度问题)
         private CircleMapSegment CreateSegment(int index)
         {
             GameObject segmentObject = new GameObject("Visible Segment " + index);
@@ -168,6 +198,7 @@ namespace CircleWar
             return 360f / visibleSegmentCount;
         }
 
+        // 黑屏遮罩
         private void BuildBlackMask()
         {
             Bounds ringBounds = circleRingRenderer.bounds;

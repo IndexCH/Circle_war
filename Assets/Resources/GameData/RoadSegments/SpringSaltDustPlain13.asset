@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
+  m_Name: SpringSaltDustPlain13
+  m_EditorClassIdentifier: 
+  definitionId: road_y1_spring_salt_dust_plain_13
+  displayName: 盐尘平原：临时标记桩
+  description: 为了不在白色平原中迷失，玩家可以在这里设立临时标记。当前没有对应设施模块 SO，因此设施引用保持为空。
+  roadIndex: 13
+  season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
+  region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
+  contentType: 5
+  mapSprite: {fileID: 0}
+  character: {fileID: 0}
+  gameEvent: {fileID: 0}
+  enemy: {fileID: 0}
+  boss: {fileID: 0}
+  facilityModule: {fileID: 0}
+  rewards: []
+  costs:
+  - resourceId: industry
+    amount: 1

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
+  m_Name: SpringSaltDustPlain02
+  m_EditorClassIdentifier: 
+  definitionId: road_y1_spring_salt_dust_plain_02
+  displayName: "\u76D0\u5C18\u5E73\u539F\uFF1A\u8F6F\u76D0\u58F3\u7A7A\u65F7\u5E26"
+  description: "\u4E00\u6BB5\u51E0\u4E4E\u6CA1\u6709\u4EFB\u4F55\u53C2\u7167\u7269\u7684\u767D\u8272\u5E73\u9762\u3002\u8FD9\u91CC\u6CA1\u6709\u660E\u663E\u6536\u83B7\uFF0C\u4E3B\u8981\u8003\u9A8C\u73A9\u5BB6\u5BF9\u5371\u9669\u5730\u8868\u7684\u5224\u65AD\u3002"
+  roadIndex: 2
+  season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
+  region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
+  contentType: 0
+  mapSprite: {fileID: -168717823013034772, guid: a978047a7afe670439b72611b91d20d2, type: 3}
+  character: {fileID: 0}
+  gameEvent: {fileID: 0}
+  enemy: {fileID: 0}
+  boss: {fileID: 0}
+  facilityModule: {fileID: 0}
+  rewards: []
+  costs:
+  - resourceId: food
+    amount: 1

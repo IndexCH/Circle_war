@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: Year1SpringSaltDustExploreRuins
+  m_EditorClassIdentifier: 
+  definitionId: y1_spring_salt_dust_explore_ruins
+  displayName: 探索破旧设施
+  description: 第一年春，盐尘平原上的破旧设施仍能提供少量工业资源，但周围有滚石晶体活动。
+  earliestDay: 1
+  latestDay: 90
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
+  locationId: salt_dust_plain_ruins
+  conditions:
+  - targetType: 11
+    targetId: spring
+    comparison: 0
+    value: 0
+    boolValue: 1
+  title: 探索破旧设施
+  bodyText: 春季的盐尘平原表层潮湿，旧设施半埋在松软盐壳下。这里没有 NPC，但能找到少量可用工业材料，并可能惊动滚石晶体。
+  choices:
+  - choiceId: explore
+    choiceText: 清理入口，回收可用材料
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: industry
+      amount: 2
+      boolValue: 1
+      textValue: 
+    - effectType: 4
+      targetId: y1_spring_salt_dust_explore_ruins
+      amount: 0
+      boolValue: 1
+      textValue: explore
+  automaticResults: []
