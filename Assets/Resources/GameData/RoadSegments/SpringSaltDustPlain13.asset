@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: SpringSaltDustPlain13
   m_EditorClassIdentifier: 
   definitionId: road_y1_spring_salt_dust_plain_13
-  displayName: 盐尘平原：临时标记桩
-  description: 为了不在白色平原中迷失，玩家可以在这里设立临时标记。当前没有对应设施模块 SO，因此设施引用保持为空。
+  displayName: 盐尘平原：临时标记桩旁的拾荒者
+  description: 临时标记桩旁停着一名拾荒者。他熟悉旧设施入口和滚石晶体巡游线，玩家靠近后可以按 E 对话。
   roadIndex: 13
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 5
+  contentType: 2
   mapSprite: {fileID: 0}
-  character: {fileID: 0}
+  character: {fileID: 11400000, guid: 32fb8cad7ddf46bda83a9f6512f951ad, type: 2}
+  dialogue: {fileID: 11400000, guid: b0d81fb5e13a4f9f9c44a6a13f85a22f, type: 2}
   gameEvent: {fileID: 0}
   enemy: {fileID: 0}
   boss: {fileID: 0}

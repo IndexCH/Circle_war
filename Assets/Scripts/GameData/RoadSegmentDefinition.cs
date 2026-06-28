@@ -15,6 +15,7 @@ namespace CircleWar
         [SerializeField] private SegmentContentType contentType = SegmentContentType.None;
         [SerializeField] private Sprite mapSprite;
         [SerializeField] private CharacterDefinition character;
+        [SerializeField] private DialogueDefinition dialogue;
         [SerializeField] private GameEventDefinition gameEvent;
         [SerializeField] private EnemyDefinition enemy;
         [SerializeField] private BossDefinition boss;
@@ -28,6 +29,7 @@ namespace CircleWar
         public SegmentContentType ContentType => contentType;
         public Sprite MapSprite => mapSprite;
         public CharacterDefinition Character => character;
+        public DialogueDefinition Dialogue => dialogue;
         public GameEventDefinition GameEvent => gameEvent;
         public EnemyDefinition Enemy => enemy;
         public BossDefinition Boss => boss;

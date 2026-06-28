@@ -7,6 +7,9 @@ namespace CircleWar
     {
         private const float CircleStartAngle = -90f;
         private const string RoadSegmentDefinitionResourceFolder = "GameData/RoadSegments";
+        private const string DialogueInteractionPromptResourcePath = "Scence/UI/InteractionPrompts/press_e_dialogue";
+        private const string EventInteractionPromptResourcePath = "Scence/UI/InteractionPrompts/press_e_investigate";
+        private const string ResourceInteractionPromptResourcePath = "Scence/UI/InteractionPrompts/press_e_collect";
 
         [SerializeField] private SpriteRenderer backgroundRenderer, circleRingRenderer;
         [SerializeField] private SpriteMask backgroundCircleMask;
@@ -15,8 +18,15 @@ namespace CircleWar
         [SerializeField] private int visibleSegmentCount = 8;
         [SerializeField] private float segmentInsetFromRing = 0.22f;
         [SerializeField] private float moveSpeed = 1.5f;
+        [SerializeField] private KeyCode interactKey = KeyCode.E;
 
         [SerializeField] private float segmentScale = 0.4f;
+        [SerializeField] private Vector2 interactionPromptOffset = new Vector2(0f, 0.12f);
+        [SerializeField] private float interactionPromptScale = 1f;
+        [SerializeField] private Sprite npcInteractionPromptSprite;
+        [SerializeField] private Sprite eventInteractionPromptSprite;
+        [SerializeField] private Sprite resourceInteractionPromptSprite;
+        [SerializeField] private GameHud gameHud;
         [SerializeField] private List<RoadSegmentDefinition> roadSegmentDefinitions = new List<RoadSegmentDefinition>();
 
         private readonly CircleRoadMapBuilder roadMapBuilder = new CircleRoadMapBuilder();
@@ -32,8 +42,10 @@ namespace CircleWar
         private void Start()
         {
             circleRotatingRoot = circleRingRenderer.transform.parent;
+            ResolveGameHud();
             BuildBlackMask();
             BuildRoadSegmentList();
+            ResolveInteractionPromptSprites();
             BuildVisibleSegments();
             TryRefreshVisibleSegments();
             ApplyCircleRotation();
@@ -62,6 +74,11 @@ namespace CircleWar
                 TryRefreshVisibleSegments();
             }
 
+            if (Input.GetKeyDown(interactKey))
+            {
+                TryInteractWithCurrentRoadSegment();
+            }
+
             ApplyCircleRotation();
         }
 
@@ -69,6 +86,44 @@ namespace CircleWar
         {
             float angle = -currentRoadPosition * GetOneSegmentAngle();
             circleRotatingRoot.localEulerAngles = new Vector3(0f, 0f, angle);
+        }
+
+        private void TryInteractWithCurrentRoadSegment()
+        {
+            CircleRoadSegmentData segment = GetCurrentRoadSegment();
+            if (segment == null || segment.contentType != SegmentContentType.Npc || segment.dialogue == null)
+            {
+                return;
+            }
+
+            GameHud hud = ResolveGameHud();
+            if (hud == null)
+            {
+                return;
+            }
+
+            hud.ShowDialogue(segment.dialogue, segment.character);
+        }
+
+        private CircleRoadSegmentData GetCurrentRoadSegment()
+        {
+            if (roadSegmentList.Count == 0)
+            {
+                return null;
+            }
+
+            int roadIndex = Mathf.Clamp(Mathf.FloorToInt(currentRoadPosition), 0, roadSegmentList.Count - 1);
+            return roadSegmentList[roadIndex];
+        }
+
+        private GameHud ResolveGameHud()
+        {
+            if (gameHud == null)
+            {
+                gameHud = FindAnyObjectByType<GameHud>();
+            }
+
+            return gameHud;
         }
 
         private void TryRefreshVisibleSegments()
@@ -102,7 +157,7 @@ namespace CircleWar
                     continue;
                 }
 
-                segment.Show(roadSegmentList[roadSegmentIndex].sprite);
+                segment.Show(roadSegmentList[roadSegmentIndex]);
             }
         }
 
@@ -154,6 +209,24 @@ namespace CircleWar
             return loadedRoadSegmentDefinitions;
         }
 
+        private void ResolveInteractionPromptSprites()
+        {
+            if (npcInteractionPromptSprite == null)
+            {
+                npcInteractionPromptSprite = Resources.Load<Sprite>(DialogueInteractionPromptResourcePath);
+            }
+
+            if (eventInteractionPromptSprite == null)
+            {
+                eventInteractionPromptSprite = Resources.Load<Sprite>(EventInteractionPromptResourcePath);
+            }
+
+            if (resourceInteractionPromptSprite == null)
+            {
+                resourceInteractionPromptSprite = Resources.Load<Sprite>(ResourceInteractionPromptResourcePath);
+            }
+        }
+
         private void BuildVisibleSegments()
         {
             visibleSegmentList.Clear();
@@ -181,8 +254,23 @@ namespace CircleWar
             SpriteRenderer segmentRenderer = imageObject.AddComponent<SpriteRenderer>();
             segmentRenderer.sortingOrder = 5;
 
+            GameObject promptObject = new GameObject("Interaction Prompt Image");
+            promptObject.transform.SetParent(segmentObject.transform, false);
+            float resolvedPromptScale = interactionPromptScale > 0f ? interactionPromptScale : 1f;
+            promptObject.transform.localScale = new Vector3(resolvedPromptScale, resolvedPromptScale, 1f);
+
+            SpriteRenderer promptRenderer = promptObject.AddComponent<SpriteRenderer>();
+            promptRenderer.sortingOrder = 8;
+            promptRenderer.enabled = false;
+
             CircleMapSegment segment = segmentObject.AddComponent<CircleMapSegment>();
-            segment.Setup(segmentRenderer);
+            segment.Setup(
+                segmentRenderer,
+                promptRenderer,
+                npcInteractionPromptSprite,
+                eventInteractionPromptSprite,
+                resourceInteractionPromptSprite,
+                interactionPromptOffset);
             return segment;
         }
 

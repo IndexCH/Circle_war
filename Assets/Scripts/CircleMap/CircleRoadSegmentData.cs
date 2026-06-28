@@ -29,6 +29,7 @@ namespace CircleWar
         public readonly SeasonDefinition season;
         public readonly RegionDefinition region;
         public readonly CharacterDefinition character;
+        public readonly DialogueDefinition dialogue;
         public readonly GameEventDefinition gameEvent;
         public readonly EnemyDefinition enemy;
         public readonly BossDefinition boss;
@@ -62,6 +63,7 @@ namespace CircleWar
             season = definition.Season;
             region = definition.Region;
             character = definition.Character;
+            dialogue = definition.Dialogue;
             gameEvent = definition.GameEvent;
             enemy = definition.Enemy;
             boss = definition.Boss;

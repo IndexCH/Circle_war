@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07b8124d12e4b6ea901e0a17e5663af, type: 3}
+  m_Name: Year1SpringSaltDustScavengerDialogue
+  m_EditorClassIdentifier: 
+  definitionId: y1_spring_salt_dust_scavenger_dialogue
+  displayName: "\u76D0\u5C18\u62FE\u8352\u8005"
+  description: "\u7B2C\u4E00\u5E74\u6625\uFF0C\u73A9\u5BB6\u5728\u76D0\u5C18\u5E73\u539F\u4E34\u65F6\u6807\u8BB0\u6869\u65C1\u9047\u5230\u62FE\u8352\u8005\uFF0C\u53EF\u4EE5\u8BE2\u95EE\u65E7\u8BBE\u65BD\u3001\u53D6\u5F97\u5C11\u91CF\u8865\u7ED9\uFF0C\u6216\u63A8\u8FDB\u521D\u9047\u5267\u60C5\u8BA1\u6570\u3002"
+  startNodeId: start
+  nodes:
+  - nodeId: start
+    character: {fileID: 11400000, guid: 32fb8cad7ddf46bda83a9f6512f951ad, type: 2}
+    speakerName: 
+    portraitOverride: {fileID: 21300000, guid: c6216ee9e6344fa38e2e042ed7b35e77, type: 3}
+    bodyText: "\u4F60\u4E5F\u662F\u6765\u6478\u65E7\u8BBE\u65BD\u7684\uFF1F\u522B\u8E29\u90A3\u4E9B\u53D1\u4EAE\u7684\u76D0\u58F3\uFF0C\u4E0B\u9762\u4E0D\u662F\u7A7A\u6D1E\u5C31\u662F\u6EDA\u77F3\u6676\u4F53\u78E8\u51FA\u6765\u7684\u5DE1\u6E38\u7EBF\u3002"
+    choices:
+    - choiceId: ask_ruins
+      choiceText: "\u65E7\u8BBE\u65BD\u5165\u53E3\u5728\u54EA\uFF1F"
+      resultType: 1
+      nextNodeId: ruins_tip
+      resourceId: 
+      resourceAmount: 0
+      plotIntId: 
+    - choiceId: ask_supply
+      choiceText: "\u80FD\u5206\u6211\u4E00\u70B9\u8865\u7ED9\u5417\uFF1F"
+      resultType: 2
+      nextNodeId: 
+      resourceId: food
+      resourceAmount: 3
+      plotIntId: 
+    - choiceId: leave
+      choiceText: "\u8BB0\u4F4F\u4E86\uFF0C\u6211\u7EE7\u7EED\u8D70\u3002"
+      resultType: 3
+      nextNodeId: 
+      resourceId: 
+      resourceAmount: 0
+      plotIntId: salt_dust_scavenger_met
+  - nodeId: ruins_tip
+    character: {fileID: 11400000, guid: 32fb8cad7ddf46bda83a9f6512f951ad, type: 2}
+    speakerName: 
+    portraitOverride: {fileID: 21300000, guid: c6216ee9e6344fa38e2e042ed7b35e77, type: 3}
+    bodyText: "\u770B\u89C1\u534A\u622A\u9ED1\u8272\u7BA1\u7EBF\u5C31\u5F80\u80CC\u98CE\u9762\u7ED5\uFF0C\u5165\u53E3\u5728\u584C\u53E3\u540E\u9762\u3002\u91CC\u9762\u8FD8\u80FD\u62C6\u51FA\u5DE5\u4E1A\u6599\uFF0C\u4F46\u522B\u5728\u540C\u4E00\u5904\u505C\u592A\u4E45\u3002"
+    choices:
+    - choiceId: take_tip
+      choiceText: "\u6536\u4E0B\u60C5\u62A5\u3002"
+      resultType: 3
+      nextNodeId: 
+      resourceId: 
+      resourceAmount: 0
+      plotIntId: salt_dust_ruins_tip
