@@ -14,6 +14,9 @@ namespace CircleWar
         public readonly HudDialogueRuntimeData Dialogue = new HudDialogueRuntimeData();
         public readonly HudFacilityRuntimeData Facility = new HudFacilityRuntimeData();
 
+        // TODO 小怪数据
+        public readonly HudEnemyRuntimeData Enemy = new HudEnemyRuntimeData();
+
         public void CopyFrom(GameHudRuntimeData source)
         {
             if (source == null)
@@ -207,6 +210,17 @@ namespace CircleWar
             Set(source.Hp.Value, source.MaxHp.Value, source.Food.Value, source.Materials.Value, source.StatusId.Value, source.StatusText.Value);
         }
     }
+
+    public sealed class HudEnemyRuntimeData
+    {
+        public readonly BindableProperty<string> EnemyId = new BindableProperty<string>(string.Empty);
+        public readonly BindableProperty<string> DisplayName = new BindableProperty<string>(string.Empty);
+        public readonly BindableProperty<int> HealthPercent = new BindableProperty<int>();
+
+        // TODO 小怪三种类型：1. 中间的飞行射击小怪  2.圆圈地形的近战小怪 3.圆圈底层的远程小怪
+        public readonly int enemytype ;
+    }
+ 
 
     public sealed class HudDialogueRuntimeData
     {
