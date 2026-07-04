@@ -9,6 +9,7 @@ namespace CircleWar
     public sealed class EnemyDefinition : GameDefinition
     {
         [SerializeField] private Sprite portrait;
+        [SerializeField] private EnemyAttackType attackType = EnemyAttackType.GroundMelee;
         [Min(1)]
         [SerializeField] private int maxHealth = 1;
         [Min(0f)]
@@ -19,6 +20,7 @@ namespace CircleWar
 
         public string EnemyName => DisplayName;
         public Sprite Portrait => portrait;
+        public EnemyAttackType AttackType => attackType;
         public int MaxHealth => maxHealth;
         public float Speed => speed;
         public int AttackPower => attackPower;

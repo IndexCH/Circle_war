@@ -88,6 +88,13 @@ namespace CircleWar
         Custom
     }
 
+    public enum EnemyAttackType
+    {
+        GroundMelee,
+        GroundRanged,
+        FlyingRobotRanged
+    }
+
     [Serializable]
     public sealed class ResourceAmount
     {

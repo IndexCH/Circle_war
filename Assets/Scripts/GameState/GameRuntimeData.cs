@@ -22,7 +22,7 @@ namespace CircleWar
         private readonly Dictionary<string, DialogueNodeRuntimeData> activeDialogueNodes =
             new Dictionary<string, DialogueNodeRuntimeData>();
         private string foodResourceId = "food";
-        private string materialsResourceId = "materials";
+        private string materialsResourceId = "industry";
         private string activeBossId = string.Empty;
         private string activeBossDisplayName = string.Empty;
         private string activeFacilityId = string.Empty;
@@ -40,7 +40,7 @@ namespace CircleWar
         public string MaterialsResourceId
         {
             get => materialsResourceId;
-            set => materialsResourceId = string.IsNullOrWhiteSpace(value) ? "materials" : value;
+            set => materialsResourceId = string.IsNullOrWhiteSpace(value) ? "industry" : value;
         }
 
         public void StartNewRun(string runId = null)
@@ -601,7 +601,7 @@ namespace CircleWar
                         "suggestions"),
                     new DialogueChoiceRuntimeData(
                         "I'LL GO FIRST.",
-                        DialogueChoiceResultRuntimeData.AddResource("materials", 5),
+                        DialogueChoiceResultRuntimeData.AddResource("industry", 5),
                         true,
                         "go_first")
                 },

@@ -228,7 +228,7 @@ namespace CircleWar
             HudPlayerStatsRuntimeData player = HudData.PlayerStats;
             SetText(playerHpText, string.Format("HP {0}/{1}", player.Hp.Value, player.MaxHp.Value));
             SetText(playerFoodText, "Food " + player.Food.Value);
-            SetText(playerMaterialsText, "Materials " + player.Materials.Value);
+            SetText(playerMaterialsText, "Industry " + player.Materials.Value);
         }
 
         private void RefreshDialogue()

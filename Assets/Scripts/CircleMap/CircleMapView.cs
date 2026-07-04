@@ -29,19 +29,45 @@ namespace CircleWar
         [SerializeField] private GameHud gameHud;
         [SerializeField] private List<RoadSegmentDefinition> roadSegmentDefinitions = new List<RoadSegmentDefinition>();
 
+        [Header("Combat")]
+        [SerializeField] private Transform playerTarget;
+        [SerializeField] private Transform enemyRuntimeRoot;
+        [SerializeField] private Vector2 flyingRobotSpawnPosition = new Vector2(-6.2f, 4f);
+        [SerializeField] private Vector2 flyingRobotOrbitCenter = new Vector2(0f, 1.55f);
+        [SerializeField] private float groundRangedSpawnViewAngle = 82f;
+        [SerializeField] private float groundMeleeSpawnViewAngle = 105f;
+        [SerializeField] private float groundEnemyRadiusOffset = -0.18f;
+        [SerializeField] private float meleeEnemySpeedMultiplier = 1.08f;
+
         private readonly CircleRoadMapBuilder roadMapBuilder = new CircleRoadMapBuilder();
         private readonly CircleSegmentSpriteFactory spriteFactory = new CircleSegmentSpriteFactory();
         private readonly List<CircleRoadSegmentData> roadSegmentList = new List<CircleRoadSegmentData>();
         private readonly List<CircleMapSegment> visibleSegmentList = new List<CircleMapSegment>();
         private readonly List<RoadSegmentDefinition> loadedRoadSegmentDefinitions = new List<RoadSegmentDefinition>();
+        private readonly HashSet<int> spawnedEnemyRoadIndices = new HashSet<int>();
 
         private Transform circleRotatingRoot;
         private float currentRoadPosition;
+        private float playerRadius;
+        private bool hasPlayerRadius;
         private int lastDisplayedAnchorIndex = -1;
+
+        public static CircleMapView Active { get; private set; }
+        public Vector2 DiskCenter => GetDiskCenter();
+        public float PlayerAngleDegrees => GetPlayerAngleDegrees();
+        public float PlayerRadius => GetPlayerRadius();
+        public float RoadSegmentAngleDegrees => GetOneSegmentAngle();
+        public CircleWorldSpace CurrentWorldSpace => new CircleWorldSpace(DiskCenter, PlayerAngleDegrees, PlayerRadius);
+        public Vector2 PlayerWorldPosition => CurrentWorldSpace.PlayerWorldPosition;
+
+        private void Awake()
+        {
+            Active = this;
+        }
 
         private void Start()
         {
-            circleRotatingRoot = circleRingRenderer.transform.parent;
+            circleRotatingRoot = circleRingRenderer != null ? circleRingRenderer.transform.parent : null;
             ResolveGameHud();
             BuildBlackMask();
             BuildRoadSegmentList();
@@ -51,15 +77,27 @@ namespace CircleWar
             ApplyCircleRotation();
         }
 
+        private void OnDestroy()
+        {
+            if (Active == this)
+            {
+                Active = null;
+            }
+        }
+
         private void Update()
         {
+            bool wantsMoveForward = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
+            bool wantsMoveBackward = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
+            bool isForwardBlocked = wantsMoveForward && GroundEnemy.IsAnyMeleeBlockingForward(this);
+
             float moveInput = 0f;
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            if (wantsMoveForward && !isForwardBlocked)
             {
                 moveInput += 1f;
             }
 
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            if (wantsMoveBackward)
             {
                 moveInput -= 1f;
             }
@@ -71,6 +109,7 @@ namespace CircleWar
                     currentRoadPosition + moveInput * moveSpeed * Time.deltaTime,
                     0f,
                     maxPosition);
+
                 TryRefreshVisibleSegments();
             }
 
@@ -84,8 +123,33 @@ namespace CircleWar
 
         private void ApplyCircleRotation()
         {
-            float angle = -currentRoadPosition * GetOneSegmentAngle();
+            if (circleRotatingRoot == null)
+            {
+                return;
+            }
+
+            float angle = CurrentWorldSpace.ViewAngleDegrees;
             circleRotatingRoot.localEulerAngles = new Vector3(0f, 0f, angle);
+        }
+
+        public Vector2 WorldToViewPosition(Vector2 worldPosition)
+        {
+            return CurrentWorldSpace.WorldToViewPosition(worldPosition);
+        }
+
+        public Vector2 ViewToWorldPosition(Vector2 viewPosition)
+        {
+            return CurrentWorldSpace.ViewToWorldPosition(viewPosition);
+        }
+
+        public Vector2 WorldToViewDirection(Vector2 worldDirection)
+        {
+            return CurrentWorldSpace.WorldToViewDirection(worldDirection);
+        }
+
+        public Vector2 ViewToWorldDirection(Vector2 viewDirection)
+        {
+            return CurrentWorldSpace.ViewToWorldDirection(viewDirection);
         }
 
         private void TryInteractWithCurrentRoadSegment()
@@ -136,6 +200,7 @@ namespace CircleWar
 
             lastDisplayedAnchorIndex = anchorIndex;
             RefreshVisibleSegments(anchorIndex);
+            RefreshCombatForCurrentRoadSegment(anchorIndex);
         }
 
         private void RefreshVisibleSegments(int anchorRoadIndex)
@@ -187,10 +252,155 @@ namespace CircleWar
             return result < 0 ? result + modulo : result;
         }
 
+        private void RefreshCombatForCurrentRoadSegment(int roadIndex)
+        {
+            CircleRoadSegmentData segment = GetCurrentRoadSegment();
+            if (segment == null ||
+                segment.contentType != SegmentContentType.Monster ||
+                segment.enemy == null)
+            {
+                return;
+            }
+
+            if (spawnedEnemyRoadIndices.Contains(roadIndex))
+            {
+                return;
+            }
+
+            if (SpawnEnemy(segment))
+            {
+                spawnedEnemyRoadIndices.Add(roadIndex);
+            }
+        }
+
+        private bool SpawnEnemy(CircleRoadSegmentData segment)
+        {
+            switch (segment.enemy.AttackType)
+            {
+                case EnemyAttackType.GroundMelee:
+                    SpawnGroundEnemy(segment, EnemyAttackType.GroundMelee);
+                    return true;
+                case EnemyAttackType.GroundRanged:
+                    SpawnGroundEnemy(segment, EnemyAttackType.GroundRanged);
+                    return true;
+                case EnemyAttackType.FlyingRobotRanged:
+                    SpawnFlyingRobotEnemy(segment);
+                    return true;
+            }
+
+            return false;
+        }
+
+        private void SpawnFlyingRobotEnemy(CircleRoadSegmentData segment)
+        {
+            GameObject enemyObject = new GameObject(segment.enemy.EnemyName);
+            enemyObject.transform.SetParent(enemyRuntimeRoot != null ? enemyRuntimeRoot : transform.parent, false);
+            enemyObject.transform.position = new Vector3(flyingRobotSpawnPosition.x, flyingRobotSpawnPosition.y, 0f);
+
+            FlyingRobotEnemy flyingRobot = enemyObject.AddComponent<FlyingRobotEnemy>();
+            flyingRobot.ConfigureViewAnchored(this, ResolvePlayerTarget(), segment.enemy, flyingRobotSpawnPosition, flyingRobotOrbitCenter);
+        }
+
+        private void SpawnGroundEnemy(CircleRoadSegmentData segment, EnemyAttackType attackType)
+        {
+            float spawnViewAngle = attackType == EnemyAttackType.GroundMelee
+                ? groundMeleeSpawnViewAngle
+                : groundRangedSpawnViewAngle;
+            float worldAngle = GetWorldAngleFromViewAngle(spawnViewAngle);
+            float radius = Mathf.Max(0.01f, PlayerRadius + groundEnemyRadiusOffset);
+            Vector2 worldPosition = DiskCenter + CircleWorldSpace.DirectionFromAngleDegrees(worldAngle) * radius;
+            Vector2 viewPosition = WorldToViewPosition(worldPosition);
+
+            GameObject enemyObject = new GameObject(segment.enemy.EnemyName);
+            enemyObject.transform.SetParent(enemyRuntimeRoot != null ? enemyRuntimeRoot : transform.parent, false);
+            enemyObject.transform.position = new Vector3(viewPosition.x, viewPosition.y, 0f);
+
+            float angularSpeed = 0f;
+            if (attackType == EnemyAttackType.GroundMelee)
+            {
+                angularSpeed = moveSpeed * RoadSegmentAngleDegrees * Mathf.Max(1.01f, meleeEnemySpeedMultiplier);
+            }
+
+            GroundEnemy groundEnemy = enemyObject.AddComponent<GroundEnemy>();
+            groundEnemy.Configure(
+                this,
+                ResolvePlayerTarget(),
+                ResolveGameHud(),
+                segment.enemy,
+                attackType,
+                worldAngle,
+                radius,
+                angularSpeed);
+        }
+
+        private float GetWorldAngleFromViewAngle(float viewAngleDegrees)
+        {
+            Vector2 viewDirection = CircleWorldSpace.DirectionFromAngleDegrees(viewAngleDegrees);
+            Vector2 worldDirection = ViewToWorldDirection(viewDirection);
+            return Mathf.Atan2(worldDirection.y, worldDirection.x) * Mathf.Rad2Deg;
+        }
+
+        private Transform ResolvePlayerTarget()
+        {
+            if (playerTarget == null)
+            {
+                GameObject playerObject = GameObject.Find("Player");
+                if (playerObject != null)
+                {
+                    playerTarget = playerObject.transform;
+                }
+            }
+
+            return playerTarget;
+        }
+
+        private Vector2 GetDiskCenter()
+        {
+            if (circleRingRenderer != null)
+            {
+                return circleRingRenderer.bounds.center;
+            }
+
+            if (circleRotatingRoot != null)
+            {
+                return circleRotatingRoot.position;
+            }
+
+            return transform.position;
+        }
+
+        private float GetPlayerAngleDegrees()
+        {
+            return CircleWorldSpace.SixClockAngleDegrees + currentRoadPosition * GetOneSegmentAngle();
+        }
+
+        private float GetPlayerRadius()
+        {
+            if (hasPlayerRadius)
+            {
+                return playerRadius;
+            }
+
+            Transform target = ResolvePlayerTarget();
+            if (target != null)
+            {
+                playerRadius = Vector2.Distance(target.position, GetDiskCenter());
+            }
+
+            if (playerRadius <= Mathf.Epsilon && circleRingRenderer != null)
+            {
+                playerRadius = circleRingRenderer.bounds.extents.y;
+            }
+
+            hasPlayerRadius = true;
+            return Mathf.Max(0.01f, playerRadius);
+        }
+
         // 构建道路段落列表DataList
         private void BuildRoadSegmentList()
         {
             roadSegmentList.Clear();
+            spawnedEnemyRoadIndices.Clear();
             roadSegmentList.AddRange(roadMapBuilder.BuildRoadSegmentList(totalRoadSegmentCount, spriteFactory, GetRoadSegmentDefinitions()));
         }
 

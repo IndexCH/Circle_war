@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -18,42 +17,12 @@ namespace CircleWar
                 .UnRegisterWhenGameObjectDestroyed(target);
         }
 
-        public static IUnRegister BindText<T>(this TMP_Text target, IReadonlyBindableProperty<T> property, Func<T, string> formatter = null)
-        {
-            Require(target, nameof(target));
-            Require(property, nameof(property));
-
-            return property
-                .RegisterWithInitValue(value => target.text = FormatText(value, formatter))
-                .UnRegisterWhenGameObjectDestroyed(target);
-        }
-
         public static IUnRegister BindToText<T>(this IReadonlyBindableProperty<T> property, Text target, Func<T, string> formatter = null)
         {
             return target.BindText(property, formatter);
         }
 
-        public static IUnRegister BindToText<T>(this IReadonlyBindableProperty<T> property, TMP_Text target, Func<T, string> formatter = null)
-        {
-            return target.BindText(property, formatter);
-        }
-
         public static IUnRegister BindText(this InputField target, IBindableProperty<string> property)
-        {
-            Require(target, nameof(target));
-            Require(property, nameof(property));
-
-            CompositeUnRegister unRegister = new CompositeUnRegister();
-            unRegister.Add(property.RegisterWithInitValue(value => target.SetTextWithoutNotify(value ?? string.Empty)));
-
-            UnityAction<string> onValueChanged = value => property.Value = value;
-            target.onValueChanged.AddListener(onValueChanged);
-            unRegister.Add(new CustomUnRegister(() => target.onValueChanged.RemoveListener(onValueChanged)));
-
-            return unRegister.UnRegisterWhenGameObjectDestroyed(target);
-        }
-
-        public static IUnRegister BindText(this TMP_InputField target, IBindableProperty<string> property)
         {
             Require(target, nameof(target));
             Require(property, nameof(property));
