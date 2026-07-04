@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7d76a96edbea4fae8d12951835bb18ed
+guid: c8ad156782c526840adcac47eb0676b0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4412758362150943071
-    second: player_bullet_horizontal_transparent
+      213: 3189347382197499943
+    second: 18_logo_food_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 250
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_bullet_horizontal_transparent
+      name: 18_logo_food_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 572
-        height: 203
+        y: 1
+        width: 32
+        height: 30
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ff777d49f0d76f330800000000000000
-      internalID: 4412758362150943071
+      spriteID: 7283435db86d24c20800000000000000
+      internalID: 3189347382197499943
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4bc2b0a2a9b29cbf0800000000000000
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player_bullet_horizontal_transparent: 4412758362150943071
+      18_logo_food_0: 3189347382197499943
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

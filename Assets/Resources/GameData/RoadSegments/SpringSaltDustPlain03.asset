@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: SpringSaltDustPlain03
   m_EditorClassIdentifier: 
   definitionId: road_y1_spring_salt_dust_plain_03
-  displayName: 盐尘平原：远程机器人巡航点
-  description: 破损信标还在周期性闪烁，一台远程机器人正沿圆圈上方巡航。玩家会遭遇飞行式远程火力压制。
+  displayName: "\u76D0\u5C18\u5E73\u539F\uFF1A\u8FDC\u7A0B\u673A\u5668\u4EBA\u5DE1\u822A\u70B9"
+  description: "\u7834\u635F\u4FE1\u6807\u8FD8\u5728\u5468\u671F\u6027\u95EA\u70C1\uFF0C\u4E00\u53F0\u8FDC\u7A0B\u673A\u5668\u4EBA\u6B63\u6CBF\u5706\u5708\u4E0A\u65B9\u5DE1\u822A\u3002\u73A9\u5BB6\u4F1A\u906D\u9047\u98DE\u884C\u5F0F\u8FDC\u7A0B\u706B\u529B\u538B\u5236\u3002"
   roadIndex: 3
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 1
+  contentType: 4
   mapSprite: {fileID: 59175984130458913, guid: 82390e8c7b97cd548ae38f9690b65b75, type: 3}
   character: {fileID: 0}
+  dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
   enemy: {fileID: 11400000, guid: ac2d6a18ebaa4bd29ed8db980479f860, type: 2}
   boss: {fileID: 0}

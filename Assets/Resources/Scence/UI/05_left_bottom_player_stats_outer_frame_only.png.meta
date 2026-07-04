@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: f39bd1640523c6f45bc00c49b4f71e49
+guid: 49093aecd8d79d2468e41ae71006768a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6527410218350371128
-    second: "\u5FAE\u4FE1\u56FE\u7247_20260621210609_17_71_0"
+      213: 6892568279659325982
+    second: 05_left_bottom_player_stats_outer_frame_only_0
+  - first:
+      213: 6987639240844827489
+    second: 05_left_bottom_player_stats_outer_frame_only_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u5FAE\u4FE1\u56FE\u7247_20260621210609_17_71_0"
+      name: 05_left_bottom_player_stats_outer_frame_only_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1672
-        height: 941
+        width: 220
+        height: 186
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8ce98f77dfaf965a0800000000000000
-      internalID: -6527410218350371128
+      spriteID: e1a283bf45257af50800000000000000
+      internalID: 6892568279659325982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05_left_bottom_player_stats_outer_frame_only_1
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 0
+        width: 203
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16bd2211ed419f060800000000000000
+      internalID: 6987639240844827489
       vertices: []
       indices: 
       edges: []
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u5FAE\u4FE1\u56FE\u7247_20260621210609_17_71_0": -6527410218350371128
+      05_left_bottom_player_stats_outer_frame_only_0: 6892568279659325982
+      05_left_bottom_player_stats_outer_frame_only_1: 6987639240844827489
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

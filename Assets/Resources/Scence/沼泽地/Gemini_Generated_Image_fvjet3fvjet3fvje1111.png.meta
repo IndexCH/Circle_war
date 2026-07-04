@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 250d1f8b9108ed94c9276aee3228cc4d
+guid: 06fc154e9fdeb48459bd7b3f5eec1ec2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6596819463652210217
-    second: 05_left_bottom_player_stats_frame_0
-  - first:
-      213: 5682151142659059963
-    second: 05_left_bottom_player_stats_frame_1
-  - first:
-      213: -6642876323286226322
-    second: 05_left_bottom_player_stats_frame_2
+      213: -1676910142881191993
+    second: Gemini_Generated_Image_fvjet3fvjet3fvje1111_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -106,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 05_left_bottom_player_stats_frame_0
+      name: Gemini_Generated_Image_fvjet3fvjet3fvje1111_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 220
-        height: 186
+        width: 2332
+        height: 1824
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,52 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7d980a536a36374a0800000000000000
-      internalID: -6596819463652210217
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 05_left_bottom_player_stats_frame_1
-      rect:
-        serializedVersion: 2
-        x: 79
-        y: 135
-        width: 191
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bf0f542eb5e0bde40800000000000000
-      internalID: 5682151142659059963
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 05_left_bottom_player_stats_frame_2
-      rect:
-        serializedVersion: 2
-        x: 107
-        y: 0
-        width: 203
-        height: 186
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e6aebafed23cfc3a0800000000000000
-      internalID: -6642876323286226322
+      spriteID: 7c721551c1b6ab8e0800000000000000
+      internalID: -1676910142881191993
       vertices: []
       indices: 
       edges: []
@@ -175,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -185,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      05_left_bottom_player_stats_frame_0: -6596819463652210217
-      05_left_bottom_player_stats_frame_1: 5682151142659059963
-      05_left_bottom_player_stats_frame_2: -6642876323286226322
+      Gemini_Generated_Image_fvjet3fvjet3fvje1111_0: -1676910142881191993
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
