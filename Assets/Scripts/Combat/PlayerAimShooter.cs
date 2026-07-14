@@ -13,6 +13,8 @@ namespace CircleWar
         [SerializeField] private Transform hand;
         [SerializeField] private Transform shootPoint;
         [SerializeField] private SpriteRenderer bodyRenderer;
+
+        [SerializeField] private SpriteRenderer leftHand;
         [SerializeField] private GameHud gameHud;
         [SerializeField] private Camera aimCamera;
         [SerializeField] private CircleMapView circleMapView;
@@ -47,7 +49,11 @@ namespace CircleWar
 
         private Sprite runtimeBulletSprite;
         private Vector3 initialHandLocalPosition;
+
+        private Vector3 initialLeftHandPosition;
         private Vector3 initialHandLocalScale;
+
+        private Vector3 initialLeftHandLocalScale;
         private bool initialBodyFlipX;
         private bool cachedInitialPose;
         private bool isFacingRight = true;
@@ -137,7 +143,9 @@ namespace CircleWar
             }
 
             initialHandLocalPosition = hand.localPosition;
+            initialLeftHandPosition = leftHand.transform.localPosition;
             initialHandLocalScale = hand.localScale;
+            initialLeftHandLocalScale = leftHand.transform.localScale;
             initialBodyFlipX = bodyRenderer != null && bodyRenderer.flipX;
             cachedInitialPose = true;
         }
@@ -161,6 +169,7 @@ namespace CircleWar
             if (bodyRenderer != null)
             {
                 bodyRenderer.flipX = isFacingRight ? initialBodyFlipX : !initialBodyFlipX;
+              //  leftHand.flipX = isFacingRight ? initialBodyFlipX : !initialBodyFlipX;
             }
 
             if (mirrorHandPositionWhenFacingLeft)
@@ -168,6 +177,13 @@ namespace CircleWar
                 Vector3 handPosition = initialHandLocalPosition;
                 handPosition.x = isFacingRight ? initialHandLocalPosition.x : -initialHandLocalPosition.x;
                 hand.localPosition = handPosition;
+
+                // Vector3 LeftHandPosition = initialLeftHandPosition;
+                // LeftHandPosition.x = isFacingRight ? initialLeftHandPosition.x : -initialLeftHandPosition.x;
+                // leftHand.transform.localPosition = LeftHandPosition;
+
+                
+                
             }
 
             if (mirrorHandVisualWhenFacingLeft)
@@ -175,6 +191,10 @@ namespace CircleWar
                 Vector3 handScale = initialHandLocalScale;
                 handScale.y = isFacingRight ? initialHandLocalScale.y : -initialHandLocalScale.y;
                 hand.localScale = handScale;
+
+                // Vector3 lefthandScale = initialLeftHandLocalScale;
+                // lefthandScale.y = isFacingRight ? initialLeftHandLocalScale.y : -initialLeftHandLocalScale.y;
+                // leftHand.transform.localScale = lefthandScale;
             }
         }
 
