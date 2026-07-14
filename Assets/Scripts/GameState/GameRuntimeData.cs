@@ -6,6 +6,11 @@ namespace CircleWar
 {
     public sealed class GameRuntimeData
     {
+        private const int MaxRegionFeedEntryCount = 2;
+        private const int FallResourceFacilityProgressPercent = 5;
+        private const int FallResourceFacilityFilledBlocks = 1;
+        private const string FallSeasonId = "fall";
+
         public const string CalendarYearValueId = "calendar_year";
         public const string CalendarLocalHourValueId = "calendar_local_hour";
         public const string CalendarLocalMinuteValueId = "calendar_local_minute";
@@ -18,6 +23,9 @@ namespace CircleWar
 
         public readonly GameState State = new GameState();
         public readonly GameHudRuntimeData Hud = new GameHudRuntimeData();
+
+        public event Action NewRunStarted;
+        public int RunRevision { get; private set; }
 
         private readonly Dictionary<string, DialogueNodeRuntimeData> activeDialogueNodes =
             new Dictionary<string, DialogueNodeRuntimeData>();
@@ -45,6 +53,7 @@ namespace CircleWar
 
         public void StartNewRun(string runId = null)
         {
+            RunRevision++;
             State.StartNewRun(runId);
             activeBossId = string.Empty;
             activeBossDisplayName = string.Empty;
@@ -55,29 +64,30 @@ namespace CircleWar
             activeRegionDisplayName = string.Empty;
             activeDialogueNodes.Clear();
 
-            SetCalendar(1, string.Empty, string.Empty, 8, 0);
+            SetCalendar(1, "spring", "春", 8, 0);
             SetPlayerStats(100, 100, 0, 0, string.Empty, string.Empty);
             SetSystemStatus("boot", "SYSTEM BOOTING...", 0);
             SetBoss(string.Empty, string.Empty, 0);
             SetRegionStatus(string.Empty, string.Empty, false, null);
             ClearDialogue();
             SetFacilityProgress(string.Empty, 0, 0, 1);
+            NewRunStarted?.Invoke();
         }
 
         public void LoadCurrentUiMockup()
         {
             StartNewRun("mock_runtime");
-            SetCalendar(2, "summer", "SUMMER", 10, 25);
+            SetCalendar(1, "spring", "春", 8, 0);
             SetSystemStatus("online", "SYSTEM ONLINE...", 4);
-            SetBoss("current_boss", "BOSS", 65);
+            SetBoss(string.Empty, string.Empty, 0);
             SetRegionStatus(
                 "salt_dust_plain",
-                "SALT DUST PLAIN",
+                "盐尘平原",
                 true,
                 new[]
                 {
-                    new HudFeedEntryRuntimeData(10, 24, "TWO SCAVENGERS SPOTTED NEAR FIRE."),
-                    new HudFeedEntryRuntimeData(10, 25, "LARGE HOSTILE SIGNAL DETECTED IN THE DISTANCE.")
+                    new HudFeedEntryRuntimeData(7, 59, "春季盐壳正在融化。"),
+                    new HudFeedEntryRuntimeData(8, 0, "盐尘平原通行风险上升。")
                 });
             SetPlayerStats(80, 100, 120, 85, "on_the_move", "ON THE MOVE");
             ClearDialogue();
@@ -114,6 +124,47 @@ namespace CircleWar
                 totalMinutes % 60);
         }
 
+        public void SetSeasonContext(
+            SeasonDefinition season,
+            RegionDefinition region,
+            float roadPosition)
+        {
+            if (season == null)
+            {
+                return;
+            }
+
+            SetCalendar(
+                Math.Max(1, Hud.Calendar.Year.Value),
+                season.DefinitionId,
+                season.DisplayName,
+                Hud.Calendar.LocalHour.Value,
+                Hud.Calendar.LocalMinute.Value);
+
+            string regionId = region != null && !string.IsNullOrWhiteSpace(region.DefinitionId)
+                ? region.DefinitionId
+                : season.DefinitionId + "_region";
+            string regionDisplayName = region != null
+                ? region.DisplayName
+                : season.DisplayName;
+            IReadOnlyList<HudFeedEntryRuntimeData> feedEntries = Hud.RegionStatus.FeedEntries.Value;
+
+            activeRegionId = regionId;
+            activeRegionDisplayName = regionDisplayName;
+            State.SetLocation(activeRegionId, Math.Max(0f, roadPosition));
+            Hud.RegionStatus.Set(activeRegionId, activeRegionDisplayName, true, feedEntries);
+        }
+
+        public void SetRoadPosition(float roadPosition)
+        {
+            if (string.IsNullOrWhiteSpace(activeRegionId))
+            {
+                return;
+            }
+
+            State.SetLocation(activeRegionId, Math.Max(0f, roadPosition));
+        }
+
         public void SetSystemStatus(string statusId, string displayText, int signalPipCount)
         {
             if (!string.IsNullOrWhiteSpace(statusId))
@@ -131,8 +182,19 @@ namespace CircleWar
 
             if (!string.IsNullOrWhiteSpace(activeBossId))
             {
-                State.StartBoss(activeBossId, 100);
-                State.SetBossHealth(activeBossId, Clamp(healthPercent, 0, 100));
+                BossProgressState progress = State.GetBossProgress(activeBossId);
+                if (progress == null || !progress.IsStarted)
+                {
+                    State.StartBoss(activeBossId, 100);
+                    progress = State.GetBossProgress(activeBossId);
+                }
+
+                int maxHealth = progress != null ? Math.Max(1, progress.MaxHealth) : 100;
+                int currentHealth = Clamp(
+                    (int)Math.Round(maxHealth * Clamp(healthPercent, 0, 100) / 100f),
+                    0,
+                    maxHealth);
+                State.SetBossHealth(activeBossId, currentHealth);
             }
 
             Hud.Boss.Set(activeBossId, activeBossDisplayName, healthPercent);
@@ -141,6 +203,102 @@ namespace CircleWar
         public void SetBossHealthPercent(int healthPercent)
         {
             SetBoss(activeBossId, activeBossDisplayName, healthPercent);
+        }
+
+        public bool StartBossEncounter(
+            BossDefinition boss,
+            string fallbackBossId,
+            string fallbackDisplayName)
+        {
+            return StartBossEncounter(boss, fallbackBossId, fallbackDisplayName, out _);
+        }
+
+        public bool StartBossEncounter(
+            BossDefinition boss,
+            string fallbackBossId,
+            string fallbackDisplayName,
+            out CombatEnemyProgressBinding progressBinding)
+        {
+            progressBinding = null;
+            string bossId = boss != null ? boss.DefinitionId : fallbackBossId;
+            if (string.IsNullOrWhiteSpace(bossId))
+            {
+                return false;
+            }
+
+            string displayName = boss != null ? boss.DisplayName : fallbackDisplayName;
+            int maxHealth = boss != null ? Math.Max(1, boss.MaxHealth) : 100;
+            BossProgressState progress = State.GetBossProgress(bossId);
+            if (progress == null || !progress.IsStarted)
+            {
+                State.StartBoss(bossId, maxHealth);
+                progress = State.GetBossProgress(bossId);
+            }
+
+            activeBossId = bossId;
+            activeBossDisplayName = string.IsNullOrWhiteSpace(displayName) ? bossId : displayName;
+            int healthPercent = progress == null || progress.MaxHealth <= 0
+                ? 100
+                : Clamp((int)Math.Round((float)progress.CurrentHealth / progress.MaxHealth * 100f), 0, 100);
+            Hud.Boss.Set(activeBossId, activeBossDisplayName, healthPercent);
+
+            int currentHealth = progress != null ? progress.CurrentHealth : maxHealth;
+            int resolvedMaxHealth = progress != null ? progress.MaxHealth : maxHealth;
+            bool isAlreadyDefeated = progress != null && progress.IsDefeated;
+            string resolvedBossDisplayName = activeBossDisplayName;
+            progressBinding = new CombatEnemyProgressBinding(
+                resolvedMaxHealth,
+                currentHealth,
+                (updatedHealth, updatedMaxHealth) => UpdateBossCombatProgress(
+                    bossId,
+                    resolvedBossDisplayName,
+                    updatedHealth,
+                    updatedMaxHealth),
+                () => CompleteBossEncounter(bossId, resolvedBossDisplayName),
+                isAlreadyDefeated);
+            return true;
+        }
+
+        private void UpdateBossCombatProgress(
+            string bossId,
+            string displayName,
+            int currentHealth,
+            int maxHealth)
+        {
+            if (string.IsNullOrWhiteSpace(bossId))
+            {
+                return;
+            }
+
+            int safeMaxHealth = Math.Max(1, maxHealth);
+            BossProgressState progress = State.GetBossProgress(bossId);
+            if (progress == null || !progress.IsStarted)
+            {
+                State.StartBoss(bossId, safeMaxHealth);
+            }
+
+            int safeCurrentHealth = Clamp(currentHealth, 0, safeMaxHealth);
+            State.SetBossHealth(bossId, safeCurrentHealth);
+            activeBossId = bossId;
+            activeBossDisplayName = string.IsNullOrWhiteSpace(displayName) ? bossId : displayName;
+            int healthPercent = Clamp(
+                (int)Math.Round((float)safeCurrentHealth / safeMaxHealth * 100f),
+                0,
+                100);
+            Hud.Boss.Set(activeBossId, activeBossDisplayName, healthPercent);
+        }
+
+        private void CompleteBossEncounter(string bossId, string displayName)
+        {
+            if (string.IsNullOrWhiteSpace(bossId))
+            {
+                return;
+            }
+
+            State.MarkBossDefeated(bossId);
+            activeBossId = bossId;
+            activeBossDisplayName = string.IsNullOrWhiteSpace(displayName) ? bossId : displayName;
+            Hud.Boss.Set(activeBossId, activeBossDisplayName, 0);
         }
 
         public void SetRegionStatus(string regionId, string displayName, bool isLiveFeed, IEnumerable<HudFeedEntryRuntimeData> feedEntries)
@@ -158,9 +316,80 @@ namespace CircleWar
 
         public void PushRegionFeed(string message)
         {
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                return;
+            }
+
             List<HudFeedEntryRuntimeData> entries = new List<HudFeedEntryRuntimeData>(Hud.RegionStatus.FeedEntries.Value);
             entries.Add(new HudFeedEntryRuntimeData(Hud.Calendar.LocalHour.Value, Hud.Calendar.LocalMinute.Value, message));
+
+            while (entries.Count > MaxRegionFeedEntryCount)
+            {
+                entries.RemoveAt(0);
+            }
+
             SetRegionStatus(activeRegionId, activeRegionDisplayName, true, entries);
+        }
+
+        public bool IsInteractionCompleted(GameDefinition definition)
+        {
+            return definition != null &&
+                   IsInteractionCompleted(definition.DefinitionId);
+        }
+
+        public bool IsInteractionCompleted(string interactionId)
+        {
+            return !string.IsNullOrWhiteSpace(interactionId) &&
+                   State.IsEventCompleted(interactionId);
+        }
+
+        public bool TryCollectRoadSegmentResource(string segmentId, IEnumerable<ResourceAmount> rewards)
+        {
+            if (string.IsNullOrWhiteSpace(segmentId) || IsInteractionCompleted(segmentId))
+            {
+                return false;
+            }
+
+            if (rewards != null)
+            {
+                foreach (ResourceAmount reward in rewards)
+                {
+                    if (reward == null || string.IsNullOrWhiteSpace(reward.ResourceId) || reward.Amount == 0)
+                    {
+                        continue;
+                    }
+
+                    State.AddResource(reward.ResourceId, reward.Amount);
+                }
+            }
+
+            State.MarkEventCompleted(segmentId);
+            AdvanceFacilityFromFallResourceCollection();
+            RefreshHudFromState();
+            return true;
+        }
+
+        private void AdvanceFacilityFromFallResourceCollection()
+        {
+            if (!string.Equals(State.CurrentSeasonId, FallSeasonId, StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            int totalBlockCount = Math.Max(1, State.GetCustomValue(FacilityTotalBlockCountValueId));
+            int progressPercent = Math.Min(
+                100,
+                State.GetCustomValue(FacilityProgressValueId) + FallResourceFacilityProgressPercent);
+            int filledBlockCount = Math.Min(
+                totalBlockCount,
+                State.GetCustomValue(FacilityFilledBlockCountValueId) + FallResourceFacilityFilledBlocks);
+
+            SetFacilityProgress(
+                activeFacilityId,
+                progressPercent,
+                filledBlockCount,
+                totalBlockCount);
         }
 
         public void SetPlayerStats(int hp, int maxHp, int food, int materials, string statusId, string statusText)
@@ -222,7 +451,9 @@ namespace CircleWar
                     choice.ChoiceText,
                     CreateDialogueResultFromEventChoice(gameEvent, choice),
                     GameStateRuleRunner.AreConditionsMet(State, choice.Conditions),
-                    choice.ChoiceId));
+                    choice.ChoiceId,
+                    gameEvent.DefinitionId,
+                    choice.ConsumeInteractionOnSelect));
             }
 
             if (choices.Count == 0)
@@ -231,12 +462,14 @@ namespace CircleWar
                     "CONTINUE",
                     DialogueChoiceResultRuntimeData.IncrementPlotInt(gameEvent.DefinitionId),
                     true,
-                    "continue"));
+                    "continue",
+                    gameEvent.DefinitionId,
+                    true));
             }
 
             DialogueNodeRuntimeData node = character == null
                 ? new DialogueNodeRuntimeData(
-                    gameEvent.Title,
+                    string.Empty,
                     (UnityEngine.Sprite)null,
                     gameEvent.BodyText,
                     choices,
@@ -318,7 +551,18 @@ namespace CircleWar
             }
 
             Hud.Dialogue.ActiveChoiceIndex.Value = choiceIndex;
-            return ApplyDialogueChoiceResult(choice.Result);
+            bool resultApplied = ApplyDialogueChoiceResult(choice.Result);
+            if (!resultApplied)
+            {
+                return false;
+            }
+
+            if (choice.ConsumeInteractionOnSelect && !string.IsNullOrWhiteSpace(choice.SourceInteractionId))
+            {
+                State.MarkEventCompleted(choice.SourceInteractionId, choice.ChoiceId);
+            }
+
+            return true;
         }
 
         public void ClearDialogue()
@@ -439,6 +683,8 @@ namespace CircleWar
                     RefreshHudFromState();
                     ClearDialogue();
                     return true;
+                case DialogueChoiceResultType.ApplyEventChoice:
+                    return ApplyEventChoiceResult(result);
                 case DialogueChoiceResultType.EndDialogue:
                 default:
                     ClearDialogue();
@@ -450,28 +696,56 @@ namespace CircleWar
             GameEventDefinition gameEvent,
             GameEventChoiceDefinition choice)
         {
-            foreach (GameEffect effect in choice.Results)
+            return DialogueChoiceResultRuntimeData.ApplyEventChoice(gameEvent, choice);
+        }
+
+        private bool ApplyEventChoiceResult(DialogueChoiceResultRuntimeData result)
+        {
+            GameEventDefinition eventDefinition = result.EventDefinition;
+            GameEventChoiceDefinition eventChoice = result.EventChoice;
+            if (eventDefinition == null || eventChoice == null)
             {
-                if (effect == null || string.IsNullOrWhiteSpace(effect.TargetId))
+                return false;
+            }
+
+            ApplyEventEffects(eventDefinition.AutomaticResults);
+            ApplyEventEffects(eventChoice.Results);
+
+            ClampPlayerHealthToValidRange();
+            RefreshHudFromState();
+            ClearDialogue();
+            return true;
+        }
+
+        private void ApplyEventEffects(IEnumerable<GameEffect> effects)
+        {
+            if (effects == null)
+            {
+                return;
+            }
+
+            foreach (GameEffect effect in effects)
+            {
+                if (effect == null)
                 {
                     continue;
                 }
 
-                if (effect.EffectType == GameEffectType.AddResource)
+                if (effect.EffectType == GameEffectType.PushRegionFeed)
                 {
-                    return DialogueChoiceResultRuntimeData.AddResource(effect.TargetId, effect.Amount);
+                    PushRegionFeed(effect.TextValue);
+                    continue;
                 }
 
-                if (effect.EffectType == GameEffectType.AddCustomValue || effect.EffectType == GameEffectType.SetCustomValue)
-                {
-                    return DialogueChoiceResultRuntimeData.IncrementPlotInt(effect.TargetId);
-                }
+                GameStateRuleRunner.ApplyEffect(State, effect);
             }
+        }
 
-            string fallbackPlotIntId = string.IsNullOrWhiteSpace(choice.ChoiceId)
-                ? gameEvent.DefinitionId + "_dialogue_choice"
-                : choice.ChoiceId;
-            return DialogueChoiceResultRuntimeData.IncrementPlotInt(fallbackPlotIntId);
+        private void ClampPlayerHealthToValidRange()
+        {
+            int maxHp = Math.Max(1, State.GetCustomValue(PlayerMaxHpValueId));
+            int hp = Clamp(State.GetCustomValue(PlayerHpValueId), 0, maxHp);
+            State.SetCustomValue(PlayerHpValueId, hp);
         }
 
         private static DialogueNodeRuntimeData CreateRuntimeDialogueNode(
@@ -526,7 +800,9 @@ namespace CircleWar
                     choiceDefinition.ChoiceText,
                     CreateDialogueResultFromDialogueChoice(dialogueDefinition, choiceDefinition),
                     true,
-                    choiceDefinition.ChoiceId));
+                    choiceDefinition.ChoiceId,
+                    dialogueDefinition.DefinitionId,
+                    choiceDefinition.ConsumeInteractionOnSelect));
             }
 
             if (choices.Count == 0)

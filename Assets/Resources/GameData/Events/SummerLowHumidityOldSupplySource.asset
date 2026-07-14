@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: SummerLowHumidityOldSupplySource
+  m_EditorClassIdentifier:
+  definitionId: summer_low_humidity_old_supply_source
+  displayName: 旧补给来源
+  description: 残留着撤离记录与补偿物资的旧补给来源。
+  earliestDay: 1
+  latestDay: 90
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
+  locationId: low_humidity_swamp_shore_11_old_supply_source
+  conditions: []
+  title: 旧补给来源
+  bodyText: 找到了旧补给来源……撤离记录和补偿物资仍在。
+  choices:
+  - choiceId: ask_evacuation_reason
+    choiceText: A：追问撤离原因
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_external
+      amount: 0
+      boolValue: 1
+      textValue:
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 外部情报：旧补给队因军方封锁提前撤离。
+  - choiceId: request_compensation
+    choiceText: B：要求物资补偿
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue:
+  automaticResults: []

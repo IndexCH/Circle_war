@@ -11,21 +11,20 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain12
-  m_EditorClassIdentifier: 
-  definitionId: road_y1_spring_salt_dust_plain_12
-  displayName: 盐尘平原：工业残片收集点
-  description: 被潮气顶起的旧设备残片散落在盐壳表面，适合作为盐尘平原春季的稳定工业收益点。
+  m_EditorClassIdentifier:
+  definitionId: road_spring_salt_dust_plain_12
+  displayName: 卡洛修理残骸
+  description: 卡洛发现一处仍有修复价值的机械残骸。
   roadIndex: 12
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 3
-  mapSprite: {fileID: 0}
+  contentType: 4
+  mapSprite: {fileID: 21300000, guid: 7ff6f429c084479e89d6f144004c09ec, type: 3}
   character: {fileID: 0}
-  gameEvent: {fileID: 0}
+  dialogue: {fileID: 0}
+  gameEvent: {fileID: 11400000, guid: cfbf87c09d3648f1a9755a29996cd717, type: 2}
   enemy: {fileID: 0}
   boss: {fileID: 0}
   facilityModule: {fileID: 0}
-  rewards:
-  - resourceId: industry
-    amount: 2
+  rewards: []
   costs: []

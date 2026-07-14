@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: WinterAbandonedMedicalKit
+  m_EditorClassIdentifier:
+  definitionId: winter_abandoned_medical_kit
+  displayName: 废车医疗箱
+  description: 废弃车辆中的医疗箱保存着急救记录和可拆材料。
+  earliestDay: 1
+  latestDay: 365
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
+  locationId: long_straight_old_supply_route_05_abandoned_medical_kit
+  conditions: []
+  title: 废车医疗箱
+  bodyText: 在废车中找到了医疗箱……急救记录与密封材料仍可利用。
+  choices:
+  - choiceId: read_first_aid_record
+    choiceText: A：读取急救记录
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 14
+      targetId: player_max_hp
+      amount: 1
+      boolValue: 1
+      textValue: 
+  - choiceId: dismantle_medical_kit
+    choiceText: B：拆解医疗箱
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: rubber
+      amount: 1
+      boolValue: 1
+      textValue: 
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue: 
+  automaticResults: []

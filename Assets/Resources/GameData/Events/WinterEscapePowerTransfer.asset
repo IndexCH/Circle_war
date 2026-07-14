@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: WinterEscapePowerTransfer
+  m_EditorClassIdentifier:
+  definitionId: winter_escape_power_transfer
+  displayName: 逃生能源转接
+  description: 逃生能源转接线路可提供芯片或稳定燃料。
+  earliestDay: 1
+  latestDay: 365
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
+  locationId: long_straight_old_supply_route_24_escape_power_transfer
+  conditions: []
+  title: 逃生能源转接
+  bodyText: 发现了逃生能源转接装置……切断线路风险很高，稳定器则可安全回收。
+  choices:
+  - choiceId: cut_power_line
+    choiceText: A：切断线路
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: chip
+      amount: 1
+      boolValue: 1
+      textValue: 
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue: 
+    - effectType: 14
+      targetId: player_hp
+      amount: -10
+      boolValue: 1
+      textValue: 
+  - choiceId: take_stabilizer
+    choiceText: B：取走稳定器
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: fuel
+      amount: 1
+      boolValue: 1
+      textValue: 
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue: 
+  automaticResults: []

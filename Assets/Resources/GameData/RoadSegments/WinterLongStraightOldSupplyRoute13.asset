@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
+  m_Name: WinterLongStraightOldSupplyRoute13
+  m_EditorClassIdentifier:
+  definitionId: road_winter_long_straight_old_supply_route_13
+  displayName: 无人机侦察
+  description: 脱离编队的侦察无人机正在搜索道路。
+  roadIndex: 13
+  season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
+  region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
+  contentType: 1
+  mapSprite: {fileID: 21300000, guid: e8f26e4e26d44652993f3071dbf44d22, type: 3}
+  character: {fileID: 0}
+  dialogue: {fileID: 0}
+  gameEvent: {fileID: 0}
+  enemy: {fileID: 11400000, guid: 3bae60ad73ac4b15a6e5e93b987a972c, type: 2}
+  boss: {fileID: 0}
+  facilityModule: {fileID: 0}
+  rewards: []
+  costs: []

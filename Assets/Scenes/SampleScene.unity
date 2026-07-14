@@ -510,7 +510,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: LIVE FEED SALT DUST PLAIN
+  m_Text: LIVE FEED 盐尘平原
 --- !u!222 &910104
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -589,7 +589,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 10:24 TWO SCAVENGERS SPOTTED NEAR FIRE.
+  m_Text: 07:59 春季盐壳正在融化。
 --- !u!222 &910108
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -668,7 +668,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 10:25 LARGE HOSTILE SIGNAL DETECTED IN THE DISTANCE.
+  m_Text: 08:00 盐尘平原通行风险上升。
 --- !u!222 &910112
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2284,7 +2284,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SUMMER
+  m_Text: 春
 --- !u!222 &169172766
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4705,13 +4705,13 @@ MonoBehaviour:
   backgroundRenderer: {fileID: 303012306}
   circleRingRenderer: {fileID: 620486530}
   backgroundCircleMask: {fileID: 1791151037}
-  totalRoadSegmentCount: 20
+  totalRoadSegmentCount: 40
   visibleSegmentCount: 8
   segmentInsetFromRing: 0.22
   moveSpeed: 1.5
   interactKey: 101
   segmentScale: 0.4
-  interactionPromptOffset: {x: 0, y: 0.12}
+  interactionPromptHorizontalOffset: 0
   interactionPromptScale: 1
   npcInteractionPromptSprite: {fileID: 0}
   eventInteractionPromptSprite: {fileID: 0}

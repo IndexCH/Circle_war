@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: SpringSaltDustUnfamiliarFootprints
+  m_EditorClassIdentifier:
+  definitionId: spring_salt_dust_unfamiliar_footprints
+  displayName: 陌生脚印
+  description: 盐尘地表留下的一串陌生脚印。
+  earliestDay: 1
+  latestDay: 90
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
+  locationId: spring_salt_dust_plain_21_unfamiliar_footprints
+  conditions: []
+  title: 陌生脚印
+  bodyText: 盐尘地表留下了一串陌生脚印。
+  choices:
+  - choiceId: track_footprints
+    choiceText: 追踪脚印
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_graff_arrival_warning
+      amount: 0
+      boolValue: 1
+      textValue:
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 格拉夫出现预警：陌生脚印显示携带重型装备的人正在接近。
+  - choiceId: ignore_footprints
+    choiceText: 忽略脚印
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: compressed_biscuit
+      amount: 1
+      boolValue: 1
+      textValue:
+    - effectType: 0
+      targetId: food
+      amount: 10
+      boolValue: 1
+      textValue:
+  automaticResults: []

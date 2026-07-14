@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07b8124d12e4b6ea901e0a17e5663af, type: 3}
+  m_Name: AutumnOldFrontlineSeviDialogue
+  m_EditorClassIdentifier:
+  definitionId: autumn_old_frontline_sevi_dialogue
+  displayName: 塞维
+  description: 主角从坠毁飞行器中救出前帝国技师塞维。
+  startNodeId: start
+  nodes:
+  - nodeId: start
+    character: {fileID: 11400000, guid: edde2826bbb341aeb70cadf0a811f3b9, type: 2}
+    speakerName: 塞维
+    portraitOverride: {fileID: 0}
+    bodyText: 主角从坠毁飞行器中救出前帝国技师塞维；塞维拒绝交出最高权限匙。
+    choices:
+    - choiceId: continue
+      choiceText: 继续
+      consumeInteractionOnSelect: 1
+      resultType: 0
+      nextNodeId:
+      resourceId:
+      resourceAmount: 0
+      plotIntId:

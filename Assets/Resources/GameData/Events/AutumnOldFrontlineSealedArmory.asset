@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: AutumnOldFrontlineSealedArmory
+  m_EditorClassIdentifier:
+  definitionId: autumn_old_frontline_sealed_armory
+  displayName: 封闭军械库
+  description: 一座仍可搜索推进组件和防御核心的封闭军械库。
+  earliestDay: 1
+  latestDay: 365
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
+  locationId: old_frontline_buffer_zone_19_sealed_armory
+  conditions: []
+  title: 封闭军械库
+  bodyText: 找到了封闭军械库……内部的推进组件与防御核心仍可搜索。
+  choices:
+  - choiceId: search_propulsion_components
+    choiceText: A：搜索推进组件
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: fuel
+      amount: 1
+      boolValue: 1
+      textValue:
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue:
+  - choiceId: search_defense_core
+    choiceText: B：搜索防御核心
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: steel
+      amount: 1
+      boolValue: 1
+      textValue:
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue:
+  automaticResults: []

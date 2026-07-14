@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: SummerLowHumidityMaintenanceSignal
+  m_EditorClassIdentifier:
+  definitionId: summer_low_humidity_maintenance_signal
+  displayName: 维护讯号
+  description: 指向维护塔且可拆取发射器的维护讯号。
+  earliestDay: 1
+  latestDay: 90
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
+  locationId: low_humidity_swamp_shore_32_maintenance_signal
+  conditions: []
+  title: 维护讯号
+  bodyText: 收到了维护讯号……维护塔位置和发射器仍可利用。
+  choices:
+  - choiceId: read_signal
+    choiceText: A：读取讯号
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_old_maintenance_tower
+      amount: 0
+      boolValue: 1
+      textValue:
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 旧维护塔情报：西侧塔台仍在广播维护代码。
+  - choiceId: remove_transmitter
+    choiceText: B：拆取发射器
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue:
+  automaticResults: []

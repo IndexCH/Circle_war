@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38aad17aeaf64dc479b1679e8fc384d0, type: 3}
+  m_Name: SaltDustOrdinaryMonster
+  m_EditorClassIdentifier:
+  definitionId: salt_dust_ordinary_monster
+  displayName: 普通怪物
+  description: 盐尘平原上常见的普通近身怪物。
+  portrait: {fileID: -168717823013034772, guid: a978047a7afe670439b72611b91d20d2, type: 3}
+  attackType: 0
+  maxHealth: 8
+  speed: 3.5
+  attackPower: 2
+  drops: []

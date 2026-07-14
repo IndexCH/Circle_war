@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
+  m_Name: WinterLongStraightOldSupplyRoute22
+  m_EditorClassIdentifier:
+  definitionId: road_winter_long_straight_old_supply_route_22
+  displayName: 伊莱、格拉夫
+  description: 伊莱与格拉夫在道路中段等待一次关键谈话。
+  roadIndex: 22
+  season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
+  region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
+  contentType: 2
+  mapSprite: {fileID: 21300000, guid: 0f479ed9f2164c978e7185e7e1611b53, type: 3}
+  character: {fileID: 11400000, guid: b39124d951274993a169d4941f6aaf1a, type: 2}
+  dialogue: {fileID: 11400000, guid: c7ba51cac2854377b2479e2cd32d62c2, type: 2}
+  gameEvent: {fileID: 0}
+  enemy: {fileID: 0}
+  boss: {fileID: 0}
+  facilityModule: {fileID: 0}
+  rewards: []
+  costs: []

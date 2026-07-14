@@ -11,24 +11,20 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain01
-  m_EditorClassIdentifier: 
-  definitionId: road_y1_spring_salt_dust_plain_01
-  displayName: "\u76D0\u5C18\u5E73\u539F\uFF1A\u6F6E\u6E7F\u76D0\u58F3\u6D45\u91C7\u70B9"
-  description: "\u8868\u5C42\u76D0\u58F3\u88AB\u6625\u5B63\u6E7F\u6C14\u6CE1\u8F6F\uFF0C\u6D45\u5C42\u9732\u51FA\u5C11\u91CF\u53EF\u56DE\u6536\u7684\u5DE5\u4E1A\u6B8B\u7247\uFF0C\u4F46\u7AD9\u5F97\u8D8A\u4E45\u8D8A\u5BB9\u6613\u9677\u811A\u3002"
+  m_EditorClassIdentifier:
+  definitionId: road_spring_salt_dust_plain_01
+  displayName: 空白
+  description: 盐尘平原上的空白缓冲路段，暂时没有可交互目标。
   roadIndex: 1
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 0
-  mapSprite: {fileID: -3396231001350701739, guid: 33d58bdf583858f4594b3667b138c0bd, type: 3}
+  mapSprite: {fileID: 0}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
   enemy: {fileID: 0}
   boss: {fileID: 0}
   facilityModule: {fileID: 0}
-  rewards:
-  - resourceId: industry
-    amount: 1
-  costs:
-  - resourceId: food
-    amount: 1
+  rewards: []
+  costs: []

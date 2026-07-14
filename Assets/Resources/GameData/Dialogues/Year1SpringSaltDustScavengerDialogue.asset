@@ -25,6 +25,7 @@ MonoBehaviour:
     choices:
     - choiceId: ask_ruins
       choiceText: "\u65E7\u8BBE\u65BD\u5165\u53E3\u5728\u54EA\uFF1F"
+      consumeInteractionOnSelect: 1
       resultType: 1
       nextNodeId: ruins_tip
       resourceId: 
@@ -32,6 +33,7 @@ MonoBehaviour:
       plotIntId: 
     - choiceId: ask_supply
       choiceText: "\u80FD\u5206\u6211\u4E00\u70B9\u8865\u7ED9\u5417\uFF1F"
+      consumeInteractionOnSelect: 1
       resultType: 2
       nextNodeId: 
       resourceId: food
@@ -39,6 +41,7 @@ MonoBehaviour:
       plotIntId: 
     - choiceId: leave
       choiceText: "\u8BB0\u4F4F\u4E86\uFF0C\u6211\u7EE7\u7EED\u8D70\u3002"
+      consumeInteractionOnSelect: 1
       resultType: 3
       nextNodeId: 
       resourceId: 
@@ -52,6 +55,7 @@ MonoBehaviour:
     choices:
     - choiceId: take_tip
       choiceText: "\u6536\u4E0B\u60C5\u62A5\u3002"
+      consumeInteractionOnSelect: 1
       resultType: 3
       nextNodeId: 
       resourceId: 

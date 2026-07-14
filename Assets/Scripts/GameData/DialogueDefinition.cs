@@ -102,6 +102,7 @@ namespace CircleWar
         [SerializeField] private string choiceId;
         [TextArea(1, 3)]
         [SerializeField] private string choiceText;
+        [SerializeField] private bool consumeInteractionOnSelect = true;
         [SerializeField] private DialogueChoiceResultType resultType = DialogueChoiceResultType.EndDialogue;
         [SerializeField] private string nextNodeId;
         [SerializeField] private string resourceId;
@@ -120,6 +121,7 @@ namespace CircleWar
 
         public string ChoiceId => choiceId;
         public string ChoiceText => choiceText;
+        public bool ConsumeInteractionOnSelect => consumeInteractionOnSelect;
         public DialogueChoiceResultType ResultType => resultType;
         public string NextNodeId => nextNodeId;
         public string ResourceId => resourceId;

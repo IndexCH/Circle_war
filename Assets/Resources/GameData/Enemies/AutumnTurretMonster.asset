@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38aad17aeaf64dc479b1679e8fc384d0, type: 3}
+  m_Name: AutumnTurretMonster
+  m_EditorClassIdentifier:
+  definitionId: autumn_turret_monster
+  displayName: 炮塔怪物
+  description: 与炮塔零件融合、会快速逼近主角的旧前线怪物。
+  portrait: {fileID: 21300000, guid: 15ac95bb21c14f3b9ce4a5ba61e21601, type: 3}
+  attackType: 0
+  maxHealth: 9
+  speed: 3.5
+  attackPower: 2
+  drops: []

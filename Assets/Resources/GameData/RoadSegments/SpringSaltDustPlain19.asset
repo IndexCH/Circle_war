@@ -11,21 +11,24 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain19
-  m_EditorClassIdentifier: 
-  definitionId: road_y1_spring_salt_dust_plain_19
-  displayName: 盐尘平原：平原边缘滚动阴影
-  description: 离开盐尘平原核心区域前，玩家再次看见滚石晶体从远处滚来。它作为本段 20 节点路线的尾端战斗压力。
+  m_EditorClassIdentifier:
+  definitionId: road_spring_salt_dust_plain_19
+  displayName: 钢铁
+  description: 从废弃构件中回收的钢铁。
   roadIndex: 19
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 1
-  mapSprite: {fileID: 0}
+  contentType: 3
+  mapSprite: {fileID: 21300000, guid: f624e6c3f59f47f3ac7a5dce2cc54d36, type: 3}
   character: {fileID: 0}
+  dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
-  enemy: {fileID: 11400000, guid: b4a552b6e48f49849b12565f82edae03, type: 2}
+  enemy: {fileID: 0}
   boss: {fileID: 0}
   facilityModule: {fileID: 0}
   rewards:
-  - resourceId: industry
+  - resourceId: steel
     amount: 1
+  - resourceId: industry
+    amount: 5
   costs: []

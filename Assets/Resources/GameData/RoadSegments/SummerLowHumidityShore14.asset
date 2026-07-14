@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
+  m_Name: SummerLowHumidityShore14
+  m_EditorClassIdentifier:
+  definitionId: road_summer_low_humidity_shore_14
+  displayName: 水边怪物
+  description: 潜伏在浅水边缘并快速扑向主角的怪物.
+  roadIndex: 14
+  season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
+  region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
+  contentType: 1
+  mapSprite: {fileID: -168717823013034772, guid: a978047a7afe670439b72611b91d20d2, type: 3}
+  character: {fileID: 0}
+  dialogue: {fileID: 0}
+  gameEvent: {fileID: 0}
+  enemy: {fileID: 11400000, guid: efd573273a8441b88c3526f533ca0ea8, type: 2}
+  boss: {fileID: 0}
+  facilityModule: {fileID: 0}
+  rewards: []
+  costs: []

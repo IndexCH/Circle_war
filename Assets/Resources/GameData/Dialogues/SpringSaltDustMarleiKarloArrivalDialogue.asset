@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07b8124d12e4b6ea901e0a17e5663af, type: 3}
+  m_Name: SpringSaltDustMarleiKarloArrivalDialogue
+  m_EditorClassIdentifier:
+  definitionId: spring_salt_dust_marlei_karlo_arrival_dialogue
+  displayName: 玛蕾、卡洛
+  description: 玛蕾和卡洛逃难抵达盐尘平原。
+  startNodeId: start
+  nodes:
+  - nodeId: start
+    character: {fileID: 11400000, guid: a431671a98e5462aac2fb86ea94bb452, type: 2}
+    speakerName: 玛蕾、卡洛
+    portraitOverride: {fileID: 21300000, guid: 9403134363ae440f964eaefd0ace58a9, type: 3}
+    bodyText: 两人逃难抵达；玛蕾希望优先收集食物，卡洛不愿离开残骸
+    choices:
+    - choiceId: continue
+      choiceText: 继续
+      consumeInteractionOnSelect: 1
+      resultType: 0
+      nextNodeId:
+      resourceId:
+      resourceAmount: 0
+      plotIntId:

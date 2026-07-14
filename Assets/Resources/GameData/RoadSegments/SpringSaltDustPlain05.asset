@@ -11,21 +11,24 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain05
-  m_EditorClassIdentifier: 
-  definitionId: road_y1_spring_salt_dust_plain_05
-  displayName: 盐尘平原：半埋盐晶簇
-  description: 盐壳下方有较硬的晶簇和旧时代金属碎片。这里更像小型资源点，而不是剧情节点。
+  m_EditorClassIdentifier:
+  definitionId: road_spring_salt_dust_plain_05
+  displayName: 仙人掌果
+  description: 耐盐植物结出的仙人掌果，可以补充食物。
   roadIndex: 5
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 3
-  mapSprite: {fileID: 0}
+  mapSprite: {fileID: 21300000, guid: 7a01ea60a7fc4d67b6adc6a592bc0df2, type: 3}
   character: {fileID: 0}
+  dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
   enemy: {fileID: 0}
   boss: {fileID: 0}
   facilityModule: {fileID: 0}
   rewards:
-  - resourceId: industry
-    amount: 2
+  - resourceId: cactus_fruit
+    amount: 1
+  - resourceId: food
+    amount: 10
   costs: []

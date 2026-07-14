@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: WinterControlTowerEntrance
+  m_EditorClassIdentifier:
+  definitionId: winter_control_tower_entrance
+  displayName: 控制塔入口
+  description: 旧控制塔入口后保存着防卫部署记录。
+  earliestDay: 1
+  latestDay: 365
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
+  locationId: long_straight_old_supply_route_17_control_tower_entrance
+  conditions: []
+  title: 控制塔入口
+  bodyText: 抵达了控制塔入口……塔内记录仍可读取，但入口也能被永久封死。
+  choices:
+  - choiceId: enter_tower
+    choiceText: A：进入塔内
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_winter_old_defense_record
+      amount: 0
+      boolValue: 1
+      textValue: 
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 旧防卫记录：控制塔保存着补给路防卫部署记录。
+  - choiceId: seal_entrance
+    choiceText: B：封死入口
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: steel
+      amount: 1
+      boolValue: 1
+      textValue: 
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue: 
+  automaticResults: []

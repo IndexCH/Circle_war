@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c27fd352affd0054fa62a1fb4426579d, type: 3}
   m_Name: Summer
   m_EditorClassIdentifier: 
-  definitionId: Summer
+  definitionId: summer
   displayName: "\u590F"
   description: "\u8D44\u6E90\u66F4\u5BB9\u6613\u5728\u5730\u8868\u51FA\u73B0"
-  seasonOrder: 0
+  seasonOrder: 1
+  region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
+  backgroundSprite: {fileID: -1676910142881191993, guid: 06fc154e9fdeb48459bd7b3f5eec1ec2, type: 3}
+  circleRingSprite: {fileID: -6833720083282604219, guid: 05baf93cef6d5d546a0058769b8bbbb4, type: 3}
   movementMultiplier: 1
   consumptionMultiplier: 1
   hitRateMultiplier: 1

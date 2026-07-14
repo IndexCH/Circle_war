@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07b8124d12e4b6ea901e0a17e5663af, type: 3}
+  m_Name: InspectorDialogue
+  m_EditorClassIdentifier:
+  definitionId: summer_low_humidity_inspector_dialogue
+  displayName: 监察官
+  description: 监察官说明附近高价值据点与当前星球重新纳入战区的风险。
+  startNodeId: start
+  nodes:
+  - nodeId: start
+    character: {fileID: 11400000, guid: 8188796a6fa5486a809a0c545a4edc26, type: 2}
+    speakerName:
+    portraitOverride: {fileID: 0}
+    bodyText: 监察官承认附近星球已被认定为高价值据点，当前星球可能被重新纳入战区。
+    choices:
+    - choiceId: continue
+      choiceText: 继续
+      consumeInteractionOnSelect: 1
+      resultType: 0
+      nextNodeId:
+      resourceId:
+      resourceAmount: 0
+      plotIntId:

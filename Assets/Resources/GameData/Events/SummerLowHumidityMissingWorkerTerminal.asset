@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: SummerLowHumidityMissingWorkerTerminal
+  m_EditorClassIdentifier:
+  definitionId: summer_low_humidity_missing_worker_terminal
+  displayName: 失踪工人终端
+  description: 保存着失踪工人撤离记录的旧终端。
+  earliestDay: 1
+  latestDay: 90
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
+  locationId: low_humidity_swamp_shore_20_missing_worker_terminal
+  conditions: []
+  title: 失踪工人终端
+  bodyText: 找到了失踪工人终端……撤离记录尚未损坏。
+  choices:
+  - choiceId: read_records
+    choiceText: A：读取记录
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_evacuation_failure
+      amount: 0
+      boolValue: 1
+      textValue:
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 撤离失败记录：工人队在关闭闸门前失去联络。
+  - choiceId: dismantle_terminal
+    choiceText: B：拆解终端
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue:
+  automaticResults: []

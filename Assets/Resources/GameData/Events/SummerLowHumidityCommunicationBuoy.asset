@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: SummerLowHumidityCommunicationBuoy
+  m_EditorClassIdentifier:
+  definitionId: summer_low_humidity_communication_buoy
+  displayName: 通讯浮标
+  description: 一座仍能读取芯片与航道记录的通讯浮标。
+  earliestDay: 1
+  latestDay: 90
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
+  locationId: low_humidity_swamp_shore_05_communication_buoy
+  conditions: []
+  title: 通讯浮标
+  bodyText: 遇到了通讯浮标……芯片与航道记录仍可读取。
+  choices:
+  - choiceId: remove_chip
+    choiceText: A：拆芯片
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue:
+  - choiceId: download_records
+    choiceText: B：下载记录
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_route_anomaly
+      amount: 0
+      boolValue: 1
+      textValue:
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 航道异常：北侧浅水航线出现重复偏移。
+  automaticResults: []

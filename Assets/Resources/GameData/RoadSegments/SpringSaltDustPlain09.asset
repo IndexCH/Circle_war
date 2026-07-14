@@ -11,23 +11,20 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain09
-  m_EditorClassIdentifier: 
-  definitionId: road_y1_spring_salt_dust_plain_09
-  displayName: 盐尘平原：地下管线回声
-  description: 踩过湿盐壳时，地下传来空洞回声。这里连接到破旧设施探索事件，提示平原下方还有旧结构。
+  m_EditorClassIdentifier:
+  definitionId: road_spring_salt_dust_plain_09
+  displayName: 空白
+  description: 盐尘平原上的空白缓冲路段，暂时没有可交互目标。
   roadIndex: 9
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 4
+  contentType: 0
   mapSprite: {fileID: 0}
   character: {fileID: 0}
-  gameEvent: {fileID: 11400000, guid: ef03f08ee8c2428599fe45c3c4bff42a, type: 2}
+  dialogue: {fileID: 0}
+  gameEvent: {fileID: 0}
   enemy: {fileID: 0}
   boss: {fileID: 0}
   facilityModule: {fileID: 0}
-  rewards:
-  - resourceId: industry
-    amount: 1
-  costs:
-  - resourceId: food
-    amount: 1
+  rewards: []
+  costs: []

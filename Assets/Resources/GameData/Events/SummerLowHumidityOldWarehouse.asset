@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: SummerLowHumidityOldWarehouse
+  m_EditorClassIdentifier:
+  definitionId: summer_low_humidity_old_warehouse
+  displayName: 旧货仓
+  description: 结构危险但存有大量食物的旧货仓。
+  earliestDay: 1
+  latestDay: 90
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
+  locationId: low_humidity_swamp_shore_26_old_warehouse
+  conditions: []
+  title: 旧货仓
+  bodyText: 找到了旧货仓……内部有大量食物但结构危险。
+  choices:
+  - choiceId: infiltrate_warehouse
+    choiceText: A：冒险潜入
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: food
+      amount: 20
+      boolValue: 1
+      textValue:
+    - effectType: 14
+      targetId: player_hp
+      amount: -10
+      boolValue: 1
+      textValue:
+  - choiceId: abandon_warehouse
+    choiceText: B：放弃货仓
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results: []
+  automaticResults: []

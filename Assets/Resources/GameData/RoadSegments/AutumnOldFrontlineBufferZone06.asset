@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
+  m_Name: AutumnOldFrontlineBufferZone06
+  m_EditorClassIdentifier:
+  definitionId: road_autumn_old_frontline_buffer_zone_06
+  displayName: 钢铁
+  description: 从锈蚀防线中拆下的钢铁废料。
+  roadIndex: 6
+  season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
+  region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
+  contentType: 3
+  mapSprite: {fileID: 21300000, guid: f624e6c3f59f47f3ac7a5dce2cc54d36, type: 3}
+  character: {fileID: 0}
+  dialogue: {fileID: 0}
+  gameEvent: {fileID: 0}
+  enemy: {fileID: 0}
+  boss: {fileID: 0}
+  facilityModule: {fileID: 0}
+  rewards:
+  - resourceId: steel
+    amount: 1
+  - resourceId: industry
+    amount: 5
+  costs: []
+

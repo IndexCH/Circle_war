@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: SpringSaltDustDangerWarning
+  m_EditorClassIdentifier:
+  definitionId: spring_salt_dust_danger_warning
+  displayName: 危险预警
+  description: 盐尘地表留下的旧伤痕提示前方存在危险。
+  earliestDay: 1
+  latestDay: 90
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
+  locationId: spring_salt_dust_plain_07_danger_warning
+  conditions: []
+  title: 危险预警
+  bodyText: 前方出现了危险预警。
+  choices:
+  - choiceId: inspect_old_scars
+    choiceText: 检查旧伤痕
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_surface_hazard
+      amount: 0
+      boolValue: 1
+      textValue:
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 地表危险情报：旧伤痕表明盐壳下方存在会突然塌陷的空洞。
+  - choiceId: continue_forward
+    choiceText: 继续前进
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results: []
+  automaticResults: []

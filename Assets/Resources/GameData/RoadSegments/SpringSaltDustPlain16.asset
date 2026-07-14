@@ -11,21 +11,20 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain16
-  m_EditorClassIdentifier: 
-  definitionId: road_y1_spring_salt_dust_plain_16
-  displayName: 盐尘平原：盐壳下零件箱
-  description: 一只旧零件箱被湿盐壳顶开，里面还能找到可用材料。这里是中后段资源补给点。
+  m_EditorClassIdentifier:
+  definitionId: road_spring_salt_dust_plain_16
+  displayName: 空白
+  description: 盐尘平原上的空白缓冲路段，暂时没有可交互目标。
   roadIndex: 16
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 3
+  contentType: 0
   mapSprite: {fileID: 0}
   character: {fileID: 0}
+  dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
   enemy: {fileID: 0}
   boss: {fileID: 0}
   facilityModule: {fileID: 0}
-  rewards:
-  - resourceId: industry
-    amount: 2
+  rewards: []
   costs: []

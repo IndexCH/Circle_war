@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07b8124d12e4b6ea901e0a17e5663af, type: 3}
+  m_Name: SpringSaltDustGraffMarleiConflictDialogue
+  m_EditorClassIdentifier:
+  definitionId: spring_salt_dust_graff_marlei_conflict_dialogue
+  displayName: 格拉夫、玛蕾
+  description: 格拉夫与玛蕾对资源优先级产生分歧。
+  startNodeId: start
+  nodes:
+  - nodeId: start
+    character: {fileID: 11400000, guid: 3ccb6340504941b0bd509f33e6d7d372, type: 2}
+    speakerName: 格拉夫、玛蕾
+    portraitOverride: {fileID: 21300000, guid: dc6cb23925154a529cbac42a6cebf9b2, type: 3}
+    bodyText: 格拉夫出现并主张工业与武器；玛蕾坚持食物与逃生机会
+    choices:
+    - choiceId: continue
+      choiceText: 继续
+      consumeInteractionOnSelect: 1
+      resultType: 0
+      nextNodeId:
+      resourceId:
+      resourceAmount: 0
+      plotIntId:

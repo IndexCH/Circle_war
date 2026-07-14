@@ -51,7 +51,8 @@ namespace CircleWar
         SetMilitarizationInclination,
         AddCustomValue,
         SetCustomValue,
-        Custom
+        Custom,
+        PushRegionFeed
     }
 
     public enum EventTriggerPhase
@@ -177,11 +178,13 @@ namespace CircleWar
         [SerializeField] private string choiceId;
         [TextArea(1, 3)]
         [SerializeField] private string choiceText;
+        [SerializeField] private bool consumeInteractionOnSelect = true;
         [SerializeField] private List<GameCondition> conditions = new List<GameCondition>();
         [SerializeField] private List<GameEffect> results = new List<GameEffect>();
 
         public string ChoiceId => choiceId;
         public string ChoiceText => choiceText;
+        public bool ConsumeInteractionOnSelect => consumeInteractionOnSelect;
         public IReadOnlyList<GameCondition> Conditions => conditions;
         public IReadOnlyList<GameEffect> Results => results;
     }

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: AutumnOldFrontlineFuelCell
+  m_EditorClassIdentifier:
+  definitionId: autumn_old_frontline_fuel_cell
+  displayName: 燃料单元
+  description: 一枚仍有燃料的危险单元，也可以用来炸开残骸。
+  earliestDay: 1
+  latestDay: 365
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
+  locationId: old_frontline_buffer_zone_13_fuel_cell
+  conditions: []
+  title: 燃料单元
+  bodyText: 发现了燃料单元……可以安全抽取燃料，也可以冒险引爆它清开残骸。
+  choices:
+  - choiceId: extract_fuel
+    choiceText: A：抽取燃料
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: fuel
+      amount: 1
+      boolValue: 1
+      textValue:
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue:
+  - choiceId: detonate_unit
+    choiceText: B：引爆单元
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: autumn_wreckage_cleared
+      amount: 0
+      boolValue: 1
+      textValue:
+    - effectType: 14
+      targetId: player_hp
+      amount: -10
+      boolValue: 1
+      textValue:
+  automaticResults: []

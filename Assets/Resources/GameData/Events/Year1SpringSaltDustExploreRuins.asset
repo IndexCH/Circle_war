@@ -31,6 +31,7 @@ MonoBehaviour:
   choices:
   - choiceId: explore
     choiceText: 清理入口，回收可用材料
+    consumeInteractionOnSelect: 1
     conditions: []
     results:
     - effectType: 0

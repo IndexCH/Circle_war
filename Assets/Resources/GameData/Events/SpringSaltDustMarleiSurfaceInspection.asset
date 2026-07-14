@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: SpringSaltDustMarleiSurfaceInspection
+  m_EditorClassIdentifier:
+  definitionId: spring_salt_dust_marlei_surface_inspection
+  displayName: 玛蕾检查地表
+  description: 玛蕾正在判断盐壳地表是否安全。
+  earliestDay: 1
+  latestDay: 90
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
+  locationId: spring_salt_dust_plain_15_marlei_surface_inspection
+  conditions: []
+  title: 玛蕾检查地表
+  bodyText: 玛蕾正在检查地表盐壳。
+  choices:
+  - choiceId: hear_assessment
+    choiceText: 听取判断
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_salt_crust_risk
+      amount: 0
+      boolValue: 1
+      textValue:
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 盐壳风险情报：颜色发暗且边缘起泡的盐壳无法承受持续踩踏。
+  - choiceId: judge_alone
+    choiceText: 独自判断
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results: []
+  automaticResults: []

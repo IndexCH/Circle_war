@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,60 @@ namespace CircleWar
         float HitRadius { get; }
         CircleMapView CircleMapView { get; }
         bool TryTakeDamage(int damage);
+    }
+
+    public sealed class CombatEnemyProgressBinding
+    {
+        private readonly Action<int, int> healthChanged;
+        private readonly Action defeated;
+        private bool hasReportedDefeat;
+
+        public int MaxHealth { get; }
+        public int CurrentHealth { get; private set; }
+
+        public CombatEnemyProgressBinding(
+            int maxHealth,
+            int currentHealth,
+            Action<int, int> healthChanged,
+            Action defeated,
+            bool isAlreadyDefeated = false)
+        {
+            MaxHealth = Mathf.Max(1, maxHealth);
+            CurrentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
+            this.healthChanged = healthChanged;
+            this.defeated = defeated;
+            hasReportedDefeat = isAlreadyDefeated;
+        }
+
+        public int ApplyDamage(int damage)
+        {
+            int safeDamage = Mathf.Max(0, damage);
+            if (safeDamage <= 0 || CurrentHealth <= 0)
+            {
+                return CurrentHealth;
+            }
+
+            CurrentHealth = Mathf.Max(0, CurrentHealth - safeDamage);
+            healthChanged?.Invoke(CurrentHealth, MaxHealth);
+            return CurrentHealth;
+        }
+
+        public void ReportDefeated()
+        {
+            if (hasReportedDefeat)
+            {
+                return;
+            }
+
+            hasReportedDefeat = true;
+            if (CurrentHealth != 0)
+            {
+                CurrentHealth = 0;
+                healthChanged?.Invoke(CurrentHealth, MaxHealth);
+            }
+
+            defeated?.Invoke();
+        }
     }
 
     public static class CombatEnemyRegistry
@@ -124,7 +179,7 @@ namespace CircleWar
                 return true;
             }
 
-            if (enemy is Object unityObject)
+            if (enemy is UnityEngine.Object unityObject)
             {
                 return unityObject == null;
             }

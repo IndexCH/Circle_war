@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566002ed1a2df3648956c8951ae3ccea, type: 3}
+  m_Name: OldFrontlineBufferZone
+  m_EditorClassIdentifier:
+  definitionId: old_frontline_buffer_zone
+  displayName: 旧前线缓冲带
+  description: 秋季旧前线缓冲带，坠毁飞行器、军械设施与失控炮塔散布其间，工业资源较为丰富。
+  baseOutputs: []
+  enemyTable:
+  - enemy: {fileID: 11400000, guid: 59a104945ff8410eb4d6abdf3136d56e, type: 2}
+    weight: 1
+  - enemy: {fileID: 11400000, guid: cceb4ef362194d25a30c9daa4d0bdb10, type: 2}
+    weight: 1
+  - enemy: {fileID: 11400000, guid: 91368962c11d429492be10f10f6e543d, type: 2}
+    weight: 1
+  - enemy: {fileID: 11400000, guid: c3df68fc1e174d02a81d32c3b8287738, type: 2}
+    weight: 1
+  environmentParameters: []

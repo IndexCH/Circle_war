@@ -32,6 +32,7 @@ MonoBehaviour:
   choices:
   - choiceId: explore1
     choiceText: "\u63A5\u5165\u4FE1\u6807"
+    consumeInteractionOnSelect: 1
     conditions: []
     results:
     - effectType: 0
@@ -46,6 +47,7 @@ MonoBehaviour:
       textValue: explore
   - choiceId: explore2
     choiceText: "\u63A5\u5165\u4FE1\u6807\u83B7\u5F97\u71C3\u6599"
+    consumeInteractionOnSelect: 1
     conditions: []
     results:
     - effectType: 0

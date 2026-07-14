@@ -11,21 +11,20 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain07
-  m_EditorClassIdentifier: 
-  definitionId: road_y1_spring_salt_dust_plain_07
-  displayName: 盐尘平原：松软盐壳滚动声
-  description: 玩家听见远处有硬物压过湿盐壳的声音。滚石晶体会从空旷地带快速接近。
+  m_EditorClassIdentifier:
+  definitionId: road_spring_salt_dust_plain_07
+  displayName: 危险预警
+  description: 地表传来一段尚未失效的危险预警。
   roadIndex: 7
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 1
-  mapSprite: {fileID: 0}
+  contentType: 4
+  mapSprite: {fileID: 21300000, guid: 11f87b9583fb499b9f065a5fe5ab260f, type: 3}
   character: {fileID: 0}
-  gameEvent: {fileID: 0}
-  enemy: {fileID: 11400000, guid: b4a552b6e48f49849b12565f82edae03, type: 2}
+  dialogue: {fileID: 0}
+  gameEvent: {fileID: 11400000, guid: 8b69b488eb1543c4a696ffe61e15caa9, type: 2}
+  enemy: {fileID: 0}
   boss: {fileID: 0}
   facilityModule: {fileID: 0}
-  rewards:
-  - resourceId: industry
-    amount: 1
+  rewards: []
   costs: []

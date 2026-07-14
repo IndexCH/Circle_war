@@ -4,12 +4,14 @@ namespace CircleWar
 {
     public sealed class CircleMapSegment : MonoBehaviour
     {
+        private const float InteractionPromptHeight = 3f;
+
         private SpriteRenderer segmentSpriteRenderer;
         private SpriteRenderer interactionPromptRenderer;
         private Sprite npcInteractionPromptSprite;
         private Sprite eventInteractionPromptSprite;
         private Sprite resourceInteractionPromptSprite;
-        private Vector2 interactionPromptOffset;
+        private float interactionPromptHorizontalOffset;
 
         public void Setup(
             SpriteRenderer renderer,
@@ -17,14 +19,14 @@ namespace CircleWar
             Sprite npcPromptSprite,
             Sprite eventPromptSprite,
             Sprite resourcePromptSprite,
-            Vector2 promptOffset)
+            float promptHorizontalOffset)
         {
             segmentSpriteRenderer = renderer;
             interactionPromptRenderer = promptRenderer;
             npcInteractionPromptSprite = npcPromptSprite;
             eventInteractionPromptSprite = eventPromptSprite;
             resourceInteractionPromptSprite = resourcePromptSprite;
-            interactionPromptOffset = promptOffset;
+            interactionPromptHorizontalOffset = promptHorizontalOffset;
 
             if (interactionPromptRenderer != null)
             {
@@ -32,13 +34,13 @@ namespace CircleWar
             }
         }
 
-        public void Show(CircleRoadSegmentData segment)
+        public void Show(CircleRoadSegmentData segment, bool showInteractionPrompt = true)
         {
             Sprite sprite = segment != null ? segment.sprite : null;
             segmentSpriteRenderer.enabled = sprite != null;
             segmentSpriteRenderer.sprite = sprite;
             AlignSpriteBottomCenter();
-            RefreshInteractionPrompt(segment);
+            RefreshInteractionPrompt(segment, showInteractionPrompt);
         }
 
         private void AlignSpriteBottomCenter()
@@ -57,14 +59,16 @@ namespace CircleWar
                 0f);
         }
 
-        private void RefreshInteractionPrompt(CircleRoadSegmentData segment)
+        private void RefreshInteractionPrompt(CircleRoadSegmentData segment, bool showInteractionPrompt)
         {
             if (interactionPromptRenderer == null)
             {
                 return;
             }
 
-            Sprite promptSprite = segment != null ? GetInteractionPromptSprite(segment.contentType) : null;
+            Sprite promptSprite = segment != null && showInteractionPrompt
+                ? GetInteractionPromptSprite(segment.contentType)
+                : null;
             interactionPromptRenderer.enabled = promptSprite != null;
             interactionPromptRenderer.sprite = promptSprite;
 
@@ -73,7 +77,7 @@ namespace CircleWar
                 return;
             }
 
-            AlignInteractionPromptAboveSegment();
+            SetInteractionPromptFixedHeight();
         }
 
         private Sprite GetInteractionPromptSprite(SegmentContentType contentType)
@@ -91,33 +95,12 @@ namespace CircleWar
             }
         }
 
-        private void AlignInteractionPromptAboveSegment()
+        private void SetInteractionPromptFixedHeight()
         {
-            if (interactionPromptRenderer.sprite == null)
-            {
-                return;
-            }
-
-            float segmentTopY = 0f;
-            if (segmentSpriteRenderer != null && segmentSpriteRenderer.enabled && segmentSpriteRenderer.sprite != null)
-            {
-                Bounds segmentBounds = segmentSpriteRenderer.sprite.bounds;
-                Vector3 segmentScale = segmentSpriteRenderer.transform.localScale;
-                segmentTopY = segmentSpriteRenderer.transform.localPosition.y + segmentBounds.max.y * segmentScale.y;
-            }
-
-            Bounds promptBounds = interactionPromptRenderer.sprite.bounds;
-            Vector3 promptScale = interactionPromptRenderer.transform.localScale;
-            Vector3 promptBottomCenter = new Vector3(
-                promptBounds.center.x * promptScale.x,
-                promptBounds.min.y * promptScale.y,
+            interactionPromptRenderer.transform.localPosition = new Vector3(
+                interactionPromptHorizontalOffset,
+                InteractionPromptHeight,
                 0f);
-            Vector3 desiredBottomCenter = new Vector3(
-                interactionPromptOffset.x,
-                segmentTopY + interactionPromptOffset.y,
-                0f);
-
-            interactionPromptRenderer.transform.localPosition = desiredBottomCenter - promptBottomCenter;
         }
     }
 }

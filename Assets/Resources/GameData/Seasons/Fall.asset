@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c27fd352affd0054fa62a1fb4426579d, type: 3}
   m_Name: Fall
   m_EditorClassIdentifier: 
-  definitionId: Fall
+  definitionId: fall
   displayName: "\u79CB"
   description: "\u8D44\u6E90\u66F4\u5BB9\u6613\u5728\u5730\u8868\u51FA\u73B0"
-  seasonOrder: 0
+  seasonOrder: 2
+  region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
+  backgroundSprite: {fileID: 21300000, guid: 7d28bcfd9ebe495cb6bfb78ca61eb5d3, type: 3}
+  circleRingSprite: {fileID: 21300000, guid: 70551866952d498e8a2f4d53df9e4d48, type: 3}
   movementMultiplier: 1
   consumptionMultiplier: 1
   hitRateMultiplier: 1

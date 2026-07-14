@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
+  m_Name: SummerLowHumidityShore29
+  m_EditorClassIdentifier:
+  definitionId: road_summer_low_humidity_shore_29
+  displayName: 远程水怪
+  description: 固守浅水区并从远处攻击主角的水怪.
+  roadIndex: 29
+  season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
+  region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
+  contentType: 1
+  mapSprite: {fileID: -168717823013034772, guid: a978047a7afe670439b72611b91d20d2, type: 3}
+  character: {fileID: 0}
+  dialogue: {fileID: 0}
+  gameEvent: {fileID: 0}
+  enemy: {fileID: 11400000, guid: 278639f5fb454919bba9d3ec6a6e3949, type: 2}
+  boss: {fileID: 0}
+  facilityModule: {fileID: 0}
+  rewards: []
+  costs: []

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
+  m_Name: SpringSaltDustPlain35
+  m_EditorClassIdentifier:
+  definitionId: road_spring_salt_dust_plain_35
+  displayName: 耐盐作物种子
+  description: 一包能够在盐碱地存活的耐盐作物种子。
+  roadIndex: 35
+  season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
+  region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
+  contentType: 4
+  mapSprite: {fileID: 2052579126201748298, guid: 42e9e02d03e12144b864c7cfdfd0ff5f, type: 3}
+  character: {fileID: 0}
+  dialogue: {fileID: 0}
+  gameEvent: {fileID: 11400000, guid: d11755267acc406ba030e717b3c2e327, type: 2}
+  enemy: {fileID: 0}
+  boss: {fileID: 0}
+  facilityModule: {fileID: 0}
+  rewards: []
+  costs: []

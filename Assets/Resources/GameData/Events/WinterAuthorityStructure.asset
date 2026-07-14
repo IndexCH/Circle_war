@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: WinterAuthorityStructure
+  m_EditorClassIdentifier:
+  definitionId: winter_authority_structure
+  displayName: 权限结构
+  description: 旧无人机网络的最高权限结构仍能被确认。
+  earliestDay: 1
+  latestDay: 365
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
+  locationId: long_straight_old_supply_route_08_authority_structure
+  conditions: []
+  title: 权限结构
+  bodyText: 读取到无人机权限结构……最高权限节点仍保留接管能力。
+  choices:
+  - choiceId: confirm_highest_authority
+    choiceText: A：确认最高权限功能
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_winter_drone_system
+      amount: 0
+      boolValue: 1
+      textValue: 
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 无人机系统情报：最高权限节点能够接管无人机控制网络。
+  - choiceId: hide_partial_information
+    choiceText: B：隐瞒部分信息
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: chip
+      amount: 1
+      boolValue: 1
+      textValue: 
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue: 
+  automaticResults: []

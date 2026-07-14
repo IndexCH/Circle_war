@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38aad17aeaf64dc479b1679e8fc384d0, type: 3}
+  m_Name: EliteSwampMonster
+  m_EditorClassIdentifier:
+  definitionId: elite_swamp_monster
+  displayName: 精英怪物
+  description: 在沼岸上空巡航并进行远程攻击的精英敌人。
+  portrait: {fileID: 21300000, guid: 30b0af42c6d773f4a83a541d8b1af325, type: 3}
+  attackType: 2
+  maxHealth: 10
+  speed: 1.4
+  attackPower: 2
+  drops: []

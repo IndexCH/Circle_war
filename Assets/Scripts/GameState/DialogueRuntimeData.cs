@@ -9,7 +9,8 @@ namespace CircleWar
         EndDialogue,
         NextDialogueNode,
         AddResource,
-        IncrementPlotInt
+        IncrementPlotInt,
+        ApplyEventChoice
     }
 
     public sealed class DialogueNodeRuntimeData
@@ -106,17 +107,23 @@ namespace CircleWar
         public string Text { get; private set; }
         public bool IsEnabled { get; private set; }
         public DialogueChoiceResultRuntimeData Result { get; private set; }
+        public string SourceInteractionId { get; private set; }
+        public bool ConsumeInteractionOnSelect { get; private set; }
 
         public DialogueChoiceRuntimeData(
             string text,
             DialogueChoiceResultRuntimeData result,
             bool isEnabled = true,
-            string choiceId = null)
+            string choiceId = null,
+            string sourceInteractionId = null,
+            bool consumeInteractionOnSelect = true)
         {
             ChoiceId = choiceId ?? string.Empty;
             Text = text ?? string.Empty;
             Result = result ?? DialogueChoiceResultRuntimeData.EndDialogue();
             IsEnabled = isEnabled;
+            SourceInteractionId = sourceInteractionId ?? string.Empty;
+            ConsumeInteractionOnSelect = consumeInteractionOnSelect;
         }
     }
 
@@ -133,6 +140,8 @@ namespace CircleWar
         public string ResourceId { get; private set; }
         public int ResourceAmount { get; private set; }
         public string PlotIntId { get; private set; }
+        public GameEventDefinition EventDefinition { get; private set; }
+        public GameEventChoiceDefinition EventChoice { get; private set; }
 
         public static DialogueChoiceResultRuntimeData EndDialogue()
         {
@@ -180,6 +189,27 @@ namespace CircleWar
             return new DialogueChoiceResultRuntimeData(DialogueChoiceResultType.IncrementPlotInt)
             {
                 PlotIntId = plotIntId
+            };
+        }
+
+        public static DialogueChoiceResultRuntimeData ApplyEventChoice(
+            GameEventDefinition eventDefinition,
+            GameEventChoiceDefinition eventChoice)
+        {
+            if (eventDefinition == null)
+            {
+                throw new ArgumentNullException(nameof(eventDefinition));
+            }
+
+            if (eventChoice == null)
+            {
+                throw new ArgumentNullException(nameof(eventChoice));
+            }
+
+            return new DialogueChoiceResultRuntimeData(DialogueChoiceResultType.ApplyEventChoice)
+            {
+                EventDefinition = eventDefinition,
+                EventChoice = eventChoice
             };
         }
 

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: AutumnOldFrontlineFlightLog
+  m_EditorClassIdentifier:
+  definitionId: autumn_old_frontline_flight_log
+  displayName: 飞行日志
+  description: 一块保存着旧帝国设施记录的飞行日志模块。
+  earliestDay: 1
+  latestDay: 365
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
+  locationId: old_frontline_buffer_zone_11_flight_log
+  conditions: []
+  title: 飞行日志
+  bodyText: 找到了飞行日志……日志内容与模块芯片都还可以读取或回收。
+  choices:
+  - choiceId: read_log
+    choiceText: A：读取日志
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_old_empire_facility
+      amount: 0
+      boolValue: 1
+      textValue:
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 旧帝国设施情报：飞行日志记录了缓冲带内仍可访问的旧帝国设施。
+  - choiceId: dismantle_log_module
+    choiceText: B：拆解日志模块
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: chip
+      amount: 1
+      boolValue: 1
+      textValue:
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue:
+  automaticResults: []

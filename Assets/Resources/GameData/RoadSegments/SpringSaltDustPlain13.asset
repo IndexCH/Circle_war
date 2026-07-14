@@ -11,22 +11,20 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain13
-  m_EditorClassIdentifier: 
-  definitionId: road_y1_spring_salt_dust_plain_13
-  displayName: 盐尘平原：临时标记桩旁的拾荒者
-  description: 临时标记桩旁停着一名拾荒者。他熟悉旧设施入口和滚石晶体巡游线，玩家靠近后可以按 E 对话。
+  m_EditorClassIdentifier:
+  definitionId: road_spring_salt_dust_plain_13
+  displayName: 空白
+  description: 盐尘平原上的空白缓冲路段，暂时没有可交互目标。
   roadIndex: 13
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 2
+  contentType: 0
   mapSprite: {fileID: 0}
-  character: {fileID: 11400000, guid: 32fb8cad7ddf46bda83a9f6512f951ad, type: 2}
-  dialogue: {fileID: 11400000, guid: b0d81fb5e13a4f9f9c44a6a13f85a22f, type: 2}
+  character: {fileID: 0}
+  dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
   enemy: {fileID: 0}
   boss: {fileID: 0}
   facilityModule: {fileID: 0}
   rewards: []
-  costs:
-  - resourceId: industry
-    amount: 1
+  costs: []

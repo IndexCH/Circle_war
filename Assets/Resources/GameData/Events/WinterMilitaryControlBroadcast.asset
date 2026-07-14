@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: WinterMilitaryControlBroadcast
+  m_EditorClassIdentifier:
+  definitionId: winter_military_control_broadcast
+  displayName: 军事管制广播
+  description: 军事管制广播暴露了伊莱的指挥习惯。
+  earliestDay: 1
+  latestDay: 365
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
+  locationId: long_straight_old_supply_route_30_military_control_broadcast
+  conditions: []
+  title: 军事管制广播
+  bodyText: 收到了军事管制广播……回应可以拖延对方，无视则能继续搜集食物。
+  choices:
+  - choiceId: respond_and_delay
+    choiceText: A：回应并拖延
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_winter_eli_command_habit
+      amount: 0
+      boolValue: 1
+      textValue: 
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 伊莱指挥习惯情报：伊莱倾向先稳定线路再集中无人机火力。
+  - choiceId: ignore_broadcast
+    choiceText: B：无视广播
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: reed_flower
+      amount: 1
+      boolValue: 1
+      textValue: 
+    - effectType: 0
+      targetId: food
+      amount: 10
+      boolValue: 1
+      textValue: 
+  automaticResults: []

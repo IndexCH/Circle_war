@@ -15,6 +15,7 @@ namespace CircleWar
         [SerializeField] private SpriteRenderer gunRenderer;
         [SerializeField] private CircleMapView circleMapView;
         [SerializeField] private EnemyDefinition enemyDefinition;
+        [SerializeField] private BossDefinition bossDefinition;
 
         [Header("Entry")]
         [SerializeField] private Vector2 fallbackOrbitViewCenter = new Vector2(0f, 1.7f);
@@ -48,6 +49,7 @@ namespace CircleWar
         private static Sprite gunSprite;
         private static Sprite runtimeBulletSprite;
 
+        private CombatEnemyProgressBinding progressBinding;
         private Vector2 viewPosition;
         private Vector2 worldPosition;
         private Vector2 entryStartViewPosition;
@@ -59,6 +61,8 @@ namespace CircleWar
         private bool isConfigured;
         private bool isDead;
         private int currentHealth;
+        private AttackPatternDefinition activeBossAttackPattern;
+        private string activeBossPhaseId = string.Empty;
 
         public bool IsAlive => isActiveAndEnabled && isConfigured && !isDead;
         public Vector2 WorldPosition => GetCurrentWorldPosition();
@@ -84,20 +88,35 @@ namespace CircleWar
             ConfigureViewAnchored(circleMapView, newPlayerTarget, newEnemyDefinition, newViewPosition, newOrbitViewCenter);
         }
 
-        public void ConfigureViewAnchored(CircleMapView newCircleMapView, Transform newPlayerTarget, EnemyDefinition newEnemyDefinition, Vector2 newViewPosition, Vector2 newOrbitViewCenter)
+        public void ConfigureViewAnchored(
+            CircleMapView newCircleMapView,
+            Transform newPlayerTarget,
+            EnemyDefinition newEnemyDefinition,
+            Vector2 newViewPosition,
+            Vector2 newOrbitViewCenter,
+            CombatEnemyProgressBinding newProgressBinding = null,
+            BossDefinition newBossDefinition = null)
         {
             circleMapView = newCircleMapView != null ? newCircleMapView : ResolveCircleMapView();
             playerTarget = newPlayerTarget;
             enemyDefinition = newEnemyDefinition != null ? newEnemyDefinition : enemyDefinition;
+            bossDefinition = newBossDefinition != null ? newBossDefinition : bossDefinition;
+            if (enemyDefinition != null && enemyDefinition.Speed > 0f)
+            {
+                orbitSpeed = enemyDefinition.Speed;
+            }
+            progressBinding = newProgressBinding;
             viewPosition = newViewPosition;
             entryStartViewPosition = newViewPosition;
             orbitViewCenter = newOrbitViewCenter;
             UpdateWorldPositionFromView();
             entryAge = 0f;
             orbitTime = 0f;
-            currentHealth = GetMaxHealth();
+            currentHealth = progressBinding != null ? progressBinding.CurrentHealth : GetMaxHealth();
             isDead = false;
             isConfigured = true;
+            RefreshBossAttackPattern();
+            EnsureVisuals();
             ApplyViewTransform();
         }
 
@@ -126,6 +145,7 @@ namespace CircleWar
 
             ResolveReferences();
             EnsureConfigured();
+            RefreshBossAttackPattern();
             Move();
             ApplyViewTransform();
             AimGunAtPlayer();
@@ -153,13 +173,24 @@ namespace CircleWar
                 GameObject bodyObject = new GameObject("Body");
                 bodyObject.layer = gameObject.layer;
                 bodyObject.transform.SetParent(transform, false);
-                bodyObject.transform.localScale = new Vector3(0.38f, 0.38f, 1f);
 
                 bodyRenderer = bodyObject.AddComponent<SpriteRenderer>();
-                bodyRenderer.sprite = GetBodySprite();
-                bodyRenderer.color = new Color(0.48f, 0.86f, 1f, 1f);
                 bodyRenderer.sortingOrder = sortingOrder;
             }
+
+            Sprite configuredBodySprite = bossDefinition != null && bossDefinition.Portrait != null
+                ? bossDefinition.Portrait
+                : enemyDefinition != null ? enemyDefinition.Portrait : null;
+            bodyRenderer.sprite = configuredBodySprite != null ? configuredBodySprite : GetBodySprite();
+            bodyRenderer.color = configuredBodySprite != null
+                ? Color.white
+                : new Color(0.48f, 0.86f, 1f, 1f);
+            float targetBodySize = bossDefinition != null ? 1.65f : 0.9f;
+            float sourceBodySize = Mathf.Max(
+                0.01f,
+                Mathf.Max(bodyRenderer.sprite.bounds.size.x, bodyRenderer.sprite.bounds.size.y));
+            float fittedBodyScale = configuredBodySprite != null ? targetBodySize / sourceBodySize : 0.38f;
+            bodyRenderer.transform.localScale = new Vector3(fittedBodyScale, fittedBodyScale, 1f);
 
             if (gunPivot == null)
             {
@@ -182,6 +213,8 @@ namespace CircleWar
                 gunRenderer.color = new Color(0.95f, 0.98f, 1f, 1f);
                 gunRenderer.sortingOrder = sortingOrder + 1;
             }
+
+            gunRenderer.enabled = configuredBodySprite == null;
 
             if (shootPoint == null)
             {
@@ -255,8 +288,91 @@ namespace CircleWar
                 return;
             }
 
-            SpawnBullet(fireDirection.normalized);
+            int volleyCount = GetBossVolleyCount();
+            float centerOffset = (volleyCount - 1) * 0.5f;
+            for (int volleyIndex = 0; volleyIndex < volleyCount; volleyIndex++)
+            {
+                float angleOffset = (volleyIndex - centerOffset) * 7f;
+                Vector2 volleyDirection = Quaternion.Euler(0f, 0f, angleOffset) * fireDirection.normalized;
+                SpawnBullet(volleyDirection.normalized);
+            }
             nextFireTime = Time.time + fireCooldown;
+        }
+
+        private void RefreshBossAttackPattern()
+        {
+            if (bossDefinition == null || progressBinding == null)
+            {
+                activeBossAttackPattern = null;
+                activeBossPhaseId = string.Empty;
+                return;
+            }
+
+            float healthRatio = progressBinding.MaxHealth <= 0
+                ? 0f
+                : (float)progressBinding.CurrentHealth / progressBinding.MaxHealth;
+            BossPhaseDefinition selectedPhase = null;
+            float selectedThreshold = float.MaxValue;
+            foreach (BossPhaseDefinition phase in bossDefinition.Phases)
+            {
+                if (phase == null || healthRatio > phase.HealthPercentThreshold)
+                {
+                    continue;
+                }
+
+                if (phase.HealthPercentThreshold < selectedThreshold)
+                {
+                    selectedPhase = phase;
+                    selectedThreshold = phase.HealthPercentThreshold;
+                }
+            }
+
+            AttackPatternDefinition selectedPattern = null;
+            if (selectedPhase != null && selectedPhase.AttackPatterns.Count > 0)
+            {
+                selectedPattern = selectedPhase.AttackPatterns[0];
+            }
+            else if (bossDefinition.DefaultAttackPatterns.Count > 0)
+            {
+                selectedPattern = bossDefinition.DefaultAttackPatterns[0];
+            }
+
+            activeBossAttackPattern = selectedPattern;
+            if (selectedPattern != null && selectedPattern.CooldownSeconds > 0f)
+            {
+                fireCooldown = selectedPattern.CooldownSeconds;
+            }
+
+            string selectedPhaseId = selectedPhase != null ? selectedPhase.PhaseId : string.Empty;
+            if (selectedPhaseId == activeBossPhaseId)
+            {
+                return;
+            }
+
+            activeBossPhaseId = selectedPhaseId;
+            GameHud hud = FindAnyObjectByType<GameHud>();
+            if (hud != null && !string.IsNullOrWhiteSpace(activeBossPhaseId))
+            {
+                hud.RuntimeData.State.SetBossPhase(bossDefinition.DefinitionId, activeBossPhaseId);
+            }
+        }
+
+        private int GetBossVolleyCount()
+        {
+            if (activeBossAttackPattern == null)
+            {
+                return 1;
+            }
+
+            switch (activeBossAttackPattern.PatternType)
+            {
+                case AttackPatternType.Summon:
+                    return 3;
+                case AttackPatternType.Area:
+                    return 5;
+                default:
+                    return 1;
+            }
         }
 
         private void SpawnBullet(Vector2 direction)
@@ -306,7 +422,13 @@ namespace CircleWar
             }
 
             CircleMapView resolvedMapView = ResolveCircleMapView();
-            ConfigureViewAnchored(resolvedMapView, playerTarget, enemyDefinition, transform.position, fallbackOrbitViewCenter);
+            ConfigureViewAnchored(
+                resolvedMapView,
+                playerTarget,
+                enemyDefinition,
+                transform.position,
+                fallbackOrbitViewCenter,
+                progressBinding);
         }
 
         public bool TryTakeDamage(int damage)
@@ -322,12 +444,14 @@ namespace CircleWar
                 return false;
             }
 
-            if (currentHealth <= 0)
+            if (currentHealth <= 0 && progressBinding == null)
             {
                 currentHealth = GetMaxHealth();
             }
 
-            currentHealth = Mathf.Max(0, currentHealth - safeDamage);
+            currentHealth = progressBinding != null
+                ? progressBinding.ApplyDamage(safeDamage)
+                : Mathf.Max(0, currentHealth - safeDamage);
             if (currentHealth <= 0)
             {
                 Die();
@@ -344,6 +468,7 @@ namespace CircleWar
             }
 
             isDead = true;
+            progressBinding?.ReportDefeated();
             CombatEnemyRegistry.Unregister(this);
             Destroy(gameObject);
         }
@@ -371,11 +496,18 @@ namespace CircleWar
 
         private int GetMaxHealth()
         {
-            return enemyDefinition != null ? Mathf.Max(1, enemyDefinition.MaxHealth) : 1;
+            return progressBinding != null
+                ? progressBinding.MaxHealth
+                : enemyDefinition != null ? Mathf.Max(1, enemyDefinition.MaxHealth) : 1;
         }
 
         private int GetAttackDamage()
         {
+            if (activeBossAttackPattern != null)
+            {
+                return Mathf.Max(0, activeBossAttackPattern.Power);
+            }
+
             return enemyDefinition != null ? Mathf.Max(0, enemyDefinition.AttackPower) : 1;
         }
 

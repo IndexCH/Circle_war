@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fba40cf5c0b14204ea0d5f96c6c9bd9d, type: 3}
+  m_Name: Sevi
+  m_EditorClassIdentifier:
+  definitionId: sevi
+  displayName: 塞维
+  description: 从坠毁飞行器中获救的前帝国技师，掌握旧帝国设施的最高权限匙。
+  portrait: {fileID: -4984325830423288902, guid: b5fc0e2eae4e4ddeb36bf7deeead4425, type: 3}
+  alternatePortraits: []
+  favorThresholds: []
+  passiveAbilities: []

@@ -36,17 +36,17 @@ namespace CircleWar
         public static GameHudRuntimeData CreateCurrentUiMockup()
         {
             GameHudRuntimeData data = new GameHudRuntimeData();
-            data.Calendar.Set(2, "summer", "SUMMER", 10, 25);
+            data.Calendar.Set(1, "spring", "春", 8, 0);
             data.SystemStatus.Set("online", "SYSTEM ONLINE...", 4);
-            data.Boss.Set("current_boss", "BOSS", 65);
+            data.Boss.Set(string.Empty, string.Empty, 0);
             data.RegionStatus.Set(
                 "salt_dust_plain",
-                "SALT DUST PLAIN",
+                "盐尘平原",
                 true,
                 new[]
                 {
-                    new HudFeedEntryRuntimeData(10, 24, "TWO SCAVENGERS SPOTTED NEAR FIRE."),
-                    new HudFeedEntryRuntimeData(10, 25, "LARGE HOSTILE SIGNAL DETECTED IN THE DISTANCE.")
+                    new HudFeedEntryRuntimeData(7, 59, "春季盐壳正在融化。"),
+                    new HudFeedEntryRuntimeData(8, 0, "盐尘平原通行风险上升。")
                 });
             data.PlayerStats.Set(80, 100, 120, 85, "on_the_move", "ON THE MOVE");
             data.Dialogue.Clear();

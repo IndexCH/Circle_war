@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: AutumnOldFrontlineOldEmpireNumber
+  m_EditorClassIdentifier:
+  definitionId: autumn_old_frontline_old_empire_number
+  displayName: 旧帝国编号
+  description: 一块记录旧帝国人员编号的铭牌。
+  earliestDay: 1
+  latestDay: 365
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
+  locationId: old_frontline_buffer_zone_23_old_empire_number
+  conditions: []
+  title: 旧帝国编号
+  bodyText: 找到了旧帝国编号……可以读取编号，也可以拆解铭牌回收芯片。
+  choices:
+  - choiceId: read_number
+    choiceText: A：读取编号
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_old_empire_personnel
+      amount: 0
+      boolValue: 1
+      textValue:
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 旧帝国人员情报：编号记录对应一批曾驻守旧前线的帝国人员。
+  - choiceId: dismantle_nameplate
+    choiceText: B：拆解铭牌
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: chip
+      amount: 1
+      boolValue: 1
+      textValue:
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue:
+  automaticResults: []

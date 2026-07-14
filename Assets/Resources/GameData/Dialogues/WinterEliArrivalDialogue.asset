@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07b8124d12e4b6ea901e0a17e5663af, type: 3}
+  m_Name: WinterEliArrivalDialogue
+  m_EditorClassIdentifier:
+  definitionId: winter_eli_arrival_dialogue
+  displayName: 伊莱
+  description: 伊莱在长直旧补给路提出重启军事设施的主张。
+  startNodeId: start
+  nodes:
+  - nodeId: start
+    character: {fileID: 11400000, guid: b39124d951274993a169d4941f6aaf1a, type: 2}
+    speakerName: 
+    portraitOverride: {fileID: 0}
+    bodyText: 被放逐的年轻军官出现，提出重启军事设施、统一指挥幸存者。
+    choices:
+    - choiceId: continue
+      choiceText: 继续
+      consumeInteractionOnSelect: 1
+      resultType: 0
+      nextNodeId:
+      resourceId:
+      resourceAmount: 0
+      plotIntId:

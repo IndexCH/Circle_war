@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: SummerLowHumidityInspectorMedkit
+  m_EditorClassIdentifier:
+  definitionId: summer_low_humidity_inspector_medkit
+  displayName: 监察官药箱
+  description: 一只请求进行接触检查的监察官药箱。
+  earliestDay: 1
+  latestDay: 90
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
+  locationId: low_humidity_swamp_shore_15_inspector_medkit
+  conditions: []
+  title: 监察官药箱
+  bodyText: 找到了监察官药箱……自检程序请求接触检查。
+  choices:
+  - choiceId: accept_examination
+    choiceText: A：接受检查
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 14
+      targetId: player_max_hp
+      amount: 1
+      boolValue: 1
+      textValue:
+  - choiceId: refuse_contact
+    choiceText: B：拒绝接触
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results: []
+  automaticResults: []

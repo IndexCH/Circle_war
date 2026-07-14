@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: AutumnOldFrontlineSeviRepair
+  m_EditorClassIdentifier:
+  definitionId: autumn_old_frontline_sevi_repair
+  displayName: 塞维维修
+  description: 塞维正在校准旧设备，并愿意交换芯片或橡胶。
+  earliestDay: 1
+  latestDay: 365
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
+  locationId: old_frontline_buffer_zone_36_sevi_repair
+  conditions: []
+  title: 塞维维修
+  bodyText: 遇到塞维进行维修……可以协助校准，也可以直接要求材料。
+  choices:
+  - choiceId: assist_calibration
+    choiceText: A：协助校准
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: chip
+      amount: 1
+      boolValue: 1
+      textValue:
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue:
+  - choiceId: request_materials
+    choiceText: B：要求材料
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: rubber
+      amount: 1
+      boolValue: 1
+      textValue:
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue:
+  automaticResults: []

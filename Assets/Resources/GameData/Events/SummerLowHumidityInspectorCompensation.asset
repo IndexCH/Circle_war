@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: SummerLowHumidityInspectorCompensation
+  m_EditorClassIdentifier:
+  definitionId: summer_low_humidity_inspector_compensation
+  displayName: 监察官补偿
+  description: 监察官提供的一份食物或材料补偿。
+  earliestDay: 1
+  latestDay: 90
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
+  locationId: low_humidity_swamp_shore_37_inspector_compensation
+  conditions: []
+  title: 监察官补偿
+  bodyText: 收到了监察官补偿……可选择食物或材料。
+  choices:
+  - choiceId: request_food
+    choiceText: A：索要食物
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: food
+      amount: 10
+      boolValue: 1
+      textValue:
+  - choiceId: request_materials
+    choiceText: B：索要材料
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue:
+  automaticResults: []

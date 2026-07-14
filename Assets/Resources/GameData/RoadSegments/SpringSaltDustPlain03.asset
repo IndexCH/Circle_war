@@ -11,22 +11,20 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain03
-  m_EditorClassIdentifier: 
-  definitionId: road_y1_spring_salt_dust_plain_03
-  displayName: "\u76D0\u5C18\u5E73\u539F\uFF1A\u8FDC\u7A0B\u673A\u5668\u4EBA\u5DE1\u822A\u70B9"
-  description: "\u7834\u635F\u4FE1\u6807\u8FD8\u5728\u5468\u671F\u6027\u95EA\u70C1\uFF0C\u4E00\u53F0\u8FDC\u7A0B\u673A\u5668\u4EBA\u6B63\u6CBF\u5706\u5708\u4E0A\u65B9\u5DE1\u822A\u3002\u73A9\u5BB6\u4F1A\u906D\u9047\u98DE\u884C\u5F0F\u8FDC\u7A0B\u706B\u529B\u538B\u5236\u3002"
+  m_EditorClassIdentifier:
+  definitionId: road_spring_salt_dust_plain_03
+  displayName: 破旧信标
+  description: 一座仍有微弱反应的破旧信标。
   roadIndex: 3
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 4
-  mapSprite: {fileID: 59175984130458913, guid: 82390e8c7b97cd548ae38f9690b65b75, type: 3}
+  mapSprite: {fileID: 21300000, guid: 11f87b9583fb499b9f065a5fe5ab260f, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
-  gameEvent: {fileID: 0}
-  enemy: {fileID: 11400000, guid: ac2d6a18ebaa4bd29ed8db980479f860, type: 2}
+  gameEvent: {fileID: 11400000, guid: cb20b3e0e84a4109ad3280e51ac11c91, type: 2}
+  enemy: {fileID: 0}
   boss: {fileID: 0}
   facilityModule: {fileID: 0}
-  rewards:
-  - resourceId: industry
-    amount: 1
+  rewards: []
   costs: []

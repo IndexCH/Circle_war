@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: WinterBackupEnergyRail
+  m_EditorClassIdentifier:
+  definitionId: winter_backup_energy_rail
+  displayName: 备用能源导轨
+  description: 备用能源导轨中仍有稳定燃料与可拆金属。
+  earliestDay: 1
+  latestDay: 365
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
+  locationId: long_straight_old_supply_route_12_backup_energy_rail
+  conditions: []
+  title: 备用能源导轨
+  bodyText: 发现了备用能源导轨……燃料与导轨金属都仍可回收。
+  choices:
+  - choiceId: extract_stable_fuel
+    choiceText: A：拆取稳定燃料
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: fuel
+      amount: 1
+      boolValue: 1
+      textValue: 
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue: 
+  - choiceId: extract_rail_metal
+    choiceText: B：拆取导轨金属
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: steel
+      amount: 1
+      boolValue: 1
+      textValue: 
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue: 
+  automaticResults: []

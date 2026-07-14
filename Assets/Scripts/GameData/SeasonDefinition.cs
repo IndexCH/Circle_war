@@ -10,12 +10,18 @@ namespace CircleWar
     {
         [Min(0)]
         [SerializeField] private int seasonOrder;
+        [SerializeField] private RegionDefinition region;
+        [SerializeField] private Sprite backgroundSprite;
+        [SerializeField] private Sprite circleRingSprite;
         [SerializeField] private float movementMultiplier = 1f;
         [SerializeField] private float consumptionMultiplier = 1f;
         [SerializeField] private float hitRateMultiplier = 1f;
         [SerializeField] private List<ResourceMultiplier> resourceMultipliers = new List<ResourceMultiplier>();
 
         public int SeasonOrder => seasonOrder;
+        public RegionDefinition Region => region;
+        public Sprite BackgroundSprite => backgroundSprite;
+        public Sprite CircleRingSprite => circleRingSprite;
         public float MovementMultiplier => movementMultiplier;
         public float ConsumptionMultiplier => consumptionMultiplier;
         public float HitRateMultiplier => hitRateMultiplier;

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: WinterBrokenMilitaryCable
+  m_EditorClassIdentifier:
+  definitionId: winter_broken_military_cable
+  displayName: 断裂军用电缆
+  description: 断裂的军用电缆仍与旧防御线路相连。
+  earliestDay: 1
+  latestDay: 365
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
+  locationId: long_straight_old_supply_route_03_broken_military_cable
+  conditions: []
+  title: 断裂军用电缆
+  bodyText: 发现了断裂军用电缆……残存线路仍与旧防御网络相连。
+  choices:
+  - choiceId: repair_cable
+    choiceText: A：修复电缆
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_winter_defense_line
+      amount: 0
+      boolValue: 1
+      textValue: 
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 防御线路情报：断裂电缆仍连接旧军事防御线路。
+  - choiceId: salvage_cable
+    choiceText: B：拆取电缆
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: fuel
+      amount: 1
+      boolValue: 1
+      textValue: 
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue: 
+  automaticResults: []

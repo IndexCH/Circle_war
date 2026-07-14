@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: Year1SpringSaltDustSupplyPod
+  m_EditorClassIdentifier:
+  definitionId: summer_low_humidity_supply_pod
+  displayName: 补给舱
+  description: 锁死的补给舱仍有残存信标反应。
+  earliestDay: 1
+  latestDay: 90
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
+  locationId: low_humidity_swamp_shore_02_supply_pod
+  conditions: []
+  title: 补给舱
+  bodyText: 遇到了补给舱……锁死舱门和残存信标仍有反应。
+  choices:
+  - choiceId: force_hatch
+    choiceText: A：强开舱门
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: food
+      amount: 10
+      boolValue: 1
+      textValue:
+    - effectType: 14
+      targetId: player_hp
+      amount: -10
+      boolValue: 1
+      textValue:
+  - choiceId: activate_beacon
+    choiceText: B：启动信标
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_inspector
+      amount: 0
+      boolValue: 1
+      textValue:
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 监察官情报：巡查队正在接近低湿季沼岸。
+  automaticResults: []

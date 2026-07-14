@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928fa1dfb76971d45b8a8826c3a7834d, type: 3}
+  m_Name: YoungOfficerEliDroneSwarmBoss
+  m_EditorClassIdentifier:
+  definitionId: young_officer_eli_drone_swarm
+  displayName: 年轻军官·伊莱 + 战术无人机群
+  description: 冬季长直旧补给路尽头的年度 Boss，由伊莱统一指挥战术无人机群。
+  portrait: {fileID: 21300000, guid: 6a816b41362d464bbe24aa0af0a97791, type: 3}
+  maxHealth: 100
+  phases:
+  - phaseId: drone_screen
+    phaseName: 无人机掩护
+    healthPercentThreshold: 1
+    attackPatterns:
+    - patternId: suppressive_fire
+      patternName: 压制射击
+      patternType: 1
+      power: 3
+      cooldownSeconds: 1.2
+      description: 伊莱命令无人机群持续压制主角。
+  - phaseId: command_overload
+    phaseName: 指挥过载
+    healthPercentThreshold: 0.5
+    attackPatterns:
+    - patternId: tactical_swarm
+      patternName: 战术蜂群
+      patternType: 3
+      power: 4
+      cooldownSeconds: 2
+      description: 伊莱调动剩余无人机集中进攻。
+  defaultAttackPatterns:
+  - patternId: command_shot
+    patternName: 指挥射击
+    patternType: 1
+    power: 2
+    cooldownSeconds: 1.5
+    description: 伊莱亲自校准无人机射击路线。
+  winConditions: []
+  lossConditions: []

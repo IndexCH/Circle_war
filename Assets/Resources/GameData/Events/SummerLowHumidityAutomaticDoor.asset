@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
+  m_Name: SummerLowHumidityAutomaticDoor
+  m_EditorClassIdentifier:
+  definitionId: summer_low_humidity_automatic_door
+  displayName: 自动门
+  description: 通往仍可能存有补给的安全屋自动门。
+  earliestDay: 1
+  latestDay: 90
+  triggerPhase: 4
+  region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
+  locationId: low_humidity_swamp_shore_23_automatic_door
+  conditions: []
+  title: 自动门
+  bodyText: 遇到了自动门……门后的安全屋似乎仍有补给。
+  choices:
+  - choiceId: open_door
+    choiceText: A：打开门
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 0
+      targetId: food
+      amount: 10
+      boolValue: 1
+      textValue:
+  - choiceId: close_door
+    choiceText: B：关闭门
+    consumeInteractionOnSelect: 1
+    conditions: []
+    results:
+    - effectType: 3
+      targetId: intel_safe_house
+      amount: 0
+      boolValue: 1
+      textValue:
+    - effectType: 17
+      targetId: region_feed
+      amount: 0
+      boolValue: 1
+      textValue: 安全屋情报：自动门后的设施仍可短期避难。
+  automaticResults: []
