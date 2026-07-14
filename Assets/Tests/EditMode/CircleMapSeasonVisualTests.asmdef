@@ -1,0 +1,12 @@
+{
+    "name": "CircleWar.EditModeTests",
+    "references": [
+        "CircleWar.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ]
+}

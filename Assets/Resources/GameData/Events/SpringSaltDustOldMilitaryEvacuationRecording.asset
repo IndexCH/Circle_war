@@ -10,42 +10,42 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
-  m_Name: SpringSaltDustDamagedOldGun
+  m_Name: SpringSaltDustOldMilitaryEvacuationRecording
   m_EditorClassIdentifier:
-  definitionId: spring_salt_dust_damaged_old_gun
-  displayName: 损坏旧枪
-  description: 一把已经无法射击但仍可拆解或辨认编号的旧枪。
+  definitionId: spring_salt_dust_old_military_evacuation_recording
+  displayName: 旧军用撤离录音
+  description: 一段记录了旧军方撤离行动的录音。
   earliestDay: 1
   latestDay: 90
   triggerPhase: 4
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  locationId: spring_salt_dust_plain_18_damaged_old_gun
+  locationId: spring_salt_dust_plain_15_old_military_evacuation_recording
   conditions: []
-  title: 损坏旧枪
-  bodyText: 发现了一把损坏旧枪。
+  title: 旧军用撤离录音
+  bodyText: 你发现了一段旧军用撤离录音。
   choices:
-  - choiceId: dismantle_for_industry
-    choiceText: 拆成工业资源
+  - choiceId: play_for_marlei
+    choiceText: 播放给玛蕾
     consumeInteractionOnSelect: 1
     conditions: []
     results:
-    - effectType: 0
-      targetId: steel
+    - effectType: 2
+      targetId: marlei
       amount: 1
       boolValue: 1
       textValue:
-    - effectType: 0
-      targetId: industry
-      amount: 5
+    - effectType: 10
+      targetId: escape_inclination
+      amount: 1
       boolValue: 1
       textValue:
-  - choiceId: inspect_serial_number
-    choiceText: 保留编号
+  - choiceId: play_for_karlo
+    choiceText: 播放给卡洛
     consumeInteractionOnSelect: 1
     conditions: []
     results:
     - effectType: 3
-      targetId: intel_old_military_activity
+      targetId: karlo_suspects_concealed_information
       amount: 0
       boolValue: 1
       textValue:
@@ -53,5 +53,5 @@ MonoBehaviour:
       targetId: region_feed
       amount: 0
       boolValue: 1
-      textValue: 旧军方活动情报：枪械编号属于曾驻扎盐尘平原的旧军方巡逻队。
+      textValue: 卡洛开始怀疑有人隐瞒了旧军方撤离行动的信息。
   automaticResults: []

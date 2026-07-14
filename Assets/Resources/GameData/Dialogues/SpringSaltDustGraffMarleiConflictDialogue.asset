@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: spring_salt_dust_graff_marlei_conflict_dialogue
   displayName: 格拉夫、玛蕾
-  description: 格拉夫与玛蕾对资源优先级产生分歧。
+  description: 格拉夫与玛蕾第一次公开争论工业、武器、食物与逃生的优先级。
   startNodeId: start
   nodes:
   - nodeId: start
     character: {fileID: 11400000, guid: 3ccb6340504941b0bd509f33e6d7d372, type: 2}
     speakerName: 格拉夫、玛蕾
     portraitOverride: {fileID: 21300000, guid: dc6cb23925154a529cbac42a6cebf9b2, type: 3}
-    bodyText: 格拉夫出现并主张工业与武器；玛蕾坚持食物与逃生机会
+    bodyText: 格拉夫出现，认为应优先积累工业资源与武器；玛蕾坚持先保证食物与逃生机会。两人第一次公开冲突。
     choices:
     - choiceId: continue
       choiceText: 继续

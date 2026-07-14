@@ -10,40 +10,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
-  m_Name: SpringSaltDustBrokenBeacon
+  m_Name: SpringSaltDustKarloPersonalTerminal
   m_EditorClassIdentifier:
-  definitionId: spring_salt_dust_broken_beacon
-  displayName: 破旧信标
-  description: 广播模块和能源核心仍有反应的破旧信标。
+  definitionId: spring_salt_dust_karlo_personal_terminal
+  displayName: 卡洛的个人终端
+  description: 卡洛遗失在坠毁舱外的个人终端，里面仍保存着物资坐标。
   earliestDay: 1
   latestDay: 90
   triggerPhase: 4
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  locationId: spring_salt_dust_plain_03_broken_beacon
+  locationId: spring_salt_dust_plain_05_karlo_personal_terminal
   conditions: []
-  title: 破旧信标
-  bodyText: 发现了一座仍有反应的破旧信标。
+  title: 卡洛的个人终端
+  bodyText: 你在坠毁舱外发现了卡洛遗失的个人终端。
   choices:
-  - choiceId: connect_beacon
-    choiceText: 接入信标
+  - choiceId: return_to_karlo
+    choiceText: 交还卡洛
     consumeInteractionOnSelect: 1
     conditions: []
     results:
-    - effectType: 3
-      targetId: intel_old_broadcast_record
-      amount: 0
+    - effectType: 2
+      targetId: karlo
+      amount: 1
       boolValue: 1
       textValue:
-    - effectType: 17
-      targetId: region_feed
-      amount: 0
-      boolValue: 1
-      textValue: 旧广播记录：撤离前的广播要求幸存者避开北侧盐壳裂区。
-  - choiceId: remove_core
-    choiceText: 拆下核心
+  - choiceId: crack_terminal
+    choiceText: 破解终端，获得一批物资
     consumeInteractionOnSelect: 1
     conditions: []
     results:
+    - effectType: 0
+      targetId: steel
+      amount: 1
+      boolValue: 1
+      textValue:
     - effectType: 0
       targetId: fuel
       amount: 1
@@ -51,7 +51,7 @@ MonoBehaviour:
       textValue:
     - effectType: 0
       targetId: industry
-      amount: 5
+      amount: 10
       boolValue: 1
       textValue:
   automaticResults: []

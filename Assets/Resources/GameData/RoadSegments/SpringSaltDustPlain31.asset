@@ -13,18 +13,22 @@ MonoBehaviour:
   m_Name: SpringSaltDustPlain31
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_31
-  displayName: 临时补给点
-  description: 一处仓促搭建、仍残留少量物资的临时补给点。
+  displayName: 压缩饼干
+  description: 密封保存的压缩饼干，可以补充食物。
   roadIndex: 31
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 4
-  mapSprite: {fileID: 21300000, guid: baa342f4eb5246439f02e190647c7258, type: 3}
+  contentType: 3
+  mapSprite: {fileID: 21300000, guid: 914727e4aa0e40c28d259751a5eb6b06, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
-  gameEvent: {fileID: 11400000, guid: 356d435cc1884f1fb819907a6834579d, type: 2}
+  gameEvent: {fileID: 0}
   enemy: {fileID: 0}
   boss: {fileID: 0}
   facilityModule: {fileID: 0}
-  rewards: []
+  rewards:
+  - resourceId: compressed_biscuit
+    amount: 1
+  - resourceId: food
+    amount: 10
   costs: []

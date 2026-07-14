@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: SpringSaltDustPlain15
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_15
-  displayName: 玛蕾检查地表
-  description: 玛蕾正在检查盐壳下是否还藏有可用资源。
+  displayName: 旧军用撤离录音
+  description: 一段记录了旧军方撤离行动的录音。
   roadIndex: 15
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 4
-  mapSprite: {fileID: 8589876542287375376, guid: 411957c32320933479e0cd44acc59c6f, type: 3}
+  mapSprite: {fileID: 21300000, guid: 11f87b9583fb499b9f065a5fe5ab260f, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: ba3a56bc5ab345209c59a2ef014f1543, type: 2}

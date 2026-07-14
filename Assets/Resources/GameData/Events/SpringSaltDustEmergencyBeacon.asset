@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
-  m_Name: SpringSaltDustDangerWarning
+  m_Name: SpringSaltDustEmergencyBeacon
   m_EditorClassIdentifier:
-  definitionId: spring_salt_dust_danger_warning
-  displayName: 危险预警
-  description: 盐尘地表留下的旧伤痕提示前方存在危险。
+  definitionId: spring_salt_dust_emergency_beacon
+  displayName: 紧急信标
+  description: 一座仍在盐壳中持续发送信号的紧急信标。
   earliestDay: 1
   latestDay: 90
   triggerPhase: 4
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  locationId: spring_salt_dust_plain_07_danger_warning
+  locationId: spring_salt_dust_plain_03_emergency_beacon
   conditions: []
-  title: 危险预警
-  bodyText: 前方出现了危险预警。
+  title: 紧急信标
+  bodyText: 你发现了一座仍在发送信号的紧急信标。
   choices:
-  - choiceId: inspect_old_scars
-    choiceText: 检查旧伤痕
+  - choiceId: connect_beacon
+    choiceText: 接入信标，读取旧撤离广播
     consumeInteractionOnSelect: 1
     conditions: []
     results:
     - effectType: 3
-      targetId: intel_surface_hazard
+      targetId: intel_old_broadcast_record
       amount: 0
       boolValue: 1
       textValue:
@@ -38,10 +38,20 @@ MonoBehaviour:
       targetId: region_feed
       amount: 0
       boolValue: 1
-      textValue: 地表危险情报：旧伤痕表明盐壳下方存在会突然塌陷的空洞。
-  - choiceId: continue_forward
-    choiceText: 继续前进
+      textValue: 旧广播记录：撤离前的广播要求幸存者避开北侧盐壳裂区。
+  - choiceId: remove_core
+    choiceText: 拆下核心，获得燃料
     consumeInteractionOnSelect: 1
     conditions: []
-    results: []
+    results:
+    - effectType: 0
+      targetId: fuel
+      amount: 1
+      boolValue: 1
+      textValue:
+    - effectType: 0
+      targetId: industry
+      amount: 5
+      boolValue: 1
+      textValue:
   automaticResults: []

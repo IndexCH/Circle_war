@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SpringSaltDustPlain03
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_03
-  displayName: 破旧信标
-  description: 一座仍有微弱反应的破旧信标。
+  displayName: 紧急信标
+  description: 一座仍在盐壳中持续发送信号的紧急信标。
   roadIndex: 3
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}

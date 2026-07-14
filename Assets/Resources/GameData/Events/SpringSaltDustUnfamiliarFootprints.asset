@@ -25,7 +25,7 @@ MonoBehaviour:
   bodyText: 盐尘地表留下了一串陌生脚印。
   choices:
   - choiceId: track_footprints
-    choiceText: 追踪脚印
+    choiceText: 追踪，提前遇到格拉夫
     consumeInteractionOnSelect: 1
     conditions: []
     results:
@@ -40,7 +40,7 @@ MonoBehaviour:
       boolValue: 1
       textValue: 格拉夫出现预警：陌生脚印显示携带重型装备的人正在接近。
   - choiceId: ignore_footprints
-    choiceText: 忽略脚印
+    choiceText: 忽略，获得少量食物
     consumeInteractionOnSelect: 1
     conditions: []
     results:

@@ -346,6 +346,7 @@ namespace CircleWar
             activeSeason = null;
             currentRoadPosition = 0f;
             hasPlayerRadius = false;
+            ApplyCircleRotation();
             BuildBlackMask();
             BuildRoadSegmentList();
             InvalidateVisibleSegmentCache();
@@ -353,7 +354,6 @@ namespace CircleWar
             {
                 RefreshVisibleSegmentLayout();
                 TryRefreshVisibleSegments();
-                ApplyCircleRotation();
             }
         }
 
@@ -620,6 +620,7 @@ namespace CircleWar
                 float roadSegmentsPerSecond = segment.enemy.Speed > 0f
                     ? segment.enemy.Speed
                     : moveSpeed * Mathf.Max(1.01f, meleeEnemySpeedMultiplier);
+                roadSegmentsPerSecond *= 0.5f;
                 angularSpeed = roadSegmentsPerSecond * RoadSegmentAngleDegrees;
             }
 
@@ -845,6 +846,7 @@ namespace CircleWar
             hasPlayerRadius = false;
 
             ApplyActiveSeasonVisuals();
+            ApplyCircleRotation();
             BuildBlackMask();
             BuildRoadSegmentList();
             currentRoadPosition = Mathf.Clamp(
@@ -858,7 +860,6 @@ namespace CircleWar
             {
                 RefreshVisibleSegmentLayout();
                 TryRefreshVisibleSegments();
-                ApplyCircleRotation();
             }
 
             return true;
@@ -1074,8 +1075,36 @@ namespace CircleWar
         private Vector3 GetLocalPositionOnCircle(int index)
         {
             float angle = CircleStartAngle + index * GetOneSegmentAngle();
-            float radius = circleRingRenderer.bounds.size.x / 2f - segmentInsetFromRing;
+            float radius = GetCircleRingLocalSize().x / 2f - segmentInsetFromRing;
             return new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad) * radius, Mathf.Sin(angle * Mathf.Deg2Rad) * radius, 0f);
+        }
+
+        private Vector2 GetCircleRingLocalSize()
+        {
+            if (circleRingRenderer == null || circleRingRenderer.sprite == null)
+            {
+                return Vector2.zero;
+            }
+
+            Vector2 spriteSize = circleRingRenderer.sprite.bounds.size;
+            Vector3 localScale = circleRingRenderer.transform.localScale;
+            return new Vector2(
+                spriteSize.x * Mathf.Abs(localScale.x),
+                spriteSize.y * Mathf.Abs(localScale.y));
+        }
+
+        private Vector2 GetCircleRingWorldSize()
+        {
+            if (circleRingRenderer == null || circleRingRenderer.sprite == null)
+            {
+                return Vector2.zero;
+            }
+
+            Vector2 spriteSize = circleRingRenderer.sprite.bounds.size;
+            Vector3 worldScale = circleRingRenderer.transform.lossyScale;
+            return new Vector2(
+                spriteSize.x * Mathf.Abs(worldScale.x),
+                spriteSize.y * Mathf.Abs(worldScale.y));
         }
 
         private float GetOneSegmentAngle()
@@ -1094,10 +1123,24 @@ namespace CircleWar
                 return;
             }
 
-            Bounds ringBounds = circleRingRenderer.bounds;
+            Vector2 ringSize = GetCircleRingWorldSize();
             Vector2 maskSize = backgroundCircleMask.sprite.bounds.size;
-            backgroundCircleMask.transform.position = ringBounds.center;
-            backgroundCircleMask.transform.localScale = new Vector3(ringBounds.size.x / maskSize.x, ringBounds.size.y / maskSize.y, 1f);
+            if (ringSize.x <= Mathf.Epsilon || ringSize.y <= Mathf.Epsilon ||
+                maskSize.x <= Mathf.Epsilon || maskSize.y <= Mathf.Epsilon)
+            {
+                return;
+            }
+
+            Transform maskParent = backgroundCircleMask.transform.parent;
+            Vector3 maskParentScale = maskParent != null ? maskParent.lossyScale : Vector3.one;
+            float parentScaleX = Mathf.Max(Mathf.Abs(maskParentScale.x), Mathf.Epsilon);
+            float parentScaleY = Mathf.Max(Mathf.Abs(maskParentScale.y), Mathf.Epsilon);
+            backgroundCircleMask.transform.position = circleRingRenderer.transform.TransformPoint(
+                circleRingRenderer.sprite.bounds.center);
+            backgroundCircleMask.transform.localScale = new Vector3(
+                ringSize.x / maskSize.x / parentScaleX,
+                ringSize.y / maskSize.y / parentScaleY,
+                1f);
             backgroundRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
         }
     }

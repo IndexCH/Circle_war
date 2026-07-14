@@ -13,45 +13,35 @@ MonoBehaviour:
   m_Name: SpringSaltDustSalvageableMaterials
   m_EditorClassIdentifier:
   definitionId: spring_salt_dust_salvageable_materials
-  displayName: 可拆物资
-  description: 一批可以拆解成燃料或芯片的物资。
+  displayName: 争执旁的可拆物资
+  description: 格拉夫与玛蕾争执时，主角在旁边发现的一批可拆物资。
   earliestDay: 1
   latestDay: 90
   triggerPhase: 4
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   locationId: spring_salt_dust_plain_25_salvageable_materials
   conditions: []
-  title: 可拆物资
-  bodyText: 发现了一批可以拆解的物资。
+  title: 争执旁的可拆物资
+  bodyText: 你在两人争执旁发现了一批可拆物资。
   choices:
-  - choiceId: dismantle_for_fuel
-    choiceText: 拆作燃料
+  - choiceId: give_to_marlei
+    choiceText: 交给玛蕾
     consumeInteractionOnSelect: 1
     conditions: []
     results:
-    - effectType: 0
-      targetId: fuel
+    - effectType: 2
+      targetId: marlei
       amount: 1
       boolValue: 1
       textValue:
-    - effectType: 0
-      targetId: industry
-      amount: 5
-      boolValue: 1
-      textValue:
-  - choiceId: dismantle_for_chip
-    choiceText: 拆作芯片
+  - choiceId: give_to_graff
+    choiceText: 交给格拉夫
     consumeInteractionOnSelect: 1
     conditions: []
     results:
-    - effectType: 0
-      targetId: chip
+    - effectType: 2
+      targetId: graff
       amount: 1
-      boolValue: 1
-      textValue:
-    - effectType: 0
-      targetId: industry
-      amount: 5
       boolValue: 1
       textValue:
   automaticResults: []

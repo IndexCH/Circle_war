@@ -13,22 +13,18 @@ MonoBehaviour:
   m_Name: SpringSaltDustPlain05
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_05
-  displayName: 仙人掌果
-  description: 耐盐植物结出的仙人掌果，可以补充食物。
+  displayName: 卡洛的个人终端
+  description: 卡洛遗失在坠毁舱外的个人终端。
   roadIndex: 5
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 3
-  mapSprite: {fileID: 21300000, guid: 7a01ea60a7fc4d67b6adc6a592bc0df2, type: 3}
+  contentType: 4
+  mapSprite: {fileID: 21300000, guid: 11f87b9583fb499b9f065a5fe5ab260f, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
-  gameEvent: {fileID: 0}
+  gameEvent: {fileID: 11400000, guid: 8b69b488eb1543c4a696ffe61e15caa9, type: 2}
   enemy: {fileID: 0}
   boss: {fileID: 0}
   facilityModule: {fileID: 0}
-  rewards:
-  - resourceId: cactus_fruit
-    amount: 1
-  - resourceId: food
-    amount: 10
+  rewards: []
   costs: []

@@ -31,6 +31,8 @@ namespace CircleWar
         [SerializeField] private float verticalAmplitude = 0.45f;
         [Min(0.01f)]
         [SerializeField] private float orbitSpeed = 1.4f;
+        [Min(0f)]
+        [SerializeField] private float orbitEdgePauseDuration = 2f;
 
         [Header("Shooting")]
         [Min(0.01f)]
@@ -57,6 +59,8 @@ namespace CircleWar
         private Vector2 aimWorldDirection = Vector2.down;
         private float entryAge;
         private float orbitTime;
+        private float orbitPauseRemaining;
+        private float nextHorizontalExtremeTime = Mathf.PI * 0.5f;
         private float nextFireTime;
         private bool isConfigured;
         private bool isDead;
@@ -112,6 +116,8 @@ namespace CircleWar
             UpdateWorldPositionFromView();
             entryAge = 0f;
             orbitTime = 0f;
+            orbitPauseRemaining = 0f;
+            nextHorizontalExtremeTime = Mathf.PI * 0.5f;
             currentHealth = progressBinding != null ? progressBinding.CurrentHealth : GetMaxHealth();
             isDead = false;
             isConfigured = true;
@@ -243,12 +249,32 @@ namespace CircleWar
                 return;
             }
 
-            orbitTime += Time.deltaTime * orbitSpeed;
+            AdvanceOrbit(Time.deltaTime);
             Vector2 offset = new Vector2(
                 Mathf.Sin(orbitTime) * horizontalAmplitude,
                 Mathf.Sin(orbitTime * 2f) * verticalAmplitude);
             viewPosition = orbitViewCenter + offset;
             UpdateWorldPositionFromView();
+        }
+
+        private void AdvanceOrbit(float deltaTime)
+        {
+            if (orbitPauseRemaining > 0f)
+            {
+                orbitPauseRemaining = Mathf.Max(0f, orbitPauseRemaining - deltaTime);
+                return;
+            }
+
+            float nextOrbitTime = orbitTime + deltaTime * orbitSpeed;
+            if (nextOrbitTime < nextHorizontalExtremeTime)
+            {
+                orbitTime = nextOrbitTime;
+                return;
+            }
+
+            orbitTime = nextHorizontalExtremeTime;
+            nextHorizontalExtremeTime += Mathf.PI;
+            orbitPauseRemaining = orbitEdgePauseDuration;
         }
 
         private void AimGunAtPlayer()

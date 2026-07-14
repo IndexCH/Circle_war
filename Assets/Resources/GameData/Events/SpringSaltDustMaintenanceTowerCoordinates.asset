@@ -10,27 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ab211e9408bbea44b1a8358966d17d6, type: 3}
-  m_Name: SpringSaltDustMarleiSurfaceInspection
+  m_Name: SpringSaltDustMaintenanceTowerCoordinates
   m_EditorClassIdentifier:
-  definitionId: spring_salt_dust_marlei_surface_inspection
-  displayName: 玛蕾检查地表
-  description: 玛蕾正在判断盐壳地表是否安全。
+  definitionId: spring_salt_dust_maintenance_tower_coordinates
+  displayName: 维护塔坐标
+  description: 远处旧维护塔留下的坐标，指向下一季的低湿季沼岸。
   earliestDay: 1
   latestDay: 90
   triggerPhase: 4
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  locationId: spring_salt_dust_plain_15_marlei_surface_inspection
+  locationId: spring_salt_dust_plain_39_maintenance_tower_coordinates
   conditions: []
-  title: 玛蕾检查地表
-  bodyText: 玛蕾正在检查地表盐壳。
+  title: 维护塔坐标
+  bodyText: 你读取了远处旧维护塔的坐标，确认下一季可以进入低湿季沼岸。
   choices:
-  - choiceId: hear_assessment
-    choiceText: 听取判断
+  - choiceId: record_coordinates
+    choiceText: 记录坐标
     consumeInteractionOnSelect: 1
     conditions: []
     results:
     - effectType: 3
-      targetId: intel_salt_crust_risk
+      targetId: intel_low_humidity_swamp_shore_route
+      amount: 0
+      boolValue: 1
+      textValue:
+    - effectType: 7
+      targetId: low_humidity_swamp_shore
       amount: 0
       boolValue: 1
       textValue:
@@ -38,10 +43,5 @@ MonoBehaviour:
       targetId: region_feed
       amount: 0
       boolValue: 1
-      textValue: 盐壳风险情报：颜色发暗且边缘起泡的盐壳无法承受持续踩踏。
-  - choiceId: judge_alone
-    choiceText: 独自判断
-    consumeInteractionOnSelect: 1
-    conditions: []
-    results: []
+      textValue: 下一季路线：维护塔坐标指向低湿季沼岸的安全入口。
   automaticResults: []
