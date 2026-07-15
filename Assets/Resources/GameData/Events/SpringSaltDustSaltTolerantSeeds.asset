@@ -35,7 +35,7 @@ MonoBehaviour:
       boolValue: 1
       textValue:
   - choiceId: use_as_food
-    choiceText: 留作食物
+    choiceText: 当作食物
     consumeInteractionOnSelect: 1
     conditions: []
     results:

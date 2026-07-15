@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpringSaltDustPlain30
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_30
-  displayName: 怪物
+  displayName: 近战怪物
   description: 潜伏在附近并迅速逼近主角的盐尘怪物。
   roadIndex: 30
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}

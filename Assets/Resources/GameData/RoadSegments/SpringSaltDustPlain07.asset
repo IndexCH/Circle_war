@@ -13,22 +13,18 @@ MonoBehaviour:
   m_Name: SpringSaltDustPlain07
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_07
-  displayName: 钢铁
-  description: 从盐尘平原的残骸中拆下的钢铁。
+  displayName: 危险预警
+  description: 地表传来一段尚未失效的危险预警。
   roadIndex: 7
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 3
-  mapSprite: {fileID: 21300000, guid: f624e6c3f59f47f3ac7a5dce2cc54d36, type: 3}
+  contentType: 4
+  mapSprite: {fileID: 21300000, guid: 11f87b9583fb499b9f065a5fe5ab260f, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
-  gameEvent: {fileID: 0}
+  gameEvent: {fileID: 11400000, guid: 8b69b488eb1543c4a696ffe61e15caa9, type: 2}
   enemy: {fileID: 0}
   boss: {fileID: 0}
   facilityModule: {fileID: 0}
-  rewards:
-  - resourceId: steel
-    amount: 1
-  - resourceId: industry
-    amount: 5
+  rewards: []
   costs: []

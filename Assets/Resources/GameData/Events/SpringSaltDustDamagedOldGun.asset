@@ -40,7 +40,7 @@ MonoBehaviour:
       boolValue: 1
       textValue:
   - choiceId: inspect_serial_number
-    choiceText: 保留编号
+    choiceText: 检查编号
     consumeInteractionOnSelect: 1
     conditions: []
     results:

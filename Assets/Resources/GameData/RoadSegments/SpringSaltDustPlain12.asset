@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SpringSaltDustPlain12
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_12
-  displayName: 受困运输船
-  description: 一艘被盐尘困住的小型运输船，船体与定位灯仍可利用。
+  displayName: 卡洛修理残骸
+  description: 卡洛发现一处仍有修复价值的机械残骸。
   roadIndex: 12
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}

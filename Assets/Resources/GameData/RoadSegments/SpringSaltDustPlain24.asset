@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_24
   displayName: 格拉夫、玛蕾
-  description: 格拉夫主张优先积累工业资源与武器，玛蕾坚持先保证食物与逃生机会；两人第一次公开冲突。
+  description: 格拉夫主张优先收集工业资源与武器，玛蕾坚持食物与逃生机会。
   roadIndex: 24
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}

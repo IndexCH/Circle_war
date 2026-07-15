@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: SpringSaltDustPlain26
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_26
-  displayName: 怪物
-  description: 潜伏在盐尘中并迅速逼近主角的怪物。
+  displayName: 空白
+  description: 盐尘平原上的空白缓冲路段，暂时没有可交互目标。
   roadIndex: 26
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 1
-  mapSprite: {fileID: -168717823013034772, guid: a978047a7afe670439b72611b91d20d2, type: 3}
+  contentType: 0
+  mapSprite: {fileID: 0}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
-  enemy: {fileID: 11400000, guid: 4e121a3f94044b87b49e241d03477f08, type: 2}
+  enemy: {fileID: 0}
   boss: {fileID: 0}
   facilityModule: {fileID: 0}
   rewards: []

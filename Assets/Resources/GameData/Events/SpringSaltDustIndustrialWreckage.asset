@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: SpringSaltDustIndustrialWreckage
   m_EditorClassIdentifier:
   definitionId: spring_salt_dust_industrial_wreckage
-  displayName: 格拉夫标记的工业残骸
-  description: 格拉夫提前标记的一批工业残骸。
+  displayName: 工业残骸
+  description: 一片可以搬运的工业残骸，附近仍可能找到食物。
   earliestDay: 1
   latestDay: 90
   triggerPhase: 4
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   locationId: spring_salt_dust_plain_32_industrial_wreckage
   conditions: []
-  title: 格拉夫标记的工业残骸
-  bodyText: 你发现格拉夫提前标记了一批工业残骸。
+  title: 工业残骸
+  bodyText: 发现了一片可以搬运的工业残骸。
   choices:
   - choiceId: help_graff_carry
     choiceText: 帮格拉夫搬运
@@ -34,14 +34,19 @@ MonoBehaviour:
       amount: 1
       boolValue: 1
       textValue:
-  - choiceId: leave_for_marlei
-    choiceText: 把残骸留给玛蕾
+  - choiceId: prioritize_food_search
+    choiceText: 优先寻找食物
     consumeInteractionOnSelect: 1
     conditions: []
     results:
-    - effectType: 2
-      targetId: marlei
+    - effectType: 0
+      targetId: compressed_biscuit
       amount: 1
+      boolValue: 1
+      textValue:
+    - effectType: 0
+      targetId: food
+      amount: 10
       boolValue: 1
       textValue:
   automaticResults: []

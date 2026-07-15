@@ -64,11 +64,15 @@ namespace CircleWar
         private float nextFireTime;
         private bool isConfigured;
         private bool isDead;
+        private bool useBossPortrait = true;
         private int currentHealth;
         private AttackPatternDefinition activeBossAttackPattern;
         private string activeBossPhaseId = string.Empty;
 
-        public bool IsAlive => isActiveAndEnabled && isConfigured && !isDead;
+        public bool IsAlive => isActiveAndEnabled &&
+                               isConfigured &&
+                               !isDead &&
+                               (progressBinding == null || progressBinding.CurrentHealth > 0);
         public Vector2 WorldPosition => GetCurrentWorldPosition();
         public float HitRadius => hitRadius;
         public CircleMapView CircleMapView => ResolveCircleMapView();
@@ -99,7 +103,8 @@ namespace CircleWar
             Vector2 newViewPosition,
             Vector2 newOrbitViewCenter,
             CombatEnemyProgressBinding newProgressBinding = null,
-            BossDefinition newBossDefinition = null)
+            BossDefinition newBossDefinition = null,
+            bool newUseBossPortrait = true)
         {
             circleMapView = newCircleMapView != null ? newCircleMapView : ResolveCircleMapView();
             playerTarget = newPlayerTarget;
@@ -110,6 +115,7 @@ namespace CircleWar
                 orbitSpeed = enemyDefinition.Speed;
             }
             progressBinding = newProgressBinding;
+            useBossPortrait = newUseBossPortrait;
             viewPosition = newViewPosition;
             entryStartViewPosition = newViewPosition;
             orbitViewCenter = newOrbitViewCenter;
@@ -149,6 +155,12 @@ namespace CircleWar
                 return;
             }
 
+            if (progressBinding != null && progressBinding.CurrentHealth <= 0)
+            {
+                Die();
+                return;
+            }
+
             ResolveReferences();
             EnsureConfigured();
             RefreshBossAttackPattern();
@@ -184,14 +196,14 @@ namespace CircleWar
                 bodyRenderer.sortingOrder = sortingOrder;
             }
 
-            Sprite configuredBodySprite = bossDefinition != null && bossDefinition.Portrait != null
+            Sprite configuredBodySprite = useBossPortrait && bossDefinition != null && bossDefinition.Portrait != null
                 ? bossDefinition.Portrait
                 : enemyDefinition != null ? enemyDefinition.Portrait : null;
             bodyRenderer.sprite = configuredBodySprite != null ? configuredBodySprite : GetBodySprite();
             bodyRenderer.color = configuredBodySprite != null
                 ? Color.white
                 : new Color(0.48f, 0.86f, 1f, 1f);
-            float targetBodySize = bossDefinition != null ? 1.65f : 0.9f;
+            float targetBodySize = useBossPortrait && bossDefinition != null ? 1.65f : 0.9f;
             float sourceBodySize = Mathf.Max(
                 0.01f,
                 Mathf.Max(bodyRenderer.sprite.bounds.size.x, bodyRenderer.sprite.bounds.size.y));

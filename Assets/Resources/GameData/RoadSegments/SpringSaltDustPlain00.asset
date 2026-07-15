@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: SpringSaltDustPlain00
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_00
-  displayName: 玛蕾、卡洛
-  description: 玛蕾与卡洛逃难抵达盐尘平原；玛蕾希望优先收集食物，卡洛不愿离开坠毁残骸。
+  displayName: 空白
+  description: 盐尘平原上的空白缓冲路段，暂时没有可交互目标。
   roadIndex: 0
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 2
-  mapSprite: {fileID: 21300000, guid: 9403134363ae440f964eaefd0ace58a9, type: 3}
-  character: {fileID: 11400000, guid: eacf44e6b21046fa98cdeeb72e464cae, type: 2}
-  dialogue: {fileID: 11400000, guid: b7d3ee443c64468487163da2d401d508, type: 2}
+  contentType: 0
+  mapSprite: {fileID: 0}
+  character: {fileID: 0}
+  dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
   enemy: {fileID: 0}
   boss: {fileID: 0}

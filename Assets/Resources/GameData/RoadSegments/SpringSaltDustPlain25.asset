@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SpringSaltDustPlain25
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_25
-  displayName: 争执旁的可拆物资
-  description: 格拉夫与玛蕾争执时，主角在旁边发现的一批可拆物资。
+  displayName: 可拆物资
+  description: 一批尚可拆解回收的旧设施物资。
   roadIndex: 25
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}

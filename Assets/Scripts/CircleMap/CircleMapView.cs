@@ -13,6 +13,7 @@ namespace CircleWar
         private const string SummerSeasonId = "summer";
         private const string FallSeasonId = "fall";
         private const string WinterSeasonId = "winter";
+        private const string FinalDroneSwarmBossId = "young_officer_eli_drone_swarm";
         private const string DialogueInteractionPromptResourcePath = "Scence/UI/InteractionPrompts/press_e_dialogue";
         private const string EventInteractionPromptResourcePath = "Scence/UI/InteractionPrompts/press_e_investigate";
         private const string ResourceInteractionPromptResourcePath = "Scence/UI/InteractionPrompts/press_e_collect";
@@ -52,7 +53,8 @@ namespace CircleWar
         private readonly List<RoadSegmentDefinition> loadedRoadSegmentDefinitions = new List<RoadSegmentDefinition>();
         private readonly List<SeasonDefinition> loadedSeasonDefinitions = new List<SeasonDefinition>();
         private readonly List<GameObject> spawnedEnemyObjects = new List<GameObject>();
-        private readonly Dictionary<int, ICombatEnemy> spawnedEnemiesByRoadIndex = new Dictionary<int, ICombatEnemy>();
+        private readonly Dictionary<int, List<ICombatEnemy>> spawnedEnemiesByRoadIndex =
+            new Dictionary<int, List<ICombatEnemy>>();
         private readonly Dictionary<int, CombatEnemyProgressBinding> bossProgressBindingsByRoadIndex =
             new Dictionary<int, CombatEnemyProgressBinding>();
         private readonly HashSet<int> spawnedEnemyRoadIndices = new HashSet<int>();
@@ -517,18 +519,28 @@ namespace CircleWar
                     segment.boss,
                     fallbackBossId,
                     fallbackBossName,
-                    out CombatEnemyProgressBinding progressBinding))
+                    out CombatEnemyProgressBinding runtimeProgressBinding) &&
+                runtimeProgressBinding != null)
             {
-                startedBossRoadIndices.Add(roadIndex);
-                if (progressBinding != null)
-                {
-                    bossProgressBindingsByRoadIndex[roadIndex] = progressBinding;
-                }
-
-                return progressBinding;
+                return RegisterBossProgressBinding(roadIndex, runtimeProgressBinding);
             }
 
-            return null;
+            int maxHealth = segment.boss != null ? segment.boss.MaxHealth : 100;
+            CombatEnemyProgressBinding localProgressBinding = new CombatEnemyProgressBinding(
+                maxHealth,
+                maxHealth,
+                null,
+                null);
+            return RegisterBossProgressBinding(roadIndex, localProgressBinding);
+        }
+
+        private CombatEnemyProgressBinding RegisterBossProgressBinding(
+            int roadIndex,
+            CombatEnemyProgressBinding progressBinding)
+        {
+            startedBossRoadIndices.Add(roadIndex);
+            bossProgressBindingsByRoadIndex[roadIndex] = progressBinding;
+            return progressBinding;
         }
 
         private void SpawnSegmentEnemyOnce(
@@ -547,12 +559,77 @@ namespace CircleWar
                 return;
             }
 
+            List<ICombatEnemy> spawnedEnemies = SpawnEnemies(segment, progressBinding);
+            if (spawnedEnemies.Count > 0)
+            {
+                spawnedEnemyRoadIndices.Add(roadIndex);
+                spawnedEnemiesByRoadIndex[roadIndex] = spawnedEnemies;
+            }
+        }
+
+        private List<ICombatEnemy> SpawnEnemies(
+            CircleRoadSegmentData segment,
+            CombatEnemyProgressBinding progressBinding)
+        {
+            if (IsFinalDroneSwarmBoss(segment))
+            {
+                return SpawnFinalBossDroneSwarm(segment, progressBinding);
+            }
+
+            List<ICombatEnemy> spawnedEnemies = new List<ICombatEnemy>(1);
             ICombatEnemy spawnedEnemy = SpawnEnemy(segment, progressBinding);
             if (spawnedEnemy != null)
             {
-                spawnedEnemyRoadIndices.Add(roadIndex);
-                spawnedEnemiesByRoadIndex[roadIndex] = spawnedEnemy;
+                spawnedEnemies.Add(spawnedEnemy);
             }
+
+            return spawnedEnemies;
+        }
+
+        private static bool IsFinalDroneSwarmBoss(CircleRoadSegmentData segment)
+        {
+            return segment != null &&
+                   segment.boss != null &&
+                   segment.enemy != null &&
+                   segment.enemy.AttackType == EnemyAttackType.FlyingRobotRanged &&
+                   string.Equals(
+                       segment.boss.DefinitionId,
+                       FinalDroneSwarmBossId,
+                       StringComparison.OrdinalIgnoreCase);
+        }
+
+        private List<ICombatEnemy> SpawnFinalBossDroneSwarm(
+            CircleRoadSegmentData segment,
+            CombatEnemyProgressBinding progressBinding)
+        {
+            GameRuntimeData runtimeData = ResolveGameHud()?.RuntimeData;
+            int droneCount = BossDroneCountResolver.Resolve(runtimeData?.State);
+            List<ICombatEnemy> spawnedDrones = new List<ICombatEnemy>(droneCount);
+            for (int droneIndex = 0; droneIndex < droneCount; droneIndex++)
+            {
+                Vector2 formationOffset = GetBossDroneFormationOffset(droneIndex, droneCount);
+                FlyingRobotEnemy drone = SpawnFlyingRobotEnemy(
+                    segment,
+                    progressBinding,
+                    flyingRobotSpawnPosition + formationOffset * 0.35f,
+                    flyingRobotOrbitCenter + formationOffset,
+                    false,
+                    segment.enemy.EnemyName + " " + (droneIndex + 1));
+                if (drone != null)
+                {
+                    spawnedDrones.Add(drone);
+                }
+            }
+
+            return spawnedDrones;
+        }
+
+        private static Vector2 GetBossDroneFormationOffset(int droneIndex, int droneCount)
+        {
+            int safeCount = Mathf.Max(1, droneCount);
+            float angle = -90f + 360f * droneIndex / safeCount;
+            float radians = angle * Mathf.Deg2Rad;
+            return new Vector2(Mathf.Cos(radians) * 1.35f, Mathf.Sin(radians) * 0.7f);
         }
 
         private ICombatEnemy SpawnEnemy(
@@ -576,12 +653,29 @@ namespace CircleWar
             CircleRoadSegmentData segment,
             CombatEnemyProgressBinding progressBinding)
         {
-            string runtimeEnemyName = segment.boss != null
-                ? segment.boss.BossName
-                : segment.enemy.EnemyName;
-            GameObject enemyObject = new GameObject(runtimeEnemyName);
+            return SpawnFlyingRobotEnemy(
+                segment,
+                progressBinding,
+                flyingRobotSpawnPosition,
+                flyingRobotOrbitCenter,
+                true,
+                null);
+        }
+
+        private FlyingRobotEnemy SpawnFlyingRobotEnemy(
+            CircleRoadSegmentData segment,
+            CombatEnemyProgressBinding progressBinding,
+            Vector2 spawnViewPosition,
+            Vector2 orbitViewCenter,
+            bool useBossPortrait,
+            string runtimeEnemyName)
+        {
+            string resolvedEnemyName = !string.IsNullOrWhiteSpace(runtimeEnemyName)
+                ? runtimeEnemyName
+                : segment.boss != null ? segment.boss.BossName : segment.enemy.EnemyName;
+            GameObject enemyObject = new GameObject(resolvedEnemyName);
             enemyObject.transform.SetParent(enemyRuntimeRoot != null ? enemyRuntimeRoot : transform.parent, false);
-            enemyObject.transform.position = new Vector3(flyingRobotSpawnPosition.x, flyingRobotSpawnPosition.y, 0f);
+            enemyObject.transform.position = new Vector3(spawnViewPosition.x, spawnViewPosition.y, 0f);
             spawnedEnemyObjects.Add(enemyObject);
 
             FlyingRobotEnemy flyingRobot = enemyObject.AddComponent<FlyingRobotEnemy>();
@@ -589,10 +683,11 @@ namespace CircleWar
                 this,
                 ResolvePlayerTarget(),
                 segment.enemy,
-                flyingRobotSpawnPosition,
-                flyingRobotOrbitCenter,
+                spawnViewPosition,
+                orbitViewCenter,
                 progressBinding,
-                segment.boss);
+                segment.boss,
+                useBossPortrait);
             return flyingRobot;
         }
 
@@ -789,14 +884,17 @@ namespace CircleWar
                 RefreshCombatForCurrentRoadSegment(roadIndex);
             }
 
-            if (!spawnedEnemiesByRoadIndex.TryGetValue(roadIndex, out ICombatEnemy enemy))
+            if (!spawnedEnemiesByRoadIndex.TryGetValue(roadIndex, out List<ICombatEnemy> enemies))
             {
                 return false;
             }
 
-            if (IsCombatEnemyAlive(enemy))
+            for (int enemyIndex = 0; enemyIndex < enemies.Count; enemyIndex++)
             {
-                return true;
+                if (IsCombatEnemyAlive(enemies[enemyIndex]))
+                {
+                    return true;
+                }
             }
 
             spawnedEnemiesByRoadIndex.Remove(roadIndex);

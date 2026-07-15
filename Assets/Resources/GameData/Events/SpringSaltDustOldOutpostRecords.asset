@@ -25,7 +25,7 @@ MonoBehaviour:
   bodyText: 发现了旧哨站留下的记录。
   choices:
   - choiceId: read_records
-    choiceText: 保存记录
+    choiceText: 读取记录
     consumeInteractionOnSelect: 1
     conditions: []
     results:
