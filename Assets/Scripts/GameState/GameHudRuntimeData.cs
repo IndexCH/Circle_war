@@ -50,7 +50,7 @@ namespace CircleWar
                 });
             data.PlayerStats.Set(80, 100, 120, 85, "on_the_move", "ON THE MOVE");
             data.Dialogue.Clear();
-            data.Facility.Set("main_facility", 42, 5, 12);
+            data.Facility.Set("main_facility", 0, 0, 10);
             return data;
         }
     }
@@ -293,7 +293,7 @@ namespace CircleWar
         public readonly BindableProperty<string> FacilityId = new BindableProperty<string>(string.Empty);
         public readonly BindableProperty<int> ProgressPercent = new BindableProperty<int>();
         public readonly BindableProperty<int> FilledBlockCount = new BindableProperty<int>();
-        public readonly BindableProperty<int> TotalBlockCount = new BindableProperty<int>(1);
+        public readonly BindableProperty<int> TotalBlockCount = new BindableProperty<int>(10);
 
         public void Set(string facilityId, int progressPercent, int filledBlockCount, int totalBlockCount)
         {

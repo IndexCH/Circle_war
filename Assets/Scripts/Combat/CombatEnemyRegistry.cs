@@ -7,6 +7,8 @@ namespace CircleWar
     public interface ICombatEnemy
     {
         bool IsAlive { get; }
+        int CurrentHealth { get; }
+        int MaxHealth { get; }
         Vector2 WorldPosition { get; }
         float HitRadius { get; }
         CircleMapView CircleMapView { get; }

@@ -45,7 +45,7 @@ namespace CircleWar
 
         [Header("Facility")]
         [SerializeField] private Text facilityProgressText;
-        [SerializeField] private Image facilityProgressFill;
+        [SerializeField] private FacilitySegmentedProgressBar facilityProgressBar;
 
         private GameRuntimeData runtimeData = new GameRuntimeData();
         private CompositeUnRegister bindings;
@@ -292,13 +292,11 @@ namespace CircleWar
         private void RefreshFacility()
         {
             HudFacilityRuntimeData facility = HudData.Facility;
-            SetText(
-                facilityProgressText,
-                string.Format("{0}%  {1}/{2}", facility.ProgressPercent.Value, facility.FilledBlockCount.Value, facility.TotalBlockCount.Value));
+            SetText(facilityProgressText, facility.ProgressPercent.Value.ToString("000") + "%");
 
-            if (facilityProgressFill != null)
+            if (facilityProgressBar != null)
             {
-                facilityProgressFill.fillAmount = Mathf.Clamp01(facility.ProgressPercent.Value / 100f);
+                facilityProgressBar.SetProgressPercent(facility.ProgressPercent.Value);
             }
         }
 
@@ -344,6 +342,9 @@ namespace CircleWar
             dialogueSpeakerText = dialogueSpeakerText == null ? FindTextByName(texts, "Speaker", "SpeakerName", "DialogueSpeaker") : dialogueSpeakerText;
             dialogueBodyText = dialogueBodyText == null ? FindTextByName(texts, "DialogueBody", "Body", "Dialogue") : dialogueBodyText;
             facilityProgressText = facilityProgressText == null ? FindTextByName(texts, "FacilityProgress", "Facility") : facilityProgressText;
+            facilityProgressBar = facilityProgressBar == null
+                ? GetComponentInChildren<FacilitySegmentedProgressBar>(true)
+                : facilityProgressBar;
             dialoguePortraitImage = dialoguePortraitImage == null
                 ? FindImageByName(images, "DialoguePortrait", "Portrait", "Avatar", "dialogue_avatar_frame")
                 : dialoguePortraitImage;

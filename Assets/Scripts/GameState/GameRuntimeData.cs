@@ -7,9 +7,8 @@ namespace CircleWar
     public sealed class GameRuntimeData
     {
         private const int MaxRegionFeedEntryCount = 2;
-        private const int FallResourceFacilityProgressPercent = 5;
-        private const int FallResourceFacilityFilledBlocks = 1;
-        private const string FallSeasonId = "fall";
+        private const int FacilityProgressPerResourceReward = 1;
+        private const int FacilityVisualBlockCount = 10;
 
         public const string CalendarYearValueId = "calendar_year";
         public const string CalendarLocalHourValueId = "calendar_local_hour";
@@ -70,7 +69,7 @@ namespace CircleWar
             SetBoss(string.Empty, string.Empty, 0);
             SetRegionStatus(string.Empty, string.Empty, false, null);
             ClearDialogue();
-            SetFacilityProgress(string.Empty, 0, 0, 1);
+            SetFacilityProgress(string.Empty, 0, 0, FacilityVisualBlockCount);
             NewRunStarted?.Invoke();
         }
 
@@ -91,7 +90,7 @@ namespace CircleWar
                 });
             SetPlayerStats(80, 100, 120, 85, "on_the_move", "ON THE MOVE");
             ClearDialogue();
-            SetFacilityProgress("main_facility", 42, 5, 12);
+            SetFacilityProgress("main_facility", 0, 0, FacilityVisualBlockCount);
         }
 
         public void SetCalendar(int year, string seasonId, string seasonName, int localHour, int localMinute)
@@ -351,6 +350,7 @@ namespace CircleWar
                 return false;
             }
 
+            bool advancesFacilityProgress = false;
             if (rewards != null)
             {
                 foreach (ResourceAmount reward in rewards)
@@ -361,35 +361,36 @@ namespace CircleWar
                     }
 
                     State.AddResource(reward.ResourceId, reward.Amount);
+                    advancesFacilityProgress |= IsFacilityProgressResourceReward(reward.ResourceId, reward.Amount);
                 }
             }
 
             State.MarkEventCompleted(segmentId);
-            AdvanceFacilityFromFallResourceCollection();
+            if (advancesFacilityProgress)
+            {
+                AdvanceFacilityFromResourceReward();
+            }
+
             RefreshHudFromState();
             return true;
         }
 
-        private void AdvanceFacilityFromFallResourceCollection()
+        private void AdvanceFacilityFromResourceReward()
         {
-            if (!string.Equals(State.CurrentSeasonId, FallSeasonId, StringComparison.OrdinalIgnoreCase))
+            int currentProgress = State.GetCustomValue(FacilityProgressValueId);
+            if (currentProgress >= 100)
             {
                 return;
             }
 
-            int totalBlockCount = Math.Max(1, State.GetCustomValue(FacilityTotalBlockCountValueId));
-            int progressPercent = Math.Min(
-                100,
-                State.GetCustomValue(FacilityProgressValueId) + FallResourceFacilityProgressPercent);
-            int filledBlockCount = Math.Min(
-                totalBlockCount,
-                State.GetCustomValue(FacilityFilledBlockCountValueId) + FallResourceFacilityFilledBlocks);
+            int progressPercent = Math.Min(100, currentProgress + FacilityProgressPerResourceReward);
+            int filledBlockCount = progressPercent * FacilityVisualBlockCount / 100;
 
             SetFacilityProgress(
                 activeFacilityId,
                 progressPercent,
                 filledBlockCount,
-                totalBlockCount);
+                FacilityVisualBlockCount);
         }
 
         public void SetPlayerStats(int hp, int maxHp, int food, int materials, string statusId, string statusText)
@@ -410,16 +411,19 @@ namespace CircleWar
         public void SetFacilityProgress(string facilityId, int progressPercent, int filledBlockCount, int totalBlockCount)
         {
             activeFacilityId = facilityId ?? string.Empty;
-            State.SetCustomValue(FacilityProgressValueId, Clamp(progressPercent, 0, 100));
-            State.SetCustomValue(FacilityFilledBlockCountValueId, Math.Max(0, filledBlockCount));
-            State.SetCustomValue(FacilityTotalBlockCountValueId, Math.Max(1, totalBlockCount));
+            int safeProgressPercent = Clamp(progressPercent, 0, 100);
+            int safeTotalBlockCount = Math.Max(1, totalBlockCount);
+            int safeFilledBlockCount = Math.Min(safeTotalBlockCount, Math.Max(0, filledBlockCount));
+            State.SetCustomValue(FacilityProgressValueId, safeProgressPercent);
+            State.SetCustomValue(FacilityFilledBlockCountValueId, safeFilledBlockCount);
+            State.SetCustomValue(FacilityTotalBlockCountValueId, safeTotalBlockCount);
 
-            if (!string.IsNullOrWhiteSpace(activeFacilityId) && progressPercent >= 100)
+            if (!string.IsNullOrWhiteSpace(activeFacilityId) && safeProgressPercent >= 100)
             {
                 State.MarkFacilityModuleBuilt(activeFacilityId);
             }
 
-            Hud.Facility.Set(activeFacilityId, progressPercent, filledBlockCount, totalBlockCount);
+            Hud.Facility.Set(activeFacilityId, safeProgressPercent, safeFilledBlockCount, safeTotalBlockCount);
         }
 
         public void ShowDialogueEvent(GameEventDefinition gameEvent)
@@ -670,6 +674,11 @@ namespace CircleWar
                     }
 
                     State.AddResource(result.ResourceId, result.ResourceAmount);
+                    if (IsFacilityProgressResourceReward(result.ResourceId, result.ResourceAmount))
+                    {
+                        AdvanceFacilityFromResourceReward();
+                    }
+
                     RefreshHudFromState();
                     ClearDialogue();
                     return true;
@@ -708,8 +717,12 @@ namespace CircleWar
                 return false;
             }
 
-            ApplyEventEffects(eventDefinition.AutomaticResults);
-            ApplyEventEffects(eventChoice.Results);
+            bool advancesFacilityProgress = ApplyEventEffects(eventDefinition.AutomaticResults);
+            advancesFacilityProgress |= ApplyEventEffects(eventChoice.Results);
+            if (advancesFacilityProgress)
+            {
+                AdvanceFacilityFromResourceReward();
+            }
 
             ClampPlayerHealthToValidRange();
             RefreshHudFromState();
@@ -717,13 +730,14 @@ namespace CircleWar
             return true;
         }
 
-        private void ApplyEventEffects(IEnumerable<GameEffect> effects)
+        private bool ApplyEventEffects(IEnumerable<GameEffect> effects)
         {
             if (effects == null)
             {
-                return;
+                return false;
             }
 
+            bool advancesFacilityProgress = false;
             foreach (GameEffect effect in effects)
             {
                 if (effect == null)
@@ -737,8 +751,19 @@ namespace CircleWar
                     continue;
                 }
 
+                advancesFacilityProgress |= effect.EffectType == GameEffectType.AddResource &&
+                                            IsFacilityProgressResourceReward(effect.TargetId, effect.Amount);
                 GameStateRuleRunner.ApplyEffect(State, effect);
             }
+
+            return advancesFacilityProgress;
+        }
+
+        private bool IsFacilityProgressResourceReward(string resourceId, int amount)
+        {
+            return amount > 0 &&
+                   (string.Equals(resourceId, FoodResourceId, StringComparison.Ordinal) ||
+                    string.Equals(resourceId, MaterialsResourceId, StringComparison.Ordinal));
         }
 
         private void ClampPlayerHealthToValidRange()

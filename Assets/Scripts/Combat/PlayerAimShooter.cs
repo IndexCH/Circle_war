@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace CircleWar
 {
@@ -71,10 +72,26 @@ namespace CircleWar
             CacheInitialPose();
             AimHandAtMouse();
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !IsPointerOverUi())
             {
                 TryShoot();
             }
+        }
+
+        private static bool IsPointerOverUi()
+        {
+            EventSystem eventSystem = EventSystem.current;
+            if (eventSystem == null)
+            {
+                return false;
+            }
+
+            if (Input.touchCount > 0)
+            {
+                return eventSystem.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+            }
+
+            return eventSystem.IsPointerOverGameObject();
         }
 
         private void ResolveReferences()

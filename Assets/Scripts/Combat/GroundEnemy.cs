@@ -14,6 +14,7 @@ namespace CircleWar
         [SerializeField] private Transform shootPoint;
         [SerializeField] private SpriteRenderer bodyRenderer;
         [SerializeField] private SpriteRenderer gunRenderer;
+        [SerializeField] private EnemyHealthBar healthBar;
         [SerializeField] private CircleMapView circleMapView;
         [SerializeField] private GameHud gameHud;
 
@@ -75,7 +76,13 @@ namespace CircleWar
         public Vector2 WorldPosition => worldPosition;
         public float AngleDegrees => angleDegrees;
         public EnemyAttackType AttackType => attackType;
-        public bool IsAlive => isActiveAndEnabled && isConfigured && !isDead;
+        public bool IsAlive => isActiveAndEnabled && isConfigured && !isDead && CurrentHealth > 0;
+        public int CurrentHealth => progressBinding != null
+            ? progressBinding.CurrentHealth
+            : Mathf.Clamp(currentHealth, 0, MaxHealth);
+        public int MaxHealth => progressBinding != null
+            ? progressBinding.MaxHealth
+            : enemyDefinition != null ? Mathf.Max(1, enemyDefinition.MaxHealth) : 1;
         public float HitRadius => hitRadius;
         public CircleMapView CircleMapView => ResolveCircleMapView();
 
@@ -124,7 +131,7 @@ namespace CircleWar
             angleDegrees = newAngleDegrees;
             radius = Mathf.Max(0.01f, newRadius);
             angularSpeedDegrees = Mathf.Max(0f, newAngularSpeedDegrees);
-            currentHealth = progressBinding != null ? progressBinding.CurrentHealth : GetMaxHealth();
+            currentHealth = progressBinding != null ? progressBinding.CurrentHealth : MaxHealth;
             isDead = false;
             isConfigured = true;
             UpdateWorldPosition();
@@ -212,6 +219,7 @@ namespace CircleWar
             bodyRenderer.transform.localScale = new Vector3(fittedBodyScale, fittedBodyScale, 1f);
             bodyBaseLocalScale = bodyRenderer.transform.localScale;
             hasBodyBasePose = true;
+            EnsureHealthBar();
 
             if (attackType != EnemyAttackType.GroundRanged)
             {
@@ -255,6 +263,21 @@ namespace CircleWar
                 shootPointObject.transform.localPosition = new Vector3(0.55f, 0f, 0f);
                 shootPoint = shootPointObject.transform;
             }
+        }
+
+        private void EnsureHealthBar()
+        {
+            if (healthBar == null)
+            {
+                healthBar = GetComponent<EnemyHealthBar>();
+            }
+
+            if (healthBar == null)
+            {
+                healthBar = gameObject.AddComponent<EnemyHealthBar>();
+            }
+
+            healthBar.Configure(this, bodyRenderer);
         }
 
         private void Move()
@@ -521,7 +544,7 @@ namespace CircleWar
 
             if (currentHealth <= 0 && progressBinding == null)
             {
-                currentHealth = GetMaxHealth();
+                currentHealth = MaxHealth;
             }
 
             currentHealth = progressBinding != null
@@ -567,13 +590,6 @@ namespace CircleWar
             }
 
             return gameHud;
-        }
-
-        private int GetMaxHealth()
-        {
-            return progressBinding != null
-                ? progressBinding.MaxHealth
-                : enemyDefinition != null ? Mathf.Max(1, enemyDefinition.MaxHealth) : 1;
         }
 
         private int GetAttackDamage()

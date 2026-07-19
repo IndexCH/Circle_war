@@ -88,6 +88,7 @@ namespace CircleWar.Tests
 
             List<ICombatEnemy> spawnedDrones = GetSpawnedEnemies(mapView, definition.RoadIndex);
             Assert.That(spawnedDrones, Has.Count.EqualTo(BossDroneCountResolver.DefaultDroneCount));
+            List<EnemyHealthBar> healthBars = new List<EnemyHealthBar>(spawnedDrones.Count);
             foreach (FlyingRobotEnemy drone in spawnedDrones.Cast<FlyingRobotEnemy>())
             {
                 Assert.That(GetPrivateField<CombatEnemyProgressBinding>(drone, "progressBinding"),
@@ -98,6 +99,13 @@ namespace CircleWar.Tests
                 SpriteRenderer bodyRenderer = drone.transform.Find("Body").GetComponent<SpriteRenderer>();
                 Assert.That(bodyRenderer.sprite, Is.SameAs(definition.Enemy.Portrait));
                 Assert.That(bodyRenderer.sprite, Is.Not.SameAs(definition.Boss.Portrait));
+
+                EnemyHealthBar healthBar = drone.GetComponent<EnemyHealthBar>();
+                Assert.That(healthBar, Is.Not.Null);
+                healthBar.RefreshVisual();
+                Assert.That(healthBar.NormalizedHealth, Is.EqualTo(1f).Within(0.0001f));
+                Assert.That(GetHealthBarRenderer(drone.transform, "Background").enabled, Is.True);
+                healthBars.Add(healthBar);
             }
 
             PopulateTerminalRoad(mapView, segment);
@@ -106,9 +114,25 @@ namespace CircleWar.Tests
             Assert.That(spawnedDrones[0].TryTakeDamage(10), Is.True);
             Assert.That(progressBinding.CurrentHealth, Is.EqualTo(definition.Boss.MaxHealth - 10));
             Assert.That(spawnedDrones.All(drone => drone.IsAlive), Is.True);
+            foreach (EnemyHealthBar healthBar in healthBars)
+            {
+                healthBar.RefreshVisual();
+                Assert.That(
+                    healthBar.NormalizedHealth,
+                    Is.EqualTo((float)(definition.Boss.MaxHealth - 10) / definition.Boss.MaxHealth)
+                        .Within(0.0001f));
+            }
 
             progressBinding.ApplyDamage(progressBinding.CurrentHealth);
             Assert.That(spawnedDrones.All(drone => !drone.IsAlive), Is.True);
+            foreach (EnemyHealthBar healthBar in healthBars)
+            {
+                healthBar.RefreshVisual();
+                Assert.That(healthBar.NormalizedHealth, Is.EqualTo(0f).Within(0.0001f));
+                Assert.That(GetHealthBarRenderer(healthBar.transform, "Background").enabled, Is.False);
+                Assert.That(GetHealthBarRenderer(healthBar.transform, "Fill").enabled, Is.False);
+            }
+
             Assert.That(InvokePrivate<bool>(mapView, "IsTerminalCombatBlockingSeasonAdvance"), Is.False);
         }
 
@@ -175,6 +199,13 @@ namespace CircleWar.Tests
                 GetPrivateField<Dictionary<int, List<ICombatEnemy>>>(mapView, "spawnedEnemiesByRoadIndex");
             Assert.That(enemiesByRoadIndex.TryGetValue(roadIndex, out List<ICombatEnemy> enemies), Is.True);
             return enemies;
+        }
+
+        private static SpriteRenderer GetHealthBarRenderer(Transform enemyTransform, string rendererName)
+        {
+            Transform rendererTransform = enemyTransform.Find("Health Bar/" + rendererName);
+            Assert.That(rendererTransform, Is.Not.Null, rendererName);
+            return rendererTransform.GetComponent<SpriteRenderer>();
         }
 
         private static void PopulateTerminalRoad(CircleMapView mapView, CircleRoadSegmentData finalSegment)
