@@ -39,11 +39,12 @@ namespace CircleWar
             Sprite sprite = segment != null ? segment.sprite : null;
             segmentSpriteRenderer.enabled = sprite != null;
             segmentSpriteRenderer.sprite = sprite;
-            AlignSpriteBottomCenter();
+            AlignSpriteBottomCenter(segment != null ? segment.y : 0f);
+            ApplySpriteLocalRotation(segment != null ? segment.z : 0f);
             RefreshInteractionPrompt(segment, showInteractionPrompt);
         }
 
-        private void AlignSpriteBottomCenter()
+        private void AlignSpriteBottomCenter(float localYOffset)
         {
             if (segmentSpriteRenderer.sprite == null || segmentSpriteRenderer.transform == transform)
             {
@@ -55,8 +56,18 @@ namespace CircleWar
             Vector3 scale = segmentSpriteRenderer.transform.localScale;
             segmentSpriteRenderer.transform.localPosition = new Vector3(
                 -bottomCenter.x * scale.x,
-                -bottomCenter.y * scale.y,
+                -bottomCenter.y * scale.y + localYOffset,
                 0f);
+        }
+
+        private void ApplySpriteLocalRotation(float localZRotation)
+        {
+            if (segmentSpriteRenderer.transform == transform)
+            {
+                return;
+            }
+
+            segmentSpriteRenderer.transform.localRotation = Quaternion.Euler(0f, 0f, localZRotation);
         }
 
         private void RefreshInteractionPrompt(CircleRoadSegmentData segment, bool showInteractionPrompt)

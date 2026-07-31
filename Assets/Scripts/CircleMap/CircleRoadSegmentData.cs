@@ -25,6 +25,8 @@ namespace CircleWar
 
         public readonly string description;
         public readonly Sprite sprite;
+        public readonly float y;
+        public readonly float z;
         public readonly int roadIndex;
         public readonly SeasonDefinition season;
         public readonly RegionDefinition region;
@@ -47,6 +49,8 @@ namespace CircleWar
             segmentName = newSegmentName;
             description = string.Empty;
             sprite = newSprite;
+            y = 0f;
+            z = 0f;
             roadIndex = -1;
             rewards = new List<ResourceAmount>();
             costs = new List<ResourceAmount>();
@@ -59,6 +63,8 @@ namespace CircleWar
             segmentName = definition.DisplayName;
             description = definition.Description;
             sprite = definition.MapSprite;
+            y = definition.Y;
+            z = definition.Z;
             roadIndex = definition.RoadIndex;
             season = definition.Season;
             region = definition.Region;

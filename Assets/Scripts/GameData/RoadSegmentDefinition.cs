@@ -14,6 +14,10 @@ namespace CircleWar
         [SerializeField] private RegionDefinition region;
         [SerializeField] private SegmentContentType contentType = SegmentContentType.None;
         [SerializeField] private Sprite mapSprite;
+        [Tooltip("MapSprite 沿道路段本地 Y 轴的偏移。正值朝圆心，负值朝圆外。")]
+        [SerializeField] private float y;
+        [Tooltip("MapSprite 绕道路段本地 Z 轴旋转的角度，单位为度。")]
+        [SerializeField] private float z;
         [SerializeField] private CharacterDefinition character;
         [SerializeField] private DialogueDefinition dialogue;
         [SerializeField] private GameEventDefinition gameEvent;
@@ -28,6 +32,8 @@ namespace CircleWar
         public RegionDefinition Region => region;
         public SegmentContentType ContentType => contentType;
         public Sprite MapSprite => mapSprite;
+        public float Y => y;
+        public float Z => z;
         public CharacterDefinition Character => character;
         public DialogueDefinition Dialogue => dialogue;
         public GameEventDefinition GameEvent => gameEvent;
