@@ -18,7 +18,7 @@ namespace CircleWar
         private const string EventInteractionPromptResourcePath = "Scence/UI/InteractionPrompts/press_e_investigate";
         private const string ResourceInteractionPromptResourcePath = "Scence/UI/InteractionPrompts/press_e_collect";
 
-        [SerializeField] private SpriteRenderer backgroundRenderer, circleRingRenderer;
+        [SerializeField] private SpriteRenderer backgroundRenderer, circleRingRenderer, circleRenderer;
         [SerializeField] private SpriteMask backgroundCircleMask;
 
         [SerializeField] private int totalRoadSegmentCount = 40;
@@ -30,6 +30,7 @@ namespace CircleWar
         [SerializeField] private float segmentScale = 0.4f;
         [SerializeField] private float interactionPromptHorizontalOffset;
         [SerializeField] private float interactionPromptScale = 1f;
+        [SerializeField, Range(0f, 0.5f)] private float interactionPromptRangeInSegments = 0.3f;
         [SerializeField] private Sprite npcInteractionPromptSprite;
         [SerializeField] private Sprite eventInteractionPromptSprite;
         [SerializeField] private Sprite resourceInteractionPromptSprite;
@@ -71,7 +72,6 @@ namespace CircleWar
         private bool hasPlayerRadius;
         private bool isMapInitialized;
         private int lastDisplayedAnchorIndex = -1;
-        private int lastCompletedInteractionCount = -1;
         private string observedRunId = string.Empty;
 
         public static CircleMapView Active { get; private set; }
@@ -166,7 +166,7 @@ namespace CircleWar
                 if (moveInput != 0f)
                 {
                     float previousRoadPosition = currentRoadPosition;
-                    float maxPosition = Mathf.Max(0f, roadSegmentList.Count - 1);
+                    float maxPosition = GetMaximumRoadPosition();
                     currentRoadPosition = Mathf.Clamp(
                         currentRoadPosition + moveInput * moveSpeed * Time.deltaTime,
                         0f,
@@ -221,11 +221,13 @@ namespace CircleWar
 
         private void TryInteractWithCurrentRoadSegment()
         {
-            CircleRoadSegmentData segment = GetCurrentRoadSegment();
-            if (segment == null)
+            int roadIndex = GetCurrentRoadSegmentIndex();
+            if (roadIndex < 0 || !IsPlayerNearRoadSegmentCenter(roadIndex))
             {
                 return;
             }
+
+            CircleRoadSegmentData segment = roadSegmentList[roadIndex];
 
             GameHud hud = ResolveGameHud();
             if (hud == null)
@@ -252,13 +254,15 @@ namespace CircleWar
 
         private CircleRoadSegmentData GetCurrentRoadSegment()
         {
-            if (roadSegmentList.Count == 0)
-            {
-                return null;
-            }
+            int roadIndex = GetCurrentRoadSegmentIndex();
+            return roadIndex >= 0 ? roadSegmentList[roadIndex] : null;
+        }
 
-            int roadIndex = Mathf.Clamp(Mathf.FloorToInt(currentRoadPosition), 0, roadSegmentList.Count - 1);
-            return roadSegmentList[roadIndex];
+        private int GetCurrentRoadSegmentIndex()
+        {
+            return roadSegmentList.Count > 0
+                ? Mathf.Clamp(Mathf.FloorToInt(currentRoadPosition), 0, roadSegmentList.Count - 1)
+                : -1;
         }
 
         private GameHud ResolveGameHud()
@@ -380,17 +384,14 @@ namespace CircleWar
         private void TryRefreshVisibleSegments()
         {
             int anchorIndex = Mathf.FloorToInt(currentRoadPosition);
-            int completedInteractionCount = ResolveGameHud()?.RuntimeData.State.Events.Count ?? 0;
-            if (anchorIndex == lastDisplayedAnchorIndex &&
-                completedInteractionCount == lastCompletedInteractionCount)
+            if (anchorIndex != lastDisplayedAnchorIndex)
             {
-                return;
+                lastDisplayedAnchorIndex = anchorIndex;
+                RefreshVisibleSegments(anchorIndex);
+                RefreshCombatForCurrentRoadSegment(anchorIndex);
             }
 
-            lastDisplayedAnchorIndex = anchorIndex;
-            lastCompletedInteractionCount = completedInteractionCount;
-            RefreshVisibleSegments(anchorIndex);
-            RefreshCombatForCurrentRoadSegment(anchorIndex);
+            RefreshVisibleInteractionPrompts(anchorIndex);
         }
 
         private void RefreshVisibleSegments(int anchorRoadIndex)
@@ -412,12 +413,25 @@ namespace CircleWar
                     continue;
                 }
 
-                CircleRoadSegmentData roadSegment = roadSegmentList[roadSegmentIndex];
-                segment.Show(roadSegment, ShouldShowInteractionPrompt(roadSegment));
+                segment.Show(roadSegmentList[roadSegmentIndex]);
             }
         }
 
-        private bool ShouldShowInteractionPrompt(CircleRoadSegmentData segment)
+        private void RefreshVisibleInteractionPrompts(int anchorRoadIndex)
+        {
+            for (int slotIndex = 0; slotIndex < visibleSegmentList.Count; slotIndex++)
+            {
+                int roadSegmentIndex = GetRoadIndexForVisibleSlot(slotIndex, anchorRoadIndex);
+                CircleRoadSegmentData roadSegment = roadSegmentIndex >= 0 && roadSegmentIndex < roadSegmentList.Count
+                    ? roadSegmentList[roadSegmentIndex]
+                    : null;
+                bool shouldShow = IsInteractionAvailable(roadSegment) &&
+                                  IsPlayerNearRoadSegmentCenter(roadSegmentIndex);
+                visibleSegmentList[slotIndex].SetInteractionPromptVisible(roadSegment, shouldShow);
+            }
+        }
+
+        private bool IsInteractionAvailable(CircleRoadSegmentData segment)
         {
             if (segment == null)
             {
@@ -437,8 +451,25 @@ namespace CircleWar
                     return !string.IsNullOrWhiteSpace(segment.segmentId) &&
                            (runtimeData == null || !runtimeData.IsInteractionCompleted(segment.segmentId));
                 default:
-                    return true;
+                    return false;
             }
+        }
+
+        private bool IsPlayerNearRoadSegmentCenter(int roadSegmentIndex)
+        {
+            if (roadSegmentIndex < 0 || roadSegmentIndex >= roadSegmentList.Count)
+            {
+                return false;
+            }
+
+            float interactionRange = Mathf.Clamp(interactionPromptRangeInSegments, 0f, 0.5f);
+            return Mathf.Abs(currentRoadPosition - GetRoadSegmentCenterPosition(roadSegmentIndex)) <=
+                   interactionRange + Mathf.Epsilon;
+        }
+
+        private static float GetRoadSegmentCenterPosition(int roadSegmentIndex)
+        {
+            return roadSegmentIndex + 0.5f;
         }
 
         private int GetRoadIndexForVisibleSlot(int visibleSlotIndex, int anchorRoadIndex)
@@ -856,8 +887,7 @@ namespace CircleWar
 
         private bool IsAtEndOfCurrentSeason()
         {
-            float maxPosition = Mathf.Max(0f, roadSegmentList.Count - 1);
-            return currentRoadPosition >= maxPosition - 0.0001f;
+            return currentRoadPosition >= GetMaximumRoadPosition() - 0.0001f;
         }
 
         private bool IsTerminalCombatBlockingSeasonAdvance()
@@ -950,7 +980,7 @@ namespace CircleWar
             currentRoadPosition = Mathf.Clamp(
                 currentRoadPosition,
                 0f,
-                Mathf.Max(0f, roadSegmentList.Count - 1));
+                GetMaximumRoadPosition());
             ApplyActiveSeasonRuntimeContext(currentRoadPosition);
             InvalidateVisibleSegmentCache();
 
@@ -1007,7 +1037,6 @@ namespace CircleWar
         private void InvalidateVisibleSegmentCache()
         {
             lastDisplayedAnchorIndex = -1;
-            lastCompletedInteractionCount = -1;
         }
 
         private void RefreshVisibleSegmentLayout()
@@ -1016,7 +1045,10 @@ namespace CircleWar
             {
                 CircleMapSegment segment = visibleSegmentList[index];
                 segment.transform.localPosition = GetLocalPositionOnCircle(index);
-                segment.transform.localEulerAngles = new Vector3(0f, 0f, index * GetOneSegmentAngle());
+                segment.transform.localEulerAngles = new Vector3(
+                    0f,
+                    0f,
+                    GetLocalAngleOnCircle(index) - CircleStartAngle);
                 segment.transform.localScale = new Vector3(segmentScale, segmentScale, 1f);
             }
         }
@@ -1131,7 +1163,10 @@ namespace CircleWar
             {
                 CircleMapSegment segment = CreateSegment(index);
                 segment.transform.localPosition = GetLocalPositionOnCircle(index);
-                segment.transform.localEulerAngles = new Vector3(0f, 0f, index * GetOneSegmentAngle());
+                segment.transform.localEulerAngles = new Vector3(
+                    0f,
+                    0f,
+                    GetLocalAngleOnCircle(index) - CircleStartAngle);
                 segment.transform.localScale = new Vector3(segmentScale, segmentScale, 1f);
                 visibleSegmentList.Add(segment);
             }
@@ -1172,9 +1207,14 @@ namespace CircleWar
 
         private Vector3 GetLocalPositionOnCircle(int index)
         {
-            float angle = CircleStartAngle + index * GetOneSegmentAngle();
+            float angle = GetLocalAngleOnCircle(index);
             float radius = GetCircleRingLocalSize().x / 2f - segmentInsetFromRing;
             return new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad) * radius, Mathf.Sin(angle * Mathf.Deg2Rad) * radius, 0f);
+        }
+
+        private float GetLocalAngleOnCircle(int index)
+        {
+            return CircleStartAngle + (index + 0.5f) * GetOneSegmentAngle();
         }
 
         private Vector2 GetCircleRingLocalSize()
@@ -1191,15 +1231,15 @@ namespace CircleWar
                 spriteSize.y * Mathf.Abs(localScale.y));
         }
 
-        private Vector2 GetCircleRingWorldSize()
+        private Vector2 GetCircleWorldSize()
         {
-            if (circleRingRenderer == null || circleRingRenderer.sprite == null)
+            if (circleRenderer == null || circleRenderer.sprite == null)
             {
                 return Vector2.zero;
             }
 
-            Vector2 spriteSize = circleRingRenderer.sprite.bounds.size;
-            Vector3 worldScale = circleRingRenderer.transform.lossyScale;
+            Vector2 spriteSize = circleRenderer.sprite.bounds.size;
+            Vector3 worldScale = circleRenderer.transform.lossyScale;
             return new Vector2(
                 spriteSize.x * Mathf.Abs(worldScale.x),
                 spriteSize.y * Mathf.Abs(worldScale.y));
@@ -1210,20 +1250,26 @@ namespace CircleWar
             return 360f / visibleSegmentCount;
         }
 
+        private float GetMaximumRoadPosition()
+        {
+            return Mathf.Max(0f, roadSegmentList.Count - 0.5f);
+        }
+
         // 黑屏遮罩
         private void BuildBlackMask()
         {
             if (backgroundRenderer == null ||
-                circleRingRenderer == null ||
+                circleRenderer == null ||
+                circleRenderer.sprite == null ||
                 backgroundCircleMask == null ||
                 backgroundCircleMask.sprite == null)
             {
                 return;
             }
 
-            Vector2 ringSize = GetCircleRingWorldSize();
+            Vector2 circleSize = GetCircleWorldSize();
             Vector2 maskSize = backgroundCircleMask.sprite.bounds.size;
-            if (ringSize.x <= Mathf.Epsilon || ringSize.y <= Mathf.Epsilon ||
+            if (circleSize.x <= Mathf.Epsilon || circleSize.y <= Mathf.Epsilon ||
                 maskSize.x <= Mathf.Epsilon || maskSize.y <= Mathf.Epsilon)
             {
                 return;
@@ -1233,11 +1279,11 @@ namespace CircleWar
             Vector3 maskParentScale = maskParent != null ? maskParent.lossyScale : Vector3.one;
             float parentScaleX = Mathf.Max(Mathf.Abs(maskParentScale.x), Mathf.Epsilon);
             float parentScaleY = Mathf.Max(Mathf.Abs(maskParentScale.y), Mathf.Epsilon);
-            backgroundCircleMask.transform.position = circleRingRenderer.transform.TransformPoint(
-                circleRingRenderer.sprite.bounds.center);
+            backgroundCircleMask.transform.position = circleRenderer.transform.TransformPoint(
+                circleRenderer.sprite.bounds.center);
             backgroundCircleMask.transform.localScale = new Vector3(
-                ringSize.x / maskSize.x / parentScaleX,
-                ringSize.y / maskSize.y / parentScaleY,
+                circleSize.x / maskSize.x / parentScaleX,
+                circleSize.y / maskSize.y / parentScaleY,
                 1f);
             backgroundRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
         }

@@ -1,7 +1,8 @@
 {
     "name": "CircleWar.EditModeTests",
     "references": [
-        "CircleWar.Runtime"
+        "CircleWar.Runtime",
+        "CircleWar.Editor"
     ],
     "includePlatforms": [
         "Editor"

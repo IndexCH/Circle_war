@@ -34,14 +34,33 @@ namespace CircleWar
             }
         }
 
-        public void Show(CircleRoadSegmentData segment, bool showInteractionPrompt = true)
+        public void Show(CircleRoadSegmentData segment)
         {
             Sprite sprite = segment != null ? segment.sprite : null;
             segmentSpriteRenderer.enabled = sprite != null;
             segmentSpriteRenderer.sprite = sprite;
             AlignSpriteBottomCenter(segment != null ? segment.y : 0f);
             ApplySpriteLocalRotation(segment != null ? segment.z : 0f);
-            RefreshInteractionPrompt(segment, showInteractionPrompt);
+            SetInteractionPromptVisible(segment, false);
+        }
+
+        public void SetInteractionPromptVisible(CircleRoadSegmentData segment, bool isVisible)
+        {
+            if (interactionPromptRenderer == null)
+            {
+                return;
+            }
+
+            Sprite promptSprite = segment != null && isVisible
+                ? GetInteractionPromptSprite(segment.contentType)
+                : null;
+            interactionPromptRenderer.enabled = promptSprite != null;
+            interactionPromptRenderer.sprite = promptSprite;
+
+            if (promptSprite != null)
+            {
+                SetInteractionPromptFixedHeight();
+            }
         }
 
         private void AlignSpriteBottomCenter(float localYOffset)
@@ -68,27 +87,6 @@ namespace CircleWar
             }
 
             segmentSpriteRenderer.transform.localRotation = Quaternion.Euler(0f, 0f, localZRotation);
-        }
-
-        private void RefreshInteractionPrompt(CircleRoadSegmentData segment, bool showInteractionPrompt)
-        {
-            if (interactionPromptRenderer == null)
-            {
-                return;
-            }
-
-            Sprite promptSprite = segment != null && showInteractionPrompt
-                ? GetInteractionPromptSprite(segment.contentType)
-                : null;
-            interactionPromptRenderer.enabled = promptSprite != null;
-            interactionPromptRenderer.sprite = promptSprite;
-
-            if (promptSprite == null)
-            {
-                return;
-            }
-
-            SetInteractionPromptFixedHeight();
         }
 
         private Sprite GetInteractionPromptSprite(SegmentContentType contentType)

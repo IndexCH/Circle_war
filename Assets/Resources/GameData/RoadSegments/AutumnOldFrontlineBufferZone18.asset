@@ -11,15 +11,17 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: AutumnOldFrontlineBufferZone18
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_18
-  displayName: 钢铁
-  description: 从锈蚀防线中拆下的钢铁废料。
+  displayName: "\u94A2\u94C1"
+  description: "\u4ECE\u9508\u8680\u9632\u7EBF\u4E2D\u62C6\u4E0B\u7684\u94A2\u94C1\u5E9F\u6599\u3002"
   roadIndex: 18
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 3
   mapSprite: {fileID: 21300000, guid: f624e6c3f59f47f3ac7a5dce2cc54d36, type: 3}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,4 +34,3 @@ MonoBehaviour:
   - resourceId: industry
     amount: 5
   costs: []
-
