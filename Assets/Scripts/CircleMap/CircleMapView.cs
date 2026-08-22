@@ -635,7 +635,7 @@ namespace CircleWar
         {
             GameRuntimeData runtimeData = ResolveGameHud()?.RuntimeData;
             int droneCount = BossDroneCountResolver.Resolve(runtimeData?.State);
-            List<ICombatEnemy> spawnedDrones = new List<ICombatEnemy>(droneCount);
+            List<ICombatEnemy> spawnedEnemies = new List<ICombatEnemy>(droneCount + 1);
             for (int droneIndex = 0; droneIndex < droneCount; droneIndex++)
             {
                 Vector2 formationOffset = GetBossDroneFormationOffset(droneIndex, droneCount);
@@ -648,11 +648,25 @@ namespace CircleWar
                     segment.enemy.EnemyName + " " + (droneIndex + 1));
                 if (drone != null)
                 {
-                    spawnedDrones.Add(drone);
+                    spawnedEnemies.Add(drone);
                 }
             }
 
-            return spawnedDrones;
+            EnemyDefinition leaderEnemy = segment.boss.LeaderEnemy;
+            if (leaderEnemy != null)
+            {
+                GroundEnemy leader = SpawnGroundEnemy(
+                    leaderEnemy,
+                    EnemyAttackType.GroundRanged,
+                    progressBinding,
+                    leaderEnemy.EnemyName);
+                if (leader != null)
+                {
+                    spawnedEnemies.Add(leader);
+                }
+            }
+
+            return spawnedEnemies;
         }
 
         private static Vector2 GetBossDroneFormationOffset(int droneIndex, int droneCount)
@@ -727,6 +741,24 @@ namespace CircleWar
             EnemyAttackType attackType,
             CombatEnemyProgressBinding progressBinding)
         {
+            return SpawnGroundEnemy(
+                segment.enemy,
+                attackType,
+                progressBinding,
+                null);
+        }
+
+        private GroundEnemy SpawnGroundEnemy(
+            EnemyDefinition enemyDefinition,
+            EnemyAttackType attackType,
+            CombatEnemyProgressBinding progressBinding,
+            string runtimeEnemyName)
+        {
+            if (enemyDefinition == null)
+            {
+                return null;
+            }
+
             float spawnViewAngle = attackType == EnemyAttackType.GroundMelee
                 ? groundMeleeSpawnViewAngle
                 : groundRangedSpawnViewAngle;
@@ -735,7 +767,10 @@ namespace CircleWar
             Vector2 worldPosition = DiskCenter + CircleWorldSpace.DirectionFromAngleDegrees(worldAngle) * radius;
             Vector2 viewPosition = WorldToViewPosition(worldPosition);
 
-            GameObject enemyObject = new GameObject(segment.enemy.EnemyName);
+            string resolvedEnemyName = !string.IsNullOrWhiteSpace(runtimeEnemyName)
+                ? runtimeEnemyName
+                : enemyDefinition.EnemyName;
+            GameObject enemyObject = new GameObject(resolvedEnemyName);
             enemyObject.transform.SetParent(enemyRuntimeRoot != null ? enemyRuntimeRoot : transform.parent, false);
             enemyObject.transform.position = new Vector3(viewPosition.x, viewPosition.y, 0f);
             spawnedEnemyObjects.Add(enemyObject);
@@ -743,8 +778,8 @@ namespace CircleWar
             float angularSpeed = 0f;
             if (attackType == EnemyAttackType.GroundMelee)
             {
-                float roadSegmentsPerSecond = segment.enemy.Speed > 0f
-                    ? segment.enemy.Speed
+                float roadSegmentsPerSecond = enemyDefinition.Speed > 0f
+                    ? enemyDefinition.Speed
                     : moveSpeed * Mathf.Max(1.01f, meleeEnemySpeedMultiplier);
                 roadSegmentsPerSecond *= 0.5f;
                 angularSpeed = roadSegmentsPerSecond * RoadSegmentAngleDegrees;
@@ -755,7 +790,7 @@ namespace CircleWar
                 this,
                 ResolvePlayerTarget(),
                 ResolveGameHud(),
-                segment.enemy,
+                enemyDefinition,
                 attackType,
                 worldAngle,
                 radius,
@@ -1009,6 +1044,8 @@ namespace CircleWar
             {
                 circleRingRenderer.sprite = activeSeason.CircleRingSprite;
             }
+
+            ResolveGameHud()?.ApplySeasonTheme(activeSeason);
         }
 
         private void ApplyActiveSeasonRuntimeContext(float roadPosition)
