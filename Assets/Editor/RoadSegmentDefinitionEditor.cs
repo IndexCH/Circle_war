@@ -73,6 +73,11 @@ namespace CircleWar.EditorTools
                 EditorGUILayout.LabelField("绿色箭头", "沿圆环径向调整 Y");
                 EditorGUILayout.LabelField("橙色圆环", "绕本地 Z 轴调整角度");
 
+                if (GUILayout.Button("重新同步游戏相机"))
+                {
+                    RoadSegmentScenePreview.SyncSceneViewToGameCamera();
+                }
+
                 if (GUILayout.Button("重新生成预览"))
                 {
                     RoadSegmentScenePreview.Rebuild(definition);

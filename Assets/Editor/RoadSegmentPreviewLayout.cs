@@ -10,12 +10,14 @@ namespace CircleWar.EditorTools
             int roadIndex,
             bool isInRange,
             bool isSelected,
+            float localAngleDegrees,
             float viewAngleDegrees)
         {
             SlotIndex = slotIndex;
             RoadIndex = roadIndex;
             IsInRange = isInRange;
             IsSelected = isSelected;
+            LocalAngleDegrees = localAngleDegrees;
             ViewAngleDegrees = viewAngleDegrees;
         }
 
@@ -23,6 +25,7 @@ namespace CircleWar.EditorTools
         public int RoadIndex { get; }
         public bool IsInRange { get; }
         public bool IsSelected { get; }
+        public float LocalAngleDegrees { get; }
         public float ViewAngleDegrees { get; }
     }
 
@@ -42,7 +45,9 @@ namespace CircleWar.EditorTools
             }
 
             float segmentAngle = 360f / visibleSegmentCount;
-            float previewRoadPosition = selectedRoadIndex + 0.5f;
+            float rootRotation = GetPreviewRootRotationDegrees(
+                selectedRoadIndex,
+                visibleSegmentCount);
             int playerSlotIndex = PositiveModulo(selectedRoadIndex, visibleSegmentCount);
 
             for (int slotIndex = 0; slotIndex < visibleSegmentCount; slotIndex++)
@@ -53,7 +58,7 @@ namespace CircleWar.EditorTools
                     playerSlotIndex,
                     visibleSegmentCount);
                 float localAngle = CircleStartAngle + (slotIndex + 0.5f) * segmentAngle;
-                float viewAngle = localAngle - previewRoadPosition * segmentAngle;
+                float viewAngle = localAngle + rootRotation;
                 bool isInRange = roadIndex >= 0 && roadIndex < totalRoadSegmentCount;
 
                 slots.Add(new RoadSegmentPreviewSlot(
@@ -61,10 +66,25 @@ namespace CircleWar.EditorTools
                     roadIndex,
                     isInRange,
                     roadIndex == selectedRoadIndex,
+                    localAngle,
                     viewAngle));
             }
 
             return slots;
+        }
+
+        public static float GetPreviewRootRotationDegrees(
+            int selectedRoadIndex,
+            int visibleSegmentCount)
+        {
+            if (visibleSegmentCount <= 0)
+            {
+                return 0f;
+            }
+
+            float segmentAngle = 360f / visibleSegmentCount;
+            float previewRoadPosition = selectedRoadIndex + 0.5f;
+            return -previewRoadPosition * segmentAngle;
         }
 
         private static int GetRoadIndexForVisibleSlot(

@@ -22,6 +22,12 @@ namespace CircleWar.EditorTools
         public const string PreviewRootName = "[Circle War] Road Segment Editor Preview";
 
         private const string PreviewEnabledSessionKey = "CircleWar.RoadSegmentPreview.Enabled";
+        private const string DialogueInteractionPromptResourcePath =
+            "Scence/UI/InteractionPrompts/press_e_dialogue";
+        private const string EventInteractionPromptResourcePath =
+            "Scence/UI/InteractionPrompts/press_e_investigate";
+        private const string ResourceInteractionPromptResourcePath =
+            "Scence/UI/InteractionPrompts/press_e_collect";
         private const HideFlags PreviewHideFlags = HideFlags.HideAndDontSave;
 
         private static GameObject previewRoot;
@@ -30,6 +36,10 @@ namespace CircleWar.EditorTools
         private static Transform selectedSegmentTransform;
         private static Transform selectedImageTransform;
         private static SpriteRenderer selectedSpriteRenderer;
+        private static Camera previewCamera;
+        private static Vector3 previewCameraTarget;
+        private static readonly List<RendererVisibilityState> hiddenSourceRenderers =
+            new List<RendererVisibilityState>();
         private static bool isRefreshing;
 
         static RoadSegmentScenePreview()
@@ -51,6 +61,11 @@ namespace CircleWar.EditorTools
         public static GameObject PreviewRoot => previewRoot;
         public static Transform SelectedSegmentTransform => selectedSegmentTransform;
         public static Transform SelectedImageTransform => selectedImageTransform;
+
+        public static void SyncSceneViewToGameCamera()
+        {
+            SyncSceneViewToGameCamera(previewCamera, previewCameraTarget);
+        }
 
         public static void SetEnabled(bool enabled)
         {
@@ -133,7 +148,8 @@ namespace CircleWar.EditorTools
                 BuildPreview(definition, settings);
                 SetStatus(
                     RoadSegmentPreviewStatusKind.Ready,
-                    "正在预览道路 " + definition.RoadIndex + "；所选节点位于 6 点钟位置。");
+                    "正在预览道路 " + definition.RoadIndex +
+                    "；圆环层级、节点、交互提示和游戏相机已按运行时状态同步。");
                 SceneView.RepaintAll();
                 return true;
             }
@@ -249,6 +265,16 @@ namespace CircleWar.EditorTools
             SerializedProperty visibleCountProperty = serializedMap.FindProperty("visibleSegmentCount");
             SerializedProperty insetProperty = serializedMap.FindProperty("segmentInsetFromRing");
             SerializedProperty scaleProperty = serializedMap.FindProperty("segmentScale");
+            SerializedProperty promptOffsetProperty = serializedMap.FindProperty(
+                "interactionPromptHorizontalOffset");
+            SerializedProperty promptScaleProperty = serializedMap.FindProperty(
+                "interactionPromptScale");
+            SerializedProperty npcPromptProperty = serializedMap.FindProperty(
+                "npcInteractionPromptSprite");
+            SerializedProperty eventPromptProperty = serializedMap.FindProperty(
+                "eventInteractionPromptSprite");
+            SerializedProperty resourcePromptProperty = serializedMap.FindProperty(
+                "resourceInteractionPromptSprite");
 
             SpriteRenderer ringRenderer = ringProperty != null
                 ? ringProperty.objectReferenceValue as SpriteRenderer
@@ -256,36 +282,112 @@ namespace CircleWar.EditorTools
             if (ringRenderer == null ||
                 ringRenderer.sprite == null ||
                 ringRenderer.transform.parent == null ||
+                ringRenderer.transform.parent.childCount == 0 ||
                 totalCountProperty == null ||
                 visibleCountProperty == null ||
                 insetProperty == null ||
                 scaleProperty == null ||
+                promptOffsetProperty == null ||
+                promptScaleProperty == null ||
                 visibleCountProperty.intValue <= 0)
             {
                 return false;
             }
 
+            Transform rotatingRoot = ringRenderer.transform.parent;
+            Transform segmentParent = rotatingRoot.GetChild(0);
             Vector2 spriteSize = ringRenderer.sprite.bounds.size;
             Vector3 ringScale = ringRenderer.transform.localScale;
             float ringWidth = spriteSize.x * Mathf.Abs(ringScale.x);
             settings = new MapPreviewSettings(
-                ringRenderer.transform.parent,
+                rotatingRoot,
+                segmentParent.GetSiblingIndex(),
+                ringRenderer.transform.GetSiblingIndex(),
                 Mathf.Max(0, totalCountProperty.intValue),
                 visibleCountProperty.intValue,
                 ringWidth * 0.5f - insetProperty.floatValue,
-                scaleProperty.floatValue);
+                scaleProperty.floatValue,
+                promptOffsetProperty.floatValue,
+                promptScaleProperty.floatValue > 0f ? promptScaleProperty.floatValue : 1f,
+                ResolvePromptSprite(npcPromptProperty, DialogueInteractionPromptResourcePath),
+                ResolvePromptSprite(eventPromptProperty, EventInteractionPromptResourcePath),
+                ResolvePromptSprite(resourcePromptProperty, ResourceInteractionPromptResourcePath),
+                FindGameCamera(mapView));
             return true;
+        }
+
+        private static Sprite ResolvePromptSprite(
+            SerializedProperty spriteProperty,
+            string resourcePath)
+        {
+            Sprite sprite = spriteProperty != null
+                ? spriteProperty.objectReferenceValue as Sprite
+                : null;
+            return sprite != null ? sprite : Resources.Load<Sprite>(resourcePath);
+        }
+
+        private static Camera FindGameCamera(CircleMapView mapView)
+        {
+            if (mapView == null)
+            {
+                return null;
+            }
+
+            Camera fallbackCamera = null;
+            Camera[] cameras = Object.FindObjectsByType<Camera>(FindObjectsInactive.Include);
+            for (int index = 0; index < cameras.Length; index++)
+            {
+                Camera camera = cameras[index];
+                if (camera == null || camera.gameObject.scene != mapView.gameObject.scene)
+                {
+                    continue;
+                }
+
+                if (camera.CompareTag("MainCamera"))
+                {
+                    return camera;
+                }
+
+                if (fallbackCamera == null)
+                {
+                    fallbackCamera = camera;
+                }
+            }
+
+            return fallbackCamera;
         }
 
         private static void BuildPreview(
             RoadSegmentDefinition definition,
             MapPreviewSettings settings)
         {
-            previewRoot = CreatePreviewGameObject(PreviewRootName);
-            previewRoot.transform.SetParent(settings.Parent, false);
-            previewRoot.transform.localPosition = Vector3.zero;
-            previewRoot.transform.localRotation = Quaternion.identity;
-            previewRoot.transform.localScale = Vector3.one;
+            previewRoot = Object.Instantiate(
+                settings.RotatingRoot.gameObject,
+                settings.RotatingRoot.parent);
+            previewRoot.name = PreviewRootName;
+            SetPreviewHideFlagsRecursively(previewRoot);
+            previewRoot.transform.localPosition = settings.RotatingRoot.localPosition;
+            previewRoot.transform.localRotation = Quaternion.Euler(
+                0f,
+                0f,
+                RoadSegmentPreviewLayout.GetPreviewRootRotationDegrees(
+                    definition.RoadIndex,
+                    settings.VisibleSegmentCount));
+            previewRoot.transform.localScale = settings.RotatingRoot.localScale;
+
+            Transform previewSegmentParent = previewRoot.transform.GetChild(
+                settings.SegmentParentSiblingIndex);
+            DestroyChildren(previewSegmentParent);
+
+            Transform previewRingTransform = previewRoot.transform.GetChild(
+                settings.RingSiblingIndex);
+            SpriteRenderer previewRingRenderer = previewRingTransform.GetComponent<SpriteRenderer>();
+            if (previewRingRenderer != null &&
+                definition.Season != null &&
+                definition.Season.CircleRingSprite != null)
+            {
+                previewRingRenderer.sprite = definition.Season.CircleRingSprite;
+            }
 
             Dictionary<int, RoadSegmentDefinition> definitions = LoadSeasonDefinitions(definition);
             IReadOnlyList<RoadSegmentPreviewSlot> slots = RoadSegmentPreviewLayout.Build(
@@ -302,10 +404,10 @@ namespace CircleWar.EditorTools
                     continue;
                 }
 
-                float angleRadians = slot.ViewAngleDegrees * Mathf.Deg2Rad;
+                float angleRadians = slot.LocalAngleDegrees * Mathf.Deg2Rad;
                 GameObject segmentObject = CreatePreviewGameObject(
                     "Preview Road " + slot.RoadIndex);
-                segmentObject.transform.SetParent(previewRoot.transform, false);
+                segmentObject.transform.SetParent(previewSegmentParent, false);
                 segmentObject.transform.localPosition = new Vector3(
                     Mathf.Cos(angleRadians) * settings.Radius,
                     Mathf.Sin(angleRadians) * settings.Radius,
@@ -313,7 +415,7 @@ namespace CircleWar.EditorTools
                 segmentObject.transform.localRotation = Quaternion.Euler(
                     0f,
                     0f,
-                    slot.ViewAngleDegrees - RoadSegmentPreviewLayout.CircleStartAngle);
+                    slot.LocalAngleDegrees - RoadSegmentPreviewLayout.CircleStartAngle);
                 segmentObject.transform.localScale = new Vector3(
                     settings.SegmentScale,
                     settings.SegmentScale,
@@ -325,10 +427,31 @@ namespace CircleWar.EditorTools
                 spriteRenderer.hideFlags = PreviewHideFlags;
                 spriteRenderer.sortingOrder = 5;
 
+                GameObject promptObject = CreatePreviewGameObject("Interaction Prompt Image");
+                promptObject.transform.SetParent(segmentObject.transform, false);
+                promptObject.transform.localScale = new Vector3(
+                    settings.InteractionPromptScale,
+                    settings.InteractionPromptScale,
+                    1f);
+                SpriteRenderer promptRenderer = promptObject.AddComponent<SpriteRenderer>();
+                promptRenderer.hideFlags = PreviewHideFlags;
+                promptRenderer.sortingOrder = 8;
+                promptRenderer.enabled = false;
+
                 CircleMapSegment segment = segmentObject.AddComponent<CircleMapSegment>();
                 segment.hideFlags = PreviewHideFlags;
-                segment.Setup(spriteRenderer, null, null, null, null, 0f);
-                segment.Show(new CircleRoadSegmentData(slotDefinition, null));
+                segment.Setup(
+                    spriteRenderer,
+                    promptRenderer,
+                    settings.NpcInteractionPromptSprite,
+                    settings.EventInteractionPromptSprite,
+                    settings.ResourceInteractionPromptSprite,
+                    settings.InteractionPromptHorizontalOffset);
+                CircleRoadSegmentData segmentData = new CircleRoadSegmentData(slotDefinition, null);
+                segment.Show(segmentData);
+                segment.SetInteractionPromptVisible(
+                    segmentData,
+                    slot.IsSelected && HasInteractionPrompt(segmentData));
 
                 if (slot.IsSelected)
                 {
@@ -337,6 +460,31 @@ namespace CircleWar.EditorTools
                     selectedImageTransform = imageObject.transform;
                     selectedSpriteRenderer = spriteRenderer;
                 }
+            }
+
+            HideSourceRenderers(settings.RotatingRoot);
+            previewCamera = settings.GameCamera;
+            previewCameraTarget = settings.RotatingRoot.position;
+            SyncSceneViewToGameCamera();
+        }
+
+        private static bool HasInteractionPrompt(CircleRoadSegmentData segment)
+        {
+            if (segment == null)
+            {
+                return false;
+            }
+
+            switch (segment.contentType)
+            {
+                case SegmentContentType.Npc:
+                    return segment.dialogue != null;
+                case SegmentContentType.Event:
+                    return segment.gameEvent != null;
+                case SegmentContentType.Resource:
+                    return !string.IsNullOrWhiteSpace(segment.segmentId);
+                default:
+                    return false;
             }
         }
 
@@ -373,6 +521,111 @@ namespace CircleWar.EditorTools
             previewObject.hideFlags = PreviewHideFlags;
             previewObject.transform.hideFlags = PreviewHideFlags;
             return previewObject;
+        }
+
+        private static void SetPreviewHideFlagsRecursively(GameObject root)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            Transform[] transforms = root.GetComponentsInChildren<Transform>(true);
+            for (int index = 0; index < transforms.Length; index++)
+            {
+                Transform transform = transforms[index];
+                transform.gameObject.hideFlags = PreviewHideFlags;
+                Component[] components = transform.GetComponents<Component>();
+                for (int componentIndex = 0; componentIndex < components.Length; componentIndex++)
+                {
+                    if (components[componentIndex] != null)
+                    {
+                        components[componentIndex].hideFlags = PreviewHideFlags;
+                    }
+                }
+
+                Renderer renderer = transform.GetComponent<Renderer>();
+                if (renderer != null)
+                {
+                    renderer.forceRenderingOff = false;
+                }
+            }
+        }
+
+        private static void DestroyChildren(Transform parent)
+        {
+            if (parent == null)
+            {
+                return;
+            }
+
+            for (int childIndex = parent.childCount - 1; childIndex >= 0; childIndex--)
+            {
+                Object.DestroyImmediate(parent.GetChild(childIndex).gameObject);
+            }
+        }
+
+        private static void HideSourceRenderers(Transform sourceRoot)
+        {
+            RestoreSourceRenderers();
+            if (sourceRoot == null)
+            {
+                return;
+            }
+
+            Renderer[] renderers = sourceRoot.GetComponentsInChildren<Renderer>(true);
+            for (int index = 0; index < renderers.Length; index++)
+            {
+                Renderer renderer = renderers[index];
+                if (renderer == null)
+                {
+                    continue;
+                }
+
+                hiddenSourceRenderers.Add(new RendererVisibilityState(
+                    renderer,
+                    renderer.forceRenderingOff));
+                renderer.forceRenderingOff = true;
+            }
+        }
+
+        private static void RestoreSourceRenderers()
+        {
+            for (int index = 0; index < hiddenSourceRenderers.Count; index++)
+            {
+                RendererVisibilityState state = hiddenSourceRenderers[index];
+                if (state.Renderer != null)
+                {
+                    state.Renderer.forceRenderingOff = state.WasForcedOff;
+                }
+            }
+
+            hiddenSourceRenderers.Clear();
+        }
+
+        private static void SyncSceneViewToGameCamera(
+            Camera gameCamera,
+            Vector3 mapPlanePoint)
+        {
+            if (gameCamera == null || SceneView.lastActiveSceneView == null)
+            {
+                return;
+            }
+
+            SceneView sceneView = SceneView.lastActiveSceneView;
+            Transform cameraTransform = gameCamera.transform;
+            float distanceToMapPlane = Vector3.Dot(
+                mapPlanePoint - cameraTransform.position,
+                cameraTransform.forward);
+            Vector3 pivot = cameraTransform.position +
+                            cameraTransform.forward * distanceToMapPlane;
+            float viewSize = gameCamera.orthographic
+                ? gameCamera.orthographicSize
+                : Mathf.Max(0.01f, Mathf.Abs(distanceToMapPlane));
+
+            sceneView.orthographic = gameCamera.orthographic;
+            sceneView.LookAtDirect(pivot, cameraTransform.rotation, viewSize);
+            sceneView.Repaint();
         }
 
         private static void OnSceneGUI(SceneView sceneView)
@@ -519,10 +772,13 @@ namespace CircleWar.EditorTools
 
         private static void DestroyPreviewObjects()
         {
+            RestoreSourceRenderers();
             selectedSegment = null;
             selectedSegmentTransform = null;
             selectedImageTransform = null;
             selectedSpriteRenderer = null;
+            previewCamera = null;
+            previewCameraTarget = Vector3.zero;
 
             if (previewRoot != null)
             {
@@ -560,24 +816,60 @@ namespace CircleWar.EditorTools
         private readonly struct MapPreviewSettings
         {
             public MapPreviewSettings(
-                Transform parent,
+                Transform rotatingRoot,
+                int segmentParentSiblingIndex,
+                int ringSiblingIndex,
                 int totalRoadSegmentCount,
                 int visibleSegmentCount,
                 float radius,
-                float segmentScale)
+                float segmentScale,
+                float interactionPromptHorizontalOffset,
+                float interactionPromptScale,
+                Sprite npcInteractionPromptSprite,
+                Sprite eventInteractionPromptSprite,
+                Sprite resourceInteractionPromptSprite,
+                Camera gameCamera)
             {
-                Parent = parent;
+                RotatingRoot = rotatingRoot;
+                SegmentParentSiblingIndex = segmentParentSiblingIndex;
+                RingSiblingIndex = ringSiblingIndex;
                 TotalRoadSegmentCount = totalRoadSegmentCount;
                 VisibleSegmentCount = visibleSegmentCount;
                 Radius = radius;
                 SegmentScale = segmentScale;
+                InteractionPromptHorizontalOffset = interactionPromptHorizontalOffset;
+                InteractionPromptScale = interactionPromptScale;
+                NpcInteractionPromptSprite = npcInteractionPromptSprite;
+                EventInteractionPromptSprite = eventInteractionPromptSprite;
+                ResourceInteractionPromptSprite = resourceInteractionPromptSprite;
+                GameCamera = gameCamera;
             }
 
-            public Transform Parent { get; }
+            public Transform RotatingRoot { get; }
+            public int SegmentParentSiblingIndex { get; }
+            public int RingSiblingIndex { get; }
             public int TotalRoadSegmentCount { get; }
             public int VisibleSegmentCount { get; }
             public float Radius { get; }
             public float SegmentScale { get; }
+            public float InteractionPromptHorizontalOffset { get; }
+            public float InteractionPromptScale { get; }
+            public Sprite NpcInteractionPromptSprite { get; }
+            public Sprite EventInteractionPromptSprite { get; }
+            public Sprite ResourceInteractionPromptSprite { get; }
+            public Camera GameCamera { get; }
+        }
+
+        private readonly struct RendererVisibilityState
+        {
+            public RendererVisibilityState(Renderer renderer, bool wasForcedOff)
+            {
+                Renderer = renderer;
+                WasForcedOff = wasForcedOff;
+            }
+
+            public Renderer Renderer { get; }
+            public bool WasForcedOff { get; }
         }
     }
 }
