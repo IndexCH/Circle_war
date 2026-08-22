@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_summer_low_humidity_shore_36
   displayName: 截断军方通讯
-  description: 显示威胁正在逼近的军方通讯.
+  description: "夏5-5｜事件节点“截断军方通讯”：A：公开播放 → 全员知道威胁临近；B：私下解析 → 获得军方通讯情报。"
   roadIndex: 36
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 11f87b9583fb499b9f065a5fe5ab260f, type: 3}
+  mapSprite: {fileID: 21300000, guid: 38d0da1125594882bc0bb241b5b319b3, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 2879bb7d46984121b1eeb17d0dc8a96e, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

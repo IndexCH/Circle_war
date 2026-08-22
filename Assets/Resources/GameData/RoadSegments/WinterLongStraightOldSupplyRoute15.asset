@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_winter_long_straight_old_supply_route_15
   displayName: 招募广播
-  description: 军方招募广播仍在重复播放。
+  description: "冬2-8｜事件节点“招募广播”：A：公开播放 → 获得伊莱军事主张情报；B：销毁广播 → 获得芯片。"
   roadIndex: 15
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 11f87b9583fb499b9f065a5fe5ab260f, type: 3}
+  mapSprite: {fileID: 21300000, guid: 45cf09dc4e50428398b37de8db3e9fa7, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: fb3c8acb5c3a4d5f8ca60a7c63b3ddef, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_33
   displayName: 钢铁
-  description: 从工业残骸边缘回收的钢铁。
+  description: "春5-2｜资源节点：钢铁。"
   roadIndex: 33
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: f624e6c3f59f47f3ac7a5dce2cc54d36, type: 3}
+  mapSprite: {fileID: 21300000, guid: dfde4595695746ac8eb395f89e04f0c0, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,3 +32,5 @@ MonoBehaviour:
   - resourceId: industry
     amount: 5
   costs: []
+
+

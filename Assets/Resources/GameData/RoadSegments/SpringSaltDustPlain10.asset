@@ -11,15 +11,19 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain10
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_10
-  displayName: 封闭军用箱
-  description: 一只锈蚀但仍然锁闭的军用箱。
+  displayName: "\u5C01\u95ED\u519B\u7528\u7BB1"
+  description: "\u66252-3\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u5C01\u95ED\u519B\u7528\u7BB1\u201D\uFF1AA\uFF1A\u5F3A\u884C\u6253\u5F00
+    \u2192 \u83B7\u5F97\u94A2\u94C1\uFF0C\u4E3B\u89D2\u53D7\u4F24\uFF1BB\uFF1A\u653E\u5F03\u5F00\u542F
+    \u2192 \u907F\u514D\u53D7\u4F24\u3002"
   roadIndex: 10
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: baa342f4eb5246439f02e190647c7258, type: 3}
+  mapSprite: {fileID: -7482404564895785253, guid: 8a8bab8a73194fd449cd03f35b283fc5, type: 3}
+  y: -0.2
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 033c808f3b6547bd879d3d919bda9e99, type: 2}

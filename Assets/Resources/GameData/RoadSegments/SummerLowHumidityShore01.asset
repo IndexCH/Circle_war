@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_summer_low_humidity_shore_01
   displayName: 芦苇花
-  description: 水边生长的芦苇花，可以补充食物.
+  description: "夏1-2｜资源节点：芦苇花。"
   roadIndex: 1
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 3
-  mapSprite: {fileID: -7314830758912770713, guid: 520d2a7243aed2d468133a2db93ca196, type: 3}
+  mapSprite: {fileID: 21300000, guid: 5f974a227c3142549c95638049475bc9, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,3 +32,4 @@ MonoBehaviour:
   - resourceId: food
     amount: 10
   costs: []
+

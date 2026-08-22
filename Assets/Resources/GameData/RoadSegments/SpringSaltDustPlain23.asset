@@ -11,15 +11,17 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain23
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_23
-  displayName: 压缩饼干
-  description: 在碎裂盐壳之间找到的压缩饼干。
+  displayName: "\u538B\u7F29\u997C\u5E72"
+  description: "\u66253-8\uFF5C\u8D44\u6E90\u8282\u70B9\uFF1A\u538B\u7F29\u997C\u5E72\u3002"
   roadIndex: 23
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: 914727e4aa0e40c28d259751a5eb6b06, type: 3}
+  mapSprite: {fileID: -467474851318412678, guid: b3db30972f6ccfb4fbec9b1c13a74f19, type: 3}
+  y: -0.4
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}

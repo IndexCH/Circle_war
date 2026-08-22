@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_summer_low_humidity_shore_11
   displayName: 旧补给来源
-  description: 撤离记录和补偿物资仍留在旧补给点.
+  description: "夏2-4｜事件节点“旧补给来源”：A：追问撤离原因 → 获得外部情报；B：要求物资补偿 → 获得钢铁。"
   roadIndex: 11
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: baa342f4eb5246439f02e190647c7258, type: 3}
+  mapSprite: {fileID: 21300000, guid: 7634ede36a1849b8991e8d395103f390, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 87800931d5e047c3ad854f9627dc0569, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

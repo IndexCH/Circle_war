@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_winter_long_straight_old_supply_route_34
   displayName: 备用增援线路
-  description: 备用增援线路仍通向军方控制区。
+  description: "冬5-3｜事件节点“备用增援线路”：A：关闭线路 → 获得无人机增援情报；B：过载线路 → 获得燃料，主角受伤。"
   roadIndex: 34
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 92f048f320764c1e81363b53eeaea703, type: 3}
+  mapSprite: {fileID: 21300000, guid: 4cb996169ac64795b93caf7409d348ed, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: b39835c94bd14000a143ba4aa8e85678, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

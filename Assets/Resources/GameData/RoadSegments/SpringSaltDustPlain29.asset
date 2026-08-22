@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_29
   displayName: 芦苇花
-  description: 盐水洼地旁采到的芦苇花。
+  description: "春4-6｜资源节点：芦苇花。"
   roadIndex: 29
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 3
-  mapSprite: {fileID: -7314830758912770713, guid: 520d2a7243aed2d468133a2db93ca196, type: 3}
+  mapSprite: {fileID: 21300000, guid: c41b89d85f6b4f668222dd266ea97444, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,3 +32,5 @@ MonoBehaviour:
   - resourceId: food
     amount: 10
   costs: []
+
+

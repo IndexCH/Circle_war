@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_39
   displayName: 精英炮塔
-  description: 旧前线缓冲带中装甲最完整、火力最强的固定精英炮塔。
+  description: "秋5-8｜怪物节点：精英炮塔。"
   roadIndex: 39
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 1
-  mapSprite: {fileID: 21300000, guid: 2e53d2dc9972463e83774a76a2183b51, type: 3}
+  mapSprite: {fileID: 21300000, guid: 899e639904b24515b83a745b1d606351, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_winter_long_straight_old_supply_route_05
   displayName: 废车医疗箱
-  description: 被遗弃在路边的军用医疗包仍能开启。
+  description: "冬1-6｜事件节点“废车医疗箱”：A：读取急救记录 → 最大生命+1；B：拆解医疗箱 → 获得橡胶。"
   roadIndex: 5
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: c95285cf1db8431fad03dd0d2032a776, type: 3}
+  mapSprite: {fileID: 21300000, guid: 8a5e0791978649549c0552c06f6a043c, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 7f5b404bcd0d49b1b4d393a7cd94f292, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

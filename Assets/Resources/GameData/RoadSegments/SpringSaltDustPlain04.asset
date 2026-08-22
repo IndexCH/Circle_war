@@ -11,15 +11,17 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain04
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_04
-  displayName: 玛蕾、卡洛
-  description: 两人逃难抵达；玛蕾希望优先收集食物，卡洛不愿离开残骸。
+  displayName: "\u739B\u857E\u3001\u5361\u6D1B"
+  description: "\u66251-5\uFF5CNPC\u8282\u70B9\u201C\u739B\u857E\u3001\u5361\u6D1B\u201D\uFF1A\u4E24\u4EBA\u9003\u96BE\u62B5\u8FBE\uFF1B\u739B\u857E\u5E0C\u671B\u4F18\u5148\u6536\u96C6\u98DF\u7269\uFF0C\u5361\u6D1B\u4E0D\u613F\u79BB\u5F00\u6B8B\u9AB8\u3002"
   roadIndex: 4
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 2
-  mapSprite: {fileID: 21300000, guid: 9403134363ae440f964eaefd0ace58a9, type: 3}
+  mapSprite: {fileID: 21300000, guid: b01045562ae04644a21e56ef3a25b846, type: 3}
+  y: -0.7
+  z: 0
   character: {fileID: 11400000, guid: eacf44e6b21046fa98cdeeb72e464cae, type: 2}
   dialogue: {fileID: 11400000, guid: b7d3ee443c64468487163da2d401d508, type: 2}
   gameEvent: {fileID: 0}

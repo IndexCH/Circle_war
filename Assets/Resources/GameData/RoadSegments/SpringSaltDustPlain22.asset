@@ -11,15 +11,17 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain22
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_22
-  displayName: 空白
-  description: 盐尘平原上的空白缓冲路段，暂时没有可交互目标。
+  displayName: "\u7A7A\u767D"
+  description: "\u66253-7\uFF5C\u7A7A\u767D\u7F13\u51B2\u8282\u70B9\uFF1A\u5B89\u5168\u63A2\u7D22\u6216\u8282\u594F\u7F13\u51B2\uFF1B\u65E0NPC\u3001\u8D44\u6E90\u3001\u4E8B\u4EF6\u3001\u602A\u7269\u6216Boss\u3002"
   roadIndex: 22
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 0
   mapSprite: {fileID: 0}
+  y: -0.2
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}

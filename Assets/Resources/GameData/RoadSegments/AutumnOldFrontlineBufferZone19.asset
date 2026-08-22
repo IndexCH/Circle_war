@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_19
   displayName: 封闭军械库
-  description: 一座仍由旧权限锁控制的封闭军械库。
+  description: "秋3-4｜事件节点“封闭军械库”：A：搜索推进组件 → 获得燃料；B：搜索防御核心 → 获得钢铁。"
   roadIndex: 19
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: f1a6672f8fab42cbab4ad8f6c232d270, type: 3}
+  mapSprite: {fileID: 21300000, guid: 948a1c8aca0b40cbb242621a8d7be48b, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 763f05f5b7694799987fe38c79f5f63b, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

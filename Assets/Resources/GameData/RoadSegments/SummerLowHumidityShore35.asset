@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_summer_low_humidity_shore_35
   displayName: 压缩饼干
-  description: 密封保存的压缩饼干，可以补充食物.
+  description: "夏5-4｜资源节点：压缩饼干。"
   roadIndex: 35
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: 914727e4aa0e40c28d259751a5eb6b06, type: 3}
+  mapSprite: {fileID: 21300000, guid: c41b89d85f6b4f668222dd266ea97444, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,3 +32,4 @@ MonoBehaviour:
   - resourceId: food
     amount: 10
   costs: []
+

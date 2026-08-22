@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_winter_long_straight_old_supply_route_39
   displayName: 年轻军官·伊莱 + 战术无人机群
-  description: 年轻军官伊莱率领战术无人机群封锁了补给路尽头。
+  description: "冬5-8｜Boss节点：年轻军官·伊莱 + 战术无人机群。"
   roadIndex: 39
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 6
-  mapSprite: {fileID: 21300000, guid: 6a816b41362d464bbe24aa0af0a97791, type: 3}
+  mapSprite: {fileID: 21300000, guid: 45cf09dc4e50428398b37de8db3e9fa7, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_summer_low_humidity_shore_08
   displayName: 巡逻无人机
-  description: 脱离编队但仍可重启的巡逻无人机.
+  description: "夏2-1｜事件节点“巡逻无人机”：A：摧毁它 → 获得芯片；B：重启它 → Boss减少一个无人机。"
   roadIndex: 8
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: e8f26e4e26d44652993f3071dbf44d22, type: 3}
+  mapSprite: {fileID: 21300000, guid: 9eaf21629a5e4c479f8c234a2c76e2e2, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 52cf320bbf7d4b7fba8fb1ea7a3e758f, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

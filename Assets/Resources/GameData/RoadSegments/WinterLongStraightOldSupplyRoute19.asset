@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_winter_long_straight_old_supply_route_19
   displayName: 塞维急修
-  description: 塞维正在抢修一处失控的军用设施。
+  description: "冬3-4｜事件节点“塞维急修”：A：协助急修 → 获得芯片；B：旁观记录 → 获得旧技术情报。"
   roadIndex: 19
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: aae2cd60b4ea4b6e9900a586e9c25bff, type: 3}
+  mapSprite: {fileID: 21300000, guid: 948a1c8aca0b40cbb242621a8d7be48b, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: a3287256db064ec3a0de9051f7127a13, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

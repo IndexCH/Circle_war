@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_winter_long_straight_old_supply_route_17
   displayName: 控制塔入口
-  description: 控制塔入口后的设备仍在运转。
+  description: "冬3-2｜事件节点“控制塔入口”：A：进入塔内 → 获得旧防卫记录；B：封死入口 → 获得钢铁。"
   roadIndex: 17
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: f1a6672f8fab42cbab4ad8f6c232d270, type: 3}
+  mapSprite: {fileID: 21300000, guid: 9eaf21629a5e4c479f8c234a2c76e2e2, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: da34fa882ce74457ab266658e329a9d3, type: 2}
@@ -28,4 +28,5 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+
 

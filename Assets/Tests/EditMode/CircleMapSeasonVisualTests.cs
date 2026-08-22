@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEngine;
 
 namespace CircleWar.Tests
@@ -229,6 +230,109 @@ namespace CircleWar.Tests
                 UnityEngine.Object.DestroyImmediate(sprite);
                 UnityEngine.Object.DestroyImmediate(texture);
             }
+        }
+
+        [Test]
+        public void NpcRoadSegmentUsesNativeAnimatorForIdleAnimation()
+        {
+            CharacterDefinition character =
+                Resources.Load<CharacterDefinition>("GameData/Characters/Graff");
+            Sprite fallbackSprite = CreateTestSprite();
+            Texture2D fallbackTexture = fallbackSprite.texture;
+            GameObject root = new GameObject("Animated NPC Segment");
+            RoadSegmentDefinition definition =
+                ScriptableObject.CreateInstance<RoadSegmentDefinition>();
+            try
+            {
+                Assert.That(character, Is.Not.Null);
+
+                SerializedObject serializedDefinition = new SerializedObject(definition);
+                serializedDefinition.FindProperty("contentType").enumValueIndex =
+                    (int)SegmentContentType.Npc;
+                serializedDefinition.FindProperty("character").objectReferenceValue = character;
+                serializedDefinition.FindProperty("mapSprite").objectReferenceValue = fallbackSprite;
+                serializedDefinition.ApplyModifiedPropertiesWithoutUndo();
+
+                SpriteRenderer renderer =
+                    new GameObject("Animated NPC Image").AddComponent<SpriteRenderer>();
+                renderer.transform.SetParent(root.transform, false);
+                CircleMapSegment mapSegment = root.AddComponent<CircleMapSegment>();
+                mapSegment.Setup(renderer, null, null, null, null, 0f);
+                mapSegment.Show(new CircleRoadSegmentData(definition, fallbackSprite));
+
+                Animator animator = renderer.GetComponent<Animator>();
+                Assert.That(animator, Is.Not.Null);
+                Assert.That(animator.enabled, Is.True);
+                Assert.That(animator.runtimeAnimatorController, Is.Not.Null);
+                Assert.That(
+                    animator.runtimeAnimatorController.name,
+                    Is.EqualTo("graff_idle_controller"));
+                Assert.That(renderer.sprite, Is.Not.Null);
+                Assert.That(renderer.sprite.name, Is.EqualTo("frame_004"));
+
+                animator.Update(0.1f);
+
+                Assert.That(renderer.sprite.name, Is.EqualTo("frame_005"));
+            }
+            finally
+            {
+                UnityEngine.Object.DestroyImmediate(root);
+                UnityEngine.Object.DestroyImmediate(definition);
+                UnityEngine.Object.DestroyImmediate(fallbackSprite);
+                UnityEngine.Object.DestroyImmediate(fallbackTexture);
+            }
+        }
+
+        [Test]
+        public void EliNpcRoadSegmentUsesStaticSpriteWithoutAnimatorPlayback()
+        {
+            CharacterDefinition character =
+                Resources.Load<CharacterDefinition>("GameData/Characters/Eli");
+            Sprite fallbackSprite = CreateTestSprite();
+            Texture2D fallbackTexture = fallbackSprite.texture;
+            GameObject root = new GameObject("Static Eli NPC Segment");
+            RoadSegmentDefinition definition =
+                ScriptableObject.CreateInstance<RoadSegmentDefinition>();
+            try
+            {
+                Assert.That(character, Is.Not.Null);
+
+                SerializedObject serializedDefinition = new SerializedObject(definition);
+                serializedDefinition.FindProperty("contentType").enumValueIndex =
+                    (int)SegmentContentType.Npc;
+                serializedDefinition.FindProperty("character").objectReferenceValue = character;
+                serializedDefinition.FindProperty("mapSprite").objectReferenceValue = fallbackSprite;
+                serializedDefinition.ApplyModifiedPropertiesWithoutUndo();
+
+                SpriteRenderer renderer =
+                    new GameObject("Static Eli NPC Image").AddComponent<SpriteRenderer>();
+                renderer.transform.SetParent(root.transform, false);
+                CircleMapSegment mapSegment = root.AddComponent<CircleMapSegment>();
+                mapSegment.Setup(renderer, null, null, null, null, 0f);
+                mapSegment.Show(new CircleRoadSegmentData(definition, fallbackSprite));
+
+                Animator animator = renderer.GetComponent<Animator>();
+                Assert.That(animator, Is.Not.Null);
+                Assert.That(animator.enabled, Is.False);
+                Assert.That(animator.runtimeAnimatorController, Is.Null);
+                Assert.That(renderer.sprite, Is.SameAs(fallbackSprite));
+            }
+            finally
+            {
+                UnityEngine.Object.DestroyImmediate(root);
+                UnityEngine.Object.DestroyImmediate(definition);
+                UnityEngine.Object.DestroyImmediate(fallbackSprite);
+                UnityEngine.Object.DestroyImmediate(fallbackTexture);
+            }
+        }
+
+        private static Sprite CreateTestSprite()
+        {
+            Texture2D texture = new Texture2D(1, 1);
+            return Sprite.Create(
+                texture,
+                new Rect(0f, 0f, texture.width, texture.height),
+                new Vector2(0.5f, 0.5f));
         }
 
         private static T InvokePrivate<T>(object target, string methodName, params object[] arguments)

@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_31
   displayName: 临时补给点
-  description: 一处仓促搭建、仍残留少量物资的临时补给点。
+  description: "春4-8｜事件节点“临时补给点”：A：接受玛蕾分配 → 获得压缩饼干；B：优先拿工具 → 获得钢铁。"
   roadIndex: 31
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: baa342f4eb5246439f02e190647c7258, type: 3}
+  mapSprite: {fileID: 21300000, guid: c69100f6e1f841cdb34cbf8e23d12b9c, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 356d435cc1884f1fb819907a6834579d, type: 2}
@@ -28,3 +28,5 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+
+

@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_31
   displayName: 远程怪物
-  description: 潜伏在旧前线设施之间并进行远程攻击的怪物。
+  description: "秋4-8｜怪物节点：远程怪物。"
   roadIndex: 31
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 1
-  mapSprite: {fileID: 21300000, guid: 9f2d875db7ca4cf4af29aa070f5e8ba8, type: 3}
+  mapSprite: {fileID: 21300000, guid: 45cf09dc4e50428398b37de8db3e9fa7, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

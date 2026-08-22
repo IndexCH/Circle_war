@@ -5,8 +5,11 @@ namespace CircleWar
     public sealed class CircleMapSegment : MonoBehaviour
     {
         private const float InteractionPromptHeight = 3f;
+        private const string NpcIdleAnimationResourceRoot = "Scence/NpcIdleAnimations";
+        private const string StaticNpcCharacterId = "eli";
 
         private SpriteRenderer segmentSpriteRenderer;
+        private Animator segmentAnimator;
         private SpriteRenderer interactionPromptRenderer;
         private Sprite npcInteractionPromptSprite;
         private Sprite eventInteractionPromptSprite;
@@ -22,6 +25,14 @@ namespace CircleWar
             float promptHorizontalOffset)
         {
             segmentSpriteRenderer = renderer;
+            segmentAnimator = renderer.GetComponent<Animator>();
+            if (segmentAnimator == null)
+            {
+                segmentAnimator = renderer.gameObject.AddComponent<Animator>();
+            }
+
+            segmentAnimator.enabled = false;
+            segmentAnimator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
             interactionPromptRenderer = promptRenderer;
             npcInteractionPromptSprite = npcPromptSprite;
             eventInteractionPromptSprite = eventPromptSprite;
@@ -36,12 +47,46 @@ namespace CircleWar
 
         public void Show(CircleRoadSegmentData segment)
         {
+            segmentAnimator.enabled = false;
+            segmentAnimator.runtimeAnimatorController = null;
+
             Sprite sprite = segment != null ? segment.sprite : null;
             segmentSpriteRenderer.enabled = sprite != null;
             segmentSpriteRenderer.sprite = sprite;
+            RuntimeAnimatorController idleController = LoadNpcIdleAnimatorController(segment);
+            if (idleController != null)
+            {
+                segmentAnimator.runtimeAnimatorController = idleController;
+                segmentAnimator.enabled = true;
+                segmentAnimator.Play("Idle", 0, 0f);
+                segmentAnimator.Update(0f);
+                segmentSpriteRenderer.enabled = segmentSpriteRenderer.sprite != null;
+            }
+
             AlignSpriteBottomCenter(segment != null ? segment.y : 0f);
             ApplySpriteLocalRotation(segment != null ? segment.z : 0f);
             SetInteractionPromptVisible(segment, false);
+        }
+
+        private static RuntimeAnimatorController LoadNpcIdleAnimatorController(
+            CircleRoadSegmentData segment)
+        {
+            if (segment == null ||
+                segment.contentType != SegmentContentType.Npc ||
+                segment.character == null)
+            {
+                return null;
+            }
+
+            string characterId = segment.character.DefinitionId;
+            if (characterId == StaticNpcCharacterId)
+            {
+                return null;
+            }
+
+            string resourcePath = NpcIdleAnimationResourceRoot + "/" + characterId + "/" +
+                characterId + "_idle_controller";
+            return Resources.Load<RuntimeAnimatorController>(resourcePath);
         }
 
         public void SetInteractionPromptVisible(CircleRoadSegmentData segment, bool isVisible)

@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_summer_low_humidity_shore_09
   displayName: 监察官
-  description: 监察官正在评估附近星球和当前战区的价值.
+  description: "夏2-2｜NPC节点“监察官”：承认附近星球被认定为高价值据点，当前星球可能被重新纳入战区。"
   roadIndex: 9
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 2
-  mapSprite: {fileID: 21300000, guid: f925139226e345d3a33381c164175a6b, type: 3}
+  mapSprite: {fileID: 21300000, guid: f3ddc317362441a1a46f2e4444ab8e09, type: 3}
   character: {fileID: 11400000, guid: 8188796a6fa5486a809a0c545a4edc26, type: 2}
   dialogue: {fileID: 11400000, guid: 8760fb9dc0f6473eb13c9b5597c56af0, type: 2}
   gameEvent: {fileID: 0}

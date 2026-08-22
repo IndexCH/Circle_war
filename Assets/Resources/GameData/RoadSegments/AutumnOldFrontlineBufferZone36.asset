@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_36
   displayName: 塞维维修
-  description: 塞维正在尝试恢复旧前线设施的一段维修线路。
+  description: "秋5-5｜事件节点“塞维维修”：A：协助校准 → 获得芯片；B：要求材料 → 获得橡胶。"
   roadIndex: 36
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: aae2cd60b4ea4b6e9900a586e9c25bff, type: 3}
+  mapSprite: {fileID: 21300000, guid: 38d0da1125594882bc0bb241b5b319b3, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: b1c2d4a515254415b465395819eb68d3, type: 2}
@@ -28,4 +28,5 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_summer_low_humidity_shore_16
   displayName: 空白
-  description: 低湿季沼岸的空旷道路，暂时没有可交互目标.
+  description: "夏3-1｜空白缓冲节点：安全探索或节奏缓冲；无NPC、资源、事件、怪物或Boss。"
   roadIndex: 16
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

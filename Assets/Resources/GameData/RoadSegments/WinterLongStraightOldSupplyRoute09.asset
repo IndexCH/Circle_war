@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_winter_long_straight_old_supply_route_09
   displayName: 钢铁
-  description: 散落的钢铁构件仍可回收。
+  description: "冬2-2｜资源节点：钢铁。"
   roadIndex: 9
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: f624e6c3f59f47f3ac7a5dce2cc54d36, type: 3}
+  mapSprite: {fileID: 21300000, guid: dfde4595695746ac8eb395f89e04f0c0, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,4 +32,5 @@ MonoBehaviour:
   - resourceId: industry
     amount: 5
   costs: []
+
 

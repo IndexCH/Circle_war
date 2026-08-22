@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_winter_long_straight_old_supply_route_03
   displayName: 断裂军用电缆
-  description: 路旁断裂的军用线缆仍残留微弱电流。
+  description: "冬1-4｜事件节点“断裂军用电缆”：A：修复电缆 → 获得防御线路情报；B：拆取电缆 → 获得燃料。"
   roadIndex: 3
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 92f048f320764c1e81363b53eeaea703, type: 3}
+  mapSprite: {fileID: 21300000, guid: 196311edc89147cf9144b52f948e5366, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 8660e9a534a0401ab334a543ce15da15, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

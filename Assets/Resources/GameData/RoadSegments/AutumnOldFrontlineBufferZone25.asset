@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_25
   displayName: 玛蕾、塞维、格拉夫
-  description: 三人正在讨论旧前线设施的权限、维修和后续行动。
+  description: "秋4-2｜NPC节点“玛蕾、塞维、格拉夫”：玛蕾希望塞维协助逃生；格拉夫要求优先重整防御。"
   roadIndex: 25
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 2
-  mapSprite: {fileID: 21300000, guid: 34514499cd9f4d958aac91179ab0ac04, type: 3}
+  mapSprite: {fileID: 21300000, guid: 86c03ecace9c401cb1c95dd461fb9995, type: 3}
   character: {fileID: 11400000, guid: edde2826bbb341aeb70cadf0a811f3b9, type: 2}
   dialogue: {fileID: 11400000, guid: 4fdcb8031d134db583e41cac0449376f, type: 2}
   gameEvent: {fileID: 0}

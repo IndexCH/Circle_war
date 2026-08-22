@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_winter_long_straight_old_supply_route_21
   displayName: 橡胶
-  description: 补给容器内的耐寒橡胶仍可回收。
+  description: "冬3-6｜资源节点：橡胶。"
   roadIndex: 21
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: 3b5f3c3f4bec41f4824fbb898cfd5c23, type: 3}
+  mapSprite: {fileID: 21300000, guid: dfde4595695746ac8eb395f89e04f0c0, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,3 +32,4 @@ MonoBehaviour:
   - resourceId: industry
     amount: 5
   costs: []
+

@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_01
   displayName: 坠毁信号
-  description: 坠毁飞行器泄漏出的信号仍在断续广播。
+  description: "秋1-2｜事件节点“坠毁信号”：A：关闭泄漏电池 → 获得芯片，主角受伤；B：先搜集残骸 → 获得燃料和钢铁。"
   roadIndex: 1
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 7ff6f429c084479e89d6f144004c09ec, type: 3}
+  mapSprite: {fileID: 21300000, guid: 948a1c8aca0b40cbb242621a8d7be48b, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 4f4adf9272fc4101ad421787d3405d47, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

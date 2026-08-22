@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_13
   displayName: 燃料单元
-  description: 一组仍有余量的旧帝国燃料单元。
+  description: "秋2-6｜事件节点“燃料单元”：A：抽取燃料 → 获得燃料；B：引爆单元 → 清开残骸，主角受伤。"
   roadIndex: 13
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: f56e01bbbc944547b2e9c687d9a774dd, type: 3}
+  mapSprite: {fileID: 21300000, guid: c69100f6e1f841cdb34cbf8e23d12b9c, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: ea8c8b0b420940dcb1b961c6db1f44b7, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

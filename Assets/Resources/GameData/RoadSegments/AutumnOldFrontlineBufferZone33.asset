@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_33
   displayName: 关键部件
-  description: 一枚可用于恢复设施功能的关键部件。
+  description: "秋5-2｜事件节点“关键部件”：A：安装部件 → 获得逃生设施结构数据；B：改造成临时护甲 → 最大生命+1。"
   roadIndex: 33
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: f4af5ec8964e4fe3a8168106fedb3e37, type: 3}
+  mapSprite: {fileID: 21300000, guid: 45cf09dc4e50428398b37de8db3e9fa7, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 948eccff189a4cd1ac8ef1dca80f6591, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

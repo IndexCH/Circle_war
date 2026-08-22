@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_summer_low_humidity_shore_38
   displayName: 精英怪物
-  description: 在沼岸上空巡航并进行远程攻击的精英怪物.
+  description: "夏5-7｜怪物节点：精英怪物。"
   roadIndex: 38
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 1
-  mapSprite: {fileID: 21300000, guid: 30b0af42c6d773f4a83a541d8b1af325, type: 3}
+  mapSprite: {fileID: 21300000, guid: 8a5e0791978649549c0552c06f6a043c, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

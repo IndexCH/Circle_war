@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_summer_low_humidity_shore_26
   displayName: 旧货仓
-  description: 内部有食物但结构危险的旧货仓.
+  description: "夏4-3｜事件节点“旧货仓”：A：冒险潜入 → 获得大量食物但受伤；B：放弃货仓 → 无变化。"
   roadIndex: 26
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: f1a6672f8fab42cbab4ad8f6c232d270, type: 3}
+  mapSprite: {fileID: 21300000, guid: 9eaf21629a5e4c479f8c234a2c76e2e2, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: bb39aee3dbaf4013afe3e532fecb0840, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_winter_long_straight_old_supply_route_01
   displayName: 伊莱
-  description: 被放逐的年轻军官伊莱站在长直补给路入口，提出重启军事设施。
+  description: "冬1-2｜NPC节点“伊莱”：被放逐的年轻军官出现，提出重启军事设施、统一指挥幸存者。"
   roadIndex: 1
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 2
-  mapSprite: {fileID: 21300000, guid: f925139226e345d3a33381c164175a6b, type: 3}
+  mapSprite: {fileID: 21300000, guid: ebd93a8e1f524216885030e95047f857, type: 3}
   character: {fileID: 11400000, guid: b39124d951274993a169d4941f6aaf1a, type: 2}
   dialogue: {fileID: 11400000, guid: 6b50d51819b847959b1ee92bffa518bb, type: 2}
   gameEvent: {fileID: 0}

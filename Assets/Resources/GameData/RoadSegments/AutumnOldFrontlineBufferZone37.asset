@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_37
   displayName: 逃生设备外壳
-  description: 逃生设备的外壳和内部记录仍有回收价值。
+  description: "秋5-6｜事件节点“逃生设备外壳”：A：质问格拉夫 → 格拉夫信任下降；B：暂不追问 → 格拉夫信任上升。"
   roadIndex: 37
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 3a97cf251c2c4da28e896c7ed7e9506c, type: 3}
+  mapSprite: {fileID: 21300000, guid: 948a1c8aca0b40cbb242621a8d7be48b, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 78ba61bfe54b4416b8a8af6090c4cad0, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

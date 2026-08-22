@@ -11,15 +11,18 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain18
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_18
-  displayName: 损坏旧枪
-  description: 一把严重损坏但仍可拆解的旧枪。
+  displayName: "\u635F\u574F\u65E7\u67AA"
+  description: "\u66253-3\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u635F\u574F\u65E7\u67AA\u201D\uFF1AA\uFF1A\u62C6\u6210\u5DE5\u4E1A\u8D44\u6E90
+    \u2192 \u83B7\u5F97\u94A2\u94C1\uFF1BB\uFF1A\u68C0\u67E5\u7F16\u53F7 \u2192 \u83B7\u5F97\u65E7\u519B\u65B9\u6D3B\u52A8\u60C5\u62A5\u3002"
   roadIndex: 18
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 3ef6893090b341d2949b5e339209d50e, type: 3}
+  mapSprite: {fileID: 4802945990878985426, guid: 175209e14f6a80d438c824c20b1536cd, type: 3}
+  y: -0.4
+  z: 5
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 55f7a46eb9d6495a9a9bbfaad30118a2, type: 2}

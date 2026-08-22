@@ -11,15 +11,19 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain12
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_12
-  displayName: 卡洛修理残骸
-  description: 卡洛发现一处仍有修复价值的机械残骸。
+  displayName: "\u5361\u6D1B\u4FEE\u7406\u6B8B\u9AB8"
+  description: "\u66252-5\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u5361\u6D1B\u4FEE\u7406\u6B8B\u9AB8\u201D\uFF1AA\uFF1A\u5E2E\u5361\u6D1B\u7A33\u4F4F\u8231\u95E8
+    \u2192 \u5361\u6D1B\u4FE1\u4EFB\u4E0A\u5347\uFF1BB\uFF1A\u62C6\u53D6\u5916\u9732\u82AF\u7247
+    \u2192 \u83B7\u5F97\u82AF\u7247\u3002"
   roadIndex: 12
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 7ff6f429c084479e89d6f144004c09ec, type: 3}
+  mapSprite: {fileID: 847511874115741484, guid: 9a1cbdf55ee92b04ba41d9d4e8bf2c1b, type: 3}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: cfbf87c09d3648f1a9755a29996cd717, type: 2}

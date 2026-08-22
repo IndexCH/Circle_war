@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_summer_low_humidity_shore_17
   displayName: 旧运输轨道
-  description: 金属构件和旧运输记录尚存的轨道.
+  description: "夏3-2｜事件节点“旧运输轨道”：A：拆取金属 → 获得钢铁；B：读取轨道记录 → 获得旧前线背景情报。"
   roadIndex: 17
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 351532a879644984a4e44be7abd6b6bc, type: 3}
+  mapSprite: {fileID: 21300000, guid: 9eaf21629a5e4c479f8c234a2c76e2e2, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: efbb0157c37b4e1e94a6df0fef878281, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

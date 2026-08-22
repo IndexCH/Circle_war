@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_summer_low_humidity_shore_31
   displayName: 钢铁
-  description: 可以用于制造和维修的钢铁废料.
+  description: "夏4-8｜资源节点：钢铁。"
   roadIndex: 31
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: f624e6c3f59f47f3ac7a5dce2cc54d36, type: 3}
+  mapSprite: {fileID: 21300000, guid: 5f974a227c3142549c95638049475bc9, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,3 +32,4 @@ MonoBehaviour:
   - resourceId: industry
     amount: 5
   costs: []
+

@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_21
   displayName: 临时护甲
-  description: 用旧前线金属板拼成的临时护甲仍可利用。
+  description: "秋3-6｜事件节点“临时护甲”：A：改造护甲 → 最大生命+1；B：拆取部件 → 获得钢铁。"
   roadIndex: 21
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 01f9124e8efd4b878c72984ae47fb9c4, type: 3}
+  mapSprite: {fileID: 21300000, guid: 196311edc89147cf9144b52f948e5366, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 4f33ba18e0f142a8a2082e39d61661fd, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

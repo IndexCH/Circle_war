@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_spring_salt_dust_plain_24
   displayName: 格拉夫、玛蕾
-  description: 格拉夫主张优先收集工业资源与武器，玛蕾坚持食物与逃生机会。
+  description: "春4-1｜NPC节点“格拉夫、玛蕾”：格拉夫出现并主张工业与武器；玛蕾坚持食物与逃生机会。"
   roadIndex: 24
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 2
-  mapSprite: {fileID: 21300000, guid: dc6cb23925154a529cbac42a6cebf9b2, type: 3}
+  mapSprite: {fileID: 21300000, guid: b85f578fbad6445388078821c46a929b, type: 3}
   character: {fileID: 11400000, guid: 3ccb6340504941b0bd509f33e6d7d372, type: 2}
   dialogue: {fileID: 11400000, guid: 88f6ffc5a34c4c309e65c441b820aec5, type: 2}
   gameEvent: {fileID: 0}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

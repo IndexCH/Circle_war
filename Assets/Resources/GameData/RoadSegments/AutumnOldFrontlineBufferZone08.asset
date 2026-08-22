@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_08
   displayName: 塞维
-  description: 从坠毁飞行器中获救的旧帝国技师塞维。
+  description: "秋2-1｜NPC节点“塞维”：主角从坠毁飞行器中救出前帝国技师塞维；塞维拒绝交出最高权限匙。"
   roadIndex: 8
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 2
-  mapSprite: {fileID: 21300000, guid: aae2cd60b4ea4b6e9900a586e9c25bff, type: 3}
+  mapSprite: {fileID: 21300000, guid: 86c03ecace9c401cb1c95dd461fb9995, type: 3}
   character: {fileID: 11400000, guid: edde2826bbb341aeb70cadf0a811f3b9, type: 2}
   dialogue: {fileID: 11400000, guid: 2953b5a43f1745ed9d5c76fb0d509576, type: 2}
   gameEvent: {fileID: 0}

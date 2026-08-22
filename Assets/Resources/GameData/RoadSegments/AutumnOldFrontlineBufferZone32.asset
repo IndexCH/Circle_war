@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_32
   displayName: 空白
-  description: 旧前线缓冲带的一段空旷道路，暂时没有可交互目标。
+  description: "秋5-1｜空白缓冲节点：无NPC、资源、事件、怪物或Boss。"
   roadIndex: 32
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
@@ -28,4 +28,5 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+
 

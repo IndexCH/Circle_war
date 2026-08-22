@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_winter_long_straight_old_supply_route_06
   displayName: 人员编制
-  description: 一份受损的人员名册仍保留着撤离记录。
+  description: "冬1-7｜事件节点“人员编制”：A：下载记录 → 现在验证伊莱身份；B：删除记录 → 获得芯片。"
   roadIndex: 6
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 11f87b9583fb499b9f065a5fe5ab260f, type: 3}
+  mapSprite: {fileID: 21300000, guid: 45cf09dc4e50428398b37de8db3e9fa7, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 1e2382050f914132bbb401a2ce3d9b1b, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

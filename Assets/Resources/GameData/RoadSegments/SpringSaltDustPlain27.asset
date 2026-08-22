@@ -11,15 +11,17 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain27
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_27
-  displayName: 燃料
-  description: 从密封罐中回收的旧式燃料。
+  displayName: "\u71C3\u6599"
+  description: "\u66254-4\uFF5C\u8D44\u6E90\u8282\u70B9\uFF1A\u71C3\u6599\u3002"
   roadIndex: 27
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: f56e01bbbc944547b2e9c687d9a774dd, type: 3}
+  mapSprite: {fileID: 21300000, guid: 4cb996169ac64795b93caf7409d348ed, type: 3}
+  y: -0.2
+  z: -5
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}

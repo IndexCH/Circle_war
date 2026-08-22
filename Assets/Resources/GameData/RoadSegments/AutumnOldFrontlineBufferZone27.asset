@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_27
   displayName: 旧导航台
-  description: 旧导航台仍保存着一部分前线航路数据。
+  description: "秋4-4｜事件节点“旧导航台”：A：下载导航参数 → 获得逃生设施参数；B：拆除导航核心 → 获得芯片与燃料。"
   roadIndex: 27
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 11f87b9583fb499b9f065a5fe5ab260f, type: 3}
+  mapSprite: {fileID: 21300000, guid: 38d0da1125594882bc0bb241b5b319b3, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 72515a6a33b84e81911255e1320379a4, type: 2}
@@ -28,4 +28,5 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+
 

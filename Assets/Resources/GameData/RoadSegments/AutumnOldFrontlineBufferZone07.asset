@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_07
   displayName: 残骸医疗箱
-  description: 飞行器残骸里的医疗箱仍保持密封。
+  description: "秋1-8｜事件节点“残骸医疗箱”：A：读取急救记录 → 最大生命+1；B：拆作材料 → 获得橡胶。"
   roadIndex: 7
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: c95285cf1db8431fad03dd0d2032a776, type: 3}
+  mapSprite: {fileID: 21300000, guid: 4cb996169ac64795b93caf7409d348ed, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: a202192e32f84dc49658a3a057d6e85a, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

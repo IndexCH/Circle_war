@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_summer_low_humidity_shore_22
   displayName: 仙人掌果
-  description: 在干燥沼岸成熟的仙人掌果，可以补充食物.
+  description: "夏3-7｜资源节点：仙人掌果。"
   roadIndex: 22
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: 7a01ea60a7fc4d67b6adc6a592bc0df2, type: 3}
+  mapSprite: {fileID: 21300000, guid: 66cb1c2ec4af4f678a28975bc8673703, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,3 +32,4 @@ MonoBehaviour:
   - resourceId: food
     amount: 10
   costs: []
+

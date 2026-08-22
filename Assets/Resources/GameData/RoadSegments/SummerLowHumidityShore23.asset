@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_summer_low_humidity_shore_23
   displayName: 自动门
-  description: 通往安全屋并仍有反应的自动门.
+  description: "夏3-8｜事件节点“自动门”：A：打开门 → 获得压缩饼干；B：关闭门 → 获得安全屋情报。"
   roadIndex: 23
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: f1a6672f8fab42cbab4ad8f6c232d270, type: 3}
+  mapSprite: {fileID: 21300000, guid: 8a5e0791978649549c0552c06f6a043c, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 7c578afbe1624399ada3ac45a4d435cc, type: 2}
@@ -28,3 +28,4 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+

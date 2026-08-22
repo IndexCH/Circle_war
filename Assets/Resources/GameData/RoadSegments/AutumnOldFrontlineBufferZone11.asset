@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   definitionId: road_autumn_old_frontline_buffer_zone_11
   displayName: 飞行日志
-  description: 坠毁飞行器的日志终端还保留着最后航程。
+  description: "秋2-4｜事件节点“飞行日志”：A：读取日志 → 获得旧帝国设施情报；B：拆解日志模块 → 获得芯片。"
   roadIndex: 11
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 11f87b9583fb499b9f065a5fe5ab260f, type: 3}
+  mapSprite: {fileID: 21300000, guid: 7634ede36a1849b8991e8d395103f390, type: 3}
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 5ef3017c3ce84a228d10f02d6170f24c, type: 2}
@@ -28,4 +28,5 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
+
 
