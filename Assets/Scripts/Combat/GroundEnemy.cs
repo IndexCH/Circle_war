@@ -168,6 +168,12 @@ namespace CircleWar
                 return;
             }
 
+            if (progressBinding != null && progressBinding.CurrentHealth <= 0)
+            {
+                Die();
+                return;
+            }
+
             ResolveReferences();
             EnsureConfigured();
             Move();

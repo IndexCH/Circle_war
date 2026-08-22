@@ -13,6 +13,8 @@ namespace CircleWar
         [SerializeField] private RegionDefinition region;
         [SerializeField] private Sprite backgroundSprite;
         [SerializeField] private Sprite circleRingSprite;
+        [ColorUsage(false)]
+        [SerializeField] private Color hudFrameColor = Color.white;
         [SerializeField] private float movementMultiplier = 1f;
         [SerializeField] private float consumptionMultiplier = 1f;
         [SerializeField] private float hitRateMultiplier = 1f;
@@ -22,6 +24,7 @@ namespace CircleWar
         public RegionDefinition Region => region;
         public Sprite BackgroundSprite => backgroundSprite;
         public Sprite CircleRingSprite => circleRingSprite;
+        public Color HudFrameColor => hudFrameColor;
         public float MovementMultiplier => movementMultiplier;
         public float ConsumptionMultiplier => consumptionMultiplier;
         public float HitRateMultiplier => hitRateMultiplier;

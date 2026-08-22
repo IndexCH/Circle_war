@@ -11,6 +11,7 @@ namespace CircleWar
         [SerializeField] private Sprite portrait;
         [Min(1)]
         [SerializeField] private int maxHealth = 1;
+        [SerializeField] private EnemyDefinition leaderEnemy;
         [SerializeField] private List<BossPhaseDefinition> phases = new List<BossPhaseDefinition>();
         [SerializeField] private List<AttackPatternDefinition> defaultAttackPatterns = new List<AttackPatternDefinition>();
         [SerializeField] private List<GameCondition> winConditions = new List<GameCondition>();
@@ -19,6 +20,7 @@ namespace CircleWar
         public string BossName => DisplayName;
         public Sprite Portrait => portrait;
         public int MaxHealth => maxHealth;
+        public EnemyDefinition LeaderEnemy => leaderEnemy;
         public IReadOnlyList<BossPhaseDefinition> Phases => phases;
         public IReadOnlyList<AttackPatternDefinition> DefaultAttackPatterns => defaultAttackPatterns;
         public IReadOnlyList<GameCondition> WinConditions => winConditions;

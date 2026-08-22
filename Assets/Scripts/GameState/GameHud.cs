@@ -47,6 +47,15 @@ namespace CircleWar
         [SerializeField] private Text facilityProgressText;
         [SerializeField] private FacilitySegmentedProgressBar facilityProgressBar;
 
+        [Header("Season Theme")]
+        [SerializeField] private Image topLeftDateTimeBackground;
+        [SerializeField] private Image topCenterBossHealthFrame;
+        [SerializeField] private Image topRightSystemFrame;
+        [SerializeField] private Image leftRegionStatusFrame;
+        [SerializeField] private Image rightDialoguePanelFrame;
+        [SerializeField] private Image rightBottomFacilityFrame;
+        [SerializeField] private Image playerStatsIconBoxes;
+
         private GameRuntimeData runtimeData = new GameRuntimeData();
         private CompositeUnRegister bindings;
 
@@ -102,6 +111,24 @@ namespace CircleWar
         public void Refresh()
         {
             runtimeData.RefreshHudFromState();
+        }
+
+        public void ApplySeasonTheme(SeasonDefinition season)
+        {
+            if (season == null)
+            {
+                return;
+            }
+
+            ResolveSeasonThemeReferences();
+            Color color = season.HudFrameColor;
+            SetImageColor(topLeftDateTimeBackground, color);
+            SetImageColor(topCenterBossHealthFrame, color);
+            SetImageColor(topRightSystemFrame, color);
+            SetImageColor(leftRegionStatusFrame, color);
+            SetImageColor(rightDialoguePanelFrame, color);
+            SetImageColor(rightBottomFacilityFrame, color);
+            SetImageColor(playerStatsIconBoxes, color);
         }
 
         public void ShowDialogue(DialogueDefinition dialogueDefinition, CharacterDefinition fallbackCharacter = null)
@@ -323,6 +350,14 @@ namespace CircleWar
             }
         }
 
+        private static void SetImageColor(Image target, Color color)
+        {
+            if (target != null)
+            {
+                target.color = color;
+            }
+        }
+
         private void ResolveMissingReferences()
         {
             Text[] texts = GetComponentsInChildren<Text>(true);
@@ -348,12 +383,50 @@ namespace CircleWar
             dialoguePortraitImage = dialoguePortraitImage == null
                 ? FindImageByName(images, "DialoguePortrait", "Portrait", "Avatar", "dialogue_avatar_frame")
                 : dialoguePortraitImage;
+            ResolveSeasonThemeReferences(images);
 
             if (dialogueRoot == null)
             {
                 Transform dialogueTransform = FindChildByName(transform, "right_dialogue_panel_frame");
                 dialogueRoot = dialogueTransform == null ? null : dialogueTransform.gameObject;
             }
+        }
+
+        private void ResolveSeasonThemeReferences(Image[] images = null)
+        {
+            if (topLeftDateTimeBackground != null &&
+                topCenterBossHealthFrame != null &&
+                topRightSystemFrame != null &&
+                leftRegionStatusFrame != null &&
+                rightDialoguePanelFrame != null &&
+                rightBottomFacilityFrame != null &&
+                playerStatsIconBoxes != null)
+            {
+                return;
+            }
+
+            images = images ?? GetComponentsInChildren<Image>(true);
+            topLeftDateTimeBackground = topLeftDateTimeBackground == null
+                ? FindImageByName(images, "top_left_dateTIme_bg")
+                : topLeftDateTimeBackground;
+            topCenterBossHealthFrame = topCenterBossHealthFrame == null
+                ? FindImageByName(images, "top_center_boss_hp_frame")
+                : topCenterBossHealthFrame;
+            topRightSystemFrame = topRightSystemFrame == null
+                ? FindImageByName(images, "top_right_system_frame")
+                : topRightSystemFrame;
+            leftRegionStatusFrame = leftRegionStatusFrame == null
+                ? FindImageByName(images, "left_region_status_frame")
+                : leftRegionStatusFrame;
+            rightDialoguePanelFrame = rightDialoguePanelFrame == null
+                ? FindImageByName(images, "right_dialogue_panel_frame")
+                : rightDialoguePanelFrame;
+            rightBottomFacilityFrame = rightBottomFacilityFrame == null
+                ? FindImageByName(images, "right_bottom_facility_frame")
+                : rightBottomFacilityFrame;
+            playerStatsIconBoxes = playerStatsIconBoxes == null
+                ? FindImageByName(images, "player_stats_icon_boxes")
+                : playerStatsIconBoxes;
         }
 
         private void EnsureDialogueFallbackWidgets()
