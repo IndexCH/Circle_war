@@ -64,15 +64,18 @@ namespace CircleWar
         private Transform circleRotatingRoot;
         private GameRuntimeData subscribedRuntimeData;
         private GameRuntimeData observedRuntimeData;
+        private IUnRegister seasonIdSubscription;
         private SeasonDefinition activeSeason;
         private int activeSeasonIndex = -1;
         private int observedRunRevision = -1;
         private float currentRoadPosition;
         private float playerRadius;
         private bool hasPlayerRadius;
+        private bool isApplyingSeasonRuntimeContext;
         private bool isMapInitialized;
         private int lastDisplayedAnchorIndex = -1;
         private string observedRunId = string.Empty;
+        private Vector3 backgroundBaseLocalScale = Vector3.one;
 
         public static CircleMapView Active { get; private set; }
         public SeasonDefinition ActiveSeason => activeSeason;
@@ -91,6 +94,9 @@ namespace CircleWar
         private void Start()
         {
             circleRotatingRoot = circleRingRenderer != null ? circleRingRenderer.transform.parent : null;
+            backgroundBaseLocalScale = backgroundRenderer != null
+                ? backgroundRenderer.transform.localScale
+                : Vector3.one;
             GameHud hud = ResolveGameHud();
             EnsureRuntimeDataSubscription(false);
             LoadSeasonDefinitions();
@@ -290,6 +296,8 @@ namespace CircleWar
                 if (subscribedRuntimeData != null)
                 {
                     subscribedRuntimeData.NewRunStarted += HandleNewRunStarted;
+                    seasonIdSubscription = subscribedRuntimeData.Hud.Calendar.SeasonId.Register(
+                        HandleRuntimeSeasonIdChanged);
                 }
             }
 
@@ -317,8 +325,27 @@ namespace CircleWar
             if (subscribedRuntimeData != null)
             {
                 subscribedRuntimeData.NewRunStarted -= HandleNewRunStarted;
+                seasonIdSubscription?.UnRegister();
+                seasonIdSubscription = null;
                 subscribedRuntimeData = null;
             }
+        }
+
+        private void HandleRuntimeSeasonIdChanged(string seasonId)
+        {
+            if (isApplyingSeasonRuntimeContext || string.IsNullOrWhiteSpace(seasonId))
+            {
+                return;
+            }
+
+            LoadSeasonDefinitions();
+            int seasonIndex = FindSeasonIndex(seasonId);
+            if (seasonIndex < 0 || seasonIndex == activeSeasonIndex)
+            {
+                return;
+            }
+
+            ActivateSeason(seasonIndex, visibleSegmentList.Count > 0);
         }
 
         private void HandleNewRunStarted()
@@ -1038,6 +1065,9 @@ namespace CircleWar
             if (backgroundRenderer != null && activeSeason.BackgroundSprite != null)
             {
                 backgroundRenderer.sprite = activeSeason.BackgroundSprite;
+                backgroundRenderer.transform.localScale = Vector3.Scale(
+                    backgroundBaseLocalScale,
+                    activeSeason.BackgroundScaleMultiplier);
             }
 
             if (circleRingRenderer != null && activeSeason.CircleRingSprite != null)
@@ -1068,7 +1098,21 @@ namespace CircleWar
                 }
             }
 
-            ResolveGameHud()?.RuntimeData.SetSeasonContext(activeSeason, region, roadPosition);
+            GameRuntimeData runtimeData = ResolveGameHud()?.RuntimeData;
+            if (runtimeData == null)
+            {
+                return;
+            }
+
+            isApplyingSeasonRuntimeContext = true;
+            try
+            {
+                runtimeData.SetSeasonContext(activeSeason, region, roadPosition);
+            }
+            finally
+            {
+                isApplyingSeasonRuntimeContext = false;
+            }
         }
 
         private void InvalidateVisibleSegmentCache()
@@ -1222,6 +1266,13 @@ namespace CircleWar
             SpriteRenderer segmentRenderer = imageObject.AddComponent<SpriteRenderer>();
             segmentRenderer.sortingOrder = 5;
 
+            GameObject npcImageObject = new GameObject("NPC Image");
+            npcImageObject.transform.SetParent(segmentObject.transform, false);
+
+            SpriteRenderer npcRenderer = npcImageObject.AddComponent<SpriteRenderer>();
+            npcRenderer.sortingOrder = 6;
+            npcRenderer.enabled = false;
+
             GameObject promptObject = new GameObject("Interaction Prompt Image");
             promptObject.transform.SetParent(segmentObject.transform, false);
             float resolvedPromptScale = interactionPromptScale > 0f ? interactionPromptScale : 1f;
@@ -1234,6 +1285,7 @@ namespace CircleWar
             CircleMapSegment segment = segmentObject.AddComponent<CircleMapSegment>();
             segment.Setup(
                 segmentRenderer,
+                npcRenderer,
                 promptRenderer,
                 npcInteractionPromptSprite,
                 eventInteractionPromptSprite,

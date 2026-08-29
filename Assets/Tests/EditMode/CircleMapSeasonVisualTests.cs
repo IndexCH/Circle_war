@@ -284,6 +284,71 @@ namespace CircleWar.Tests
         }
 
         [Test]
+        public void NpcRoadSegmentCanLayerStaticPropBehindAnimatedIdleSprite()
+        {
+            CharacterDefinition character =
+                Resources.Load<CharacterDefinition>("GameData/Characters/Graff");
+            Sprite propSprite = CreateTestSprite();
+            Texture2D propTexture = propSprite.texture;
+            Sprite npcSprite = CreateTestSprite();
+            Texture2D npcTexture = npcSprite.texture;
+            GameObject root = new GameObject("Layered NPC Segment");
+            RoadSegmentDefinition definition =
+                ScriptableObject.CreateInstance<RoadSegmentDefinition>();
+            try
+            {
+                Assert.That(character, Is.Not.Null);
+
+                SerializedObject serializedDefinition = new SerializedObject(definition);
+                serializedDefinition.FindProperty("contentType").enumValueIndex =
+                    (int)SegmentContentType.Npc;
+                serializedDefinition.FindProperty("character").objectReferenceValue = character;
+                serializedDefinition.FindProperty("mapSprite").objectReferenceValue = propSprite;
+                serializedDefinition.FindProperty("npcMapSprite").objectReferenceValue = npcSprite;
+                serializedDefinition.ApplyModifiedPropertiesWithoutUndo();
+
+                SpriteRenderer propRenderer =
+                    new GameObject("Static Prop Image").AddComponent<SpriteRenderer>();
+                propRenderer.transform.SetParent(root.transform, false);
+                SpriteRenderer npcRenderer =
+                    new GameObject("Animated NPC Image").AddComponent<SpriteRenderer>();
+                npcRenderer.transform.SetParent(root.transform, false);
+
+                CircleMapSegment mapSegment = root.AddComponent<CircleMapSegment>();
+                mapSegment.Setup(propRenderer, npcRenderer, null, null, null, null, 0f);
+                mapSegment.Show(new CircleRoadSegmentData(definition, propSprite));
+
+                Animator propAnimator = propRenderer.GetComponent<Animator>();
+                Animator npcAnimator = npcRenderer.GetComponent<Animator>();
+
+                Assert.That(propRenderer.sprite, Is.SameAs(propSprite));
+                Assert.That(propAnimator.enabled, Is.False);
+                Assert.That(propAnimator.runtimeAnimatorController, Is.Null);
+                Assert.That(npcAnimator.enabled, Is.True);
+                Assert.That(npcAnimator.runtimeAnimatorController, Is.Not.Null);
+                Assert.That(
+                    npcAnimator.runtimeAnimatorController.name,
+                    Is.EqualTo("graff_idle_controller"));
+                Assert.That(npcRenderer.sprite, Is.Not.Null);
+                Assert.That(npcRenderer.sprite.name, Is.EqualTo("frame_004"));
+
+                npcAnimator.Update(0.1f);
+
+                Assert.That(propRenderer.sprite, Is.SameAs(propSprite));
+                Assert.That(npcRenderer.sprite.name, Is.EqualTo("frame_005"));
+            }
+            finally
+            {
+                UnityEngine.Object.DestroyImmediate(root);
+                UnityEngine.Object.DestroyImmediate(definition);
+                UnityEngine.Object.DestroyImmediate(propSprite);
+                UnityEngine.Object.DestroyImmediate(propTexture);
+                UnityEngine.Object.DestroyImmediate(npcSprite);
+                UnityEngine.Object.DestroyImmediate(npcTexture);
+            }
+        }
+
+        [Test]
         public void EliNpcRoadSegmentUsesStaticSpriteWithoutAnimatorPlayback()
         {
             CharacterDefinition character =
@@ -323,6 +388,47 @@ namespace CircleWar.Tests
                 UnityEngine.Object.DestroyImmediate(definition);
                 UnityEngine.Object.DestroyImmediate(fallbackSprite);
                 UnityEngine.Object.DestroyImmediate(fallbackTexture);
+            }
+        }
+
+        [Test]
+        public void RuntimeSeasonIdChangeUpdatesMapBackgroundSprite()
+        {
+            SeasonDefinition spring = Resources.Load<SeasonDefinition>("GameData/Seasons/Spring");
+            SeasonDefinition summer = Resources.Load<SeasonDefinition>("GameData/Seasons/Summer");
+            GameObject mapObject = new GameObject("Season Sync Map");
+            GameObject backgroundObject = new GameObject("Background");
+            GameObject ringObject = new GameObject("Ring");
+            GameObject hudObject = new GameObject("HUD");
+            try
+            {
+                Assert.That(spring, Is.Not.Null);
+                Assert.That(summer, Is.Not.Null);
+                Assert.That(spring.BackgroundSprite, Is.Not.Null);
+                Assert.That(summer.BackgroundSprite, Is.Not.Null);
+
+                backgroundObject.transform.SetParent(mapObject.transform, false);
+                ringObject.transform.SetParent(mapObject.transform, false);
+                SpriteRenderer backgroundRenderer = backgroundObject.AddComponent<SpriteRenderer>();
+                SpriteRenderer ringRenderer = ringObject.AddComponent<SpriteRenderer>();
+                CircleMapView mapView = mapObject.AddComponent<CircleMapView>();
+                GameHud hud = hudObject.AddComponent<GameHud>();
+                SetPrivateField(mapView, "backgroundRenderer", backgroundRenderer);
+                SetPrivateField(mapView, "circleRingRenderer", ringRenderer);
+                SetPrivateField(mapView, "gameHud", hud);
+
+                InvokePrivate<object>(mapView, "LoadSeasonDefinitions");
+                Assert.That(InvokePrivate<bool>(mapView, "ActivateSeason", 0, false, 0f), Is.True);
+                Assert.That(backgroundRenderer.sprite, Is.SameAs(spring.BackgroundSprite));
+
+                InvokePrivate<object>(mapView, "HandleRuntimeSeasonIdChanged", "summer");
+
+                Assert.That(backgroundRenderer.sprite, Is.SameAs(summer.BackgroundSprite));
+            }
+            finally
+            {
+                UnityEngine.Object.DestroyImmediate(mapObject);
+                UnityEngine.Object.DestroyImmediate(hudObject);
             }
         }
 

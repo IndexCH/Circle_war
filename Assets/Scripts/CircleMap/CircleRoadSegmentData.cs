@@ -25,6 +25,8 @@ namespace CircleWar
 
         public readonly string description;
         public readonly Sprite sprite;
+        public readonly Sprite npcSprite;
+        public readonly Vector2 npcSpriteOffset;
         public readonly float y;
         public readonly float z;
         public readonly int roadIndex;
@@ -49,6 +51,8 @@ namespace CircleWar
             segmentName = newSegmentName;
             description = string.Empty;
             sprite = newSprite;
+            npcSprite = null;
+            npcSpriteOffset = Vector2.zero;
             y = 0f;
             z = 0f;
             roadIndex = -1;
@@ -63,6 +67,8 @@ namespace CircleWar
             segmentName = definition.DisplayName;
             description = definition.Description;
             sprite = definition.MapSprite;
+            npcSprite = definition.NpcMapSprite;
+            npcSpriteOffset = definition.NpcMapSpriteOffset;
             y = definition.Y;
             z = definition.Z;
             roadIndex = definition.RoadIndex;

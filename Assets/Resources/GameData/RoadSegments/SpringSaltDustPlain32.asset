@@ -11,15 +11,21 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain32
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_32
-  displayName: 工业残骸
-  description: "春5-1｜事件节点“工业残骸”：A：帮格拉夫搬运 → 格拉夫信任上升；B：优先寻找食物 → 获得压缩饼干。"
+  displayName: "\u5DE5\u4E1A\u6B8B\u9AB8"
+  description: "\u66255-1\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u5DE5\u4E1A\u6B8B\u9AB8\u201D\uFF1AA\uFF1A\u5E2E\u683C\u62C9\u592B\u642C\u8FD0
+    \u2192 \u683C\u62C9\u592B\u4FE1\u4EFB\u4E0A\u5347\uFF1BB\uFF1A\u4F18\u5148\u5BFB\u627E\u98DF\u7269
+    \u2192 \u83B7\u5F97\u538B\u7F29\u997C\u5E72\u3002"
   roadIndex: 32
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 8a5e0791978649549c0552c06f6a043c, type: 3}
+  mapSprite: {fileID: 2949746548659186015, guid: bb8a51f78cded8b4bbf98de608a4164f, type: 3}
+  npcMapSprite: {fileID: 21300000, guid: b85f578fbad6445388078821c46a929b, type: 3}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.13
+  z: 3
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 07ea2bc21a6b4c519f8fa5fce303542b, type: 2}
@@ -28,5 +34,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-
-

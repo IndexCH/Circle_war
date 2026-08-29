@@ -14,6 +14,10 @@ namespace CircleWar
         [SerializeField] private RegionDefinition region;
         [SerializeField] private SegmentContentType contentType = SegmentContentType.None;
         [SerializeField] private Sprite mapSprite;
+        [Tooltip("NPC 节点可选的额外人物 Sprite。配置后 mapSprite 作为静态道具层保留，人物层单独播放 idle 动画。")]
+        [SerializeField] private Sprite npcMapSprite;
+        [Tooltip("NpcMapSprite 相对节点底部居中的本地偏移。X 控制左右，Y 控制沿道路段本地 Y 轴偏移。")]
+        [SerializeField] private Vector2 npcMapSpriteOffset;
         [Tooltip("MapSprite 沿道路段本地 Y 轴的偏移。正值朝圆心，负值朝圆外。")]
         [SerializeField] private float y;
         [Tooltip("MapSprite 绕道路段本地 Z 轴旋转的角度，单位为度。")]
@@ -32,6 +36,8 @@ namespace CircleWar
         public RegionDefinition Region => region;
         public SegmentContentType ContentType => contentType;
         public Sprite MapSprite => mapSprite;
+        public Sprite NpcMapSprite => npcMapSprite;
+        public Vector2 NpcMapSpriteOffset => npcMapSpriteOffset;
         public float Y => y;
         public float Z => z;
         public CharacterDefinition Character => character;

@@ -3193,6 +3193,13 @@ MonoBehaviour:
   - {fileID: 910334}
   facilityProgressText: {fileID: 910403}
   facilityProgressBar: {fileID: 303270367}
+  topLeftDateTimeBackground: {fileID: 0}
+  topCenterBossHealthFrame: {fileID: 0}
+  topRightSystemFrame: {fileID: 0}
+  leftRegionStatusFrame: {fileID: 0}
+  rightDialoguePanelFrame: {fileID: 0}
+  rightBottomFacilityFrame: {fileID: 0}
+  playerStatsIconBoxes: {fileID: 0}
 --- !u!1 &754196964
 GameObject:
   m_ObjectHideFlags: 0

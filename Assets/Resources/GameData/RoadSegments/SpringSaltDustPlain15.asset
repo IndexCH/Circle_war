@@ -11,15 +11,21 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain15
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_15
-  displayName: 玛蕾检查地表
-  description: "春2-8｜事件节点“玛蕾检查地表”：A：听取判断 → 获得盐壳风险情报；B：独自判断 → 无变化。"
+  displayName: "\u739B\u857E\u68C0\u67E5\u5730\u8868"
+  description: "\u66252-8\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u739B\u857E\u68C0\u67E5\u5730\u8868\u201D\uFF1AA\uFF1A\u542C\u53D6\u5224\u65AD
+    \u2192 \u83B7\u5F97\u76D0\u58F3\u98CE\u9669\u60C5\u62A5\uFF1BB\uFF1A\u72EC\u81EA\u5224\u65AD
+    \u2192 \u65E0\u53D8\u5316\u3002"
   roadIndex: 15
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
-  contentType: 4
+  contentType: 3
   mapSprite: {fileID: 21300000, guid: 45cf09dc4e50428398b37de8db3e9fa7, type: 3}
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: ba3a56bc5ab345209c59a2ef014f1543, type: 2}
@@ -28,5 +34,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-
-

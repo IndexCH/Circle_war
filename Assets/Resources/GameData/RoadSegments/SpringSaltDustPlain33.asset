@@ -11,15 +11,19 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain33
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_33
-  displayName: 钢铁
-  description: "春5-2｜资源节点：钢铁。"
+  displayName: "\u94A2\u94C1"
+  description: "\u66255-2\uFF5C\u8D44\u6E90\u8282\u70B9\uFF1A\u94A2\u94C1\u3002"
   roadIndex: 33
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: dfde4595695746ac8eb395f89e04f0c0, type: 3}
+  mapSprite: {fileID: 8761131854793930396, guid: 8ba660f93d01e9342848cd3faf856aa3, type: 3}
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,5 +36,3 @@ MonoBehaviour:
   - resourceId: industry
     amount: 5
   costs: []
-
-

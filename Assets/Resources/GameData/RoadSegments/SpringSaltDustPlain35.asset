@@ -11,15 +11,21 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain35
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_35
-  displayName: 耐盐作物种子
-  description: "春5-4｜事件节点“耐盐作物种子”：A：交给玛蕾 → 玛蕾信任上升；B：当作食物 → 获得压缩饼干。"
+  displayName: "\u8010\u76D0\u4F5C\u7269\u79CD\u5B50"
+  description: "\u66255-4\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u8010\u76D0\u4F5C\u7269\u79CD\u5B50\u201D\uFF1AA\uFF1A\u4EA4\u7ED9\u739B\u857E
+    \u2192 \u739B\u857E\u4FE1\u4EFB\u4E0A\u5347\uFF1BB\uFF1A\u5F53\u4F5C\u98DF\u7269
+    \u2192 \u83B7\u5F97\u538B\u7F29\u997C\u5E72\u3002"
   roadIndex: 35
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 9eaf21629a5e4c479f8c234a2c76e2e2, type: 3}
+  mapSprite: {fileID: -1528934053, guid: 5f974a227c3142549c95638049475bc9, type: 3}
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.3
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: d11755267acc406ba030e717b3c2e327, type: 2}
@@ -28,4 +34,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

@@ -11,15 +11,19 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain29
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_29
-  displayName: 芦苇花
-  description: "春4-6｜资源节点：芦苇花。"
+  displayName: "\u82A6\u82C7\u82B1"
+  description: "\u66254-6\uFF5C\u8D44\u6E90\u8282\u70B9\uFF1A\u82A6\u82C7\u82B1\u3002"
   roadIndex: 29
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: c41b89d85f6b4f668222dd266ea97444, type: 3}
+  mapSprite: {fileID: -1528934053, guid: 5f974a227c3142549c95638049475bc9, type: 3}
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.25
+  z: -10
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,5 +36,3 @@ MonoBehaviour:
   - resourceId: food
     amount: 10
   costs: []
-
-

@@ -9,7 +9,9 @@ namespace CircleWar
         private const string StaticNpcCharacterId = "eli";
 
         private SpriteRenderer segmentSpriteRenderer;
+        private SpriteRenderer npcSpriteRenderer;
         private Animator segmentAnimator;
+        private Animator npcAnimator;
         private SpriteRenderer interactionPromptRenderer;
         private Sprite npcInteractionPromptSprite;
         private Sprite eventInteractionPromptSprite;
@@ -24,15 +26,32 @@ namespace CircleWar
             Sprite resourcePromptSprite,
             float promptHorizontalOffset)
         {
-            segmentSpriteRenderer = renderer;
-            segmentAnimator = renderer.GetComponent<Animator>();
-            if (segmentAnimator == null)
-            {
-                segmentAnimator = renderer.gameObject.AddComponent<Animator>();
-            }
+            Setup(
+                renderer,
+                null,
+                promptRenderer,
+                npcPromptSprite,
+                eventPromptSprite,
+                resourcePromptSprite,
+                promptHorizontalOffset);
+        }
 
-            segmentAnimator.enabled = false;
-            segmentAnimator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+        public void Setup(
+            SpriteRenderer renderer,
+            SpriteRenderer npcRenderer,
+            SpriteRenderer promptRenderer,
+            Sprite npcPromptSprite,
+            Sprite eventPromptSprite,
+            Sprite resourcePromptSprite,
+            float promptHorizontalOffset)
+        {
+            segmentSpriteRenderer = renderer;
+            npcSpriteRenderer = npcRenderer;
+            segmentAnimator = GetOrCreateAnimator(segmentSpriteRenderer);
+            npcAnimator = npcSpriteRenderer != null ? GetOrCreateAnimator(npcSpriteRenderer) : null;
+
+            DisableAnimator(segmentAnimator);
+            DisableAnimator(npcAnimator);
             interactionPromptRenderer = promptRenderer;
             npcInteractionPromptSprite = npcPromptSprite;
             eventInteractionPromptSprite = eventPromptSprite;
@@ -47,33 +66,49 @@ namespace CircleWar
 
         public void Show(CircleRoadSegmentData segment)
         {
-            segmentAnimator.enabled = false;
-            segmentAnimator.runtimeAnimatorController = null;
+            DisableAnimator(segmentAnimator);
+            DisableAnimator(npcAnimator);
 
             Sprite sprite = segment != null ? segment.sprite : null;
             segmentSpriteRenderer.enabled = sprite != null;
             segmentSpriteRenderer.sprite = sprite;
-            RuntimeAnimatorController idleController = LoadNpcIdleAnimatorController(segment);
-            if (idleController != null)
+
+            SpriteRenderer animatedNpcRenderer = GetNpcSpriteRenderer(segment);
+            Animator animatedNpcAnimator = GetNpcAnimator(segment);
+            if (npcSpriteRenderer != null)
             {
-                segmentAnimator.runtimeAnimatorController = idleController;
-                segmentAnimator.enabled = true;
-                segmentAnimator.Play("Idle", 0, 0f);
-                segmentAnimator.Update(0f);
-                segmentSpriteRenderer.enabled = segmentSpriteRenderer.sprite != null;
+                Sprite npcSprite = segment != null ? segment.npcSprite : null;
+                npcSpriteRenderer.enabled = npcSprite != null;
+                npcSpriteRenderer.sprite = npcSprite;
             }
 
-            AlignSpriteBottomCenter(segment != null ? segment.y : 0f);
-            ApplySpriteLocalRotation(segment != null ? segment.z : 0f);
+            RuntimeAnimatorController idleController = LoadNpcIdleAnimatorController(segment);
+            if (idleController != null && animatedNpcAnimator != null)
+            {
+                animatedNpcAnimator.runtimeAnimatorController = idleController;
+                animatedNpcAnimator.enabled = true;
+                animatedNpcAnimator.Play("Idle", 0, 0f);
+                animatedNpcAnimator.Update(0f);
+                animatedNpcRenderer.enabled = animatedNpcRenderer.sprite != null;
+            }
+
+            AlignSpriteBottomCenter(segmentSpriteRenderer, 0f, segment != null ? segment.y : 0f);
+            ApplySpriteLocalRotation(segmentSpriteRenderer, segment != null ? segment.z : 0f);
+
+            if (npcSpriteRenderer != null)
+            {
+                Vector2 npcOffset = segment != null ? segment.npcSpriteOffset : Vector2.zero;
+                AlignSpriteBottomCenter(npcSpriteRenderer, npcOffset.x, npcOffset.y);
+                ApplySpriteLocalRotation(npcSpriteRenderer, segment != null ? segment.z : 0f);
+            }
+
             SetInteractionPromptVisible(segment, false);
         }
 
         private static RuntimeAnimatorController LoadNpcIdleAnimatorController(
             CircleRoadSegmentData segment)
         {
-            if (segment == null ||
-                segment.contentType != SegmentContentType.Npc ||
-                segment.character == null)
+            if (segment == null || segment.character == null)
             {
                 return null;
             }
@@ -108,30 +143,72 @@ namespace CircleWar
             }
         }
 
-        private void AlignSpriteBottomCenter(float localYOffset)
+        private static Animator GetOrCreateAnimator(SpriteRenderer renderer)
         {
-            if (segmentSpriteRenderer.sprite == null || segmentSpriteRenderer.transform == transform)
+            if (renderer == null)
+            {
+                return null;
+            }
+
+            Animator animator = renderer.GetComponent<Animator>();
+            if (animator == null)
+            {
+                animator = renderer.gameObject.AddComponent<Animator>();
+            }
+
+            animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+            return animator;
+        }
+
+        private static void DisableAnimator(Animator animator)
+        {
+            if (animator == null)
             {
                 return;
             }
 
-            Bounds bounds = segmentSpriteRenderer.sprite.bounds;
+            animator.enabled = false;
+            animator.runtimeAnimatorController = null;
+        }
+
+        private SpriteRenderer GetNpcSpriteRenderer(CircleRoadSegmentData segment)
+        {
+            return segment != null && segment.npcSprite != null && npcSpriteRenderer != null
+                ? npcSpriteRenderer
+                : segmentSpriteRenderer;
+        }
+
+        private Animator GetNpcAnimator(CircleRoadSegmentData segment)
+        {
+            return segment != null && segment.npcSprite != null && npcAnimator != null
+                ? npcAnimator
+                : segmentAnimator;
+        }
+
+        private void AlignSpriteBottomCenter(SpriteRenderer renderer, float localXOffset, float localYOffset)
+        {
+            if (renderer == null || renderer.sprite == null || renderer.transform == transform)
+            {
+                return;
+            }
+
+            Bounds bounds = renderer.sprite.bounds;
             Vector3 bottomCenter = new Vector3(bounds.center.x, bounds.min.y, 0f);
-            Vector3 scale = segmentSpriteRenderer.transform.localScale;
-            segmentSpriteRenderer.transform.localPosition = new Vector3(
-                -bottomCenter.x * scale.x,
+            Vector3 scale = renderer.transform.localScale;
+            renderer.transform.localPosition = new Vector3(
+                -bottomCenter.x * scale.x + localXOffset,
                 -bottomCenter.y * scale.y + localYOffset,
                 0f);
         }
 
-        private void ApplySpriteLocalRotation(float localZRotation)
+        private void ApplySpriteLocalRotation(SpriteRenderer renderer, float localZRotation)
         {
-            if (segmentSpriteRenderer.transform == transform)
+            if (renderer == null || renderer.transform == transform)
             {
                 return;
             }
 
-            segmentSpriteRenderer.transform.localRotation = Quaternion.Euler(0f, 0f, localZRotation);
+            renderer.transform.localRotation = Quaternion.Euler(0f, 0f, localZRotation);
         }
 
         private Sprite GetInteractionPromptSprite(SegmentContentType contentType)

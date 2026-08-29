@@ -11,16 +11,22 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain31
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_31
-  displayName: 临时补给点
-  description: "春4-8｜事件节点“临时补给点”：A：接受玛蕾分配 → 获得压缩饼干；B：优先拿工具 → 获得钢铁。"
+  displayName: "\u4E34\u65F6\u8865\u7ED9\u70B9"
+  description: "\u66254-8\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u4E34\u65F6\u8865\u7ED9\u70B9\u201D\uFF1AA\uFF1A\u63A5\u53D7\u739B\u857E\u5206\u914D
+    \u2192 \u83B7\u5F97\u538B\u7F29\u997C\u5E72\uFF1BB\uFF1A\u4F18\u5148\u62FF\u5DE5\u5177
+    \u2192 \u83B7\u5F97\u94A2\u94C1\u3002"
   roadIndex: 31
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: c69100f6e1f841cdb34cbf8e23d12b9c, type: 3}
-  character: {fileID: 0}
+  mapSprite: {fileID: -467474851318412678, guid: b3db30972f6ccfb4fbec9b1c13a74f19, type: 3}
+  npcMapSprite: {fileID: 21300000, guid: b01045562ae04644a21e56ef3a25b846, type: 3}
+  npcMapSpriteOffset: {x: 1.45, y: -0.3}
+  y: 0
+  z: 0
+  character: {fileID: 11400000, guid: eacf44e6b21046fa98cdeeb72e464cae, type: 2}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 356d435cc1884f1fb819907a6834579d, type: 2}
   enemy: {fileID: 0}
@@ -28,5 +34,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-
-

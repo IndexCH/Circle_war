@@ -12,6 +12,7 @@ namespace CircleWar
         [SerializeField] private int seasonOrder;
         [SerializeField] private RegionDefinition region;
         [SerializeField] private Sprite backgroundSprite;
+        [SerializeField] private Vector2 backgroundScaleMultiplier = Vector2.one;
         [SerializeField] private Sprite circleRingSprite;
         [ColorUsage(false)]
         [SerializeField] private Color hudFrameColor = Color.white;
@@ -23,6 +24,10 @@ namespace CircleWar
         public int SeasonOrder => seasonOrder;
         public RegionDefinition Region => region;
         public Sprite BackgroundSprite => backgroundSprite;
+        public Vector3 BackgroundScaleMultiplier => new Vector3(
+            backgroundScaleMultiplier.x,
+            backgroundScaleMultiplier.y,
+            1f);
         public Sprite CircleRingSprite => circleRingSprite;
         public Color HudFrameColor => hudFrameColor;
         public float MovementMultiplier => movementMultiplier;

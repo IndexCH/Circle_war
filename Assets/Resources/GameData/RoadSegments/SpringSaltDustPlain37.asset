@@ -11,15 +11,19 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain37
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_37
-  displayName: 精英哨塔
-  description: "春5-6｜怪物节点：精英前哨。"
+  displayName: "\u7CBE\u82F1\u54E8\u5854"
+  description: "\u66255-6\uFF5C\u602A\u7269\u8282\u70B9\uFF1A\u7CBE\u82F1\u524D\u54E8\u3002"
   roadIndex: 37
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 1
-  mapSprite: {fileID: 21300000, guid: 45cf09dc4e50428398b37de8db3e9fa7, type: 3}
+  mapSprite: {fileID: -168717823013034772, guid: 899e639904b24515b83a745b1d606351, type: 3}
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.35
+  z: -15
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -28,4 +32,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

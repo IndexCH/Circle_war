@@ -20,6 +20,8 @@ namespace CircleWar.EditorTools
     public static class RoadSegmentScenePreview
     {
         public const string PreviewRootName = "[Circle War] Road Segment Editor Preview";
+        private const string PreviewBackgroundName =
+            "[Circle War] Road Segment Editor Preview Background";
 
         private const string PreviewEnabledSessionKey = "CircleWar.RoadSegmentPreview.Enabled";
         private const string DialogueInteractionPromptResourcePath =
@@ -31,6 +33,7 @@ namespace CircleWar.EditorTools
         private const HideFlags PreviewHideFlags = HideFlags.HideAndDontSave;
 
         private static GameObject previewRoot;
+        private static GameObject previewBackgroundObject;
         private static RoadSegmentDefinition currentDefinition;
         private static CircleMapSegment selectedSegment;
         private static Transform selectedSegmentTransform;
@@ -260,6 +263,7 @@ namespace CircleWar.EditorTools
         {
             settings = default;
             SerializedObject serializedMap = new SerializedObject(mapView);
+            SerializedProperty backgroundProperty = serializedMap.FindProperty("backgroundRenderer");
             SerializedProperty ringProperty = serializedMap.FindProperty("circleRingRenderer");
             SerializedProperty totalCountProperty = serializedMap.FindProperty("totalRoadSegmentCount");
             SerializedProperty visibleCountProperty = serializedMap.FindProperty("visibleSegmentCount");
@@ -276,6 +280,9 @@ namespace CircleWar.EditorTools
             SerializedProperty resourcePromptProperty = serializedMap.FindProperty(
                 "resourceInteractionPromptSprite");
 
+            SpriteRenderer backgroundRenderer = backgroundProperty != null
+                ? backgroundProperty.objectReferenceValue as SpriteRenderer
+                : null;
             SpriteRenderer ringRenderer = ringProperty != null
                 ? ringProperty.objectReferenceValue as SpriteRenderer
                 : null;
@@ -312,7 +319,8 @@ namespace CircleWar.EditorTools
                 ResolvePromptSprite(npcPromptProperty, DialogueInteractionPromptResourcePath),
                 ResolvePromptSprite(eventPromptProperty, EventInteractionPromptResourcePath),
                 ResolvePromptSprite(resourcePromptProperty, ResourceInteractionPromptResourcePath),
-                FindGameCamera(mapView));
+                FindGameCamera(mapView),
+                backgroundRenderer);
             return true;
         }
 
@@ -375,6 +383,8 @@ namespace CircleWar.EditorTools
                     settings.VisibleSegmentCount));
             previewRoot.transform.localScale = settings.RotatingRoot.localScale;
 
+            BuildPreviewBackground(definition, settings.BackgroundRenderer);
+
             Transform previewSegmentParent = previewRoot.transform.GetChild(
                 settings.SegmentParentSiblingIndex);
             DestroyChildren(previewSegmentParent);
@@ -427,6 +437,13 @@ namespace CircleWar.EditorTools
                 spriteRenderer.hideFlags = PreviewHideFlags;
                 spriteRenderer.sortingOrder = 5;
 
+                GameObject npcImageObject = CreatePreviewGameObject("NPC Image");
+                npcImageObject.transform.SetParent(segmentObject.transform, false);
+                SpriteRenderer npcRenderer = npcImageObject.AddComponent<SpriteRenderer>();
+                npcRenderer.hideFlags = PreviewHideFlags;
+                npcRenderer.sortingOrder = 6;
+                npcRenderer.enabled = false;
+
                 GameObject promptObject = CreatePreviewGameObject("Interaction Prompt Image");
                 promptObject.transform.SetParent(segmentObject.transform, false);
                 promptObject.transform.localScale = new Vector3(
@@ -442,6 +459,7 @@ namespace CircleWar.EditorTools
                 segment.hideFlags = PreviewHideFlags;
                 segment.Setup(
                     spriteRenderer,
+                    npcRenderer,
                     promptRenderer,
                     settings.NpcInteractionPromptSprite,
                     settings.EventInteractionPromptSprite,
@@ -463,6 +481,7 @@ namespace CircleWar.EditorTools
             }
 
             HideSourceRenderers(settings.RotatingRoot);
+            HideSourceRenderer(settings.BackgroundRenderer);
             previewCamera = settings.GameCamera;
             previewCameraTarget = settings.RotatingRoot.position;
             SyncSceneViewToGameCamera();
@@ -513,6 +532,41 @@ namespace CircleWar.EditorTools
 
             definitions[selectedDefinition.RoadIndex] = selectedDefinition;
             return definitions;
+        }
+
+        private static void BuildPreviewBackground(
+            RoadSegmentDefinition definition,
+            SpriteRenderer sourceBackgroundRenderer)
+        {
+            if (sourceBackgroundRenderer == null)
+            {
+                return;
+            }
+
+            previewBackgroundObject = Object.Instantiate(
+                sourceBackgroundRenderer.gameObject,
+                sourceBackgroundRenderer.transform.parent);
+            previewBackgroundObject.name = PreviewBackgroundName;
+            SetPreviewHideFlagsRecursively(previewBackgroundObject);
+            previewBackgroundObject.transform.localPosition =
+                sourceBackgroundRenderer.transform.localPosition;
+            previewBackgroundObject.transform.localRotation =
+                sourceBackgroundRenderer.transform.localRotation;
+            previewBackgroundObject.transform.localScale =
+                definition.Season != null
+                    ? Vector3.Scale(
+                        sourceBackgroundRenderer.transform.localScale,
+                        definition.Season.BackgroundScaleMultiplier)
+                    : sourceBackgroundRenderer.transform.localScale;
+
+            SpriteRenderer previewBackgroundRenderer =
+                previewBackgroundObject.GetComponent<SpriteRenderer>();
+            if (previewBackgroundRenderer != null &&
+                definition.Season != null &&
+                definition.Season.BackgroundSprite != null)
+            {
+                previewBackgroundRenderer.sprite = definition.Season.BackgroundSprite;
+            }
         }
 
         private static GameObject CreatePreviewGameObject(string objectName)
@@ -587,6 +641,19 @@ namespace CircleWar.EditorTools
                     renderer.forceRenderingOff));
                 renderer.forceRenderingOff = true;
             }
+        }
+
+        private static void HideSourceRenderer(Renderer renderer)
+        {
+            if (renderer == null)
+            {
+                return;
+            }
+
+            hiddenSourceRenderers.Add(new RendererVisibilityState(
+                renderer,
+                renderer.forceRenderingOff));
+            renderer.forceRenderingOff = true;
         }
 
         private static void RestoreSourceRenderers()
@@ -786,6 +853,12 @@ namespace CircleWar.EditorTools
                 previewRoot = null;
             }
 
+            if (previewBackgroundObject != null)
+            {
+                Object.DestroyImmediate(previewBackgroundObject);
+                previewBackgroundObject = null;
+            }
+
             SceneView.RepaintAll();
         }
 
@@ -797,7 +870,8 @@ namespace CircleWar.EditorTools
                 GameObject previewObject = allObjects[index];
                 if (previewObject != null &&
                     previewObject != previewRoot &&
-                    previewObject.name == PreviewRootName &&
+                    (previewObject.name == PreviewRootName ||
+                     previewObject.name == PreviewBackgroundName) &&
                     (previewObject.hideFlags & HideFlags.DontSaveInEditor) != 0)
                 {
                     Object.DestroyImmediate(previewObject);
@@ -828,7 +902,8 @@ namespace CircleWar.EditorTools
                 Sprite npcInteractionPromptSprite,
                 Sprite eventInteractionPromptSprite,
                 Sprite resourceInteractionPromptSprite,
-                Camera gameCamera)
+                Camera gameCamera,
+                SpriteRenderer backgroundRenderer)
             {
                 RotatingRoot = rotatingRoot;
                 SegmentParentSiblingIndex = segmentParentSiblingIndex;
@@ -843,6 +918,7 @@ namespace CircleWar.EditorTools
                 EventInteractionPromptSprite = eventInteractionPromptSprite;
                 ResourceInteractionPromptSprite = resourceInteractionPromptSprite;
                 GameCamera = gameCamera;
+                BackgroundRenderer = backgroundRenderer;
             }
 
             public Transform RotatingRoot { get; }
@@ -858,6 +934,7 @@ namespace CircleWar.EditorTools
             public Sprite EventInteractionPromptSprite { get; }
             public Sprite ResourceInteractionPromptSprite { get; }
             public Camera GameCamera { get; }
+            public SpriteRenderer BackgroundRenderer { get; }
         }
 
         private readonly struct RendererVisibilityState

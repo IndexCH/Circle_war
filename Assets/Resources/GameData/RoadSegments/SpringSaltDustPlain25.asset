@@ -21,7 +21,7 @@ MonoBehaviour:
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 4
   mapSprite: {fileID: -7893427593845575368, guid: a6f661b1c68352f4fab211ebbf28c7a6, type: 3}
-  y: -0.2
+  y: -0.1
   z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
