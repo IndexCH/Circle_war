@@ -53,6 +53,7 @@ namespace CircleWar
         private static Sprite runtimeBulletSprite;
 
         private CombatEnemyProgressBinding progressBinding;
+        private CombatEnemyProgressBinding bossProgressBinding;
         private Vector2 viewPosition;
         private Vector2 worldPosition;
         private Vector2 entryStartViewPosition;
@@ -111,7 +112,8 @@ namespace CircleWar
             Vector2 newOrbitViewCenter,
             CombatEnemyProgressBinding newProgressBinding = null,
             BossDefinition newBossDefinition = null,
-            bool newUseBossPortrait = true)
+            bool newUseBossPortrait = true,
+            CombatEnemyProgressBinding newBossProgressBinding = null)
         {
             circleMapView = newCircleMapView != null ? newCircleMapView : ResolveCircleMapView();
             playerTarget = newPlayerTarget;
@@ -122,6 +124,7 @@ namespace CircleWar
                 orbitSpeed = enemyDefinition.Speed;
             }
             progressBinding = newProgressBinding;
+            bossProgressBinding = newBossProgressBinding != null ? newBossProgressBinding : newProgressBinding;
             useBossPortrait = newUseBossPortrait;
             viewPosition = newViewPosition;
             entryStartViewPosition = newViewPosition;
@@ -362,16 +365,19 @@ namespace CircleWar
 
         private void RefreshBossAttackPattern()
         {
-            if (bossDefinition == null || progressBinding == null)
+            CombatEnemyProgressBinding resolvedBossProgressBinding = bossProgressBinding != null
+                ? bossProgressBinding
+                : progressBinding;
+            if (bossDefinition == null || resolvedBossProgressBinding == null)
             {
                 activeBossAttackPattern = null;
                 activeBossPhaseId = string.Empty;
                 return;
             }
 
-            float healthRatio = progressBinding.MaxHealth <= 0
+            float healthRatio = resolvedBossProgressBinding.MaxHealth <= 0
                 ? 0f
-                : (float)progressBinding.CurrentHealth / progressBinding.MaxHealth;
+                : (float)resolvedBossProgressBinding.CurrentHealth / resolvedBossProgressBinding.MaxHealth;
             BossPhaseDefinition selectedPhase = null;
             float selectedThreshold = float.MaxValue;
             foreach (BossPhaseDefinition phase in bossDefinition.Phases)

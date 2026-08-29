@@ -372,6 +372,12 @@ namespace CircleWar.EditorTools
             previewRoot = Object.Instantiate(
                 settings.RotatingRoot.gameObject,
                 settings.RotatingRoot.parent);
+            if (previewRoot.scene != settings.RotatingRoot.gameObject.scene)
+            {
+                SceneManager.MoveGameObjectToScene(
+                    previewRoot,
+                    settings.RotatingRoot.gameObject.scene);
+            }
             previewRoot.name = PreviewRootName;
             SetPreviewHideFlagsRecursively(previewRoot);
             previewRoot.transform.localPosition = settings.RotatingRoot.localPosition;
@@ -833,7 +839,11 @@ namespace CircleWar.EditorTools
                 return;
             }
 
-            selectedSegment.Show(new CircleRoadSegmentData(currentDefinition, null));
+            CircleRoadSegmentData segmentData = new CircleRoadSegmentData(currentDefinition, null);
+            selectedSegment.Show(segmentData);
+            selectedSegment.SetInteractionPromptVisible(
+                segmentData,
+                HasInteractionPrompt(segmentData));
             SceneView.RepaintAll();
         }
 

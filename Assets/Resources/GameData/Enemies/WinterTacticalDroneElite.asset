@@ -17,7 +17,7 @@ MonoBehaviour:
   description: 为年轻军官伊莱提供火力掩护的精英战术无人机。
   portrait: {fileID: 21300000, guid: 84de7816cd484509acc5cc80aa0ca15c, type: 3}
   attackType: 2
-  maxHealth: 14
+  maxHealth: 10
   speed: 1.5
   attackPower: 3
   drops: []

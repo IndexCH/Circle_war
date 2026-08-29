@@ -668,11 +668,12 @@ namespace CircleWar
                 Vector2 formationOffset = GetBossDroneFormationOffset(droneIndex, droneCount);
                 FlyingRobotEnemy drone = SpawnFlyingRobotEnemy(
                     segment,
-                    progressBinding,
+                    null,
                     flyingRobotSpawnPosition + formationOffset * 0.35f,
                     flyingRobotOrbitCenter + formationOffset,
                     false,
-                    segment.enemy.EnemyName + " " + (droneIndex + 1));
+                    segment.enemy.EnemyName + " " + (droneIndex + 1),
+                    progressBinding);
                 if (drone != null)
                 {
                     spawnedEnemies.Add(drone);
@@ -740,7 +741,8 @@ namespace CircleWar
             Vector2 spawnViewPosition,
             Vector2 orbitViewCenter,
             bool useBossPortrait,
-            string runtimeEnemyName)
+            string runtimeEnemyName,
+            CombatEnemyProgressBinding bossProgressBinding = null)
         {
             string resolvedEnemyName = !string.IsNullOrWhiteSpace(runtimeEnemyName)
                 ? runtimeEnemyName
@@ -759,7 +761,8 @@ namespace CircleWar
                 orbitViewCenter,
                 progressBinding,
                 segment.boss,
-                useBossPortrait);
+                useBossPortrait,
+                bossProgressBinding);
             return flyingRobot;
         }
 

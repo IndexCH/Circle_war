@@ -19,7 +19,7 @@ MonoBehaviour:
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   backgroundSprite: {fileID: 21300000, guid: 3d332ffd124341f48962e0b0db62a38b, type: 3}
   circleRingSprite: {fileID: 21300000, guid: f4a82369dad7416a910eaa17b6e7be63, type: 3}
-  hudFrameColor: {r: 1, g: 1, b: 1, a: 1}
+  hudFrameColor: {r: 0.5372549, g: 0.7529412, b: 0.3254902, a: 1}
   movementMultiplier: 1
   consumptionMultiplier: 1
   hitRateMultiplier: 1

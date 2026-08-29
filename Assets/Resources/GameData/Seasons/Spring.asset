@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Spring
   m_EditorClassIdentifier: 
   definitionId: spring
-  displayName: 春
-  description: 资源更容易在地表出现，但部分地形会因为融化和潮湿变得难以通行。
+  displayName: "\u6625"
+  description: "\u8D44\u6E90\u66F4\u5BB9\u6613\u5728\u5730\u8868\u51FA\u73B0\uFF0C\u4F46\u90E8\u5206\u5730\u5F62\u4F1A\u56E0\u4E3A\u878D\u5316\u548C\u6F6E\u6E7F\u53D8\u5F97\u96BE\u4EE5\u901A\u884C\u3002"
   seasonOrder: 0
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   backgroundSprite: {fileID: -7903096915857137036, guid: a96c931de2c0c354e96e0d7cdd2a9a98, type: 3}
   circleRingSprite: {fileID: -4935564624611437089, guid: 61ea54d2a56680343971e33afd08cd67, type: 3}
-  hudFrameColor: {r: 1, g: 1, b: 1, a: 1}
+  hudFrameColor: {r: 0.5372549, g: 0.7529412, b: 0.3254902, a: 1}
   movementMultiplier: 1
   consumptionMultiplier: 1
   hitRateMultiplier: 1

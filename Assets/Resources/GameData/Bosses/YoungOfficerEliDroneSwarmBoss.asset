@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: 年轻军官·伊莱 + 战术无人机群
   description: 冬季长直旧补给路尽头的年度 Boss，由伊莱统一指挥战术无人机群。
   portrait: {fileID: 21300000, guid: 6a816b41362d464bbe24aa0af0a97791, type: 3}
-  maxHealth: 100
+  maxHealth: 20
   leaderEnemy: {fileID: 11400000, guid: bb6beab9092e4e9797dea6d085dda712, type: 2}
   phases:
   - phaseId: drone_screen
