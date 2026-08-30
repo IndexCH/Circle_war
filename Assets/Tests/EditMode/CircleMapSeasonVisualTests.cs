@@ -349,6 +349,77 @@ namespace CircleWar.Tests
         }
 
         [Test]
+        public void RoadSegmentCanRenderIndividuallyAdjustedMapSpriteLayers()
+        {
+            Sprite primarySprite = CreateTestSprite();
+            Texture2D primaryTexture = primarySprite.texture;
+            Sprite additionalSprite = CreateTestSprite();
+            Texture2D additionalTexture = additionalSprite.texture;
+            GameObject root = new GameObject("Multi Sprite Segment");
+            RoadSegmentDefinition definition =
+                ScriptableObject.CreateInstance<RoadSegmentDefinition>();
+            try
+            {
+                SerializedObject serializedDefinition = new SerializedObject(definition);
+                SerializedProperty layersProperty =
+                    serializedDefinition.FindProperty("mapSpriteLayers");
+                layersProperty.arraySize = 2;
+
+                SerializedProperty primaryLayer = layersProperty.GetArrayElementAtIndex(0);
+                primaryLayer.FindPropertyRelative("sprite").objectReferenceValue = primarySprite;
+                primaryLayer.FindPropertyRelative("offset").vector2Value = Vector2.zero;
+                primaryLayer.FindPropertyRelative("scale").vector2Value = Vector2.one;
+                primaryLayer.FindPropertyRelative("z").floatValue = 0f;
+
+                SerializedProperty additionalLayer = layersProperty.GetArrayElementAtIndex(1);
+                additionalLayer.FindPropertyRelative("sprite").objectReferenceValue = additionalSprite;
+                additionalLayer.FindPropertyRelative("offset").vector2Value = new Vector2(0.25f, -0.5f);
+                additionalLayer.FindPropertyRelative("scale").vector2Value = new Vector2(2f, 0.5f);
+                additionalLayer.FindPropertyRelative("z").floatValue = 15f;
+                serializedDefinition.ApplyModifiedPropertiesWithoutUndo();
+
+                SpriteRenderer primaryRenderer =
+                    new GameObject("Primary Map Image").AddComponent<SpriteRenderer>();
+                primaryRenderer.transform.SetParent(root.transform, false);
+                CircleMapSegment mapSegment = root.AddComponent<CircleMapSegment>();
+                mapSegment.Setup(primaryRenderer, null, null, null, null, 0f);
+                mapSegment.Show(new CircleRoadSegmentData(definition, primarySprite));
+
+                SpriteRenderer[] renderers = root.GetComponentsInChildren<SpriteRenderer>();
+                SpriteRenderer additionalRenderer = Array.Find(
+                    renderers,
+                    renderer => renderer != primaryRenderer &&
+                                renderer.sprite == additionalSprite);
+
+                Assert.That(primaryRenderer.sprite, Is.SameAs(primarySprite));
+                Assert.That(additionalRenderer, Is.Not.Null);
+                Assert.That(additionalRenderer.enabled, Is.True);
+                Assert.That(additionalRenderer.sortingOrder, Is.EqualTo(primaryRenderer.sortingOrder + 1));
+                Assert.That(
+                    additionalRenderer.transform.localScale,
+                    Is.EqualTo(new Vector3(2f, 0.5f, 1f)));
+                Assert.That(
+                    additionalRenderer.transform.localPosition.x,
+                    Is.EqualTo(0.25f).Within(0.0001f));
+                Assert.That(
+                    additionalRenderer.transform.localPosition.y,
+                    Is.EqualTo(-0.4975f).Within(0.0001f));
+                Assert.That(
+                    Mathf.DeltaAngle(15f, additionalRenderer.transform.localEulerAngles.z),
+                    Is.Zero.Within(0.0001f));
+            }
+            finally
+            {
+                UnityEngine.Object.DestroyImmediate(root);
+                UnityEngine.Object.DestroyImmediate(definition);
+                UnityEngine.Object.DestroyImmediate(primarySprite);
+                UnityEngine.Object.DestroyImmediate(primaryTexture);
+                UnityEngine.Object.DestroyImmediate(additionalSprite);
+                UnityEngine.Object.DestroyImmediate(additionalTexture);
+            }
+        }
+
+        [Test]
         public void EliNpcRoadSegmentUsesStaticSpriteWithoutAnimatorPlayback()
         {
             CharacterDefinition character =

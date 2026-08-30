@@ -25,6 +25,8 @@ namespace CircleWar
 
         public readonly string description;
         public readonly Sprite sprite;
+        public readonly IReadOnlyList<Sprite> sprites;
+        public readonly IReadOnlyList<RoadSegmentMapSpriteLayer> mapSpriteLayers;
         public readonly Sprite npcSprite;
         public readonly Vector2 npcSpriteOffset;
         public readonly float y;
@@ -51,6 +53,15 @@ namespace CircleWar
             segmentName = newSegmentName;
             description = string.Empty;
             sprite = newSprite;
+            sprites = newSprite != null
+                ? new List<Sprite> { newSprite }
+                : new List<Sprite>();
+            mapSpriteLayers = newSprite != null
+                ? new List<RoadSegmentMapSpriteLayer>
+                {
+                    new RoadSegmentMapSpriteLayer(newSprite, Vector2.zero, Vector2.one, 0f)
+                }
+                : new List<RoadSegmentMapSpriteLayer>();
             npcSprite = null;
             npcSpriteOffset = Vector2.zero;
             y = 0f;
@@ -67,6 +78,8 @@ namespace CircleWar
             segmentName = definition.DisplayName;
             description = definition.Description;
             sprite = definition.MapSprite;
+            mapSpriteLayers = BuildMapSpriteLayerList(definition);
+            sprites = BuildSpriteList(mapSpriteLayers);
             npcSprite = definition.NpcMapSprite;
             npcSpriteOffset = definition.NpcMapSpriteOffset;
             y = definition.Y;
@@ -83,6 +96,49 @@ namespace CircleWar
             rewards = definition.Rewards;
             costs = definition.Costs;
             contentType = definition.ContentType;
+        }
+
+        private static IReadOnlyList<RoadSegmentMapSpriteLayer> BuildMapSpriteLayerList(
+            RoadSegmentDefinition definition)
+        {
+            List<RoadSegmentMapSpriteLayer> layers = new List<RoadSegmentMapSpriteLayer>();
+            IReadOnlyList<RoadSegmentMapSpriteLayer> definitionLayers = definition.MapSpriteLayers;
+            if (definitionLayers == null)
+            {
+                return layers;
+            }
+
+            for (int index = 0; index < definitionLayers.Count; index++)
+            {
+                RoadSegmentMapSpriteLayer layer = definitionLayers[index];
+                if (layer != null && layer.Sprite != null)
+                {
+                    layers.Add(layer);
+                }
+            }
+
+            return layers;
+        }
+
+        private static IReadOnlyList<Sprite> BuildSpriteList(
+            IReadOnlyList<RoadSegmentMapSpriteLayer> mapSpriteLayers)
+        {
+            List<Sprite> mapSprites = new List<Sprite>();
+            if (mapSpriteLayers == null)
+            {
+                return mapSprites;
+            }
+
+            for (int index = 0; index < mapSpriteLayers.Count; index++)
+            {
+                RoadSegmentMapSpriteLayer layer = mapSpriteLayers[index];
+                if (layer != null && layer.Sprite != null)
+                {
+                    mapSprites.Add(layer.Sprite);
+                }
+            }
+
+            return mapSprites;
         }
     }
 }

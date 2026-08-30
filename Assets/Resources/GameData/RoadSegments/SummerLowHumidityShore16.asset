@@ -11,15 +11,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore16
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_16
-  displayName: 空白
-  description: "夏3-1｜空白缓冲节点：安全探索或节奏缓冲；无NPC、资源、事件、怪物或Boss。"
+  displayName: "\u7A7A\u767D"
+  description: "\u590F3-1\uFF5C\u7A7A\u767D\u7F13\u51B2\u8282\u70B9\uFF1A\u5B89\u5168\u63A2\u7D22\u6216\u8282\u594F\u7F13\u51B2\uFF1B\u65E0NPC\u3001\u8D44\u6E90\u3001\u4E8B\u4EF6\u3001\u602A\u7269\u6216Boss\u3002"
   roadIndex: 16
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 0
+  mapSpriteLayers:
+  - sprite: {fileID: -168717823013034772, guid: d38c10f496e66ca4885adaaf16c0e358, type: 3}
+    offset: {x: 0, y: 0}
+    scale: {x: 0, y: 0}
+    z: 0
   mapSprite: {fileID: 0}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -28,4 +38,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

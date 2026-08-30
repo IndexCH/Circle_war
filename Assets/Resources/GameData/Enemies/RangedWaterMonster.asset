@@ -11,11 +11,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38aad17aeaf64dc479b1679e8fc384d0, type: 3}
   m_Name: RangedWaterMonster
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: ranged_water_monster
-  displayName: 远程水怪
-  description: 固守浅水区并从远处攻击主角的沼岸怪物。
-  portrait: {fileID: -168717823013034772, guid: a978047a7afe670439b72611b91d20d2, type: 3}
+  displayName: "\u8FDC\u7A0B\u6C34\u602A"
+  description: "\u56FA\u5B88\u6D45\u6C34\u533A\u5E76\u4ECE\u8FDC\u5904\u653B\u51FB\u4E3B\u89D2\u7684\u6CBC\u5CB8\u602A\u7269\u3002"
+  portrait: {fileID: -227246428814060060, guid: c2f78c9a88f0cbf4691529713e067715, type: 3}
   attackType: 1
   maxHealth: 9
   speed: 0

@@ -11,15 +11,21 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore06
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_06
-  displayName: 干净水源
-  description: "夏1-7｜事件节点“干净水源”：A：停留取水 → 获得芦苇花；B：继续前进 → 无变化。"
+  displayName: "\u5E72\u51C0\u6C34\u6E90"
+  description: "\u590F1-7\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u5E72\u51C0\u6C34\u6E90\u201D\uFF1AA\uFF1A\u505C\u7559\u53D6\u6C34
+    \u2192 \u83B7\u5F97\u82A6\u82C7\u82B1\uFF1BB\uFF1A\u7EE7\u7EED\u524D\u8FDB \u2192
+    \u65E0\u53D8\u5316\u3002"
   roadIndex: 6
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 45cf09dc4e50428398b37de8db3e9fa7, type: 3}
+  mapSprite: {fileID: -168717823013034772, guid: d38c10f496e66ca4885adaaf16c0e358, type: 3}
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: d6124ca518d24e5196d49e0e88ee01cd, type: 2}
@@ -28,4 +34,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

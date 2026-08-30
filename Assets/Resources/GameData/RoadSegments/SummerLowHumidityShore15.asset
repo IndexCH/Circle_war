@@ -11,15 +11,31 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore15
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_15
-  displayName: 监察官药箱
-  description: "夏2-8｜事件节点“监察官药箱”：A：接受检查 → 最大生命+1；B：拒绝接触 → 无变化。"
+  displayName: "\u76D1\u5BDF\u5B98\u836F\u7BB1"
+  description: "\u590F2-8\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u76D1\u5BDF\u5B98\u836F\u7BB1\u201D\uFF1AA\uFF1A\u63A5\u53D7\u68C0\u67E5
+    \u2192 \u6700\u5927\u751F\u547D+1\uFF1BB\uFF1A\u62D2\u7EDD\u63A5\u89E6 \u2192
+    \u65E0\u53D8\u5316\u3002"
   roadIndex: 15
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
+  mapSpriteLayers:
+  - sprite: {fileID: -467474851318412678, guid: b3db30972f6ccfb4fbec9b1c13a74f19, type: 3}
+    offset: {x: -1.5, y: 0.3}
+    scale: {x: 0, y: 0}
+    z: -10
+  - sprite: {fileID: 21300000, guid: f3ddc317362441a1a46f2e4444ab8e09, type: 3}
+    offset: {x: 0, y: -0.2}
+    scale: {x: 0, y: 0}
+    z: 0
   mapSprite: {fileID: 21300000, guid: 45cf09dc4e50428398b37de8db3e9fa7, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 26105fbf725445fcb94c8609973fac3c, type: 2}
@@ -28,4 +44,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

@@ -11,15 +11,21 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore11
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_11
-  displayName: 旧补给来源
-  description: "夏2-4｜事件节点“旧补给来源”：A：追问撤离原因 → 获得外部情报；B：要求物资补偿 → 获得钢铁。"
+  displayName: "\u65E7\u8865\u7ED9\u6765\u6E90"
+  description: "\u590F2-4\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u65E7\u8865\u7ED9\u6765\u6E90\u201D\uFF1AA\uFF1A\u8FFD\u95EE\u64A4\u79BB\u539F\u56E0
+    \u2192 \u83B7\u5F97\u5916\u90E8\u60C5\u62A5\uFF1BB\uFF1A\u8981\u6C42\u7269\u8D44\u8865\u507F
+    \u2192 \u83B7\u5F97\u94A2\u94C1\u3002"
   roadIndex: 11
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 7634ede36a1849b8991e8d395103f390, type: 3}
+  mapSprite: {fileID: -7320046986400614101, guid: 8f46e2e5348462b4380dacc273600b39, type: 3}
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 87800931d5e047c3ad854f9627dc0569, type: 2}
@@ -28,4 +34,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

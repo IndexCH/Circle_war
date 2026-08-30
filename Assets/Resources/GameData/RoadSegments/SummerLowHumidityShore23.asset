@@ -11,15 +11,35 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore23
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_23
-  displayName: 自动门
-  description: "夏3-8｜事件节点“自动门”：A：打开门 → 获得压缩饼干；B：关闭门 → 获得安全屋情报。"
+  displayName: "\u81EA\u52A8\u95E8"
+  description: "\u590F3-8\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u81EA\u52A8\u95E8\u201D\uFF1AA\uFF1A\u6253\u5F00\u95E8
+    \u2192 \u83B7\u5F97\u538B\u7F29\u997C\u5E72\uFF1BB\uFF1A\u5173\u95ED\u95E8 \u2192
+    \u83B7\u5F97\u5B89\u5168\u5C4B\u60C5\u62A5\u3002"
   roadIndex: 23
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
+  mapSpriteLayers:
+  - sprite: {fileID: -168717823013034772, guid: d38c10f496e66ca4885adaaf16c0e358, type: 3}
+    offset: {x: -2, y: 0}
+    scale: {x: 0.7, y: 1}
+    z: 0
+  - sprite: {fileID: -6397580623275993540, guid: e37871d068bf95c43aab55426c6b907b, type: 3}
+    offset: {x: 0, y: 0}
+    scale: {x: 0.7, y: 1}
+    z: 0
+  - sprite: {fileID: -3396231001350701739, guid: 9e4d47634fbdafe4da0f1aa3010e80cd, type: 3}
+    offset: {x: 3, y: 0.4}
+    scale: {x: 0.7, y: 1}
+    z: 20
   mapSprite: {fileID: 21300000, guid: 8a5e0791978649549c0552c06f6a043c, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 7c578afbe1624399ada3ac45a4d435cc, type: 2}
@@ -28,4 +48,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

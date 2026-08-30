@@ -11,15 +11,29 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore35
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_35
-  displayName: 压缩饼干
-  description: "夏5-4｜资源节点：压缩饼干。"
+  displayName: "\u538B\u7F29\u997C\u5E72"
+  description: "\u590F5-4\uFF5C\u8D44\u6E90\u8282\u70B9\uFF1A\u538B\u7F29\u997C\u5E72\u3002"
   roadIndex: 35
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 3
+  mapSpriteLayers:
+  - sprite: {fileID: -168717823013034772, guid: d38c10f496e66ca4885adaaf16c0e358, type: 3}
+    offset: {x: 0, y: 0}
+    scale: {x: 0, y: 0}
+    z: 0
+  - sprite: {fileID: -467474851318412678, guid: b3db30972f6ccfb4fbec9b1c13a74f19, type: 3}
+    offset: {x: 0, y: 0}
+    scale: {x: 0, y: 0}
+    z: 0
   mapSprite: {fileID: 21300000, guid: c41b89d85f6b4f668222dd266ea97444, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,4 +46,3 @@ MonoBehaviour:
   - resourceId: food
     amount: 10
   costs: []
-

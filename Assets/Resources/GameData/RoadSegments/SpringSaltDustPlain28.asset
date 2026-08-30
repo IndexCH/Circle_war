@@ -21,7 +21,17 @@ MonoBehaviour:
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 4
+  mapSpriteLayers:
+  - sprite: {fileID: -1458393122, guid: ffe2a0918abf40a894f88d17d47d60eb, type: 3}
+    offset: {x: -2, y: 0}
+    scale: {x: 1, y: 1}
+    z: -20
+  - sprite: {fileID: -7320046986400614101, guid: 8f46e2e5348462b4380dacc273600b39, type: 3}
+    offset: {x: 0, y: -0.35}
+    scale: {x: 1, y: 1}
+    z: 0
   mapSprite: {fileID: -7320046986400614101, guid: 8f46e2e5348462b4380dacc273600b39, type: 3}
+  additionalMapSprites: []
   npcMapSprite: {fileID: 0}
   npcMapSpriteOffset: {x: 0, y: 0}
   y: -0.35

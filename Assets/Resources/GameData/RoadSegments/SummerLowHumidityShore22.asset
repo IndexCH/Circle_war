@@ -11,15 +11,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore22
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_22
-  displayName: 仙人掌果
-  description: "夏3-7｜资源节点：仙人掌果。"
+  displayName: "\u4ED9\u4EBA\u638C\u679C"
+  description: "\u590F3-7\uFF5C\u8D44\u6E90\u8282\u70B9\uFF1A\u4ED9\u4EBA\u638C\u679C\u3002"
   roadIndex: 22
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 3
+  mapSpriteLayers:
+  - sprite: {fileID: -5239119246108853860, guid: 9cc8facb91196a94da8f62fa2e67d925, type: 3}
+    offset: {x: 0, y: 0}
+    scale: {x: 1.5, y: 1.3}
+    z: 0
   mapSprite: {fileID: 21300000, guid: 66cb1c2ec4af4f678a28975bc8673703, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,4 +42,3 @@ MonoBehaviour:
   - resourceId: food
     amount: 10
   costs: []
-

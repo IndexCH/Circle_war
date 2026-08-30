@@ -11,15 +11,31 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore28
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_28
-  displayName: 格拉夫坐标
-  description: "夏4-5｜事件节点“格拉夫坐标”：A：公开坐标 → 格拉夫信任下降；B：私下交给格拉夫 → 格拉夫信任上升。"
+  displayName: "\u683C\u62C9\u592B\u5750\u6807"
+  description: "\u590F4-5\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u683C\u62C9\u592B\u5750\u6807\u201D\uFF1AA\uFF1A\u516C\u5F00\u5750\u6807
+    \u2192 \u683C\u62C9\u592B\u4FE1\u4EFB\u4E0B\u964D\uFF1BB\uFF1A\u79C1\u4E0B\u4EA4\u7ED9\u683C\u62C9\u592B
+    \u2192 \u683C\u62C9\u592B\u4FE1\u4EFB\u4E0A\u5347\u3002"
   roadIndex: 28
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
+  mapSpriteLayers:
+  - sprite: {fileID: -6300526161011895439, guid: 4308acc837515034e915f48782324d47, type: 3}
+    offset: {x: 2, y: 0.3}
+    scale: {x: 0, y: 0}
+    z: 15
+  - sprite: {fileID: 21300000, guid: b85f578fbad6445388078821c46a929b, type: 3}
+    offset: {x: 0, y: 0}
+    scale: {x: 0, y: 0}
+    z: 0
   mapSprite: {fileID: 21300000, guid: 948a1c8aca0b40cbb242621a8d7be48b, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 7a123547ea56413eae7c98e048df594e, type: 2}
@@ -28,4 +44,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

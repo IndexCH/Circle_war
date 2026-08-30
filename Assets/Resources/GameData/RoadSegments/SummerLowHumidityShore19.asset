@@ -11,15 +11,33 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore19
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_19
-  displayName: 强化液
-  description: "夏3-4｜资源节点：强化液。"
+  displayName: "\u5F3A\u5316\u6DB2"
+  description: "\u590F3-4\uFF5C\u8D44\u6E90\u8282\u70B9\uFF1A\u5F3A\u5316\u6DB2\u3002"
   roadIndex: 19
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 3
+  mapSpriteLayers:
+  - sprite: {fileID: -6300526161011895439, guid: 4308acc837515034e915f48782324d47, type: 3}
+    offset: {x: 1, y: 0.2}
+    scale: {x: 1, y: 1}
+    z: 5
+  - sprite: {fileID: -6300526161011895439, guid: 4308acc837515034e915f48782324d47, type: 3}
+    offset: {x: 2, y: 0.2}
+    scale: {x: 1, y: 1.5}
+    z: 10
+  - sprite: {fileID: -7263324490986289846, guid: 20c734f203e864f47aab20aef47a95de, type: 3}
+    offset: {x: 0, y: -0.25}
+    scale: {x: 0.5, y: 0.5}
+    z: 0
   mapSprite: {fileID: 21300000, guid: 5f974a227c3142549c95638049475bc9, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,4 +50,3 @@ MonoBehaviour:
   - resourceId: food
     amount: 10
   costs: []
-

@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: fb01ed5f49ee16044aefe014432b8f2f
+guid: 62b3a0842b7aaf34d9a743622d3c0c1a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 321786366445918625
-    second: "\u56FE\u5C42 27_0"
-  - first:
-      213: 7011349920514887009
-    second: "\u56FE\u5C42 27_1"
+      213: -8618289134902841126
+    second: "\u56FE\u5C42 22_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 80
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -129,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u56FE\u5C42 27_0"
+      name: "\u56FE\u5C42 22_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 308
-        height: 433
+        width: 231
+        height: 324
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,30 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1a99291def6377400800000000000000
-      internalID: 321786366445918625
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\u56FE\u5C42 27_1"
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 340
-        width: 58
-        height: 73
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 16dc040ea915d4160800000000000000
-      internalID: 7011349920514887009
+      spriteID: ad0f18681bfa56880800000000000000
+      internalID: -8618289134902841126
       vertices: []
       indices: 
       edges: []
@@ -186,8 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u56FE\u5C42 27_0": 321786366445918625
-      "\u56FE\u5C42 27_1": 7011349920514887009
+      "\u56FE\u5C42 22_0": -8618289134902841126
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

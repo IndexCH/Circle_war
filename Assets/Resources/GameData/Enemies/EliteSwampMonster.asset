@@ -11,11 +11,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38aad17aeaf64dc479b1679e8fc384d0, type: 3}
   m_Name: EliteSwampMonster
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: elite_swamp_monster
-  displayName: 精英怪物
-  description: 在沼岸上空巡航并进行远程攻击的精英敌人。
-  portrait: {fileID: 21300000, guid: 30b0af42c6d773f4a83a541d8b1af325, type: 3}
+  displayName: "\u7CBE\u82F1\u602A\u7269"
+  description: "\u5728\u6CBC\u5CB8\u4E0A\u7A7A\u5DE1\u822A\u5E76\u8FDB\u884C\u8FDC\u7A0B\u653B\u51FB\u7684\u7CBE\u82F1\u654C\u4EBA\u3002"
+  portrait: {fileID: -227246428814060060, guid: c2f78c9a88f0cbf4691529713e067715, type: 3}
   attackType: 2
   maxHealth: 10
   speed: 1.4

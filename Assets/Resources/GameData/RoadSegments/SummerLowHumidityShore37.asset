@@ -11,15 +11,31 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore37
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_37
-  displayName: 监察官补偿
-  description: "夏5-6｜事件节点“监察官补偿”：A：索要食物补偿 → 获得压缩饼干；B：索要材料补偿 → 获得钢铁。"
+  displayName: "\u76D1\u5BDF\u5B98\u8865\u507F"
+  description: "\u590F5-6\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u76D1\u5BDF\u5B98\u8865\u507F\u201D\uFF1AA\uFF1A\u7D22\u8981\u98DF\u7269\u8865\u507F
+    \u2192 \u83B7\u5F97\u538B\u7F29\u997C\u5E72\uFF1BB\uFF1A\u7D22\u8981\u6750\u6599\u8865\u507F
+    \u2192 \u83B7\u5F97\u94A2\u94C1\u3002"
   roadIndex: 37
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
+  mapSpriteLayers:
+  - sprite: {fileID: -7482404564895785253, guid: 8a8bab8a73194fd449cd03f35b283fc5, type: 3}
+    offset: {x: 2, y: 0.5}
+    scale: {x: 0, y: 0}
+    z: 20
+  - sprite: {fileID: -467474851318412678, guid: b3db30972f6ccfb4fbec9b1c13a74f19, type: 3}
+    offset: {x: 0, y: 0}
+    scale: {x: 0, y: 0}
+    z: 0
   mapSprite: {fileID: 21300000, guid: 948a1c8aca0b40cbb242621a8d7be48b, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: d854d8bb75a746779f2c876ed948af40, type: 2}
@@ -28,4 +44,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

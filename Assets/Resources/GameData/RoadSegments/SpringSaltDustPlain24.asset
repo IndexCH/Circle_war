@@ -11,15 +11,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SpringSaltDustPlain24
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_spring_salt_dust_plain_24
-  displayName: 格拉夫、玛蕾
-  description: "春4-1｜NPC节点“格拉夫、玛蕾”：格拉夫出现并主张工业与武器；玛蕾坚持食物与逃生机会。"
+  displayName: "\u683C\u62C9\u592B\u3001\u739B\u857E"
+  description: "\u66254-1\uFF5CNPC\u8282\u70B9\u201C\u683C\u62C9\u592B\u3001\u739B\u857E\u201D\uFF1A\u683C\u62C9\u592B\u51FA\u73B0\u5E76\u4E3B\u5F20\u5DE5\u4E1A\u4E0E\u6B66\u5668\uFF1B\u739B\u857E\u575A\u6301\u98DF\u7269\u4E0E\u9003\u751F\u673A\u4F1A\u3002"
   roadIndex: 24
   season: {fileID: 11400000, guid: 8f3c82027b044f1eb1f8a1227fbfbc01, type: 2}
   region: {fileID: 11400000, guid: 964aba4f14cc4b98a5b5f048deceb102, type: 2}
   contentType: 2
+  mapSpriteLayers:
+  - sprite: {fileID: 21300000, guid: b85f578fbad6445388078821c46a929b, type: 3}
+    offset: {x: 0, y: -0.3}
+    scale: {x: 1, y: 1}
+    z: 0
   mapSprite: {fileID: 21300000, guid: b85f578fbad6445388078821c46a929b, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 11400000, guid: 3ccb6340504941b0bd509f33e6d7d372, type: 2}
   dialogue: {fileID: 11400000, guid: 88f6ffc5a34c4c309e65c441b820aec5, type: 2}
   gameEvent: {fileID: 0}
@@ -28,4 +38,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

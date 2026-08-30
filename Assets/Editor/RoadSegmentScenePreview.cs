@@ -739,8 +739,8 @@ namespace CircleWar.EditorTools
             Handles.Label(
                 labelPosition,
                 "#" + currentDefinition.RoadIndex + " " + currentDefinition.DisplayName +
-                "\nY " + currentDefinition.Y.ToString("0.###") +
-                "   Z " + currentDefinition.Z.ToString("0.###") + "°");
+                "\nLayer 1 Offset Y " + GetFirstMapSpriteLayerOffsetY(currentDefinition).ToString("0.###") +
+                "   Z " + GetFirstMapSpriteLayerZ(currentDefinition).ToString("0.###") + "°");
         }
 
         private static void DrawYOffsetHandle()
@@ -771,11 +771,10 @@ namespace CircleWar.EditorTools
             Vector3 newLocalPosition = selectedSegmentTransform.InverseTransformPoint(newPosition);
             float bottomAlignedY = -selectedSpriteRenderer.sprite.bounds.min.y *
                                    selectedImageTransform.localScale.y;
-            ApplyFloatProperty(
+            ApplyFirstMapSpriteLayerOffsetY(
                 currentDefinition,
-                "y",
                 newLocalPosition.y - bottomAlignedY,
-                "Adjust Road MapSprite Y");
+                "Adjust Road MapSprite Layer Offset Y");
         }
 
         private static void DrawZRotationHandle()
@@ -805,31 +804,91 @@ namespace CircleWar.EditorTools
             Quaternion newLocalRotation =
                 Quaternion.Inverse(selectedSegmentTransform.rotation) * newWorldRotation;
             float signedZ = Mathf.DeltaAngle(0f, newLocalRotation.eulerAngles.z);
-            ApplyFloatProperty(
+            ApplyFirstMapSpriteLayerZ(
                 currentDefinition,
-                "z",
                 signedZ,
-                "Adjust Road MapSprite Z");
+                "Adjust Road MapSprite Layer Z");
         }
 
-        private static void ApplyFloatProperty(
+        private static float GetFirstMapSpriteLayerOffsetY(RoadSegmentDefinition definition)
+        {
+            IReadOnlyList<RoadSegmentMapSpriteLayer> layers = definition.MapSpriteLayers;
+            return layers != null && layers.Count > 0 ? layers[0].Offset.y : definition.Y;
+        }
+
+        private static float GetFirstMapSpriteLayerZ(RoadSegmentDefinition definition)
+        {
+            IReadOnlyList<RoadSegmentMapSpriteLayer> layers = definition.MapSpriteLayers;
+            return layers != null && layers.Count > 0 ? layers[0].Z : definition.Z;
+        }
+
+        private static void ApplyFirstMapSpriteLayerOffsetY(
             RoadSegmentDefinition definition,
-            string propertyName,
             float value,
             string undoName)
         {
             Undo.RecordObject(definition, undoName);
             SerializedObject serializedDefinition = new SerializedObject(definition);
-            SerializedProperty property = serializedDefinition.FindProperty(propertyName);
-            if (property == null)
+            SerializedProperty layerProperty = GetFirstMapSpriteLayerProperty(serializedDefinition);
+            if (layerProperty == null)
             {
                 return;
             }
 
-            property.floatValue = value;
+            SerializedProperty offsetProperty = layerProperty.FindPropertyRelative("offset");
+            if (offsetProperty == null)
+            {
+                return;
+            }
+
+            Vector2 offset = offsetProperty.vector2Value;
+            offset.y = value;
+            offsetProperty.vector2Value = offset;
             serializedDefinition.ApplyModifiedProperties();
             EditorUtility.SetDirty(definition);
             RefreshSelectedVisual();
+        }
+
+        private static void ApplyFirstMapSpriteLayerZ(
+            RoadSegmentDefinition definition,
+            float value,
+            string undoName)
+        {
+            Undo.RecordObject(definition, undoName);
+            SerializedObject serializedDefinition = new SerializedObject(definition);
+            SerializedProperty layerProperty = GetFirstMapSpriteLayerProperty(serializedDefinition);
+            if (layerProperty == null)
+            {
+                return;
+            }
+
+            SerializedProperty zProperty = layerProperty.FindPropertyRelative("z");
+            if (zProperty == null)
+            {
+                return;
+            }
+
+            zProperty.floatValue = value;
+            serializedDefinition.ApplyModifiedProperties();
+            EditorUtility.SetDirty(definition);
+            RefreshSelectedVisual();
+        }
+
+        private static SerializedProperty GetFirstMapSpriteLayerProperty(
+            SerializedObject serializedDefinition)
+        {
+            SerializedProperty layersProperty = serializedDefinition.FindProperty("mapSpriteLayers");
+            if (layersProperty == null)
+            {
+                return null;
+            }
+
+            if (layersProperty.arraySize == 0)
+            {
+                layersProperty.arraySize = 1;
+            }
+
+            return layersProperty.GetArrayElementAtIndex(0);
         }
 
         private static void RefreshSelectedVisual()

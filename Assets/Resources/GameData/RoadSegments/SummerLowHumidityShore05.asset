@@ -11,15 +11,30 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore05
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_05
-  displayName: 通讯浮标
-  description: "夏1-6｜事件节点“通讯浮标”：A：拆芯片 → 获得芯片；B：下载记录 → 获得航道异常情报。"
+  displayName: "\u901A\u8BAF\u6D6E\u6807"
+  description: "\u590F1-6\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u901A\u8BAF\u6D6E\u6807\u201D\uFF1AA\uFF1A\u62C6\u82AF\u7247
+    \u2192 \u83B7\u5F97\u82AF\u7247\uFF1BB\uFF1A\u4E0B\u8F7D\u8BB0\u5F55 \u2192 \u83B7\u5F97\u822A\u9053\u5F02\u5E38\u60C5\u62A5\u3002"
   roadIndex: 5
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 8a5e0791978649549c0552c06f6a043c, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -3396231001350701739, guid: 9e4d47634fbdafe4da0f1aa3010e80cd, type: 3}
+    offset: {x: -2, y: 0.2}
+    scale: {x: 1, y: 1}
+    z: -15
+  - sprite: {fileID: -4921643809562629903, guid: 6a9d27f4d1d55614fa5f583d07a136a4, type: 3}
+    offset: {x: 0, y: 0.2}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: -4921643809562629903, guid: 6a9d27f4d1d55614fa5f583d07a136a4, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0.2
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 3fb5d5c6512d45b8943c4433349776bd, type: 2}
@@ -28,4 +43,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

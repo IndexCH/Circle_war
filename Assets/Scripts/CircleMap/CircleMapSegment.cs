@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CircleWar
@@ -10,6 +11,8 @@ namespace CircleWar
 
         private SpriteRenderer segmentSpriteRenderer;
         private SpriteRenderer npcSpriteRenderer;
+        private readonly List<SpriteRenderer> mapSpriteRenderers = new List<SpriteRenderer>();
+        private Vector3 segmentSpriteBaseLocalScale = Vector3.one;
         private Animator segmentAnimator;
         private Animator npcAnimator;
         private SpriteRenderer interactionPromptRenderer;
@@ -47,6 +50,12 @@ namespace CircleWar
         {
             segmentSpriteRenderer = renderer;
             npcSpriteRenderer = npcRenderer;
+            mapSpriteRenderers.Clear();
+            if (segmentSpriteRenderer != null)
+            {
+                mapSpriteRenderers.Add(segmentSpriteRenderer);
+                segmentSpriteBaseLocalScale = segmentSpriteRenderer.transform.localScale;
+            }
             segmentAnimator = GetOrCreateAnimator(segmentSpriteRenderer);
             npcAnimator = npcSpriteRenderer != null ? GetOrCreateAnimator(npcSpriteRenderer) : null;
 
@@ -69,9 +78,9 @@ namespace CircleWar
             DisableAnimator(segmentAnimator);
             DisableAnimator(npcAnimator);
 
-            Sprite sprite = segment != null ? segment.sprite : null;
-            segmentSpriteRenderer.enabled = sprite != null;
-            segmentSpriteRenderer.sprite = sprite;
+            IReadOnlyList<RoadSegmentMapSpriteLayer> mapSpriteLayers =
+                segment != null ? segment.mapSpriteLayers : null;
+            ApplyMapSprites(mapSpriteLayers);
 
             SpriteRenderer animatedNpcRenderer = GetNpcSpriteRenderer(segment);
             Animator animatedNpcAnimator = GetNpcAnimator(segment);
@@ -92,9 +101,6 @@ namespace CircleWar
                 animatedNpcRenderer.enabled = animatedNpcRenderer.sprite != null;
             }
 
-            AlignSpriteBottomCenter(segmentSpriteRenderer, 0f, segment != null ? segment.y : 0f);
-            ApplySpriteLocalRotation(segmentSpriteRenderer, segment != null ? segment.z : 0f);
-
             if (npcSpriteRenderer != null)
             {
                 Vector2 npcOffset = segment != null ? segment.npcSpriteOffset : Vector2.zero;
@@ -103,6 +109,87 @@ namespace CircleWar
             }
 
             SetInteractionPromptVisible(segment, false);
+        }
+
+        private void ApplyMapSprites(IReadOnlyList<RoadSegmentMapSpriteLayer> layers)
+        {
+            int layerCount = layers != null ? layers.Count : 0;
+            EnsureMapSpriteRendererCount(layerCount);
+            int baseSortingOrder = segmentSpriteRenderer != null
+                ? segmentSpriteRenderer.sortingOrder
+                : 0;
+
+            for (int index = 0; index < mapSpriteRenderers.Count; index++)
+            {
+                SpriteRenderer renderer = mapSpriteRenderers[index];
+                if (renderer == null)
+                {
+                    continue;
+                }
+
+                RoadSegmentMapSpriteLayer layer = index < layerCount ? layers[index] : null;
+                Sprite sprite = layer != null ? layer.Sprite : null;
+                renderer.enabled = sprite != null;
+                renderer.sprite = sprite;
+                renderer.sortingOrder = baseSortingOrder + index;
+                renderer.transform.localScale = layer != null
+                    ? Vector3.Scale(segmentSpriteBaseLocalScale, layer.Scale)
+                    : segmentSpriteBaseLocalScale;
+
+                if (sprite == null)
+                {
+                    continue;
+                }
+
+                Vector2 offset = layer.Offset;
+                AlignSpriteBottomCenter(renderer, offset.x, offset.y);
+                ApplySpriteLocalRotation(renderer, layer.Z);
+            }
+
+            if (npcSpriteRenderer != null)
+            {
+                npcSpriteRenderer.sortingOrder = baseSortingOrder + mapSpriteRenderers.Count;
+            }
+
+            if (interactionPromptRenderer != null)
+            {
+                interactionPromptRenderer.sortingOrder = baseSortingOrder + mapSpriteRenderers.Count + 1;
+            }
+        }
+
+        private void EnsureMapSpriteRendererCount(int spriteCount)
+        {
+            if (segmentSpriteRenderer == null)
+            {
+                return;
+            }
+
+            if (mapSpriteRenderers.Count == 0)
+            {
+                mapSpriteRenderers.Add(segmentSpriteRenderer);
+            }
+
+            while (mapSpriteRenderers.Count < spriteCount)
+            {
+                SpriteRenderer renderer = CreateAdditionalMapSpriteRenderer(mapSpriteRenderers.Count + 1);
+                mapSpriteRenderers.Add(renderer);
+            }
+        }
+
+        private SpriteRenderer CreateAdditionalMapSpriteRenderer(int layerNumber)
+        {
+            GameObject imageObject = new GameObject("Map Sprite Image " + layerNumber);
+            imageObject.hideFlags = segmentSpriteRenderer.gameObject.hideFlags;
+            imageObject.transform.hideFlags = segmentSpriteRenderer.transform.hideFlags;
+            imageObject.transform.SetParent(transform, false);
+            imageObject.transform.localScale = segmentSpriteBaseLocalScale;
+
+            SpriteRenderer renderer = imageObject.AddComponent<SpriteRenderer>();
+            renderer.hideFlags = segmentSpriteRenderer.hideFlags;
+            renderer.sortingLayerID = segmentSpriteRenderer.sortingLayerID;
+            renderer.sortingOrder = segmentSpriteRenderer.sortingOrder;
+            renderer.enabled = false;
+            return renderer;
         }
 
         private static RuntimeAnimatorController LoadNpcIdleAnimatorController(

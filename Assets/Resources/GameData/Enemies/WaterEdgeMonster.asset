@@ -11,11 +11,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38aad17aeaf64dc479b1679e8fc384d0, type: 3}
   m_Name: WaterEdgeMonster
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: water_edge_monster
-  displayName: 水边怪物
-  description: 潜伏在低湿季浅水边缘、会快速扑向主角的怪物。
-  portrait: {fileID: -168717823013034772, guid: a978047a7afe670439b72611b91d20d2, type: 3}
+  displayName: "\u6C34\u8FB9\u602A\u7269"
+  description: "\u6F5C\u4F0F\u5728\u4F4E\u6E7F\u5B63\u6D45\u6C34\u8FB9\u7F18\u3001\u4F1A\u5FEB\u901F\u6251\u5411\u4E3B\u89D2\u7684\u602A\u7269\u3002"
+  portrait: {fileID: -227246428814060060, guid: c2f78c9a88f0cbf4691529713e067715, type: 3}
   attackType: 0
   maxHealth: 8
   speed: 3.5

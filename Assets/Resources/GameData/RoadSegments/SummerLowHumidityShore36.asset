@@ -11,15 +11,31 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore36
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_36
-  displayName: 截断军方通讯
-  description: "夏5-5｜事件节点“截断军方通讯”：A：公开播放 → 全员知道威胁临近；B：私下解析 → 获得军方通讯情报。"
+  displayName: "\u622A\u65AD\u519B\u65B9\u901A\u8BAF"
+  description: "\u590F5-5\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u622A\u65AD\u519B\u65B9\u901A\u8BAF\u201D\uFF1AA\uFF1A\u516C\u5F00\u64AD\u653E
+    \u2192 \u5168\u5458\u77E5\u9053\u5A01\u80C1\u4E34\u8FD1\uFF1BB\uFF1A\u79C1\u4E0B\u89E3\u6790
+    \u2192 \u83B7\u5F97\u519B\u65B9\u901A\u8BAF\u60C5\u62A5\u3002"
   roadIndex: 36
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
+  mapSpriteLayers:
+  - sprite: {fileID: -7320046986400614101, guid: 8f46e2e5348462b4380dacc273600b39, type: 3}
+    offset: {x: 2, y: 0.2}
+    scale: {x: 0, y: 0}
+    z: 20
+  - sprite: {fileID: 21300000, guid: f3ddc317362441a1a46f2e4444ab8e09, type: 3}
+    offset: {x: 0, y: 0}
+    scale: {x: 0, y: 0}
+    z: 0
   mapSprite: {fileID: 21300000, guid: 38d0da1125594882bc0bb241b5b319b3, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 2879bb7d46984121b1eeb17d0dc8a96e, type: 2}
@@ -28,4 +44,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

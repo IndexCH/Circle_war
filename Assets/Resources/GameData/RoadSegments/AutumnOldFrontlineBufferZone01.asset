@@ -11,15 +11,27 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: AutumnOldFrontlineBufferZone01
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_01
-  displayName: 坠毁信号
-  description: "秋1-2｜事件节点“坠毁信号”：A：关闭泄漏电池 → 获得芯片，主角受伤；B：先搜集残骸 → 获得燃料和钢铁。"
+  displayName: "\u5760\u6BC1\u4FE1\u53F7"
+  description: "\u79CB1-2\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u5760\u6BC1\u4FE1\u53F7\u201D\uFF1AA\uFF1A\u5173\u95ED\u6CC4\u6F0F\u7535\u6C60
+    \u2192 \u83B7\u5F97\u82AF\u7247\uFF0C\u4E3B\u89D2\u53D7\u4F24\uFF1BB\uFF1A\u5148\u641C\u96C6\u6B8B\u9AB8
+    \u2192 \u83B7\u5F97\u71C3\u6599\u548C\u94A2\u94C1\u3002"
   roadIndex: 1
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
+  mapSpriteLayers:
+  - sprite: {fileID: 6891918830266795194, guid: f4822854e61afc041a8cad652310f710, type: 3}
+    offset: {x: 0, y: -0.5}
+    scale: {x: 0, y: 0}
+    z: 10
   mapSprite: {fileID: 21300000, guid: 948a1c8aca0b40cbb242621a8d7be48b, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 4f4adf9272fc4101ad421787d3405d47, type: 2}
@@ -28,4 +40,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

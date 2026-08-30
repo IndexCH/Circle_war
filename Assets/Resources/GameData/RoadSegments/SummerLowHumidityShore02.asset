@@ -11,15 +11,33 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore02
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_02
-  displayName: 补给舱
-  description: "夏1-3｜事件节点“补给舱”：A：强开舱门 → 获得压缩饼干，主角受伤；B：启动信标 → 现在获得监察官情报。"
+  displayName: "\u8865\u7ED9\u8231"
+  description: "\u590F1-3\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u8865\u7ED9\u8231\u201D\uFF1AA\uFF1A\u5F3A\u5F00\u8231\u95E8
+    \u2192 \u83B7\u5F97\u538B\u7F29\u997C\u5E72\uFF0C\u4E3B\u89D2\u53D7\u4F24\uFF1BB\uFF1A\u542F\u52A8\u4FE1\u6807
+    \u2192 \u73B0\u5728\u83B7\u5F97\u76D1\u5BDF\u5B98\u60C5\u62A5\u3002"
   roadIndex: 2
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 7634ede36a1849b8991e8d395103f390, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -3396231001350701739, guid: 9e4d47634fbdafe4da0f1aa3010e80cd, type: 3}
+    offset: {x: 2, y: 0.3}
+    scale: {x: 1, y: 1}
+    z: 10
+  - sprite: {fileID: 3968539199397004180, guid: 1bceeecf8dd38dc4d8a49888a949eb1e, type: 3}
+    offset: {x: 0, y: -0.2}
+    scale: {x: 1, y: 1}
+    z: 3
+  mapSprite: {fileID: 3968539199397004180, guid: 1bceeecf8dd38dc4d8a49888a949eb1e, type: 3}
+  additionalMapSprites:
+  - {fileID: -3396231001350701739, guid: 9e4d47634fbdafe4da0f1aa3010e80cd, type: 3}
+  - {fileID: -3396231001350701739, guid: 9e4d47634fbdafe4da0f1aa3010e80cd, type: 3}
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.2
+  z: 3
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 0e2b52693dcd4c19aaf12efcfd4441f1, type: 2}
@@ -28,4 +46,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

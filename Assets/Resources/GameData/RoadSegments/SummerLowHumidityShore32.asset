@@ -11,15 +11,35 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore32
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_32
-  displayName: 维护讯号
-  description: "夏5-1｜事件节点“维护讯号”：A：读取维护讯号 → 获得旧维护塔情报；B：拆取发射器 → 获得燃料。"
+  displayName: "\u7EF4\u62A4\u8BAF\u53F7"
+  description: "\u590F5-1\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u7EF4\u62A4\u8BAF\u53F7\u201D\uFF1AA\uFF1A\u8BFB\u53D6\u7EF4\u62A4\u8BAF\u53F7
+    \u2192 \u83B7\u5F97\u65E7\u7EF4\u62A4\u5854\u60C5\u62A5\uFF1BB\uFF1A\u62C6\u53D6\u53D1\u5C04\u5668
+    \u2192 \u83B7\u5F97\u71C3\u6599\u3002"
   roadIndex: 32
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 4
+  mapSpriteLayers:
+  - sprite: {fileID: -4921643809562629903, guid: 6a9d27f4d1d55614fa5f583d07a136a4, type: 3}
+    offset: {x: 0, y: 0}
+    scale: {x: 0, y: 0}
+    z: 0
+  - sprite: {fileID: -6300526161011895439, guid: 4308acc837515034e915f48782324d47, type: 3}
+    offset: {x: 0, y: 0}
+    scale: {x: 0, y: 0}
+    z: 0
+  - sprite: {fileID: -3396231001350701739, guid: 9e4d47634fbdafe4da0f1aa3010e80cd, type: 3}
+    offset: {x: 3, y: 0.5}
+    scale: {x: 0, y: 0}
+    z: 20
   mapSprite: {fileID: 21300000, guid: 8a5e0791978649549c0552c06f6a043c, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 70c903deb0934e3fb2a9a85620ac32b6, type: 2}
@@ -28,4 +48,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

@@ -11,15 +11,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: SummerLowHumidityShore09
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_summer_low_humidity_shore_09
-  displayName: 监察官
-  description: "夏2-2｜NPC节点“监察官”：承认附近星球被认定为高价值据点，当前星球可能被重新纳入战区。"
+  displayName: "\u76D1\u5BDF\u5B98"
+  description: "\u590F2-2\uFF5CNPC\u8282\u70B9\u201C\u76D1\u5BDF\u5B98\u201D\uFF1A\u627F\u8BA4\u9644\u8FD1\u661F\u7403\u88AB\u8BA4\u5B9A\u4E3A\u9AD8\u4EF7\u503C\u636E\u70B9\uFF0C\u5F53\u524D\u661F\u7403\u53EF\u80FD\u88AB\u91CD\u65B0\u7EB3\u5165\u6218\u533A\u3002"
   roadIndex: 9
   season: {fileID: 11400000, guid: 7eb99f656b1e0df408929db7839d8c63, type: 2}
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   contentType: 2
+  mapSpriteLayers:
+  - sprite: {fileID: 21300000, guid: f3ddc317362441a1a46f2e4444ab8e09, type: 3}
+    offset: {x: 0, y: -0.1}
+    scale: {x: 1, y: 1}
+    z: 0
   mapSprite: {fileID: 21300000, guid: f3ddc317362441a1a46f2e4444ab8e09, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: 0
+  z: 0
   character: {fileID: 11400000, guid: 8188796a6fa5486a809a0c545a4edc26, type: 2}
   dialogue: {fileID: 11400000, guid: 8760fb9dc0f6473eb13c9b5597c56af0, type: 2}
   gameEvent: {fileID: 0}
