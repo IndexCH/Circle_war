@@ -11,15 +11,27 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: WinterLongStraightOldSupplyRoute08
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_winter_long_straight_old_supply_route_08
-  displayName: 权限结构
-  description: "冬2-1｜事件节点“权限结构”：A：确认最高权限匙功能 → 获得无人机系统情报；B：隐藏部分信息 → 获得芯片。"
+  displayName: "\u6743\u9650\u7ED3\u6784"
+  description: "\u51AC2-1\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u6743\u9650\u7ED3\u6784\u201D\uFF1AA\uFF1A\u786E\u8BA4\u6700\u9AD8\u6743\u9650\u5319\u529F\u80FD
+    \u2192 \u83B7\u5F97\u65E0\u4EBA\u673A\u7CFB\u7EDF\u60C5\u62A5\uFF1BB\uFF1A\u9690\u85CF\u90E8\u5206\u4FE1\u606F
+    \u2192 \u83B7\u5F97\u82AF\u7247\u3002"
   roadIndex: 8
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 9eaf21629a5e4c479f8c234a2c76e2e2, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -4921643809562629903, guid: 885eef3f3efbbfe4bbee955253d58c53, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 0.8, y: 0.8}
+    z: 0
+  mapSprite: {fileID: -4921643809562629903, guid: 885eef3f3efbbfe4bbee955253d58c53, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 09a9b5077996460c8036817ce490590f, type: 2}
@@ -28,4 +40,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

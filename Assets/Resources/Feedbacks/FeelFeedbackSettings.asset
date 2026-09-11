@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f367e1731f14894498f5c234eab48eb9, type: 3}
+  m_Name: FeelFeedbackSettings
+  m_EditorClassIdentifier: CircleWar.Runtime::CircleWar.FeelFeedbackSettings
+  ShotSound: {fileID: 8300000, guid: 6e158e2d37d77a048838813185c20707, type: 3}
+  HitSound: {fileID: 8300000, guid: 8afe5f72f4d9ef242a63799641fa0e12, type: 3}
+  DeathSound: {fileID: 8300000, guid: 1739ff78014ab3f44a5757aede3c7ea9, type: 3}
+  DeniedSound: {fileID: 8300000, guid: 5e569d2a692222842bfc96e94520ab9a, type: 3}
+  GainSound: {fileID: 8300000, guid: b8256a6b792fe3b488157984ecc43f61, type: 3}
+  PlayerHurtSound: {fileID: 8300000, guid: ca7e829e9f876ea4a95a4edad95deb8e, type: 3}
+  InfoUpdateSound: {fileID: 8300000, guid: 4ede2b3a9ded5ff43aa7b33d97a610d5, type: 3}
+  MixerGroup: {fileID: 0}
+  Volume: 0.35
+  ParticleMaterial: {fileID: 2100000, guid: fd622707d61a4294f9eb6c14bae5f306, type: 2}
+  ShotParticleMaterial: {fileID: 2100000, guid: 871416c815774fb4891581fb42eaed2e, type: 2}
+  PlayerFlashMaterial: {fileID: 2100000, guid: 9a89f4695e0148847bf683cf90ddfd48, type: 2}
+  ShotBrightness: 2.5
+  ShotColor: {r: 1, g: 0.77, b: 0.25, a: 1}
+  HitColor: {r: 1, g: 0.42, b: 0.2, a: 1}
+  DeathColor: {r: 1, g: 0.64, b: 0.16, a: 1}
+  HitDuration: 0.14
+  HitShakeDistance: 0.045
+  HitShakeDuration: 0.14
+  RecoilDistance: 0.07
+  RecoilDuration: 0.11
+  PlayerHurtColor: {r: 1, g: 0.2, b: 0.18, a: 1}
+  PlayerHurtDuration: 0.42
+  DamageFontSize: 36
+  HurtBorderOpacity: 0.65
+  InfoUpdateColor: {r: 0.55, g: 1, b: 0.95, a: 1}
+  InfoUpdateDuration: 0.4
+  InfoSoundCooldown: 0.25
+  GainColor: {r: 0.55, g: 1, b: 0.72, a: 1}
+  IndustryGainColor: {r: 1, g: 0.72, b: 0.24, a: 1}
+  GainRowGap: 2
+  DeniedColor: {r: 1, g: 0.48, b: 0.36, a: 1}
+  GainScreenOffset: {x: 130, y: 95}
+  GainFontSize: 30
+  MessageDuration: 1.5
+  DeniedCooldown: 0.65

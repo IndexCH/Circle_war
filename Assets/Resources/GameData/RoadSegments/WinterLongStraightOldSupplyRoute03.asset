@@ -11,15 +11,27 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: WinterLongStraightOldSupplyRoute03
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_winter_long_straight_old_supply_route_03
-  displayName: 断裂军用电缆
-  description: "冬1-4｜事件节点“断裂军用电缆”：A：修复电缆 → 获得防御线路情报；B：拆取电缆 → 获得燃料。"
+  displayName: "\u65AD\u88C2\u519B\u7528\u7535\u7F06"
+  description: "\u51AC1-4\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u65AD\u88C2\u519B\u7528\u7535\u7F06\u201D\uFF1AA\uFF1A\u4FEE\u590D\u7535\u7F06
+    \u2192 \u83B7\u5F97\u9632\u5FA1\u7EBF\u8DEF\u60C5\u62A5\uFF1BB\uFF1A\u62C6\u53D6\u7535\u7F06
+    \u2192 \u83B7\u5F97\u71C3\u6599\u3002"
   roadIndex: 3
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 196311edc89147cf9144b52f948e5366, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: 2949746548659186015, guid: bb8a51f78cded8b4bbf98de608a4164f, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: 2949746548659186015, guid: bb8a51f78cded8b4bbf98de608a4164f, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 8660e9a534a0401ab334a543ce15da15, type: 2}
@@ -28,4 +40,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

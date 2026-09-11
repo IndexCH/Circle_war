@@ -42,6 +42,9 @@ namespace CircleWar
         public IReadOnlyList<EnemyProgressState> Enemies => enemies;
         public IReadOnlyList<BossProgressState> Bosses => bosses;
 
+        // Grants are distinct from absolute balance assignment (initialization/load).
+        public event Action<string, int> ResourceGained;
+
         public void StartNewRun(string newRunId = null)
         {
             runId = string.IsNullOrWhiteSpace(newRunId) ? Guid.NewGuid().ToString("N") : newRunId;
@@ -95,7 +98,13 @@ namespace CircleWar
         public void AddResource(string resourceId, int amount)
         {
             ResourceState state = GetOrCreateResource(resourceId);
+            int previousAmount = state.Amount;
             state.SetAmount(state.Amount + amount);
+            int gained = state.Amount - previousAmount;
+            if (gained > 0)
+            {
+                ResourceGained?.Invoke(resourceId, gained);
+            }
         }
 
         public bool GetFlag(string flagId)

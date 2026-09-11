@@ -18,7 +18,7 @@ MonoBehaviour:
   seasonOrder: 1
   region: {fileID: 11400000, guid: 48e0b3a88e2142f6bbe17edd46d76ccf, type: 2}
   backgroundSprite: {fileID: -1676910142881191993, guid: 06fc154e9fdeb48459bd7b3f5eec1ec2, type: 3}
-  backgroundScaleMultiplier: {x: 0.5, y: 0.5}
+  backgroundScaleMultiplier: {x: 0.6, y: 0.6}
   circleRingSprite: {fileID: -572072223708330313, guid: 6e1950ebaefb54240bdfc8a9b08180c0, type: 3}
   hudFrameColor: {r: 1, g: 1, b: 1, a: 1}
   movementMultiplier: 1

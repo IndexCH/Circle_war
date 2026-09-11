@@ -11,15 +11,26 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: AutumnOldFrontlineBufferZone36
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_36
-  displayName: 塞维维修
-  description: "秋5-5｜事件节点“塞维维修”：A：协助校准 → 获得芯片；B：要求材料 → 获得橡胶。"
+  displayName: "\u585E\u7EF4\u7EF4\u4FEE"
+  description: "\u79CB5-5\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u585E\u7EF4\u7EF4\u4FEE\u201D\uFF1AA\uFF1A\u534F\u52A9\u6821\u51C6
+    \u2192 \u83B7\u5F97\u82AF\u7247\uFF1BB\uFF1A\u8981\u6C42\u6750\u6599 \u2192 \u83B7\u5F97\u6A61\u80F6\u3002"
   roadIndex: 36
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 38d0da1125594882bc0bb241b5b319b3, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -1502498846177436413, guid: 96df5a5656cc4bb4c9292c5fb5df6ca2, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: -1502498846177436413, guid: 96df5a5656cc4bb4c9292c5fb5df6ca2, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: b1c2d4a515254415b465395819eb68d3, type: 2}
@@ -28,5 +39,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-
-

@@ -11,15 +11,27 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: WinterLongStraightOldSupplyRoute34
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_winter_long_straight_old_supply_route_34
-  displayName: 备用增援线路
-  description: "冬5-3｜事件节点“备用增援线路”：A：关闭线路 → 获得无人机增援情报；B：过载线路 → 获得燃料，主角受伤。"
+  displayName: "\u5907\u7528\u589E\u63F4\u7EBF\u8DEF"
+  description: "\u51AC5-3\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u5907\u7528\u589E\u63F4\u7EBF\u8DEF\u201D\uFF1AA\uFF1A\u5173\u95ED\u7EBF\u8DEF
+    \u2192 \u83B7\u5F97\u65E0\u4EBA\u673A\u589E\u63F4\u60C5\u62A5\uFF1BB\uFF1A\u8FC7\u8F7D\u7EBF\u8DEF
+    \u2192 \u83B7\u5F97\u71C3\u6599\uFF0C\u4E3B\u89D2\u53D7\u4F24\u3002"
   roadIndex: 34
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 4cb996169ac64795b93caf7409d348ed, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -1502498846177436413, guid: 96df5a5656cc4bb4c9292c5fb5df6ca2, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: -1502498846177436413, guid: 96df5a5656cc4bb4c9292c5fb5df6ca2, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: b39835c94bd14000a143ba4aa8e85678, type: 2}
@@ -28,4 +40,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

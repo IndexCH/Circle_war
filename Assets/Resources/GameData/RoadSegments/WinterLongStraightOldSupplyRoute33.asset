@@ -11,15 +11,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: WinterLongStraightOldSupplyRoute33
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_winter_long_straight_old_supply_route_33
-  displayName: 钢铁
-  description: "冬5-2｜资源节点：钢铁。"
+  displayName: "\u94A2\u94C1"
+  description: "\u51AC5-2\uFF5C\u8D44\u6E90\u8282\u70B9\uFF1A\u94A2\u94C1\u3002"
   roadIndex: 33
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: dfde4595695746ac8eb395f89e04f0c0, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: 8761131854793930396, guid: 8ba660f93d01e9342848cd3faf856aa3, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 0.85, y: 0.85}
+    z: 0
+  mapSprite: {fileID: 8761131854793930396, guid: 8ba660f93d01e9342848cd3faf856aa3, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,5 +42,3 @@ MonoBehaviour:
   - resourceId: industry
     amount: 5
   costs: []
-
-

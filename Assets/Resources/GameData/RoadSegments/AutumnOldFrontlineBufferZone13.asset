@@ -11,15 +11,26 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: AutumnOldFrontlineBufferZone13
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_13
-  displayName: 燃料单元
-  description: "秋2-6｜事件节点“燃料单元”：A：抽取燃料 → 获得燃料；B：引爆单元 → 清开残骸，主角受伤。"
+  displayName: "\u71C3\u6599\u5355\u5143"
+  description: "\u79CB2-6\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u71C3\u6599\u5355\u5143\u201D\uFF1AA\uFF1A\u62BD\u53D6\u71C3\u6599
+    \u2192 \u83B7\u5F97\u71C3\u6599\uFF1BB\uFF1A\u5F15\u7206\u5355\u5143 \u2192 \u6E05\u5F00\u6B8B\u9AB8\uFF0C\u4E3B\u89D2\u53D7\u4F24\u3002"
   roadIndex: 13
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: c69100f6e1f841cdb34cbf8e23d12b9c, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -7263324490986289846, guid: 20c734f203e864f47aab20aef47a95de, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 0.5, y: 0.5}
+    z: 0
+  mapSprite: {fileID: -7263324490986289846, guid: 20c734f203e864f47aab20aef47a95de, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: ea8c8b0b420940dcb1b961c6db1f44b7, type: 2}
@@ -28,4 +39,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

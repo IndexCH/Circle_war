@@ -519,6 +519,10 @@ namespace CircleWar
             currentHealth = progressBinding != null
                 ? progressBinding.ApplyDamage(safeDamage)
                 : Mathf.Max(0, currentHealth - safeDamage);
+            if (Application.isPlaying && currentHealth > 0)
+            {
+                CombatFeelFeedback.GetOrAdd(gameObject).PlayHit(bodyRenderer);
+            }
             if (currentHealth <= 0)
             {
                 Die();
@@ -535,6 +539,10 @@ namespace CircleWar
             }
 
             isDead = true;
+            if (Application.isPlaying)
+            {
+                CombatFeelFeedback.GetOrAdd(gameObject).PlayDeath(bodyRenderer);
+            }
             progressBinding?.ReportDefeated();
             CombatEnemyRegistry.Unregister(this);
             Destroy(gameObject);

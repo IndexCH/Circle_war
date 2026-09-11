@@ -11,15 +11,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: WinterLongStraightOldSupplyRoute22
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_winter_long_straight_old_supply_route_22
-  displayName: 伊莱、格拉夫
-  description: "冬3-7｜NPC节点“伊莱、格拉夫”：伊莱说服格拉夫，格拉夫开始协助重整军事设施。"
+  displayName: "\u4F0A\u83B1\u3001\u683C\u62C9\u592B"
+  description: "\u51AC3-7\uFF5CNPC\u8282\u70B9\u201C\u4F0A\u83B1\u3001\u683C\u62C9\u592B\u201D\uFF1A\u4F0A\u83B1\u8BF4\u670D\u683C\u62C9\u592B\uFF0C\u683C\u62C9\u592B\u5F00\u59CB\u534F\u52A9\u91CD\u6574\u519B\u4E8B\u8BBE\u65BD\u3002"
   roadIndex: 22
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 2
-  mapSprite: {fileID: 21300000, guid: ebd93a8e1f524216885030e95047f857, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: 21300000, guid: 612935d5472bbb14abe27874904100b0, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: 21300000, guid: 612935d5472bbb14abe27874904100b0, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 11400000, guid: b39124d951274993a169d4941f6aaf1a, type: 2}
   dialogue: {fileID: 11400000, guid: c7ba51cac2854377b2479e2cd32d62c2, type: 2}
   gameEvent: {fileID: 0}

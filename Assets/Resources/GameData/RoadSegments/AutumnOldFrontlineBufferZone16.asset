@@ -11,15 +11,27 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: AutumnOldFrontlineBufferZone16
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_16
-  displayName: 识别模块
-  description: "秋3-1｜事件节点“识别模块”：A：关闭炮塔网络 → 获得防卫系统情报；B：拆出芯片 → 获得芯片。"
+  displayName: "\u8BC6\u522B\u6A21\u5757"
+  description: "\u79CB3-1\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u8BC6\u522B\u6A21\u5757\u201D\uFF1AA\uFF1A\u5173\u95ED\u70AE\u5854\u7F51\u7EDC
+    \u2192 \u83B7\u5F97\u9632\u536B\u7CFB\u7EDF\u60C5\u62A5\uFF1BB\uFF1A\u62C6\u51FA\u82AF\u7247
+    \u2192 \u83B7\u5F97\u82AF\u7247\u3002"
   roadIndex: 16
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 4cb996169ac64795b93caf7409d348ed, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -467474851318412678, guid: b3db30972f6ccfb4fbec9b1c13a74f19, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: -467474851318412678, guid: b3db30972f6ccfb4fbec9b1c13a74f19, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 4b8cf8808f9f4d9fbc02457fa8f6a673, type: 2}
@@ -28,5 +40,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-
-

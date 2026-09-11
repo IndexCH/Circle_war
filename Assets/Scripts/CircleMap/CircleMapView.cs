@@ -71,6 +71,7 @@ namespace CircleWar
         private float currentRoadPosition;
         private float playerRadius;
         private bool hasPlayerRadius;
+        private PlayerJump playerJump;
         private bool isApplyingSeasonRuntimeContext;
         private bool isMapInitialized;
         private int lastDisplayedAnchorIndex = -1;
@@ -84,7 +85,8 @@ namespace CircleWar
         public float PlayerRadius => GetPlayerRadius();
         public float RoadSegmentAngleDegrees => GetOneSegmentAngle();
         public CircleWorldSpace CurrentWorldSpace => new CircleWorldSpace(DiskCenter, PlayerAngleDegrees, PlayerRadius);
-        public Vector2 PlayerWorldPosition => CurrentWorldSpace.PlayerWorldPosition;
+        public Vector2 PlayerWorldPosition => ResolvePlayerTarget() != null
+            ? ViewToWorldPosition(playerTarget.position) : CurrentWorldSpace.PlayerWorldPosition;
 
         private void Awake()
         {
@@ -146,11 +148,9 @@ namespace CircleWar
             {
                 bool wantsMoveForward = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
                 bool wantsMoveBackward = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
-                bool isForwardBlocked = wantsMoveForward && GroundEnemy.IsAnyMeleeBlockingForward(this);
                 bool pressedMoveForward = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
 
                 if (pressedMoveForward &&
-                    !isForwardBlocked &&
                     IsAtEndOfCurrentSeason() &&
                     !IsTerminalCombatBlockingSeasonAdvance() &&
                     TryAdvanceToNextSeason())
@@ -159,7 +159,7 @@ namespace CircleWar
                 }
 
                 float moveInput = 0f;
-                if (wantsMoveForward && !isForwardBlocked)
+                if (wantsMoveForward)
                 {
                     moveInput += 1f;
                 }
@@ -880,7 +880,8 @@ namespace CircleWar
             Transform target = ResolvePlayerTarget();
             if (target != null)
             {
-                playerRadius = Vector2.Distance(target.position, GetDiskCenter());
+                if (playerJump == null) playerJump = target.GetComponent<PlayerJump>();
+                playerRadius = Vector2.Distance(playerJump != null ? playerJump.GroundPosition : target.position, GetDiskCenter());
             }
 
             if (playerRadius <= Mathf.Epsilon && circleRingRenderer != null)

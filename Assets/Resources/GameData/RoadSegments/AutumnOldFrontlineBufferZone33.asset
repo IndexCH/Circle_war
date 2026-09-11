@@ -11,15 +11,27 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: AutumnOldFrontlineBufferZone33
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_33
-  displayName: 关键部件
-  description: "秋5-2｜事件节点“关键部件”：A：安装部件 → 获得逃生设施结构数据；B：改造成临时护甲 → 最大生命+1。"
+  displayName: "\u5173\u952E\u90E8\u4EF6"
+  description: "\u79CB5-2\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u5173\u952E\u90E8\u4EF6\u201D\uFF1AA\uFF1A\u5B89\u88C5\u90E8\u4EF6
+    \u2192 \u83B7\u5F97\u9003\u751F\u8BBE\u65BD\u7ED3\u6784\u6570\u636E\uFF1BB\uFF1A\u6539\u9020\u6210\u4E34\u65F6\u62A4\u7532
+    \u2192 \u6700\u5927\u751F\u547D+1\u3002"
   roadIndex: 33
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 45cf09dc4e50428398b37de8db3e9fa7, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -467474851318412678, guid: b3db30972f6ccfb4fbec9b1c13a74f19, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: -467474851318412678, guid: b3db30972f6ccfb4fbec9b1c13a74f19, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 948eccff189a4cd1ac8ef1dca80f6591, type: 2}
@@ -28,4 +40,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

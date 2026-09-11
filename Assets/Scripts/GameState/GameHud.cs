@@ -58,6 +58,12 @@ namespace CircleWar
 
         private GameRuntimeData runtimeData = new GameRuntimeData();
         private CompositeUnRegister bindings;
+        private ResourceFeelFeedback resourceFeedback;
+        private GameState feedbackState;
+        private HudFeelFeedback hudFeedback;
+        private bool presentationReady;
+        private int presentationRunRevision;
+        private int observedPlayerHp;
 
         public GameRuntimeData RuntimeData => runtimeData;
         public GameHudRuntimeData HudData => runtimeData.Hud;
@@ -83,19 +89,132 @@ namespace CircleWar
             {
                 runtimeData.RefreshHudFromState();
             }
+            presentationRunRevision = runtimeData.RunRevision;
+            presentationReady = true;
         }
 
         private void OnDestroy()
         {
+            UnbindResourceFeedback();
             bindings?.UnRegister();
             bindings = null;
         }
 
         public void SetRuntimeData(GameRuntimeData newRuntimeData)
         {
+            bool wasReady = presentationReady;
+            presentationReady = false;
+            UnbindResourceFeedback();
             runtimeData = newRuntimeData ?? new GameRuntimeData();
             Bind(HudData);
             runtimeData.RefreshHudFromState();
+            if (isActiveAndEnabled)
+            {
+                BindResourceFeedback();
+            }
+            presentationRunRevision = runtimeData.RunRevision;
+            presentationReady = wasReady;
+        }
+
+        private void OnEnable()
+        {
+            BindResourceFeedback();
+        }
+
+        private void OnDisable()
+        {
+            UnbindResourceFeedback();
+        }
+
+        private void BindResourceFeedback()
+        {
+            UnbindResourceFeedback();
+            feedbackState = runtimeData.State;
+            feedbackState.ResourceGained += OnResourceGained;
+            runtimeData.NewRunStarted += ResetFeedbackPresentation;
+        }
+
+        private void UnbindResourceFeedback()
+        {
+            if (feedbackState != null)
+            {
+                feedbackState.ResourceGained -= OnResourceGained;
+                feedbackState = null;
+            }
+            runtimeData.NewRunStarted -= ResetFeedbackPresentation;
+            ResetFeedbackPresentation();
+        }
+
+        private void ResetFeedbackPresentation()
+        {
+            presentationRunRevision = runtimeData.RunRevision;
+            if (resourceFeedback != null)
+            {
+                resourceFeedback.Clear();
+            }
+            if (hudFeedback != null) hudFeedback.Clear();
+        }
+
+        private bool CanPlayPresentationFeedback => presentationReady && Application.isPlaying &&
+            isActiveAndEnabled && presentationRunRevision == runtimeData.RunRevision;
+
+        private HudFeelFeedback ResolveHudFeedback()
+        {
+            if (hudFeedback == null)
+            {
+                hudFeedback = GetComponent<HudFeelFeedback>();
+                if (hudFeedback == null) hudFeedback = gameObject.AddComponent<HudFeelFeedback>();
+                hudFeedback.Configure(playerHpText, leftRegionStatusFrame);
+            }
+            return hudFeedback;
+        }
+
+        public void ShowPlayerDamaged(int actualDamage)
+        {
+            if (actualDamage > 0 && CanPlayPresentationFeedback)
+                ResolveHudFeedback().PlayPlayerDamage(actualDamage);
+        }
+
+        private void SetRegionFeedbackText(Text target, string value)
+        {
+            if (target == null || string.Equals(target.text, value, StringComparison.Ordinal)) return;
+            target.text = value;
+            if (CanPlayPresentationFeedback) ResolveHudFeedback().QueueInfoUpdate(target);
+        }
+
+        private ResourceFeelFeedback ResolveResourceFeedback()
+        {
+            if (resourceFeedback == null && Application.isPlaying)
+            {
+                resourceFeedback = GetComponent<ResourceFeelFeedback>();
+                if (resourceFeedback == null)
+                {
+                    resourceFeedback = gameObject.AddComponent<ResourceFeelFeedback>();
+                }
+                resourceFeedback.Configure(playerFoodText, playerMaterialsText);
+            }
+            return resourceFeedback;
+        }
+
+        private void OnResourceGained(string resourceId, int amount)
+        {
+            ResolveResourceFeedback()?.ShowGain(resourceId, ResourceDisplayName(resourceId), amount,
+                resourceId == runtimeData.MaterialsResourceId);
+        }
+
+        public void ShowResourceInsufficient(string resourceId, int missingAmount)
+        {
+            if (isActiveAndEnabled)
+            {
+                ResolveResourceFeedback()?.ShowInsufficient(ResourceDisplayName(resourceId), missingAmount);
+            }
+        }
+
+        private string ResourceDisplayName(string resourceId)
+        {
+            if (resourceId == runtimeData.FoodResourceId) return "食物";
+            if (resourceId == runtimeData.MaterialsResourceId) return "工业";
+            return "资源";
         }
 
         public void SetHudRuntimeData(GameHudRuntimeData hudRuntimeData)
@@ -105,7 +224,11 @@ namespace CircleWar
                 throw new ArgumentNullException(nameof(hudRuntimeData));
             }
 
+            bool wasReady = presentationReady;
+            presentationReady = false;
+            ResetFeedbackPresentation();
             runtimeData.Hud.CopyFrom(hudRuntimeData);
+            presentationReady = wasReady;
         }
 
         public void Refresh()
@@ -163,6 +286,7 @@ namespace CircleWar
 
         private void Bind(GameHudRuntimeData data)
         {
+            observedPlayerHp = data.PlayerStats.Hp.Value;
             bindings?.UnRegister();
             bindings = new CompositeUnRegister();
 
@@ -225,7 +349,7 @@ namespace CircleWar
         {
             HudRegionStatusRuntimeData region = HudData.RegionStatus;
             string label = string.IsNullOrWhiteSpace(region.DisplayName.Value) ? region.RegionId.Value : region.DisplayName.Value;
-            SetText(regionStatusText, region.IsLiveFeed.Value ? "LIVE FEED " + label : label);
+            SetRegionFeedbackText(regionStatusText, region.IsLiveFeed.Value ? "LIVE FEED " + label : label);
         }
 
         private void RefreshRegionFeed()
@@ -241,11 +365,11 @@ namespace CircleWar
                 if (feedEntries != null && index < feedEntries.Count)
                 {
                     HudFeedEntryRuntimeData entry = feedEntries[index];
-                    regionFeedTexts[index].text = string.Format("{0:00}:{1:00} {2}", entry.Hour, entry.Minute, entry.Message);
+                    SetRegionFeedbackText(regionFeedTexts[index], string.Format("{0:00}:{1:00} {2}", entry.Hour, entry.Minute, entry.Message));
                 }
                 else
                 {
-                    regionFeedTexts[index].text = string.Empty;
+                    SetRegionFeedbackText(regionFeedTexts[index], string.Empty);
                 }
             }
         }
@@ -253,9 +377,13 @@ namespace CircleWar
         private void RefreshPlayerStats()
         {
             HudPlayerStatsRuntimeData player = HudData.PlayerStats;
-            SetText(playerHpText, string.Format("HP {0}/{1}", player.Hp.Value, player.MaxHp.Value));
-            SetText(playerFoodText, "Food " + player.Food.Value);
-            SetText(playerMaterialsText, "Industry " + player.Materials.Value);
+            int actualDamage = observedPlayerHp - player.Hp.Value;
+            observedPlayerHp = player.Hp.Value;
+            SetText(playerHpText, string.Format("生命 {0}/{1}", player.Hp.Value, player.MaxHp.Value));
+            SetText(playerFoodText, "食物 " + player.Food.Value);
+            SetText(playerMaterialsText, "工业 " + player.Materials.Value);
+            // Observe actual HP changes so combat and event consequences share one cue.
+            if (actualDamage > 0) ShowPlayerDamaged(actualDamage);
         }
 
         private void RefreshDialogue()

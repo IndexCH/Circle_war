@@ -11,15 +11,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: AutumnOldFrontlineBufferZone17
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_17
-  displayName: 空白
-  description: "秋3-2｜空白缓冲节点：无NPC、资源、事件、怪物或Boss。"
+  displayName: "\u7A7A\u767D"
+  description: "\u79CB3-2\uFF5C\u7A7A\u767D\u7F13\u51B2\u8282\u70B9\uFF1A\u65E0NPC\u3001\u8D44\u6E90\u3001\u4E8B\u4EF6\u3001\u602A\u7269\u6216Boss\u3002"
   roadIndex: 17
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 0
-  mapSprite: {fileID: 0}
+  mapSpriteLayers:
+  - sprite: {fileID: 21300000, guid: 612935d5472bbb14abe27874904100b0, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: 21300000, guid: 612935d5472bbb14abe27874904100b0, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -28,5 +38,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-
-

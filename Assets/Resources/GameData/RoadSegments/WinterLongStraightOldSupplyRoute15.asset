@@ -11,15 +11,27 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: WinterLongStraightOldSupplyRoute15
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_winter_long_straight_old_supply_route_15
-  displayName: 招募广播
-  description: "冬2-8｜事件节点“招募广播”：A：公开播放 → 获得伊莱军事主张情报；B：销毁广播 → 获得芯片。"
+  displayName: "\u62DB\u52DF\u5E7F\u64AD"
+  description: "\u51AC2-8\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u62DB\u52DF\u5E7F\u64AD\u201D\uFF1AA\uFF1A\u516C\u5F00\u64AD\u653E
+    \u2192 \u83B7\u5F97\u4F0A\u83B1\u519B\u4E8B\u4E3B\u5F20\u60C5\u62A5\uFF1BB\uFF1A\u9500\u6BC1\u5E7F\u64AD
+    \u2192 \u83B7\u5F97\u82AF\u7247\u3002"
   roadIndex: 15
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 45cf09dc4e50428398b37de8db3e9fa7, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -4921643809562629903, guid: 6a9d27f4d1d55614fa5f583d07a136a4, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 0.8, y: 0.8}
+    z: 0
+  mapSprite: {fileID: -4921643809562629903, guid: 6a9d27f4d1d55614fa5f583d07a136a4, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: fb3c8acb5c3a4d5f8ca60a7c63b3ddef, type: 2}
@@ -28,4 +40,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

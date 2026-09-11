@@ -59,9 +59,11 @@ namespace CircleWar
         private bool cachedInitialPose;
         private bool isFacingRight = true;
         private float nextAllowedFireTime;
+        private CombatFeelFeedback feelFeedback;
 
         private void Awake()
         {
+            if (GetComponent<PlayerJump>() == null) gameObject.AddComponent<PlayerJump>();
             ResolveReferences();
             CacheInitialPose();
         }
@@ -236,6 +238,14 @@ namespace CircleWar
             Vector2 shootViewPosition = shootPoint.position;
 
             SpawnBullet(shootViewPosition, fireViewDirection.normalized);
+            if (Application.isPlaying)
+            {
+                if (feelFeedback == null)
+                {
+                    feelFeedback = CombatFeelFeedback.GetOrAdd(gameObject);
+                }
+                feelFeedback.PlayShot(shootPoint, hand);
+            }
             nextAllowedFireTime = Time.time + fireCooldown;
         }
 
@@ -256,6 +266,7 @@ namespace CircleWar
             int currentIndustry = state.GetResourceAmount(industryResourceId);
             if (currentIndustry < industryCostPerShot)
             {
+                gameHud.ShowResourceInsufficient(industryResourceId, industryCostPerShot - currentIndustry);
                 return false;
             }
 

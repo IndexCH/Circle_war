@@ -11,15 +11,27 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: WinterLongStraightOldSupplyRoute30
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_winter_long_straight_old_supply_route_30
-  displayName: 军事管制广播
-  description: "冬4-7｜事件节点“军事管制广播”：A：回应并拖延 → 获得伊莱指挥习惯情报；B：无视广播 → 获得芦苇花。"
+  displayName: "\u519B\u4E8B\u7BA1\u5236\u5E7F\u64AD"
+  description: "\u51AC4-7\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u519B\u4E8B\u7BA1\u5236\u5E7F\u64AD\u201D\uFF1AA\uFF1A\u56DE\u5E94\u5E76\u62D6\u5EF6
+    \u2192 \u83B7\u5F97\u4F0A\u83B1\u6307\u6325\u4E60\u60EF\u60C5\u62A5\uFF1BB\uFF1A\u65E0\u89C6\u5E7F\u64AD
+    \u2192 \u83B7\u5F97\u82A6\u82C7\u82B1\u3002"
   roadIndex: 30
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 196311edc89147cf9144b52f948e5366, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -4921643809562629903, guid: 885eef3f3efbbfe4bbee955253d58c53, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 0.8, y: 0.8}
+    z: 0
+  mapSprite: {fileID: -4921643809562629903, guid: 885eef3f3efbbfe4bbee955253d58c53, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 7ef5d8bf918b4e0ab22542ae7ea87167, type: 2}
@@ -28,4 +40,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

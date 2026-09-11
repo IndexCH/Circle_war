@@ -11,15 +11,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: WinterLongStraightOldSupplyRoute13
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_winter_long_straight_old_supply_route_13
-  displayName: 无人机侦察
-  description: "冬2-6｜怪物节点：无人机侦察。"
+  displayName: "\u65E0\u4EBA\u673A\u4FA6\u5BDF"
+  description: "\u51AC2-6\uFF5C\u602A\u7269\u8282\u70B9\uFF1A\u65E0\u4EBA\u673A\u4FA6\u5BDF\u3002"
   roadIndex: 13
   season: {fileID: 11400000, guid: d27f42dd52c196c42bf783ed7f4f33f1, type: 2}
   region: {fileID: 11400000, guid: e346912c8620410d8c16251fc7346e56, type: 2}
   contentType: 1
-  mapSprite: {fileID: 21300000, guid: 45cf09dc4e50428398b37de8db3e9fa7, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -6397580623275993540, guid: e37871d068bf95c43aab55426c6b907b, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 0.65, y: 0.65}
+    z: 0
+  mapSprite: {fileID: -6397580623275993540, guid: e37871d068bf95c43aab55426c6b907b, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -28,4 +38,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

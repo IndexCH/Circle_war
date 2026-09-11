@@ -2,7 +2,8 @@
     "name": "CircleWar.Runtime",
     "rootNamespace": "CircleWar",
     "references": [
-        "UnityEngine.UI"
+        "UnityEngine.UI",
+        "MoreMountains.Tools"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

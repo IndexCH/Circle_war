@@ -11,15 +11,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: AutumnOldFrontlineBufferZone12
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_12
-  displayName: 芯片
-  description: "秋2-5｜资源节点：芯片。"
+  displayName: "\u82AF\u7247"
+  description: "\u79CB2-5\uFF5C\u8D44\u6E90\u8282\u70B9\uFF1A\u82AF\u7247\u3002"
   roadIndex: 12
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: 26df71ef3fc64696a361bf2ec97179dd, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -7320046986400614101, guid: 8f46e2e5348462b4380dacc273600b39, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: -7320046986400614101, guid: 8f46e2e5348462b4380dacc273600b39, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,4 +42,3 @@ MonoBehaviour:
   - resourceId: industry
     amount: 5
   costs: []
-

@@ -11,15 +11,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: AutumnOldFrontlineBufferZone39
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_39
-  displayName: 精英炮塔
-  description: "秋5-8｜怪物节点：精英炮塔。"
+  displayName: "\u7CBE\u82F1\u70AE\u5854"
+  description: "\u79CB5-8\uFF5C\u602A\u7269\u8282\u70B9\uFF1A\u7CBE\u82F1\u70AE\u5854\u3002"
   roadIndex: 39
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 1
-  mapSprite: {fileID: 21300000, guid: 899e639904b24515b83a745b1d606351, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -712701909925368117, guid: 175209e14f6a80d438c824c20b1536cd, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: -712701909925368117, guid: 175209e14f6a80d438c824c20b1536cd, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -28,4 +38,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

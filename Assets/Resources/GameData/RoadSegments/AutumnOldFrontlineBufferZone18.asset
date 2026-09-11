@@ -14,13 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_18
   displayName: "\u94A2\u94C1"
-  description: "秋3-3｜资源节点：钢铁。"
+  description: "\u79CB3-3\uFF5C\u8D44\u6E90\u8282\u70B9\uFF1A\u94A2\u94C1\u3002"
   roadIndex: 18
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: f624e6c3f59f47f3ac7a5dce2cc54d36, type: 3}
-  y: 0
+  mapSpriteLayers:
+  - sprite: {fileID: -7893427593845575368, guid: a6f661b1c68352f4fab211ebbf28c7a6, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: -7893427593845575368, guid: a6f661b1c68352f4fab211ebbf28c7a6, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
   z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}

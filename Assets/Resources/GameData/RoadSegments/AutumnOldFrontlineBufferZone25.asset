@@ -11,15 +11,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: AutumnOldFrontlineBufferZone25
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_25
-  displayName: 玛蕾、塞维、格拉夫
-  description: "秋4-2｜NPC节点“玛蕾、塞维、格拉夫”：玛蕾希望塞维协助逃生；格拉夫要求优先重整防御。"
+  displayName: "\u739B\u857E\u3001\u585E\u7EF4\u3001\u683C\u62C9\u592B"
+  description: "\u79CB4-2\uFF5CNPC\u8282\u70B9\u201C\u739B\u857E\u3001\u585E\u7EF4\u3001\u683C\u62C9\u592B\u201D\uFF1A\u739B\u857E\u5E0C\u671B\u585E\u7EF4\u534F\u52A9\u9003\u751F\uFF1B\u683C\u62C9\u592B\u8981\u6C42\u4F18\u5148\u91CD\u6574\u9632\u5FA1\u3002"
   roadIndex: 25
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 2
-  mapSprite: {fileID: 21300000, guid: 86c03ecace9c401cb1c95dd461fb9995, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: 21300000, guid: aaaa0bf972b6b1e4489fa724b28995ab, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: 21300000, guid: aaaa0bf972b6b1e4489fa724b28995ab, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 11400000, guid: edde2826bbb341aeb70cadf0a811f3b9, type: 2}
   dialogue: {fileID: 11400000, guid: 4fdcb8031d134db583e41cac0449376f, type: 2}
   gameEvent: {fileID: 0}

@@ -11,15 +11,27 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: AutumnOldFrontlineBufferZone37
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_37
-  displayName: 逃生设备外壳
-  description: "秋5-6｜事件节点“逃生设备外壳”：A：质问格拉夫 → 格拉夫信任下降；B：暂不追问 → 格拉夫信任上升。"
+  displayName: "\u9003\u751F\u8BBE\u5907\u5916\u58F3"
+  description: "\u79CB5-6\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u9003\u751F\u8BBE\u5907\u5916\u58F3\u201D\uFF1AA\uFF1A\u8D28\u95EE\u683C\u62C9\u592B
+    \u2192 \u683C\u62C9\u592B\u4FE1\u4EFB\u4E0B\u964D\uFF1BB\uFF1A\u6682\u4E0D\u8FFD\u95EE
+    \u2192 \u683C\u62C9\u592B\u4FE1\u4EFB\u4E0A\u5347\u3002"
   roadIndex: 37
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 948a1c8aca0b40cbb242621a8d7be48b, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: 847511874115741484, guid: 9a1cbdf55ee92b04ba41d9d4e8bf2c1b, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 0.8, y: 0.8}
+    z: 0
+  mapSprite: {fileID: 847511874115741484, guid: 9a1cbdf55ee92b04ba41d9d4e8bf2c1b, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: 78ba61bfe54b4416b8a8af6090c4cad0, type: 2}
@@ -28,4 +40,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

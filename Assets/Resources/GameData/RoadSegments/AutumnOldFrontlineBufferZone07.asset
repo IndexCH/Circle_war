@@ -11,15 +11,27 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: AutumnOldFrontlineBufferZone07
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_07
-  displayName: 残骸医疗箱
-  description: "秋1-8｜事件节点“残骸医疗箱”：A：读取急救记录 → 最大生命+1；B：拆作材料 → 获得橡胶。"
+  displayName: "\u6B8B\u9AB8\u533B\u7597\u7BB1"
+  description: "\u79CB1-8\uFF5C\u4E8B\u4EF6\u8282\u70B9\u201C\u6B8B\u9AB8\u533B\u7597\u7BB1\u201D\uFF1AA\uFF1A\u8BFB\u53D6\u6025\u6551\u8BB0\u5F55
+    \u2192 \u6700\u5927\u751F\u547D+1\uFF1BB\uFF1A\u62C6\u4F5C\u6750\u6599 \u2192
+    \u83B7\u5F97\u6A61\u80F6\u3002"
   roadIndex: 7
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 4
-  mapSprite: {fileID: 21300000, guid: 4cb996169ac64795b93caf7409d348ed, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: 3968539199397004180, guid: 1bceeecf8dd38dc4d8a49888a949eb1e, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: 3968539199397004180, guid: 1bceeecf8dd38dc4d8a49888a949eb1e, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 11400000, guid: a202192e32f84dc49658a3a057d6e85a, type: 2}
@@ -28,4 +40,3 @@ MonoBehaviour:
   facilityModule: {fileID: 0}
   rewards: []
   costs: []
-

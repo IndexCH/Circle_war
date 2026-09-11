@@ -11,15 +11,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5d02c0cc0424bb8a671a4b2a66ec101, type: 3}
   m_Name: AutumnOldFrontlineBufferZone09
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   definitionId: road_autumn_old_frontline_buffer_zone_09
-  displayName: 橡胶
-  description: "秋2-2｜资源节点：橡胶。"
+  displayName: "\u6A61\u80F6"
+  description: "\u79CB2-2\uFF5C\u8D44\u6E90\u8282\u70B9\uFF1A\u6A61\u80F6\u3002"
   roadIndex: 9
   season: {fileID: 11400000, guid: b453f8c15ab586d429a12e6b854f8849, type: 2}
   region: {fileID: 11400000, guid: 6af2d3061c2e4366b0183690f04298b2, type: 2}
   contentType: 3
-  mapSprite: {fileID: 21300000, guid: dfde4595695746ac8eb395f89e04f0c0, type: 3}
+  mapSpriteLayers:
+  - sprite: {fileID: -1502498846177436413, guid: 96df5a5656cc4bb4c9292c5fb5df6ca2, type: 3}
+    offset: {x: 0, y: -0.22}
+    scale: {x: 1, y: 1}
+    z: 0
+  mapSprite: {fileID: -1502498846177436413, guid: 96df5a5656cc4bb4c9292c5fb5df6ca2, type: 3}
+  additionalMapSprites: []
+  npcMapSprite: {fileID: 0}
+  npcMapSpriteOffset: {x: 0, y: 0}
+  y: -0.22
+  z: 0
   character: {fileID: 0}
   dialogue: {fileID: 0}
   gameEvent: {fileID: 0}
@@ -32,4 +42,3 @@ MonoBehaviour:
   - resourceId: industry
     amount: 5
   costs: []
-

@@ -45,9 +45,8 @@ namespace CircleWar
         [SerializeField] private float meleeRange = 0.48f;
         [Min(0.01f)]
         [SerializeField] private float meleeCooldown = 0.85f;
-        [SerializeField] private float meleeHoldAheadAngleDegrees = 10f;
-        [Min(0.01f)]
-        [SerializeField] private float meleeAttackAngleTolerance = 0.25f;
+        [SerializeField, Min(0.1f)] private float meleeRetreatDistance = 1.35f;
+        [SerializeField, Min(0.1f)] private float meleeChargeSpeedMultiplier = 1.6f;
         [Min(0.01f)]
         [SerializeField] private float meleeAttackDuration = 0.26f;
         [Min(0f)]
@@ -67,6 +66,11 @@ namespace CircleWar
         private float meleeAttackAge;
         private Vector3 bodyBaseLocalScale = Vector3.one;
         private bool isMeleeAttacking;
+        public enum MeleePhase { Approach, Strike, Retreat, Recovery }
+        private MeleePhase meleePhase;
+        private float retreatSide = 1f;
+        private float retreatAge;
+        public MeleePhase CurrentMeleePhase => meleePhase;
         private bool hasAppliedMeleeDamage;
         private bool hasBodyBasePose;
         private bool isConfigured;
@@ -88,26 +92,7 @@ namespace CircleWar
 
         public static bool IsAnyMeleeBlockingForward(CircleMapView mapView)
         {
-            if (mapView == null)
-            {
-                return false;
-            }
-
-            for (int index = ActiveEnemies.Count - 1; index >= 0; index--)
-            {
-                GroundEnemy enemy = ActiveEnemies[index];
-                if (enemy == null)
-                {
-                    ActiveEnemies.RemoveAt(index);
-                    continue;
-                }
-
-                if (enemy.BlocksForwardMovement(mapView))
-                {
-                    return true;
-                }
-            }
-
+            // Enemies attack by range; player movement never uses body blocking.
             return false;
         }
 
@@ -134,6 +119,7 @@ namespace CircleWar
             currentHealth = progressBinding != null ? progressBinding.CurrentHealth : MaxHealth;
             isDead = false;
             isConfigured = true;
+            ResetMeleeCycle();
             UpdateWorldPosition();
             EnsureVisuals();
             ApplyViewTransform();
@@ -157,6 +143,7 @@ namespace CircleWar
 
         private void OnDisable()
         {
+            ResetMeleeCycle();
             ActiveEnemies.Remove(this);
             CombatEnemyRegistry.Unregister(this);
         }
@@ -291,12 +278,30 @@ namespace CircleWar
             if (attackType == EnemyAttackType.GroundMelee)
             {
                 CircleMapView resolvedMapView = ResolveCircleMapView();
-                float targetAngle = GetMeleeHoldAngle(resolvedMapView);
-                float clockwiseDelta = GetClockwiseAngleDelta(angleDegrees, targetAngle);
-                if (clockwiseDelta > meleeAttackAngleTolerance)
+                if (resolvedMapView == null || playerTarget == null) return;
+                float targetAngle = resolvedMapView.PlayerAngleDegrees;
+                if (meleePhase == MeleePhase.Approach)
                 {
-                    float step = angularSpeedDegrees * Time.deltaTime;
-                    angleDegrees -= Mathf.Min(clockwiseDelta, step);
+                    float gap = Mathf.DeltaAngle(targetAngle, angleDegrees);
+                    if (Mathf.Abs(gap) > .01f) retreatSide = Mathf.Sign(gap);
+                    angleDegrees = Mathf.MoveTowardsAngle(angleDegrees, targetAngle,
+                        angularSpeedDegrees * meleeChargeSpeedMultiplier * Time.deltaTime);
+                }
+                else if (meleePhase == MeleePhase.Retreat)
+                {
+                    retreatAge += Time.deltaTime;
+                    float retreatAngle = meleeRetreatDistance / Mathf.Max(.1f, radius) * Mathf.Rad2Deg;
+                    float goal = targetAngle + retreatSide * retreatAngle;
+                    angleDegrees = Mathf.MoveTowardsAngle(angleDegrees, goal, angularSpeedDegrees * Time.deltaTime);
+                    if (Mathf.Abs(Mathf.DeltaAngle(angleDegrees, goal)) < .3f || retreatAge >= 1.2f)
+                    {
+                        meleePhase = MeleePhase.Recovery;
+                        nextMeleeTime = Time.time + meleeCooldown;
+                    }
+                }
+                else if (meleePhase == MeleePhase.Recovery && Time.time >= nextMeleeTime)
+                {
+                    meleePhase = MeleePhase.Approach;
                 }
             }
 
@@ -381,6 +386,7 @@ namespace CircleWar
         private void TryMeleeAttack()
         {
             if (attackType != EnemyAttackType.GroundMelee ||
+                meleePhase != MeleePhase.Approach ||
                 isMeleeAttacking ||
                 Time.time < nextMeleeTime ||
                 !IsMeleeInAttackPosition(ResolveCircleMapView()))
@@ -389,6 +395,7 @@ namespace CircleWar
             }
 
             isMeleeAttacking = true;
+            meleePhase = MeleePhase.Strike;
             hasAppliedMeleeDamage = false;
             meleeAttackAge = 0f;
         }
@@ -411,7 +418,8 @@ namespace CircleWar
 
             if (!hasAppliedMeleeDamage && progress >= 0.5f)
             {
-                if (IsMeleeInAttackPosition(ResolveCircleMapView()))
+                CircleMapView map = ResolveCircleMapView();
+                if (map != null && Vector2.Distance(worldPosition, map.PlayerWorldPosition) <= meleeRange)
                 {
                     ApplyMeleeDamage();
                 }
@@ -422,7 +430,8 @@ namespace CircleWar
             if (progress >= 1f)
             {
                 isMeleeAttacking = false;
-                nextMeleeTime = Time.time + meleeCooldown;
+                meleePhase = MeleePhase.Retreat;
+                retreatAge = 0f;
                 ResetBodyPose();
             }
         }
@@ -440,14 +449,13 @@ namespace CircleWar
             CombatDamage.TryApplyPlayerDamage(ResolveGameHud(), GetAttackDamage());
         }
 
-        private bool BlocksForwardMovement(CircleMapView mapView)
+        private void ResetMeleeCycle()
         {
-            return isActiveAndEnabled &&
-                IsAlive &&
-                isConfigured &&
-                attackType == EnemyAttackType.GroundMelee &&
-                ReferenceEquals(circleMapView, mapView) &&
-                IsMeleeInAttackPosition(mapView);
+            meleePhase = MeleePhase.Approach;
+            isMeleeAttacking = false;
+            hasAppliedMeleeDamage = false;
+            meleeAttackAge = retreatAge = nextMeleeTime = 0f;
+            ResetBodyPose();
         }
 
         private bool IsMeleeInAttackPosition(CircleMapView resolvedMapView)
@@ -457,22 +465,11 @@ namespace CircleWar
                 return false;
             }
 
-            float angleGap = Mathf.Abs(Mathf.DeltaAngle(angleDegrees, GetMeleeHoldAngle(resolvedMapView)));
-            if (angleGap > meleeAttackAngleTolerance)
-            {
-                return false;
-            }
-
-            // The melee enemy intentionally holds an angular offset in front of the player,
-            // so center-to-center distance includes arc length and grows with hold angle.
-            float radialGap = Mathf.Abs(radius - resolvedMapView.PlayerRadius);
-            return radialGap <= meleeRange;
-        }
-
-        private float GetMeleeHoldAngle(CircleMapView resolvedMapView)
-        {
-            float playerAngle = resolvedMapView != null ? resolvedMapView.PlayerAngleDegrees : angleDegrees;
-            return playerAngle + meleeHoldAheadAngleDegrees;
+            // Start the swing at the player's ground location, then test their actual
+            // position at impact. A jump can dodge a swing without freezing this cycle.
+            Vector2 groundTarget = resolvedMapView.DiskCenter +
+                CircleWorldSpace.DirectionFromAngleDegrees(resolvedMapView.PlayerAngleDegrees) * resolvedMapView.PlayerRadius;
+            return Vector2.Distance(worldPosition, groundTarget) <= meleeRange;
         }
 
         private void SpawnBullet(Vector2 shootWorldPosition, Vector2 direction)
@@ -556,6 +553,10 @@ namespace CircleWar
             currentHealth = progressBinding != null
                 ? progressBinding.ApplyDamage(safeDamage)
                 : Mathf.Max(0, currentHealth - safeDamage);
+            if (Application.isPlaying && currentHealth > 0)
+            {
+                CombatFeelFeedback.GetOrAdd(gameObject).PlayHit(bodyRenderer);
+            }
             if (currentHealth <= 0)
             {
                 Die();
@@ -572,6 +573,10 @@ namespace CircleWar
             }
 
             isDead = true;
+            if (Application.isPlaying)
+            {
+                CombatFeelFeedback.GetOrAdd(gameObject).PlayDeath(bodyRenderer);
+            }
             progressBinding?.ReportDefeated();
             ActiveEnemies.Remove(this);
             CombatEnemyRegistry.Unregister(this);
