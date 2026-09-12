@@ -74,6 +74,7 @@ namespace CircleWar
             text.font = reference != null ? reference.font : Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             text.fontSize = isGain ? settings.GainFontSize : 22;
             text.fontStyle = isGain ? FontStyle.Bold : FontStyle.Normal;
+            PixelHudTypography.ApplyToGeneratedText(text, reference);
             text.alignment = isGain ? TextAnchor.MiddleLeft : TextAnchor.MiddleCenter;
             text.color = color;
             text.raycastTarget = false;

@@ -1,0 +1,24 @@
+[
+  {
+    "key": "summer-moss-ring",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/moss_vine_ring_2k_enhanced.png"
+    ],
+    "prompt": "Use case: style-transfer. Edit target Image 1: the game's moss-and-root circular terrain ring. Redraw this SAME complete circular annulus as crisp fine 16-bit pixel game terrain, preserving its exact circular framing, very thin band proportion, sparse clumps of moss, silhouette, and natural original dark olive green, muted yellow-green and gray-brown root/soil colors. Fine readable pixel clusters, restrained surface variation, no confetti noise. Moss should face into the circular opening as a walkable inner edge; brown roots/earth on the outer band. Full 360-degree circle, flat front-on orthographic view, no perspective ellipse. Center the circle, equal margin on four edges. Transparent alpha both inside AND outside the ring, absolutely no filled white background or checkerboard pixels. No ground plane, sky, text, other objects or UI. 2048 by 2048 square, keep the ring thin like reference with an enormous empty transparent center. This is the summer counterpart to an existing fine pixel salt terrain ring; do not turn it into a thick wreath."
+  },
+  {
+    "key": "summer-upward-dusk",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/ArtStyles/PixelBackgrounds/pixel-background-upward-salt-dusk-v6.png",
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/moss_vine_ring_2k_enhanced.png"
+    ],
+    "prompt": "Use case: lighting-weather / style-transfer. Image 1 is the existing approved pixel sky background and upward-looking composition to preserve. Image 2 is ONLY a color/material reference for a low-humidity summer marsh's dark olive moss and gray-brown soil; DO NOT put the ring or plants in the sky. Make a matching summer evening sky background, looking from the ground almost vertically overhead, seeing the UNDERSIDES of large overhead cloud banks and open depth above. Opaque full-bleed 16:9 wide background. Preserve Image 1's fine crisp 16-bit pixel cluster treatment and uneven naturally overhead cloud distribution. Muted olive-gray and warm gray cloud undersides with restrained dull ochre/ivory sunset light through gaps, a slightly hazy humid feeling, lower contrast than foreground props. Keep original earthy neutral direction, no pink/magenta cast, no saturated yellow/orange wash, no bright blue daylight. No horizon, no ground, no water, no mountains, no trees, no buildings, no characters, no moon or sun disk, no text or frame. Do not line clouds into horizontal side-view strips. This must look like looking UP, not looking straight forward."
+  },
+  {
+    "key": "summer-moss-ground-contact",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/moss_vine_ring_2k_enhanced.png"
+    ],
+    "prompt": "Use case: stylized-concept. Image 1 is material and palette reference only. Create ONE isolated thin horizontal strip of summer marsh ground-contact dressing for placing in front of the lower corner of game supply crates: small dark olive moss clumps, muted green root fibers and tiny irregular gray-brown earth crumbs. It will later be deformed into a circular arc by Unity geometry. Match the reference's original muted olive greens and gray-brown earth precisely; no salt white, no bright lime, no yellow tint, no purple. Fine crisp 16-bit pixel art, deliberately shaped small pixel clusters, clean stepping, no soft painting or blurry antialiasing. Long organic low horizontal base, irregular upper silhouette with two restrained uneven moss hummocks, subtle brown root line underneath; not a straight rectangular ledge. Content width to height approximately 9:1 with small transparent margin. True transparent RGBA background, including holes between isolated tips, no painted checkerboard, no white or black canvas. No crate, no large rocks, no tall grass, no scene, no cast shadow rectangle, no labels or text. Canvas wide 3:1 with thin strip centered."
+  }
+]

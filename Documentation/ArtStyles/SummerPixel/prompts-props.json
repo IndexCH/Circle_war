@@ -1,0 +1,86 @@
+[
+  {
+    "key": "summer-seaweed-large",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/图层 25.png"
+    ],
+    "prompt": "Use case: style-transfer. Image 1 is the edit target: an existing summer marsh game prop. Redraw the SAME prop as clean fine 16-bit pixel art, strong readable pixel clusters and crisp stair-step silhouette, limited calm texture and thin dark pixel outlines matching an established post-apocalyptic pixel game. Preserve the reference's original colors, exact proportions, pose, perspective, distinctive components and material identity; no overall warm, pink, purple or yellow filter. Render enough detail to be legible at a small gameplay size, no blurry painted shading, no large chunky mosaic. Keep complete subject including roots/feet/debris, centered and fully visible with a small transparent margin, fill most of canvas. True transparent alpha background; ALL existing white/black rectangles or smeared transparent-edge colors are unwanted backdrop and must be removed. NO checkerboard pattern drawn into pixels, no floor plane, no extra plants, no other items, no captions, UI or watermark. Subject: Low broad clump of curling marsh seaweed with olive gray lobes and faint dark lavender at root, silhouette like the reference."
+  },
+  {
+    "key": "summer-cattails",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/图层 23.png"
+    ],
+    "prompt": "Use case: style-transfer. Image 1 is the edit target: an existing summer marsh game prop. Redraw the SAME prop as clean fine 16-bit pixel art, strong readable pixel clusters and crisp stair-step silhouette, limited calm texture and thin dark pixel outlines matching an established post-apocalyptic pixel game. Preserve the reference's original colors, exact proportions, pose, perspective, distinctive components and material identity; no overall warm, pink, purple or yellow filter. Render enough detail to be legible at a small gameplay size, no blurry painted shading, no large chunky mosaic. Keep complete subject including roots/feet/debris, centered and fully visible with a small transparent margin, fill most of canvas. True transparent alpha background; ALL existing white/black rectangles or smeared transparent-edge colors are unwanted backdrop and must be removed. NO checkerboard pattern drawn into pixels, no floor plane, no extra plants, no other items, no captions, UI or watermark. Subject: Tall clustered cattails, narrow olive green leaves and several beige and brown cylindrical seedheads, same grouping and relative lengths."
+  },
+  {
+    "key": "summer-fern",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/图层 30.png"
+    ],
+    "prompt": "Use case: style-transfer. Image 1 is the edit target: an existing summer marsh game prop. Redraw the SAME prop as clean fine 16-bit pixel art, strong readable pixel clusters and crisp stair-step silhouette, limited calm texture and thin dark pixel outlines matching an established post-apocalyptic pixel game. Preserve the reference's original colors, exact proportions, pose, perspective, distinctive components and material identity; no overall warm, pink, purple or yellow filter. Render enough detail to be legible at a small gameplay size, no blurry painted shading, no large chunky mosaic. Keep complete subject including roots/feet/debris, centered and fully visible with a small transparent margin, fill most of canvas. True transparent alpha background; ALL existing white/black rectangles or smeared transparent-edge colors are unwanted backdrop and must be removed. NO checkerboard pattern drawn into pixels, no floor plane, no extra plants, no other items, no captions, UI or watermark. Subject: The same five-frond upright olive gray fern cluster, jagged leaflets and visible rib, preserve open gaps."
+  },
+  {
+    "key": "summer-reeds",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/图层 28.png"
+    ],
+    "prompt": "Use case: style-transfer. Image 1 is the edit target: an existing summer marsh game prop. Redraw the SAME prop as clean fine 16-bit pixel art, strong readable pixel clusters and crisp stair-step silhouette, limited calm texture and thin dark pixel outlines matching an established post-apocalyptic pixel game. Preserve the reference's original colors, exact proportions, pose, perspective, distinctive components and material identity; no overall warm, pink, purple or yellow filter. Render enough detail to be legible at a small gameplay size, no blurry painted shading, no large chunky mosaic. Keep complete subject including roots/feet/debris, centered and fully visible with a small transparent margin, fill most of canvas. True transparent alpha background; ALL existing white/black rectangles or smeared transparent-edge colors are unwanted backdrop and must be removed. NO checkerboard pattern drawn into pixels, no floor plane, no extra plants, no other items, no captions, UI or watermark. Subject: The same tall pointed marsh reed/grass tuft, dark olive green long blades, dense bottom roots, remove the small unrelated four-point spark at bottom right."
+  },
+  {
+    "key": "summer-dandelion",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/图层 22.png"
+    ],
+    "prompt": "Use case: style-transfer. Image 1 is the edit target: an existing summer marsh game prop. Redraw the SAME prop as clean fine 16-bit pixel art, strong readable pixel clusters and crisp stair-step silhouette, limited calm texture and thin dark pixel outlines matching an established post-apocalyptic pixel game. Preserve the reference's original colors, exact proportions, pose, perspective, distinctive components and material identity; no overall warm, pink, purple or yellow filter. Render enough detail to be legible at a small gameplay size, no blurry painted shading, no large chunky mosaic. Keep complete subject including roots/feet/debris, centered and fully visible with a small transparent margin, fill most of canvas. True transparent alpha background; ALL existing white/black rectangles or smeared transparent-edge colors are unwanted backdrop and must be removed. NO checkerboard pattern drawn into pixels, no floor plane, no extra plants, no other items, no captions, UI or watermark. Subject: The same single white dandelion seed head on tall thin stalk, jagged gray green basal leaves, slender vertical proportion."
+  },
+  {
+    "key": "summer-marsh-leaves",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/图层 29.png"
+    ],
+    "prompt": "Use case: style-transfer. Image 1 is the edit target: an existing summer marsh game prop. Redraw the SAME prop as clean fine 16-bit pixel art, strong readable pixel clusters and crisp stair-step silhouette, limited calm texture and thin dark pixel outlines matching an established post-apocalyptic pixel game. Preserve the reference's original colors, exact proportions, pose, perspective, distinctive components and material identity; no overall warm, pink, purple or yellow filter. Render enough detail to be legible at a small gameplay size, no blurry painted shading, no large chunky mosaic. Keep complete subject including roots/feet/debris, centered and fully visible with a small transparent margin, fill most of canvas. True transparent alpha background; ALL existing white/black rectangles or smeared transparent-edge colors are unwanted backdrop and must be removed. NO checkerboard pattern drawn into pixels, no floor plane, no extra plants, no other items, no captions, UI or watermark. Subject: The same broad marsh leaf cluster, multiple long curved stems, muted olive green large leaves and smaller reeds to the right, wide silhouette."
+  },
+  {
+    "key": "summer-seaweed-small",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/图层 24.png"
+    ],
+    "prompt": "Use case: style-transfer. Image 1 is the edit target: an existing summer marsh game prop. Redraw the SAME prop as clean fine 16-bit pixel art, strong readable pixel clusters and crisp stair-step silhouette, limited calm texture and thin dark pixel outlines matching an established post-apocalyptic pixel game. Preserve the reference's original colors, exact proportions, pose, perspective, distinctive components and material identity; no overall warm, pink, purple or yellow filter. Render enough detail to be legible at a small gameplay size, no blurry painted shading, no large chunky mosaic. Keep complete subject including roots/feet/debris, centered and fully visible with a small transparent margin, fill most of canvas. True transparent alpha background; ALL existing white/black rectangles or smeared transparent-edge colors are unwanted backdrop and must be removed. NO checkerboard pattern drawn into pixels, no floor plane, no extra plants, no other items, no captions, UI or watermark. Subject: The same short small upward branching blue gray/green marsh algae clump, thin pale rims and dark contours."
+  },
+  {
+    "key": "summer-storage-pod",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/ChatGPT Image 2026年8月28日 15_11_17.png"
+    ],
+    "prompt": "Use case: style-transfer. Image 1 is the edit target: an existing summer marsh game prop. Redraw the SAME prop as clean fine 16-bit pixel art, strong readable pixel clusters and crisp stair-step silhouette, limited calm texture and thin dark pixel outlines matching an established post-apocalyptic pixel game. Preserve the reference's original colors, exact proportions, pose, perspective, distinctive components and material identity; no overall warm, pink, purple or yellow filter. Render enough detail to be legible at a small gameplay size, no blurry painted shading, no large chunky mosaic. Keep complete subject including roots/feet/debris, centered and fully visible with a small transparent margin, fill most of canvas. True transparent alpha background; ALL existing white/black rectangles or smeared transparent-edge colors are unwanted backdrop and must be removed. NO checkerboard pattern drawn into pixels, no floor plane, no extra plants, no other items, no captions, UI or watermark. Subject: The same abandoned horizontal dark gray brown storage capsule with octagonal end door on the right, broken upper plating, small debris stones, front three-quarter view."
+  },
+  {
+    "key": "summer-navigation-buoy",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/ChatGPT Image 2026年8月28日 15_11_24.png"
+    ],
+    "prompt": "Use case: style-transfer. Image 1 is the edit target: an existing summer marsh game prop. Redraw the SAME prop as clean fine 16-bit pixel art, strong readable pixel clusters and crisp stair-step silhouette, limited calm texture and thin dark pixel outlines matching an established post-apocalyptic pixel game. Preserve the reference's original colors, exact proportions, pose, perspective, distinctive components and material identity; no overall warm, pink, purple or yellow filter. Render enough detail to be legible at a small gameplay size, no blurry painted shading, no large chunky mosaic. Keep complete subject including roots/feet/debris, centered and fully visible with a small transparent margin, fill most of canvas. True transparent alpha background; ALL existing white/black rectangles or smeared transparent-edge colors are unwanted backdrop and must be removed. NO checkerboard pattern drawn into pixels, no floor plane, no extra plants, no other items, no captions, UI or watermark. Subject: The same damaged navigation buoy with muted rust orange and ivory bands, antenna, small orange lantern, circular concrete base, preserve tall conical silhouette and cracks."
+  },
+  {
+    "key": "summer-water-purifier",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/ChatGPT Image 2026年8月28日 15_11_29.png"
+    ],
+    "prompt": "Use case: style-transfer. Image 1 is the edit target: an existing summer marsh game prop. Redraw the SAME prop as clean fine 16-bit pixel art, strong readable pixel clusters and crisp stair-step silhouette, limited calm texture and thin dark pixel outlines matching an established post-apocalyptic pixel game. Preserve the reference's original colors, exact proportions, pose, perspective, distinctive components and material identity; no overall warm, pink, purple or yellow filter. Render enough detail to be legible at a small gameplay size, no blurry painted shading, no large chunky mosaic. Keep complete subject including roots/feet/debris, centered and fully visible with a small transparent margin, fill most of canvas. True transparent alpha background; ALL existing white/black rectangles or smeared transparent-edge colors are unwanted backdrop and must be removed. NO checkerboard pattern drawn into pixels, no floor plane, no extra plants, no other items, no captions, UI or watermark. Subject: The same tall weathered gray olive water purifier, rectangular four-legged cage, large center cylindrical tank, narrow blue-gray tank on left and control box on right, pipes and exhaust at top. Keep water-drop triangular symbols only, no added words."
+  },
+  {
+    "key": "summer-ruined-doorway",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/ChatGPT Image 2026年8月29日 22_23_07.png"
+    ],
+    "prompt": "Use case: style-transfer. Image 1 is the edit target: an existing summer marsh game prop. Redraw the SAME prop as clean fine 16-bit pixel art, strong readable pixel clusters and crisp stair-step silhouette, limited calm texture and thin dark pixel outlines matching an established post-apocalyptic pixel game. Preserve the reference's original colors, exact proportions, pose, perspective, distinctive components and material identity; no overall warm, pink, purple or yellow filter. Render enough detail to be legible at a small gameplay size, no blurry painted shading, no large chunky mosaic. Keep complete subject including roots/feet/debris, centered and fully visible with a small transparent margin, fill most of canvas. True transparent alpha background; ALL existing white/black rectangles or smeared transparent-edge colors are unwanted backdrop and must be removed. NO checkerboard pattern drawn into pixels, no floor plane, no extra plants, no other items, no captions, UI or watermark. Subject: The same wide ruined gray concrete bunker entrance with tall dark doorway right of center and sloping rubble mound on both sides, preserve dark original gray-brown palette and structure."
+  },
+  {
+    "key": "summer-escape-pod",
+    "refs": [
+      "D:/Unity Projects/Circle_War/Assets/Resources/Scence/沼泽地/ChatGPT Image 2026年8月29日 22_23_18.png"
+    ],
+    "prompt": "Use case: style-transfer. Image 1 is the edit target: an existing summer marsh game prop. Redraw the SAME prop as clean fine 16-bit pixel art, strong readable pixel clusters and crisp stair-step silhouette, limited calm texture and thin dark pixel outlines matching an established post-apocalyptic pixel game. Preserve the reference's original colors, exact proportions, pose, perspective, distinctive components and material identity; no overall warm, pink, purple or yellow filter. Render enough detail to be legible at a small gameplay size, no blurry painted shading, no large chunky mosaic. Keep complete subject including roots/feet/debris, centered and fully visible with a small transparent margin, fill most of canvas. True transparent alpha background; ALL existing white/black rectangles or smeared transparent-edge colors are unwanted backdrop and must be removed. NO checkerboard pattern drawn into pixels, no floor plane, no extra plants, no other items, no captions, UI or watermark. Subject: The same squat damaged ivory-gray escape capsule, tapered trapezoid walls, door on right, lower-right broken opening with wires, side window left, top antenna, fallen hatch and rubble underneath, preserve muted gray olive/rust markings."
+  }
+]

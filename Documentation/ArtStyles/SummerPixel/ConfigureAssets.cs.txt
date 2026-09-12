@@ -1,0 +1,41 @@
+using UnityEngine;using UnityEditor;using CircleWar;using System.IO;
+internal class CommandScript:IRunCommand{
+public void Execute(ExecutionResult result){
+if(EditorApplication.isPlaying)throw new System.Exception("Expected edit mode");
+string[] originals={"Assets/Resources/Scence/沼泽地/Gemini_Generated_Image_fvjet3fvjet3fvje1111.png","Assets/Resources/Scence/沼泽地/moss_vine_ring_2k_enhanced.png","Assets/Resources/Scence/沼泽地/图层 25.png","Assets/Resources/Scence/沼泽地/图层 23.png","Assets/Resources/Scence/沼泽地/图层 30.png","Assets/Resources/Scence/沼泽地/ChatGPT Image 2026年8月28日 15_11_17.png","Assets/Resources/Scence/沼泽地/图层 28.png","Assets/Resources/Scence/沼泽地/图层 22.png","Assets/Resources/Scence/沼泽地/ChatGPT Image 2026年8月28日 15_11_24.png","Assets/Resources/Scence/沼泽地/图层 29.png","Assets/Resources/GameData/RoadSegments/ChatGPT Image 2026年7月31日 06_52_06.png","Assets/Resources/GameData/RoadSegments/ChatGPT Image 2026年7月31日 06_52_01.png","Assets/Resources/GameData/RoadSegments/call_9v6OWhxFCrP6I4vqh7NidBQZ.png","Assets/Resources/Scence/沼泽地/图层 31.png","Assets/Resources/GameData/RoadSegments/ChatGPT Image 2026年7月31日 06_52_35.png","Assets/Resources/Scence/沼泽地/图层 24.png","Assets/Resources/GameData/RoadSegments/ChatGPT Image 2026年8月28日 15_11_29.png","Assets/Resources/Scence/沼泽地/ChatGPT Image 2026年8月29日 22_23_07.png","Assets/Resources/Scence/沼泽地/ChatGPT Image 2026年8月29日 22_23_18.png","Assets/Resources/GameData/RoadSegments/ChatGPT Image 2026年7月31日 06_52_31.png","Assets/Resources/Scence/沼泽地/ChatGPT Image 2026年8月28日 15_11_29.png"};
+string[] pixels={"Assets/ArtStyles/SummerPixel/summer-upward-dusk.png","Assets/ArtStyles/SummerPixel/summer-moss-ring.png","Assets/ArtStyles/SummerPixel/summer-seaweed-large.png","Assets/ArtStyles/SummerPixel/summer-cattails.png","Assets/ArtStyles/SummerPixel/summer-fern.png","Assets/ArtStyles/SummerPixel/summer-storage-pod.png","Assets/ArtStyles/SummerPixel/summer-reeds.png","Assets/ArtStyles/SummerPixel/summer-dandelion.png","Assets/ArtStyles/SummerPixel/summer-navigation-buoy.png","Assets/ArtStyles/SummerPixel/summer-marsh-leaves.png","Assets/ArtStyles/SpringPixel/upright-supply-crate.png","Assets/ArtStyles/SpringPixel/wide-supply-chest.png","Assets/ArtStyles/SpringPixel/broken-terminal.png","Assets/ArtStyles/SummerPixel/summer-dandelion.png","Assets/ArtStyles/SpringPixel/severed-cables.png","Assets/ArtStyles/SummerPixel/summer-seaweed-small.png","Assets/ArtStyles/SummerPixel/summer-water-purifier.png","Assets/ArtStyles/SummerPixel/summer-ruined-doorway.png","Assets/ArtStyles/SummerPixel/summer-escape-pod.png","Assets/ArtStyles/SpringPixel/industrial-ruins.png","Assets/ArtStyles/SummerPixel/summer-water-purifier.png"};
+string[] keys={"summer-upward-dusk","summer-moss-ring","summer-seaweed-large","summer-cattails","summer-fern","summer-storage-pod","summer-reeds","summer-dandelion","summer-navigation-buoy","summer-marsh-leaves","","","","summer-dandelion","","summer-seaweed-small","summer-water-purifier","summer-ruined-doorway","summer-escape-pod","","summer-water-purifier"};
+bool[] contacts={false,false,false,false,false,true,false,false,false,false,true,true,false,false,false,false,false,false,false,false,false};
+foreach(string path in Directory.GetFiles("Assets/ArtStyles/SummerPixel","*.png")){
+ AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceSynchronousImport);
+ var importer=AssetImporter.GetAtPath(path) as TextureImporter;result.RegisterObjectModification(importer);
+ importer.textureType=TextureImporterType.Sprite;importer.spriteImportMode=SpriteImportMode.Single;importer.spritePixelsPerUnit=100f;
+ importer.filterMode=FilterMode.Point;importer.textureCompression=TextureImporterCompression.Uncompressed;importer.mipmapEnabled=false;importer.sRGBTexture=true;importer.alphaIsTransparency=true;importer.wrapMode=TextureWrapMode.Clamp;importer.maxTextureSize=4096;
+ var ts=new TextureImporterSettings();importer.ReadTextureSettings(ts);ts.spriteMeshType=SpriteMeshType.FullRect;ts.spriteAlignment=(int)SpriteAlignment.Center;ts.spritePivot=new Vector2(.5f,.5f);importer.SetTextureSettings(ts);importer.SaveAndReimport();
+}
+string folder="Assets/ArtStyles/SummerPixel/OriginalColorLuts";if(!AssetDatabase.IsValidFolder(folder))AssetDatabase.CreateFolder("Assets/ArtStyles/SummerPixel","OriginalColorLuts");
+foreach(string file in Directory.GetFiles("C:/Users/Administrator/Downloads/动作素材/summer-pixel/tables","*.rgba16")){
+ string key=Path.GetFileNameWithoutExtension(file), path=folder+"/"+key+".asset";
+ var table=AssetDatabase.LoadAssetAtPath<Texture3D>(path);bool created=table==null;
+ if(created)table=new Texture3D(32,32,32,TextureFormat.RGBAHalf,false);else result.RegisterObjectModification(table);
+ table.name=key;table.filterMode=FilterMode.Bilinear;table.wrapMode=TextureWrapMode.Clamp;table.SetPixelData<byte>(File.ReadAllBytes(file),0);table.Apply(false,true);
+ if(created){result.RegisterObjectCreation(table);AssetDatabase.CreateAsset(table,path);}EditorUtility.SetDirty(table);AssetDatabase.SaveAssetIfDirty(table);
+}
+string settingsPath="Assets/Resources/ArtStyles/SummerPixelArtStyle.asset";
+var summer=AssetDatabase.LoadAssetAtPath<SpringPixelArtStyle>(settingsPath);
+if(summer==null){summer=ScriptableObject.CreateInstance<SpringPixelArtStyle>();summer.name="SummerPixelArtStyle";result.RegisterObjectCreation(summer);AssetDatabase.CreateAsset(summer,settingsPath);}else result.RegisterObjectModification(summer);
+var spring=AssetDatabase.LoadAssetAtPath<SpringPixelArtStyle>("Assets/Resources/ArtStyles/SpringPixelArtStyle.asset");var springPairs=new SerializedObject(spring).FindProperty("sprites");
+var so=new SerializedObject(summer);so.FindProperty("enabledByDefault").boolValue=true;var pairs=so.FindProperty("sprites");pairs.arraySize=originals.Length;
+var contact=FirstSprite("Assets/ArtStyles/SummerPixel/summer-moss-ground-contact.png");
+for(int i=0;i<originals.Length;i++){
+var original=FirstSprite(originals[i]);var pixel=FirstSprite(pixels[i]);if(original==null||pixel==null)throw new System.Exception("Missing sprite "+originals[i]);
+var pair=pairs.GetArrayElementAtIndex(i);pair.FindPropertyRelative("original").objectReferenceValue=original;pair.FindPropertyRelative("pixel").objectReferenceValue=pixel;pair.FindPropertyRelative("groundContact").objectReferenceValue=contacts[i]?contact:null;
+Texture3D table=null;if(keys[i]!="")table=AssetDatabase.LoadAssetAtPath<Texture3D>(folder+"/"+keys[i]+".asset");
+else for(int j=0;j<springPairs.arraySize;j++){var p=springPairs.GetArrayElementAtIndex(j);if(p.FindPropertyRelative("original").objectReferenceValue==original)table=p.FindPropertyRelative("originalColorLut").objectReferenceValue as Texture3D;}
+pair.FindPropertyRelative("originalColorLut").objectReferenceValue=table;
+}
+so.ApplyModifiedPropertiesWithoutUndo();EditorUtility.SetDirty(summer);AssetDatabase.SaveAssetIfDirty(summer);
+result.Log("Imported 15 summer PNGs, 13 original-color tables, 21 sprite mappings and 3 curved moss crate mappings.");
+}
+private static Sprite FirstSprite(string path){foreach(var a in AssetDatabase.LoadAllAssetsAtPath(path))if(a is Sprite s)return s;return null;}
+}

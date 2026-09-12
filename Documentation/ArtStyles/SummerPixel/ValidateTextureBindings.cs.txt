@@ -1,0 +1,14 @@
+using UnityEngine;using UnityEditor;using CircleWar;using System.Collections;
+internal class CommandScript:IRunCommand{
+public void Execute(ExecutionResult result){
+int checkedSprites=0;var block=new MaterialPropertyBlock();
+foreach(var sr in Object.FindObjectsByType<SpriteRenderer>()){if(!sr.enabled||sr.sprite==null||!AssetDatabase.GetAssetPath(sr.sprite).StartsWith("Assets/ArtStyles/"))continue;
+sr.GetPropertyBlock(block);var bound=block.GetTexture("_MainTex");
+if(bound!=sr.sprite.texture)throw new System.Exception("Stale texture on "+sr.name+": "+AssetDatabase.GetAssetPath(bound));
+checkedSprites++;
+}
+result.Log("PASS: actual texture bindings match current sprites for "+checkedSprites+" renderers after original/pixel toggling.");
+Object.FindFirstObjectByType<GameHud>().StartCoroutine(Capture());
+}
+private static IEnumerator Capture(){yield return new WaitForSecondsRealtime(1f);ScreenCapture.CaptureScreenshot("C:/Users/Administrator/Downloads/动作素材/summer-pixel/game-summer-pixel.png");}
+}

@@ -1,0 +1,7 @@
+[Log] PASS: 40 summer nodes, 536 roots/feet across 8 circle angles; max radial error 0.000019; current pixel textures, ground masks, style toggling, empty slots and spring mask reset.
+[Log] PASS: 13 summer nodes / 14 rendered props (NPC replacement excluded); circle geometry, buried corner, 71-degree rotation; sorting; same mesh reused; style off/on; empty node; other season.
+PASS: 40 summer assets compared to baseline: no gameplay field changes.
+PASS: inspector idle 41 frames: opaque foot row remains y=578.
+PASS: Unity Console 0 errors, 0 warnings after final compilation.
+PASS: all 40 final node images visually reviewed.
+PASS: SummerPixelPreview, SpringPixelPreview, SampleScene and SpringPixelArtStyle hashes unchanged.

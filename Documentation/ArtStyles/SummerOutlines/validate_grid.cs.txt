@@ -1,0 +1,27 @@
+using UnityEngine;using UnityEditor;using CircleWar;using System.Collections.Generic;
+internal class CommandScript:IRunCommand{
+public void Execute(ExecutionResult result){
+if(!Application.isPlaying)throw new System.Exception("Play required");
+var root=new GameObject("Uniform Pixel Grid Check");result.RegisterObjectCreation(root);var child=new GameObject("Image");child.transform.SetParent(root.transform,false);var primary=child.AddComponent<SpriteRenderer>();primary.sortingOrder=5;var segment=root.AddComponent<CircleMapSegment>();segment.Setup(primary,null,null,null,null,0);
+var ground=Resources.Load<Material>("ArtStyles/ScenePixelDensity");float reference=ground.GetFloat("_ReferencePixelSize");float expected=reference>0?108/reference:ground.GetFloat("_PixelsPerUnit");var block=new MaterialPropertyBlock();int sprites=0,contacts=0,nodes=0;bool enabled=SpringPixelArtStyle.IsEnabled;
+try{
+SpringPixelArtStyle.SetEnabled(true);
+foreach(var def in Resources.LoadAll<RoadSegmentDefinition>("GameData/RoadSegments")){
+if(def.Season==null||!SpringPixelArtStyle.SupportsSeason(def.Season))continue;nodes++;
+foreach(float scale in new[]{.2f,.4f,.7f})foreach(float rotation in new[]{0f,37f}){
+root.transform.localScale=new Vector3(scale,scale,1);root.transform.position=(Vector3)CircleMapView.Active.DiskCenter+Vector3.down*CircleMapView.Active.GroundSurfaceRadius;root.transform.rotation=Quaternion.Euler(0,0,rotation);
+segment.Show(new CircleRoadSegmentData(def,null));
+foreach(var renderer in root.GetComponentsInChildren<Renderer>()){if(!renderer.enabled||renderer.sharedMaterial==null)continue;var m=renderer.sharedMaterial;if(!m.shader.name.StartsWith("CircleWar/")||!m.HasProperty("_PixelsPerUnit"))continue;
+renderer.GetPropertyBlock(block);
+float r=block.HasFloat("_ReferencePixelSize")?block.GetFloat("_ReferencePixelSize"):m.GetFloat("_ReferencePixelSize");float ppu=block.HasFloat("_PixelsPerUnit")?block.GetFloat("_PixelsPerUnit"):m.GetFloat("_PixelsPerUnit");float actual=r>0?108/r:ppu;if(Mathf.Abs(actual-expected)>.001f)throw new System.Exception("Density mismatch "+def.name);
+if(renderer is SpriteRenderer sr){if(block.GetTexture("_MainTex")!=sr.sprite.texture)throw new System.Exception("Stale texture binding");if(block.GetFloat("_SpringOutlineEnabled")!=(def.Season.DefinitionId=="summer"?1f:0f))throw new System.Exception("Incorrect outline scope "+def.name);sprites++;}else {if(block.GetFloat("_SpringOutlineEnabled")!=0)throw new System.Exception("Contact unexpectedly outlined");contacts++;}}
+}
+SpringPixelArtStyle.SetEnabled(false);segment.Show(new CircleRoadSegmentData(def,null));
+foreach(var renderer in root.GetComponentsInChildren<SpriteRenderer>()){if(!renderer.enabled)continue;renderer.GetPropertyBlock(block);if(block.HasFloat("_ReferencePixelSize")||block.HasFloat("_PixelsPerUnit")||block.GetFloat("_SpringOutlineEnabled")!=0)throw new System.Exception("Grid override remained in original style");}
+SpringPixelArtStyle.SetEnabled(true);
+}
+int live=0;
+foreach(var sr in Object.FindObjectsByType<SpriteRenderer>()){if(sr.transform.IsChildOf(root.transform)||!sr.enabled||sr.sharedMaterial==null||!sr.sharedMaterial.HasProperty("_PixelsPerUnit"))continue;sr.GetPropertyBlock(block);float r=block.HasFloat("_ReferencePixelSize")?block.GetFloat("_ReferencePixelSize"):sr.sharedMaterial.GetFloat("_ReferencePixelSize");float p=block.HasFloat("_PixelsPerUnit")?block.GetFloat("_PixelsPerUnit"):sr.sharedMaterial.GetFloat("_PixelsPerUnit");float actual=r>0?108/r:p;float liveExpected=sr.sharedMaterial.shader.name=="CircleWar/GroundPixelDensity"?108f:expected;if(Mathf.Abs(actual-liveExpected)>.001f)throw new System.Exception("Live density mismatch "+sr.name+" "+actual+" expected "+liveExpected);live++;}
+result.Log("PASS: "+nodes+" spring/summer nodes; "+sprites+" sprite draws and "+contacts+" contact draws at scales 0.2/0.4/0.7 and rotations 0/37; common density "+expected+"; "+live+" live scene renderers: ground stays 108 (1 px), props/sky stay 54 (2 px); texture binding, summer-only prop outlines and original-style reset valid.");
+}finally{SpringPixelArtStyle.SetEnabled(enabled);result.DestroyObject(root);}
+}}

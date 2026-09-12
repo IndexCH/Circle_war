@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac73c6cd4e3d1a48afa57bbe5ec99de, type: 3}
+  m_Name: SpringPixelArtStyle
+  m_EditorClassIdentifier: CircleWar.Runtime::CircleWar.SpringPixelArtStyle
+  enabledByDefault: 1
+  sprites:
+  - original: {fileID: 1954399816, guid: 9eaf21629a5e4c479f8c234a2c76e2e2, type: 3}
+    pixel: {fileID: 21300000, guid: 767dc5ae3a8a24c4ab2880b8b09f43cc, type: 3}
+    originalColorLut: {fileID: 11700000, guid: a95b034c323d81c49ad9a5dd3d824b07, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: -467474851318412678, guid: b3db30972f6ccfb4fbec9b1c13a74f19, type: 3}
+    pixel: {fileID: 21300000, guid: c808e29dc9ec3f647b8fe69f54e3de73, type: 3}
+    originalColorLut: {fileID: 11700000, guid: 8264b6d7b33188d44a5f8cbd99d3109f, type: 2}
+    groundContact: {fileID: 21300000, guid: 28dce0e90c738b543bdfa7d36b3899f7, type: 3}
+  - original: {fileID: 9169485331020585881, guid: 3b0ee4b7043a59a4287713d5dad089dc, type: 3}
+    pixel: {fileID: 21300000, guid: 68d4eb8f859ccb34ba55f808c271f5f5, type: 3}
+    originalColorLut: {fileID: 11700000, guid: b8ee65a1d8f0d6442ab378cdebb8a86b, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: -1458393122, guid: ffe2a0918abf40a894f88d17d47d60eb, type: 3}
+    pixel: {fileID: 21300000, guid: 270a240aa82ba0344b3d28d0f98b87fa, type: 3}
+    originalColorLut: {fileID: 11700000, guid: df5ba72c0afe2f840a2ac11186651619, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: 2052579126201748298, guid: 26df71ef3fc64696a361bf2ec97179dd, type: 3}
+    pixel: {fileID: 21300000, guid: 176cd4fb79b7d4b40a1fda697c107b09, type: 3}
+    originalColorLut: {fileID: 11700000, guid: 0c054e26b0c0dd847b8f74f972007f92, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: -7893427593845575368, guid: a6f661b1c68352f4fab211ebbf28c7a6, type: 3}
+    pixel: {fileID: 21300000, guid: cd0c832f0657c73429701d6991db8b41, type: 3}
+    originalColorLut: {fileID: 11700000, guid: 468e99f50d31f8143801ed4d76a7aeb1, type: 2}
+    groundContact: {fileID: 21300000, guid: 28dce0e90c738b543bdfa7d36b3899f7, type: 3}
+  - original: {fileID: -1528934053, guid: 5f974a227c3142549c95638049475bc9, type: 3}
+    pixel: {fileID: 21300000, guid: b2cfe2e68e3fab14d95b1314834f205d, type: 3}
+    originalColorLut: {fileID: 11700000, guid: da03a5b8f862b6748bc3f3999f99874a, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: 8761131854793930396, guid: 8ba660f93d01e9342848cd3faf856aa3, type: 3}
+    pixel: {fileID: 21300000, guid: 10c91e061183d01469cfe4116b75b4f0, type: 3}
+    originalColorLut: {fileID: 11700000, guid: ec8e22475b80e664f9494661563eebef, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: -7482404564895785253, guid: 8a8bab8a73194fd449cd03f35b283fc5, type: 3}
+    pixel: {fileID: 21300000, guid: 9702e046e5d670a46acc0dcf8981d8fe, type: 3}
+    originalColorLut: {fileID: 11700000, guid: 2917a0fb197685b42b7b8bfd6a893bd0, type: 2}
+    groundContact: {fileID: 21300000, guid: 28dce0e90c738b543bdfa7d36b3899f7, type: 3}
+  - original: {fileID: -298380847, guid: 7fdd4812bb3f4d6bae2b28ffe1775d68, type: 3}
+    pixel: {fileID: 21300000, guid: 91fcbcdc1b8ec5f449e9e863241cdcda, type: 3}
+    originalColorLut: {fileID: 11700000, guid: 8a81946b73e6c9943901b363ff95d157, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: 847511874115741484, guid: 9a1cbdf55ee92b04ba41d9d4e8bf2c1b, type: 3}
+    pixel: {fileID: 21300000, guid: 148bff76890910d4089f133d4ea1222a, type: 3}
+    originalColorLut: {fileID: 11700000, guid: 7d7bd4e91e2f92441a503c4cac125ad2, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: -1502498846177436413, guid: 96df5a5656cc4bb4c9292c5fb5df6ca2, type: 3}
+    pixel: {fileID: 21300000, guid: 6ada934d17eadc842915cdeb8a90c809, type: 3}
+    originalColorLut: {fileID: 11700000, guid: cd5579e3b518bc8499164a79acd62707, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: 4802945990878985426, guid: 175209e14f6a80d438c824c20b1536cd, type: 3}
+    pixel: {fileID: 21300000, guid: dd0b941bcbab7074d89bcd40671070a7, type: 3}
+    originalColorLut: {fileID: 11700000, guid: 566bc37ffc627834088cefc882c4e32a, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: 1664413691, guid: cec98e291b7149fdaffef53639e74e4b, type: 3}
+    pixel: {fileID: 21300000, guid: a35b69355c17bb64cb558bb62c094fbc, type: 3}
+    originalColorLut: {fileID: 11700000, guid: 745333424a1fd7543819f32666f84dd6, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: 21300000, guid: 4cb996169ac64795b93caf7409d348ed, type: 3}
+    pixel: {fileID: 21300000, guid: 8db579afe319b9447b2dc0de83805dfd, type: 3}
+    originalColorLut: {fileID: 11700000, guid: aab24dca62bf0104e9f06295256ba11c, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: -7320046986400614101, guid: 8f46e2e5348462b4380dacc273600b39, type: 3}
+    pixel: {fileID: 21300000, guid: 5bf1cd2dd28e2144c8d6c655cd2800d3, type: 3}
+    originalColorLut: {fileID: 11700000, guid: 41c6de4f3754eb44d8fd7f58d22e3d8b, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: -1101611508220818007, guid: 6c3eed716ba138c4893c44926f0a83fe, type: 3}
+    pixel: {fileID: 21300000, guid: 8f0b3ceb76972064abd8882f5aa8fe7f, type: 3}
+    originalColorLut: {fileID: 0}
+    groundContact: {fileID: 0}
+  - original: {fileID: 21300000, guid: 61ea54d2a56680343971e33afd08cd67, type: 3}
+    pixel: {fileID: 21300000, guid: 273084f8a3d32624eba976ef4238bb0a, type: 3}
+    originalColorLut: {fileID: 11700000, guid: fa40aee06597d7743a5f46380478f88d, type: 2}
+    groundContact: {fileID: 0}
+  - original: {fileID: 2949746548659186015, guid: bb8a51f78cded8b4bbf98de608a4164f, type: 3}
+    pixel: {fileID: 21300000, guid: 6ada934d17eadc842915cdeb8a90c809, type: 3}
+    originalColorLut: {fileID: 11700000, guid: cd5579e3b518bc8499164a79acd62707, type: 2}
+    groundContact: {fileID: 0}

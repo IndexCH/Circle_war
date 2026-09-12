@@ -1,0 +1,18 @@
+using UnityEngine;using UnityEditor;using CircleWar;using UnityEngine.UI;
+internal class CommandScript:IRunCommand{
+public void Execute(ExecutionResult result){
+var summer=Resources.Load<SeasonDefinition>("GameData/Seasons/Summer");var spring=Resources.Load<SeasonDefinition>("GameData/Seasons/Spring");
+int nodes=0,layers=0,npc=0;
+foreach(string guid in AssetDatabase.FindAssets("t:RoadSegmentDefinition")){var d=AssetDatabase.LoadAssetAtPath<RoadSegmentDefinition>(AssetDatabase.GUIDToAssetPath(guid));if(d.Season!=summer)continue;nodes++;foreach(var l in d.MapSpriteLayers){if(l.Sprite==null)continue;if(AssetDatabase.GetAssetPath(l.Sprite).Contains("/NpcRoadSprites/")){npc++;continue;}var pixel=SpringPixelArtStyle.Resolve(summer,l.Sprite,out Vector3 scale);if(pixel==l.Sprite)throw new System.Exception("Unmapped summer prop "+d.name+" "+l.Sprite.name);if(Vector3.Distance(Vector3.Scale(pixel.bounds.size,new Vector3(scale.x,scale.y,1f)),l.Sprite.bounds.size)>.001f)throw new System.Exception("Footprint mismatch");if(SpringPixelArtStyle.OriginalColorLut(pixel)==null)throw new System.Exception("Missing color table "+pixel.name);layers++;}}
+var original=Resources.Load<SpringPixelArtStyle>("ArtStyles/SpringPixelArtStyle");var pairs=new SerializedObject(original).FindProperty("sprites");int springPairs=0;
+for(int i=0;i<pairs.arraySize;i++){var p=pairs.GetArrayElementAtIndex(i);var src=p.FindPropertyRelative("original").objectReferenceValue as Sprite;var pixel=p.FindPropertyRelative("pixel").objectReferenceValue as Sprite;if(SpringPixelArtStyle.Resolve(spring,src,out Vector3 scale)!=pixel)throw new System.Exception("Spring mapping regression");if(SpringPixelArtStyle.GroundContact(spring,src)!=p.FindPropertyRelative("groundContact").objectReferenceValue)throw new System.Exception("Spring contact regression");springPairs++;}
+var map=CircleMapView.Active;var so=new SerializedObject(map);var ring=so.FindProperty("circleRingRenderer").objectReferenceValue as SpriteRenderer;var bg=so.FindProperty("backgroundRenderer").objectReferenceValue as SpriteRenderer;var circle=so.FindProperty("circleRenderer").objectReferenceValue as SpriteRenderer;
+Vector3 size=ring.bounds.size;float radius=map.GroundSurfaceRadius;
+map.SetPixelSceneStyle(false);if(ring.sprite!=summer.CircleRingSprite)throw new System.Exception("Original style not restored");if(Vector3.Distance(size,ring.bounds.size)>.001f)throw new System.Exception("Original terrain scale changed");
+map.SetPixelSceneStyle(true);if(Vector3.Distance(size,ring.bounds.size)>.001f||Mathf.Abs(radius-map.GroundSurfaceRadius)>.001f)throw new System.Exception("Pixel terrain scale changed");
+if(Mathf.Abs(bg.bounds.size.x/bg.bounds.size.y-1672f/941f)>.001f)throw new System.Exception("Sky stretched");
+if(bg.bounds.size.x+.001f<circle.bounds.size.x||bg.bounds.size.y+.001f<circle.bounds.size.y)throw new System.Exception("Sky does not cover window");
+if(circle.enabled)throw new System.Exception("White UI ring reappeared");
+int contacts=0;foreach(var c in Object.FindObjectsByType<CrateGroundContact>())if(c.GetComponent<MeshRenderer>().enabled)contacts++;
+result.Log("PASS: "+nodes+" summer road nodes, "+layers+" mapped environment layers, "+npc+" NPC layers preserved; "+springPairs+" spring mappings and contacts preserved; original/pixel toggle keeps dimensions; sky aspect and full coverage; white UI ring stays hidden; active moss footings="+contacts);
+}}

@@ -1,0 +1,111 @@
+using UnityEngine;
+using UnityEditor;
+using CircleWar;
+using System.Collections;
+internal class CommandScript : IRunCommand {
+ public void Execute(ExecutionResult result){
+  if(!EditorApplication.isPlaying)throw new System.Exception("Expected play mode");
+  bool wasPixel=SpringPixelArtStyle.IsEnabled;
+  var root=new GameObject("Crate Contact Runtime Check");
+  result.RegisterObjectCreation(root);
+  var map=CircleMapView.Active;
+  Vector2 center=map.DiskCenter; float radius=map.GroundSurfaceRadius;
+  root.transform.localScale=new Vector3(.4f,.4f,1f);
+  var owner=CreateRenderer(root.transform,"Image",5);
+  var npc=CreateRenderer(root.transform,"NPC Image",6);
+  var prompt=CreateRenderer(root.transform,"Prompt",8);
+  var segment=root.AddComponent<CircleMapSegment>();
+  segment.Setup(owner,npc,prompt,null,null,null,0f);
+  int definitions=0,totalCrates=0;
+  try {
+   SpringPixelArtStyle.SetEnabled(true);
+   foreach(string guid in AssetDatabase.FindAssets("t:RoadSegmentDefinition")){
+    var def=AssetDatabase.LoadAssetAtPath<RoadSegmentDefinition>(AssetDatabase.GUIDToAssetPath(guid));
+    if(def.Season==null||def.Season.DefinitionId!="spring")continue;
+    int expected=0;
+    foreach(var layer in def.MapSpriteLayers)
+     if(SpringPixelArtStyle.GroundContact(def.Season,layer.Sprite)!=null)expected++;
+    if(expected==0)continue;
+    float angle=(-150f+definitions*39f)*Mathf.Deg2Rad;
+    root.transform.position=(Vector3)(center+new Vector2(Mathf.Cos(angle),Mathf.Sin(angle))*radius);
+    root.transform.rotation=Quaternion.Euler(0f,0f,angle*Mathf.Rad2Deg+90f);
+    var data=new CircleRoadSegmentData(def,null);
+    segment.Show(data);
+    expected=0;
+    foreach(var visual in root.GetComponentsInChildren<SpriteRenderer>(true)){
+     string p=AssetDatabase.GetAssetPath(visual.sprite);
+     if(visual.enabled&&(p.EndsWith("upright-supply-crate.png")||p.EndsWith("damaged-supply-chest.png")||p.EndsWith("wide-supply-chest.png")))expected++;
+    }
+    int actual=0;
+    UnityEngine.Mesh reusedMesh=null;
+    CrateGroundContact reusedContact=null;
+    foreach(var contact in root.GetComponentsInChildren<CrateGroundContact>(true)){
+     var sr=contact.GetComponent<MeshRenderer>();
+     if(!sr.enabled)continue;
+     actual++;
+     var box=contact.transform.parent.GetComponent<SpriteRenderer>();
+     var mesh=contact.GetComponent<MeshFilter>().sharedMesh;
+     reusedMesh=mesh;reusedContact=contact;
+     var vertices=mesh.vertices;var uv=mesh.uv;
+     if(vertices.Length!=66||mesh.triangles.Length!=192)throw new System.Exception("Incorrect arc topology");
+     float lowRadius=Vector2.Distance(contact.transform.TransformPoint(vertices[0]),center);
+     if(lowRadius<radius||lowRadius>radius+.11f)throw new System.Exception("Surface anchor missed the terrain");
+     float minHigh=radius;
+     for(int v=0;v<vertices.Length;v++){
+      var world=contact.transform.TransformPoint(vertices[v]);
+      if(float.IsNaN(world.x)||float.IsNaN(world.y))throw new System.Exception("Invalid vertex");
+      float r=Vector2.Distance(world,center);
+      if(v%2==0&&Mathf.Abs(r-lowRadius)>.001f)throw new System.Exception("Base not a circle arc");
+      if(v%2==1)minHigh=Mathf.Min(minHigh,r);
+      if(uv[v].x<0f||uv[v].x>1f||uv[v].y<0f||uv[v].y>1f)throw new System.Exception("UV out of bounds");
+     }
+     if(radius-minHigh<.13f)throw new System.Exception("Corner mound too low");
+     float l=Vector2.Distance(contact.transform.TransformPoint(vertices[13]),center);
+     float r2=Vector2.Distance(contact.transform.TransformPoint(vertices[53]),center);
+     if(Mathf.Abs(l-r2)<.07f)throw new System.Exception("Expected asymmetric corner burial");
+     if(sr.sortingOrder!=box.sortingOrder+1||sr.sortingOrder>=npc.sortingOrder)throw new System.Exception("Contact sorting overlap");
+     if(sr.GetComponent<Collider2D>()!=null)throw new System.Exception("Unexpected collider");
+     root.transform.RotateAround((Vector3)center,Vector3.forward,71f);
+     for(int v=0;v<vertices.Length;v+=2)
+      if(Mathf.Abs(Vector2.Distance(contact.transform.TransformPoint(vertices[v]),center)-lowRadius)>.001f)
+       throw new System.Exception("Rotation detached arc");
+     root.transform.RotateAround((Vector3)center,Vector3.forward,-71f);
+    }
+    if(actual!=expected)throw new System.Exception("Contact count "+def.name+" expected "+expected+" got "+actual);
+    int poolSize=CountAll(root);
+    segment.Show(data);
+    if(CountAll(root)!=poolSize)throw new System.Exception("Repeated Show allocated duplicate contact");
+    if(reusedMesh!=null&&reusedContact.GetComponent<MeshFilter>().sharedMesh!=reusedMesh)
+     throw new System.Exception("Repeated Show allocated a new mesh");
+    SpringPixelArtStyle.SetEnabled(false);
+    segment.Show(data);
+    if(CountVisible(root)!=0)throw new System.Exception("Contact remains in original style");
+    SpringPixelArtStyle.SetEnabled(true);
+    segment.Show(data);
+    if(CountVisible(root)!=expected)throw new System.Exception("Contact not restored");
+    segment.Show(null);
+    if(CountVisible(root)!=0)throw new System.Exception("Contact leaked onto empty segment");
+    definitions++;totalCrates+=expected;
+   }
+   var other=AssetDatabase.LoadAssetAtPath<RoadSegmentDefinition>("Assets/Resources/GameData/RoadSegments/AutumnOldFrontlineBufferZone16.asset");
+   segment.Show(new CircleRoadSegmentData(other,null));
+   if(CountVisible(root)!=0)throw new System.Exception("Salt contact leaked into other season");
+   result.Log("PASS: "+definitions+" spring nodes / "+totalCrates+" rendered crates (NPC replacement excluded); circle geometry, buried corner, 71-degree rotation; sorting; same mesh reused; style off/on; empty node; other season.");
+  } finally { SpringPixelArtStyle.SetEnabled(wasPixel);result.DestroyObject(root); }
+
+ }
+ private static SpriteRenderer CreateRenderer(Transform root,string name,int sort){
+  var go=new GameObject(name);go.transform.SetParent(root,false);
+  var r=go.AddComponent<SpriteRenderer>();r.sortingOrder=sort;return r;
+ }
+ private static int CountAll(GameObject root){
+  int n=0;foreach(var r in root.GetComponentsInChildren<CrateGroundContact>(true))n++;return n;
+ }
+ private static int CountVisible(GameObject root){
+  int n=0;foreach(var r in root.GetComponentsInChildren<CrateGroundContact>(true))if(r.GetComponent<MeshRenderer>().enabled)n++;return n;
+ }
+ private static IEnumerator Capture(){
+  yield return new WaitForSecondsRealtime(1f);
+  ScreenCapture.CaptureScreenshot("C:/Users/Administrator/Downloads/动作素材/crate-ground-contact/game-crate-ground-contact.png");
+ }
+}

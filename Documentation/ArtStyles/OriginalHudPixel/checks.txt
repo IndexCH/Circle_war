@@ -1,0 +1,14 @@
+PASS UI original sprites, colors, rects, anchors, pivots and image modes preserved
+PASS Original UI images use pixel sampling: 34
+PASS Character portrait unchanged
+PASS Mask reference world size survives repeated F6 switching
+PASS Background mask stays full-sized in both styles
+PASS Terrain ring size unchanged
+PASS Player path and position unchanged
+PASS Background covers whole mask
+PASS Background centered on circle
+PASS Background aspect ratio preserved
+PASS Original progress animation and partial block fill preserved
+PASS FEEL info pulse uses the same pixel frame material
+PASS Original dialogue button active and selectable
+PASS Original dialogue callback completes event

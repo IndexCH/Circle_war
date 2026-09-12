@@ -21,7 +21,7 @@ MonoBehaviour:
   contentType: 3
   mapSpriteLayers:
   - sprite: {fileID: -7263324490986289846, guid: 9e8ca7193ff28ce418865991d87594d4, type: 3}
-    offset: {x: 0, y: -0.3}
+    offset: {x: 0, y: -0.0827}
     scale: {x: 0.5, y: 0.5}
     z: 0
   mapSprite: {fileID: 21300000, guid: dfde4595695746ac8eb395f89e04f0c0, type: 3}

@@ -1,0 +1,23 @@
+using UnityEngine;using UnityEditor;using CircleWar;
+internal class CommandScript:IRunCommand{
+public void Execute(ExecutionResult result){
+string root="Assets/ArtStyles/SummerPixel/";int changed=0;
+foreach(string key in new[]{"summer-navigation-buoy-eye-level","summer-water-purifier-eye-level"}){
+string path=root+key+".png";AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceSynchronousImport);
+var importer=AssetImporter.GetAtPath(path) as TextureImporter;result.RegisterObjectModification(importer);
+importer.textureType=TextureImporterType.Sprite;importer.spriteImportMode=SpriteImportMode.Single;
+importer.spritePixelsPerUnit=100;importer.filterMode=FilterMode.Point;importer.textureCompression=TextureImporterCompression.Uncompressed;
+importer.mipmapEnabled=false;importer.alphaIsTransparency=true;importer.sRGBTexture=true;importer.wrapMode=TextureWrapMode.Clamp;importer.maxTextureSize=4096;
+var settings=new TextureImporterSettings();importer.ReadTextureSettings(settings);settings.spriteMeshType=SpriteMeshType.FullRect;settings.spriteAlignment=(int)SpriteAlignment.Center;importer.SetTextureSettings(settings);importer.SaveAndReimport();
+}
+var asset=AssetDatabase.LoadAssetAtPath<SpringPixelArtStyle>("Assets/Resources/ArtStyles/SummerPixelArtStyle.asset");result.RegisterObjectModification(asset);
+var so=new SerializedObject(asset);var pairs=so.FindProperty("sprites");
+for(int i=0;i<pairs.arraySize;i++){var pair=pairs.GetArrayElementAtIndex(i);var pp=pair.FindPropertyRelative("pixel");var old=pp.objectReferenceValue as Sprite;
+if(old==null)continue;string path=AssetDatabase.GetAssetPath(old);string key=null;
+if(path==root+"summer-navigation-buoy.png")key="summer-navigation-buoy-eye-level";
+if(path==root+"summer-water-purifier.png")key="summer-water-purifier-eye-level";
+if(key==null)continue;pp.objectReferenceValue=AssetDatabase.LoadAssetAtPath<Sprite>(root+key+".png");changed++;
+}
+so.ApplyModifiedProperties();AssetDatabase.SaveAssetIfDirty(asset);
+result.Log("Updated "+changed+" buoy/purifier source mappings; existing palettes and contacts retained.");
+}}

@@ -1,0 +1,32 @@
+[
+  {
+    "key": "summer-navigation-buoy-eye-level",
+    "path": "C:/Users/Administrator/.codex/generated_images/01a09080-1e30-7e81-a8cf-b6224a5c1bff/exec-2812d5e1-7f9f-4f5f-8c06-422f5870b564.png",
+    "size": [
+      730,
+      1436
+    ],
+    "crop": [
+      181,
+      15,
+      911,
+      1451
+    ],
+    "transparentFraction": 0.7120526631673177
+  },
+  {
+    "key": "summer-water-purifier-eye-level",
+    "path": "C:/Users/Administrator/.codex/generated_images/01a09080-1e30-7e81-a8cf-b6224a5c1bff/exec-e635efbe-c57e-421e-aa2b-a0e647f746e3.png",
+    "size": [
+      658,
+      1430
+    ],
+    "crop": [
+      183,
+      21,
+      841,
+      1451
+    ],
+    "transparentFraction": 0.5859362284342448
+  }
+]

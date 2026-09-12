@@ -1,0 +1,9 @@
+PASS Animated characters present in comparison
+PASS Animated characters keep their original scale
+PASS Background and ring switch to generated pixel sprites
+PASS Background world size preserved
+PASS Ring world size preserved
+PASS Player path radius preserved
+PASS Style switch preserves player position
+PASS Style switch preserves road progress
+PASS Original art restores exactly

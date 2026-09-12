@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f367e1731f14894498f5c234eab48eb9, type: 3}
   m_Name: FeelFeedbackSettings
   m_EditorClassIdentifier: CircleWar.Runtime::CircleWar.FeelFeedbackSettings
-  ShotSound: {fileID: 8300000, guid: 6e158e2d37d77a048838813185c20707, type: 3}
-  HitSound: {fileID: 8300000, guid: 8afe5f72f4d9ef242a63799641fa0e12, type: 3}
-  DeathSound: {fileID: 8300000, guid: 1739ff78014ab3f44a5757aede3c7ea9, type: 3}
-  DeniedSound: {fileID: 8300000, guid: 5e569d2a692222842bfc96e94520ab9a, type: 3}
-  GainSound: {fileID: 8300000, guid: b8256a6b792fe3b488157984ecc43f61, type: 3}
-  PlayerHurtSound: {fileID: 8300000, guid: ca7e829e9f876ea4a95a4edad95deb8e, type: 3}
-  InfoUpdateSound: {fileID: 8300000, guid: 4ede2b3a9ded5ff43aa7b33d97a610d5, type: 3}
+  ShotSound: {fileID: 0}
+  HitSound: {fileID: 0}
+  DeathSound: {fileID: 0}
+  DeniedSound: {fileID: 0}
+  GainSound: {fileID: 0}
+  PlayerHurtSound: {fileID: 0}
+  InfoUpdateSound: {fileID: 0}
   MixerGroup: {fileID: 0}
   Volume: 0.35
   ParticleMaterial: {fileID: 2100000, guid: fd622707d61a4294f9eb6c14bae5f306, type: 2}

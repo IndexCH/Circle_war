@@ -1,0 +1,30 @@
+using UnityEngine;using UnityEditor;using CircleWar;using System.Collections.Generic;using System.IO;
+internal class CommandScript:IRunCommand{
+public void Execute(ExecutionResult result){
+if(Application.isPlaying)throw new System.Exception("Edit mode required");
+bool previous=SpringPixelArtStyle.IsEnabled;SpringPixelArtStyle.SetEnabled(true);int changed=0;
+try{
+foreach(var d in Resources.LoadAll<RoadSegmentDefinition>("GameData/RoadSegments")){
+if(d.Season==null||d.Season.DefinitionId!="summer")continue;
+var so=new SerializedObject(d);var layers=so.FindProperty("mapSpriteLayers");bool dirty=false;
+for(int i=0;i<layers.arraySize;i++){
+var layer=layers.GetArrayElementAtIndex(i);var source=layer.FindPropertyRelative("sprite").objectReferenceValue as Sprite;
+var sprite=SpringPixelArtStyle.Resolve(d.Season,source,out Vector3 artScale);
+if(sprite==null||!sprite.name.EndsWith("-eye-level"))continue;
+if(!dirty){result.RegisterObjectModification(d);dirty=true;}
+var tex=new Texture2D(2,2);ImageConversion.LoadImage(tex,File.ReadAllBytes(AssetDatabase.GetAssetPath(sprite)));
+var pixels=tex.GetPixels32();var r=sprite.rect;var ys=new List<float>();
+for(int x=(int)(r.x+r.width*.05f);x<(int)(r.x+r.width*.95f);x++)for(int y=(int)r.y;y<r.y+r.height;y++)if(pixels[y*tex.width+x].a>=180){ys.Add((y-r.y+.5f)/sprite.pixelsPerUnit);break;}
+ys.Sort();float floor=ys[Mathf.Min(ys.Count-1,Mathf.FloorToInt(ys.Count*.02f))];result.DestroyObject(tex);
+var offset=layer.FindPropertyRelative("offset");var v=offset.vector2Value;float oldY=v.y;
+float pad=floor*artScale.y*layer.FindPropertyRelative("scale").vector2Value.y;
+float angle=layer.FindPropertyRelative("z").floatValue*Mathf.Deg2Rad;float dx=-Mathf.Sin(angle)*pad,dy=Mathf.Cos(angle)*pad;
+const float radius=4.080001f,segmentScale=.4f;float worldX=(v.x+dx)*segmentScale;
+v.y=Mathf.Round(((radius-Mathf.Sqrt((radius+.025f)*(radius+.025f)-worldX*worldX))/segmentScale-dy)*10000f)/10000f;
+offset.vector2Value=v;changed++;result.Log(d.name+" "+sprite.name+" bottom "+oldY+" -> "+v.y);
+}
+if(dirty){so.ApplyModifiedProperties();AssetDatabase.SaveAssetIfDirty(d);}
+}
+result.Log("Regrounded "+changed+" new art placements; other layer transforms unchanged.");
+}finally{SpringPixelArtStyle.SetEnabled(previous);}
+}}

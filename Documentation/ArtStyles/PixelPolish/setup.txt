@@ -1,0 +1,4 @@
+Ground reference pixel size=1.3
+Enemy reference pixel size=1.3
+Environment world density=54
+Body font=unifont-17.0.04 nativeSize=16 lineHeight=16

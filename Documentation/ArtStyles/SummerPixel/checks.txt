@@ -1,0 +1,8 @@
+[Log] PASS: 40 summer road nodes, 63 mapped environment layers, 4 NPC layers preserved; 19 spring mappings and contacts preserved; original/pixel toggle keeps dimensions; sky aspect and full coverage; white UI ring stays hidden; active moss footings=1
+[Log] PASS: actual texture bindings match current sprites for 10 renderers after original/pixel toggling.
+[Log] PASS: 8 summer nodes / 9 rendered crates (NPC replacement excluded); circle geometry, buried corner, 71-degree rotation; sorting; same mesh reused; style off/on; empty node; other season.
+PASS: Unity Console: 0 errors, 0 warnings.
+PASS: Original SpringPixelPreview, SampleScene and SpringPixelArtStyle hashes unchanged.
+PASS: git diff --check (existing line-ending notices only).
+PASS: Final screenshots visually reviewed, temporary gallery cleaned.
+Independent player build not run.

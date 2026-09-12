@@ -53,6 +53,7 @@ namespace CircleWar
             label.font = reference != null ? reference.font : Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             label.fontStyle = FontStyle.Bold;
             label.fontSize = settings.DamageFontSize;
+            PixelHudTypography.ApplyToGeneratedText(label, reference);
             label.alignment = TextAnchor.MiddleCenter;
             label.color = new Color(1f, .26f, .22f);
             label.raycastTarget = false;

@@ -1,0 +1,26 @@
+{
+  "before.png": {
+    "interior_cells": 44994,
+    "constant_3x3_interior_percent": 14.79,
+    "ring_strip_cells": 1896,
+    "constant_3x3_ring_percent": 0.53
+  },
+  "scene-unified.png": {
+    "interior_cells": 44994,
+    "constant_3x3_interior_percent": 99.96,
+    "ring_strip_cells": 1896,
+    "constant_3x3_ring_percent": 95.41
+  },
+  "crate-scaled-150.png": {
+    "interior_cells": 44994,
+    "constant_3x3_interior_percent": 99.95,
+    "ring_strip_cells": 1896,
+    "constant_3x3_ring_percent": 95.57
+  },
+  "rotated-23.png": {
+    "interior_cells": 44994,
+    "constant_3x3_interior_percent": 99.22,
+    "ring_strip_cells": 1896,
+    "constant_3x3_ring_percent": 95.62
+  }
+}

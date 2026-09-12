@@ -87,6 +87,7 @@ namespace CircleWar
                 rect.offsetMin = rect.offsetMax = Vector2.zero;
                 Image image = infoOverlay.GetComponent<Image>();
                 image.sprite = infoFrame.sprite;
+                image.material = infoFrame.material;
                 image.type = infoFrame.type;
                 image.preserveAspect = infoFrame.preserveAspect;
                 image.fillCenter = infoFrame.fillCenter;

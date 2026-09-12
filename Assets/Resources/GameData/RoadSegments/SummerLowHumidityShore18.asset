@@ -21,16 +21,16 @@ MonoBehaviour:
   contentType: 3
   mapSpriteLayers:
   - sprite: {fileID: -8647656995838675177, guid: 0bff3b27e84791d4cb99289818bc315e, type: 3}
-    offset: {x: -2, y: 0}
-    scale: {x: 0, y: 0}
-    z: 0
+    offset: {x: -2, y: 0.1276}
+    scale: {x: 1, y: 1}
+    z: -6.308
   - sprite: {fileID: -3396231001350701739, guid: 9e4d47634fbdafe4da0f1aa3010e80cd, type: 3}
-    offset: {x: 1.5, y: 0}
-    scale: {x: 0, y: 0}
-    z: 0
+    offset: {x: 1.5, y: 0.0337}
+    scale: {x: 1, y: 1}
+    z: 3.457
   - sprite: {fileID: -467474851318412678, guid: b3db30972f6ccfb4fbec9b1c13a74f19, type: 3}
-    offset: {x: 0, y: 0}
-    scale: {x: 0, y: 0}
+    offset: {x: 0, y: -0.0656}
+    scale: {x: 1, y: 1}
     z: 0
   mapSprite: {fileID: 21300000, guid: 26df71ef3fc64696a361bf2ec97179dd, type: 3}
   additionalMapSprites: []

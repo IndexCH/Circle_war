@@ -12,6 +12,7 @@ namespace CircleWar
         private SpriteRenderer segmentSpriteRenderer;
         private SpriteRenderer npcSpriteRenderer;
         private readonly List<SpriteRenderer> mapSpriteRenderers = new List<SpriteRenderer>();
+        private readonly List<CrateGroundContact> groundContactRenderers = new List<CrateGroundContact>();
         private Vector3 segmentSpriteBaseLocalScale = Vector3.one;
         private Animator segmentAnimator;
         private Animator npcAnimator;
@@ -80,7 +81,10 @@ namespace CircleWar
 
             IReadOnlyList<RoadSegmentMapSpriteLayer> mapSpriteLayers =
                 segment != null ? segment.mapSpriteLayers : null;
-            ApplyMapSprites(mapSpriteLayers);
+            RuntimeAnimatorController idleController = LoadNpcIdleAnimatorController(segment);
+            bool primarySpriteIsAnimated = idleController != null &&
+                GetNpcSpriteRenderer(segment) == segmentSpriteRenderer;
+            ApplyMapSprites(mapSpriteLayers, segment != null ? segment.season : null, primarySpriteIsAnimated);
 
             SpriteRenderer animatedNpcRenderer = GetNpcSpriteRenderer(segment);
             Animator animatedNpcAnimator = GetNpcAnimator(segment);
@@ -91,7 +95,6 @@ namespace CircleWar
                 npcSpriteRenderer.sprite = npcSprite;
             }
 
-            RuntimeAnimatorController idleController = LoadNpcIdleAnimatorController(segment);
             if (idleController != null && animatedNpcAnimator != null)
             {
                 animatedNpcAnimator.runtimeAnimatorController = idleController;
@@ -99,6 +102,15 @@ namespace CircleWar
                 animatedNpcAnimator.Play("Idle", 0, 0f);
                 animatedNpcAnimator.Update(0f);
                 animatedNpcRenderer.enabled = animatedNpcRenderer.sprite != null;
+
+                // Summer placement is authored against the feet of the displayed frame.
+                // The idle frame can have different bounds from the map's source sprite.
+                if (IsSummer(segment.season) && animatedNpcRenderer == segmentSpriteRenderer &&
+                    mapSpriteLayers != null && mapSpriteLayers.Count > 0)
+                {
+                    RoadSegmentMapSpriteLayer layer = mapSpriteLayers[0];
+                    AlignSpriteBottomCenter(animatedNpcRenderer, layer.Offset.x, layer.Offset.y, layer.Z);
+                }
             }
 
             if (npcSpriteRenderer != null)
@@ -111,7 +123,8 @@ namespace CircleWar
             SetInteractionPromptVisible(segment, false);
         }
 
-        private void ApplyMapSprites(IReadOnlyList<RoadSegmentMapSpriteLayer> layers)
+        private void ApplyMapSprites(
+            IReadOnlyList<RoadSegmentMapSpriteLayer> layers, SeasonDefinition season, bool primarySpriteIsAnimated)
         {
             int layerCount = layers != null ? layers.Count : 0;
             EnsureMapSpriteRendererCount(layerCount);
@@ -128,33 +141,75 @@ namespace CircleWar
                 }
 
                 RoadSegmentMapSpriteLayer layer = index < layerCount ? layers[index] : null;
-                Sprite sprite = layer != null ? layer.Sprite : null;
+                Sprite sourceSprite = layer != null ? layer.Sprite : null;
+                Vector3 artScale = Vector3.one;
+                // Some NPCs animate the primary map renderer instead of the dedicated NPC renderer.
+                Sprite sprite = index == 0 && primarySpriteIsAnimated
+                    ? sourceSprite
+                    : SpringPixelArtStyle.Resolve(season, sourceSprite, out artScale);
                 renderer.enabled = sprite != null;
                 renderer.sprite = sprite;
-                renderer.sortingOrder = baseSortingOrder + index;
+                ScenePixelDensity.Apply(renderer, sprite != null && sprite != sourceSprite, IsSummer(season));
+                // Reuse the map's circular terrain window to hide buried roots and
+                // rubble outside the ground. Reset this when the pooled slot changes style.
+                renderer.maskInteraction = IsSummer(season) && sprite != sourceSprite &&
+                    CircleMapView.Active != null && CircleMapView.Active.HasBackgroundMask
+                    ? SpriteMaskInteraction.VisibleInsideMask : SpriteMaskInteraction.None;
+                // Reserve the next order for contact details over this prop's bottom edge.
+                renderer.sortingOrder = baseSortingOrder + index * 2;
                 renderer.transform.localScale = layer != null
                     ? Vector3.Scale(segmentSpriteBaseLocalScale, layer.Scale)
                     : segmentSpriteBaseLocalScale;
+                renderer.transform.localScale = Vector3.Scale(renderer.transform.localScale, artScale);
 
                 if (sprite == null)
                 {
+                    ApplyGroundContact(index, renderer, null);
                     continue;
                 }
 
                 Vector2 offset = layer.Offset;
-                AlignSpriteBottomCenter(renderer, offset.x, offset.y);
+                AlignSpriteBottomCenter(renderer, offset.x, offset.y, IsSummer(season) ? layer.Z : 0f);
                 ApplySpriteLocalRotation(renderer, layer.Z);
+                ApplyGroundContact(index, renderer, index == 0 && primarySpriteIsAnimated
+                    ? null : SpringPixelArtStyle.GroundContact(season, sourceSprite));
             }
 
             if (npcSpriteRenderer != null)
             {
-                npcSpriteRenderer.sortingOrder = baseSortingOrder + mapSpriteRenderers.Count;
+                npcSpriteRenderer.sortingOrder = baseSortingOrder + mapSpriteRenderers.Count * 2;
             }
 
             if (interactionPromptRenderer != null)
             {
-                interactionPromptRenderer.sortingOrder = baseSortingOrder + mapSpriteRenderers.Count + 1;
+                interactionPromptRenderer.sortingOrder = baseSortingOrder + mapSpriteRenderers.Count * 2 + 1;
             }
+        }
+
+        private void ApplyGroundContact(int index, SpriteRenderer owner, Sprite sprite)
+        {
+            CrateGroundContact contact = index < groundContactRenderers.Count ? groundContactRenderers[index] : null;
+            CircleMapView map = CircleMapView.Active;
+            if (sprite == null || !owner.enabled || map == null)
+            {
+                if (contact != null) contact.Hide();
+                return;
+            }
+
+            if (contact == null)
+            {
+                while (groundContactRenderers.Count <= index) groundContactRenderers.Add(null);
+                GameObject contactObject = new GameObject("Crate Ground Contact");
+                contactObject.hideFlags = owner.gameObject.hideFlags;
+                contactObject.transform.hideFlags = owner.transform.hideFlags;
+                contactObject.layer = owner.gameObject.layer;
+                contactObject.transform.SetParent(owner.transform, false);
+                contact = contactObject.AddComponent<CrateGroundContact>();
+                contact.hideFlags = owner.hideFlags;
+                groundContactRenderers[index] = contact;
+            }
+
+            contact.Configure(owner, sprite, map.DiskCenter, map.GroundSurfaceRadius);
         }
 
         private void EnsureMapSpriteRendererCount(int spriteCount)
@@ -272,7 +327,11 @@ namespace CircleWar
                 : segmentAnimator;
         }
 
-        private void AlignSpriteBottomCenter(SpriteRenderer renderer, float localXOffset, float localYOffset)
+        private static bool IsSummer(SeasonDefinition season) =>
+            season != null && season.DefinitionId == "summer";
+
+        private void AlignSpriteBottomCenter(
+            SpriteRenderer renderer, float localXOffset, float localYOffset, float groundRotation = 0f)
         {
             if (renderer == null || renderer.sprite == null || renderer.transform == transform)
             {
@@ -282,10 +341,11 @@ namespace CircleWar
             Bounds bounds = renderer.sprite.bounds;
             Vector3 bottomCenter = new Vector3(bounds.center.x, bounds.min.y, 0f);
             Vector3 scale = renderer.transform.localScale;
-            renderer.transform.localPosition = new Vector3(
-                -bottomCenter.x * scale.x + localXOffset,
-                -bottomCenter.y * scale.y + localYOffset,
-                0f);
+            // Rotate the anchor as well as the image, so tilting a summer prop
+            // does not swing its base away from the authored ground position.
+            Vector3 rotatedBottom = Quaternion.Euler(0f, 0f, groundRotation) *
+                Vector3.Scale(bottomCenter, scale);
+            renderer.transform.localPosition = new Vector3(localXOffset, localYOffset, 0f) - rotatedBottom;
         }
 
         private void ApplySpriteLocalRotation(SpriteRenderer renderer, float localZRotation)

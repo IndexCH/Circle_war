@@ -219,6 +219,7 @@ namespace CircleWar
                 Mathf.Max(bodyRenderer.sprite.bounds.size.x, bodyRenderer.sprite.bounds.size.y));
             float fittedBodyScale = configuredBodySprite != null ? targetBodySize / sourceBodySize : 0.38f;
             bodyRenderer.transform.localScale = new Vector3(fittedBodyScale, fittedBodyScale, 1f);
+            ScenePixelDensity.ApplyEnemy(bodyRenderer);
             EnsureHealthBar();
 
             if (gunPivot == null)
@@ -244,6 +245,7 @@ namespace CircleWar
             }
 
             gunRenderer.enabled = configuredBodySprite == null;
+            ScenePixelDensity.ApplyEnemy(gunRenderer);
 
             if (shootPoint == null)
             {

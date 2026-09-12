@@ -1,0 +1,18 @@
+top_left_dateTIme_bg|Assets/Resources/Scence/UI/01_top_left_date_time_frame.png|RGBA(0.941, 0.267, 0.184, 1.000)|(-761.50, 890.00)|(229.00, 134.00)|(0.50, 0.00)|(0.50, 0.00)|(1.00, 1.00, 1.00)
+top_center_boss_hp_frame|Assets/Resources/Scence/UI/02_top_center_boss_hp_frame.png|RGBA(1.000, 1.000, 1.000, 1.000)|(0.00, -51.50)|(399.00, 103.00)|(0.50, 1.00)|(0.50, 1.00)|(1.00, 1.00, 1.00)
+Fill||RGBA(1.000, 0.080, 0.050, 0.800)|(0.00, 0.00)|(0.00, 0.00)|(0.00, 0.00)|(1.00, 1.00)|(1.00, 1.00, 1.00)
+top_right_system_frame|Assets/Resources/Scence/UI/03_top_right_system_frame.png|RGBA(0.937, 0.259, 0.180, 1.000)|(860.00, 910.00)|(249.00, 92.00)|(0.50, 0.00)|(0.50, 0.00)|(1.00, 1.00, 1.00)
+left_region_status_frame|Assets/Resources/Scence/UI/04_left_region_status_frame.png|RGBA(0.937, 0.259, 0.180, 1.000)|(203.75, 23.00)|(229.00, 403.00)|(0.00, 0.50)|(0.00, 0.50)|(1.00, 1.00, 1.00)
+right_dialogue_panel_frame|Assets/Resources/Scence/UI/06_right_dialogue_panel_frame.png|RGBA(0.937, 0.259, 0.180, 1.000)|(-265.00, 41.00)|(338.00, 477.00)|(1.00, 0.50)|(1.00, 0.50)|(1.00, 1.00, 1.00)
+DialoguePortrait|Assets/Resources/Scence/UI/Portraits/portrait_eli.png|RGBA(0.600, 0.561, 0.318, 0.800)|(-90.10, 164.00)|(84.00, 100.00)|(0.50, 0.50)|(0.50, 0.50)|(1.00, 1.00, 1.00)
+DialogueChoice1|Assets/Resources/Scence/UI/12_dialogue_choice_2_frame.png|RGBA(0.949, 0.627, 0.145, 1.000)|(0.00, -41.00)|(272.00, 52.00)|(0.50, 0.50)|(0.50, 0.50)|(1.00, 1.00, 1.00)
+DialogueChoice2|Assets/Resources/Scence/UI/13_dialogue_choice_3_frame.png|RGBA(0.118, 0.620, 0.663, 1.000)|(0.00, -122.00)|(272.00, 52.00)|(0.50, 0.50)|(0.50, 0.50)|(1.00, 1.00, 1.00)
+DialogueChoice3|Assets/Resources/Scence/UI/13_dialogue_choice_3_frame.png|RGBA(0.086, 0.675, 0.729, 1.000)|(0.00, -190.00)|(272.00, 53.00)|(0.50, 0.50)|(0.50, 0.50)|(1.00, 1.00, 1.00)
+right_bottom_facility_frame|Assets/Resources/Scence/UI/05_left_bottom_player_stats_outer_frame_only.png|RGBA(0.937, 0.259, 0.180, 1.000)|(-250.00, -318.00)|(310.00, 150.00)|(1.00, 0.50)|(1.00, 0.50)|(1.00, 1.00, 1.00)
+player_stats_icon_boxes|Assets/Resources/Scence/UI/05_left_bottom_player_stats_outer_frame_only.png|RGBA(0.937, 0.259, 0.180, 1.000)|(248.10, -331.00)|(310.00, 150.00)|(0.00, 0.50)|(0.00, 0.50)|(1.00, 1.00, 1.00)
+Image|Assets/Resources/Scence/UI/17_logo_life_hp.png|RGBA(0.380, 0.588, 0.604, 1.000)|(16.00, -16.00)|(32.00, 32.00)|(0.00, 1.00)|(0.00, 1.00)|(1.00, 1.00, 1.00)
+Image (1)|Assets/Resources/Scence/UI/18_logo_food.png|RGBA(0.765, 0.569, 0.376, 1.000)|(16.00, -53.03)|(32.00, 32.00)|(0.00, 1.00)|(0.00, 1.00)|(1.00, 1.00, 1.00)
+Image (2)|Assets/Resources/Scence/UI/19_logo_industry_materials.png|RGBA(0.851, 0.235, 0.122, 1.000)|(16.00, -90.06)|(32.00, 32.00)|(0.00, 1.00)|(0.00, 1.00)|(1.00, 1.00, 1.00)
+BUTTON|DialogueChoice1|SpriteSwap|True
+BUTTON|DialogueChoice2|SpriteSwap|True
+BUTTON|DialogueChoice3|SpriteSwap|True

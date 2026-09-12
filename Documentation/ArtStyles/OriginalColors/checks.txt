@@ -1,0 +1,1 @@
+Assigned runtime palettes=6; missing=0; original mode cleared palette=True; pixel mode reapplied=True; ring size preserved=True; background hidden=True; ground pixels=1; detail color changes=0

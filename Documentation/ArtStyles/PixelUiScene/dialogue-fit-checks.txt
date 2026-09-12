@@ -1,0 +1,2 @@
+Measured strings=178; overflow=0; max body height=114; max choice height=24
+Longest body rendered characters=56/56; lines=6; preferredHeight=114; rectHeight=140

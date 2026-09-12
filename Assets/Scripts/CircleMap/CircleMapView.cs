@@ -77,10 +77,24 @@ namespace CircleWar
         private int lastDisplayedAnchorIndex = -1;
         private string observedRunId = string.Empty;
         private Vector3 backgroundBaseLocalScale = Vector3.one;
+        private Vector3 circleRingBaseLocalScale = Vector3.one;
+        private Sprite originalCircleRingSprite;
+        private Vector3 circleBaseLocalScale = Vector3.one;
 
         public static CircleMapView Active { get; private set; }
         public SeasonDefinition ActiveSeason => activeSeason;
         public Vector2 DiskCenter => GetDiskCenter();
+        public bool HasBackgroundMask => backgroundCircleMask != null &&
+            backgroundCircleMask.enabled && backgroundCircleMask.gameObject.activeInHierarchy;
+        public float GroundSurfaceRadius
+        {
+            get
+            {
+                float radius = Mathf.Max(0f, GetCircleRingLocalSize().x * 0.5f - segmentInsetFromRing);
+                Transform parent = circleRingRenderer != null ? circleRingRenderer.transform.parent : null;
+                return parent != null ? parent.TransformVector(Vector3.right * radius).magnitude : radius;
+            }
+        }
         public float PlayerAngleDegrees => GetPlayerAngleDegrees();
         public float PlayerRadius => GetPlayerRadius();
         public float RoadSegmentAngleDegrees => GetOneSegmentAngle();
@@ -99,6 +113,10 @@ namespace CircleWar
             backgroundBaseLocalScale = backgroundRenderer != null
                 ? backgroundRenderer.transform.localScale
                 : Vector3.one;
+            circleRingBaseLocalScale = circleRingRenderer != null
+                ? circleRingRenderer.transform.localScale : Vector3.one;
+            originalCircleRingSprite = circleRingRenderer != null ? circleRingRenderer.sprite : null;
+            circleBaseLocalScale = circleRenderer != null ? circleRenderer.transform.localScale : Vector3.one;
             GameHud hud = ResolveGameHud();
             EnsureRuntimeDataSubscription(false);
             LoadSeasonDefinitions();
@@ -141,6 +159,10 @@ namespace CircleWar
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.F6) && SpringPixelArtStyle.SupportsSeason(activeSeason))
+            {
+                SetPixelSceneStyle(!SpringPixelArtStyle.IsEnabled);
+            }
             EnsureRuntimeDataSubscription(true);
             GameHud hud = ResolveGameHud();
             bool isDialogueVisible = hud != null && hud.HudData.Dialogue.IsVisible.Value;
@@ -1059,6 +1081,19 @@ namespace CircleWar
             return true;
         }
 
+        public void SetPixelSceneStyle(bool enabled)
+        {
+            SpringPixelArtStyle.SetEnabled(enabled);
+            ScenePixelDensity.RefreshEnemies();
+            if (!isMapInitialized)
+            {
+                return;
+            }
+            ApplyActiveSeasonVisuals();
+            BuildBlackMask();
+            RefreshVisibleSegments(Mathf.FloorToInt(currentRoadPosition));
+        }
+
         private void ApplyActiveSeasonVisuals()
         {
             if (activeSeason == null)
@@ -1068,15 +1103,34 @@ namespace CircleWar
 
             if (backgroundRenderer != null && activeSeason.BackgroundSprite != null)
             {
-                backgroundRenderer.sprite = activeSeason.BackgroundSprite;
+                backgroundRenderer.sprite = SpringPixelArtStyle.Resolve(
+                    activeSeason, activeSeason.BackgroundSprite, out Vector3 artScale);
+                ScenePixelDensity.Apply(backgroundRenderer, backgroundRenderer.sprite != activeSeason.BackgroundSprite);
+                // Backgrounds are fitted to the mask below; keep the new image's aspect ratio.
+                Vector3 uniformArtScale = new Vector3(artScale.y, artScale.y, 1f);
                 backgroundRenderer.transform.localScale = Vector3.Scale(
-                    backgroundBaseLocalScale,
-                    activeSeason.BackgroundScaleMultiplier);
+                    Vector3.Scale(backgroundBaseLocalScale, activeSeason.BackgroundScaleMultiplier), uniformArtScale);
             }
 
-            if (circleRingRenderer != null && activeSeason.CircleRingSprite != null)
+            if (circleRingRenderer != null)
             {
-                circleRingRenderer.sprite = activeSeason.CircleRingSprite;
+                // The scene sprite also covers a missing seasonal ring reference.
+                Sprite sourceRing = activeSeason.CircleRingSprite != null
+                    ? activeSeason.CircleRingSprite : originalCircleRingSprite;
+                circleRingRenderer.sprite = SpringPixelArtStyle.Resolve(
+                    activeSeason, sourceRing, out Vector3 artScale);
+                ScenePixelDensity.ApplyGround(circleRingRenderer, circleRingRenderer.sprite != sourceRing);
+                // The thin decorative circle overlays the terrain and must share its grid.
+                ScenePixelDensity.ApplyGround(circleRenderer, circleRingRenderer.sprite != sourceRing);
+                circleRingRenderer.transform.localScale = Vector3.Scale(circleRingBaseLocalScale, artScale);
+
+                // The mask reference is a child of the ring. Compensating the new ring
+                // canvas must not also shrink that child's world-space diameter.
+                if (circleRenderer != null && circleRenderer.transform.IsChildOf(circleRingRenderer.transform))
+                {
+                    circleRenderer.transform.localScale = Vector3.Scale(circleBaseLocalScale,
+                        new Vector3(1f / artScale.x, 1f / artScale.y, 1f));
+                }
             }
 
             ResolveGameHud()?.ApplySeasonTheme(activeSeason);
@@ -1379,6 +1433,26 @@ namespace CircleWar
                 circleSize.y / maskSize.y / parentScaleY,
                 1f);
             backgroundRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+
+            if (SpringPixelArtStyle.SupportsSeason(activeSeason))
+            {
+                FitPixelBackground(circleSize);
+            }
+        }
+
+        private void FitPixelBackground(Vector2 windowSize)
+        {
+            if (backgroundRenderer.sprite == null) return;
+            Vector3 currentSize = backgroundRenderer.bounds.size;
+            if (currentSize.x <= Mathf.Epsilon || currentSize.y <= Mathf.Epsilon) return;
+
+            // Cover the complete mask uniformly, without stretching the landscape.
+            float coverScale = Mathf.Max(windowSize.x / currentSize.x, windowSize.y / currentSize.y);
+            Vector3 scale = backgroundRenderer.transform.localScale;
+            backgroundRenderer.transform.localScale = new Vector3(scale.x * coverScale, scale.y * coverScale, scale.z);
+            Vector3 offset = backgroundCircleMask.transform.position - backgroundRenderer.bounds.center;
+            offset.z = 0f;
+            backgroundRenderer.transform.position += offset;
         }
     }
 }

@@ -1,0 +1,4 @@
+Dialogue strings=178; overflow=0; Chinese glyphs=708; missing=0
+Temporary monster objects=0; ground pixel size=1; detail reduction=0.7; white overlay hidden=True
+Body=fusion-pixel-10px-proportional-zh_hans size=20 line spacing=0.75; ground bounds=(8.60, 8.53, 0.20)
+Final detail reduction=0.45; radius=1; palette steps=16; actual ground pixels=1; shader errors=False

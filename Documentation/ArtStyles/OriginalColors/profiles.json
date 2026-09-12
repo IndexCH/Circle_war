@@ -1,0 +1,408 @@
+{
+  "profiles": [
+    {
+      "name": "dead-crystal-tree",
+      "pixel": "Assets/ArtStyles/SpringPixel/dead-crystal-tree.png",
+      "original": "Assets/Resources/GameData/RoadSegments/spring_layer_dead_crystal_tree.png",
+      "size": 32,
+      "sourceMeanLab": [
+        36.007,
+        8.428,
+        9.205
+      ],
+      "beforeMeanLab": [
+        35.687,
+        14.806,
+        3.006
+      ],
+      "correctedMeanLab": [
+        35.722,
+        9.005,
+        8.077
+      ],
+      "accentGroups": [
+        3
+      ]
+    },
+    {
+      "name": "upright-supply-crate",
+      "pixel": "Assets/ArtStyles/SpringPixel/upright-supply-crate.png",
+      "original": "Assets/Resources/GameData/RoadSegments/ChatGPT Image 2026年7月31日 06_52_06.png",
+      "size": 32,
+      "sourceMeanLab": [
+        27.519,
+        -1.963,
+        11.877
+      ],
+      "beforeMeanLab": [
+        38.144,
+        -1.743,
+        8.123
+      ],
+      "correctedMeanLab": [
+        27.594,
+        -1.926,
+        11.77
+      ],
+      "accentGroups": []
+    },
+    {
+      "name": "broken-industrial-pole",
+      "pixel": "Assets/ArtStyles/SpringPixel/broken-industrial-pole.png",
+      "original": "Assets/Resources/GameData/RoadSegments/ChatGPT Image 2026年7月31日 06_51_49.png",
+      "size": 32,
+      "sourceMeanLab": [
+        34.036,
+        4.536,
+        13.23
+      ],
+      "beforeMeanLab": [
+        39.402,
+        7.085,
+        7.179
+      ],
+      "correctedMeanLab": [
+        34.073,
+        4.557,
+        13.142
+      ],
+      "accentGroups": []
+    },
+    {
+      "name": "salt-dead-tree",
+      "pixel": "Assets/ArtStyles/SpringPixel/salt-dead-tree.png",
+      "original": "Assets/Resources/GameData/RoadSegments/spring_layer_salt_dead_tree.png",
+      "size": 32,
+      "sourceMeanLab": [
+        38.523,
+        6.406,
+        13.522
+      ],
+      "beforeMeanLab": [
+        39.798,
+        11.986,
+        7.116
+      ],
+      "correctedMeanLab": [
+        38.5,
+        6.415,
+        13.497
+      ],
+      "accentGroups": []
+    },
+    {
+      "name": "coral-fungus-tree",
+      "pixel": "Assets/ArtStyles/SpringPixel/coral-fungus-tree.png",
+      "original": "Assets/Resources/GameData/RoadSegments/spring_layer_cactus_fruit.png",
+      "size": 32,
+      "sourceMeanLab": [
+        43.377,
+        12.511,
+        15.442
+      ],
+      "beforeMeanLab": [
+        41.788,
+        16.474,
+        8.494
+      ],
+      "correctedMeanLab": [
+        43.35,
+        12.524,
+        15.406
+      ],
+      "accentGroups": []
+    },
+    {
+      "name": "damaged-supply-chest",
+      "pixel": "Assets/ArtStyles/SpringPixel/damaged-supply-chest.png",
+      "original": "Assets/Resources/GameData/RoadSegments/ChatGPT Image 2026年7月31日 06_51_58.png",
+      "size": 32,
+      "sourceMeanLab": [
+        28.648,
+        -0.739,
+        7.773
+      ],
+      "beforeMeanLab": [
+        35.82,
+        0.723,
+        7.532
+      ],
+      "correctedMeanLab": [
+        28.761,
+        -0.824,
+        7.825
+      ],
+      "accentGroups": []
+    },
+    {
+      "name": "purple-flower-stump",
+      "pixel": "Assets/ArtStyles/SpringPixel/purple-flower-stump.png",
+      "original": "Assets/Resources/GameData/RoadSegments/spring_layer_reed_flower.png",
+      "size": 32,
+      "sourceMeanLab": [
+        36.653,
+        10.345,
+        9.237
+      ],
+      "beforeMeanLab": [
+        39.245,
+        13.232,
+        2.377
+      ],
+      "correctedMeanLab": [
+        35.994,
+        11.11,
+        7.186
+      ],
+      "accentGroups": [
+        3
+      ]
+    },
+    {
+      "name": "industrial-ruins",
+      "pixel": "Assets/ArtStyles/SpringPixel/industrial-ruins.png",
+      "original": "Assets/Resources/GameData/RoadSegments/ChatGPT Image 2026年7月31日 06_52_31.png",
+      "size": 32,
+      "sourceMeanLab": [
+        16.175,
+        -0.221,
+        4.691
+      ],
+      "beforeMeanLab": [
+        39.918,
+        5.297,
+        5.779
+      ],
+      "correctedMeanLab": [
+        16.271,
+        -0.147,
+        4.696
+      ],
+      "accentGroups": []
+    },
+    {
+      "name": "wide-supply-chest",
+      "pixel": "Assets/ArtStyles/SpringPixel/wide-supply-chest.png",
+      "original": "Assets/Resources/GameData/RoadSegments/ChatGPT Image 2026年7月31日 06_52_01.png",
+      "size": 32,
+      "sourceMeanLab": [
+        29.403,
+        -2.373,
+        11.613
+      ],
+      "beforeMeanLab": [
+        38.228,
+        -2.593,
+        8.33
+      ],
+      "correctedMeanLab": [
+        29.464,
+        -2.367,
+        11.594
+      ],
+      "accentGroups": []
+    },
+    {
+      "name": "blue-crystal-rocks",
+      "pixel": "Assets/ArtStyles/SpringPixel/blue-crystal-rocks.png",
+      "original": "Assets/Resources/GameData/RoadSegments/spring_layer_steel_crystal_rocks.png",
+      "size": 32,
+      "sourceMeanLab": [
+        52.561,
+        5.668,
+        19.493
+      ],
+      "beforeMeanLab": [
+        52.135,
+        5.305,
+        2.136
+      ],
+      "correctedMeanLab": [
+        52.635,
+        5.679,
+        19.189
+      ],
+      "accentGroups": []
+    },
+    {
+      "name": "crashed-capsule",
+      "pixel": "Assets/ArtStyles/SpringPixel/crashed-capsule.png",
+      "original": "Assets/Resources/GameData/RoadSegments/ChatGPT Image 2026年7月31日 06_52_12.png",
+      "size": 32,
+      "sourceMeanLab": [
+        35.675,
+        2.949,
+        15.409
+      ],
+      "beforeMeanLab": [
+        45.027,
+        5.835,
+        6.197
+      ],
+      "correctedMeanLab": [
+        35.918,
+        3.187,
+        14.715
+      ],
+      "accentGroups": []
+    },
+    {
+      "name": "severed-cables",
+      "pixel": "Assets/ArtStyles/SpringPixel/severed-cables.png",
+      "original": "Assets/Resources/GameData/RoadSegments/ChatGPT Image 2026年7月31日 06_52_35.png",
+      "size": 32,
+      "sourceMeanLab": [
+        22.88,
+        0.056,
+        4.864
+      ],
+      "beforeMeanLab": [
+        39.305,
+        2.908,
+        2.624
+      ],
+      "correctedMeanLab": [
+        22.982,
+        0.058,
+        4.859
+      ],
+      "accentGroups": []
+    },
+    {
+      "name": "discarded-rifle-pile",
+      "pixel": "Assets/ArtStyles/SpringPixel/discarded-rifle-pile.png",
+      "original": "Assets/Resources/GameData/RoadSegments/ChatGPT Image 2026年7月31日 06_52_22.png",
+      "size": 32,
+      "sourceMeanLab": [
+        20.227,
+        0.434,
+        5.967
+      ],
+      "beforeMeanLab": [
+        36.904,
+        4.522,
+        5.12
+      ],
+      "correctedMeanLab": [
+        20.303,
+        0.45,
+        5.923
+      ],
+      "accentGroups": []
+    },
+    {
+      "name": "salt-crystal-arch",
+      "pixel": "Assets/ArtStyles/SpringPixel/salt-crystal-arch.png",
+      "original": "Assets/Resources/GameData/RoadSegments/spring_layer_salt_crystal_arch.png",
+      "size": 32,
+      "sourceMeanLab": [
+        47.537,
+        9.108,
+        15.127
+      ],
+      "beforeMeanLab": [
+        50.028,
+        11.07,
+        -0.372
+      ],
+      "correctedMeanLab": [
+        45.695,
+        10.443,
+        11.568
+      ],
+      "accentGroups": [
+        3
+      ]
+    },
+    {
+      "name": "crystal-rock-marker",
+      "pixel": "Assets/ArtStyles/SpringPixel/crystal-rock-marker.png",
+      "original": "Assets/Resources/GameData/RoadSegments/spring_layer_surface_marker.png",
+      "size": 32,
+      "sourceMeanLab": [
+        58.177,
+        9.989,
+        23.547
+      ],
+      "beforeMeanLab": [
+        55.304,
+        10.085,
+        0.598
+      ],
+      "correctedMeanLab": [
+        56.506,
+        11.038,
+        20.16
+      ],
+      "accentGroups": [
+        3
+      ]
+    },
+    {
+      "name": "broken-terminal",
+      "pixel": "Assets/ArtStyles/SpringPixel/broken-terminal.png",
+      "original": "Assets/Resources/GameData/RoadSegments/call_9v6OWhxFCrP6I4vqh7NidBQZ.png",
+      "size": 32,
+      "sourceMeanLab": [
+        16.149,
+        -0.711,
+        5.447
+      ],
+      "beforeMeanLab": [
+        32.841,
+        3.27,
+        2.93
+      ],
+      "correctedMeanLab": [
+        16.23,
+        -0.659,
+        5.294
+      ],
+      "accentGroups": []
+    },
+    {
+      "name": "salt-dust-background",
+      "pixel": "Assets/ArtStyles/SpringPixel/salt-dust-background.png",
+      "original": "Assets/Resources/Scence/盐碱地/ChatGPT Image 2026年8月30日 01_24_45.png",
+      "size": 32,
+      "sourceMeanLab": [
+        66.077,
+        13.047,
+        22.286
+      ],
+      "beforeMeanLab": [
+        65.398,
+        5.531,
+        -8.075
+      ],
+      "correctedMeanLab": [
+        66.027,
+        12.976,
+        22.26
+      ],
+      "accentGroups": []
+    },
+    {
+      "name": "salt-crust-ring",
+      "pixel": "Assets/ArtStyles/SpringPixel/salt-crust-ring.png",
+      "original": "Assets/Resources/Scence/盐碱地/Gemini_Generated_Image_wwab5bwwab5bwwab (1) (1).png",
+      "size": 32,
+      "sourceMeanLab": [
+        58.967,
+        0.693,
+        6.707
+      ],
+      "beforeMeanLab": [
+        57.917,
+        9.271,
+        4.295
+      ],
+      "correctedMeanLab": [
+        59.003,
+        0.835,
+        6.629
+      ],
+      "accentGroups": []
+    }
+  ]
+}

@@ -244,6 +244,8 @@ namespace CircleWar
             }
 
             ResolveSeasonThemeReferences();
+            OriginalHudPixelStyle.Apply(this, dialoguePortraitImage,
+                SpringPixelArtStyle.SupportsSeason(season) && SpringPixelArtStyle.IsEnabled);
             Color color = season.HudFrameColor;
             SetImageColor(topLeftDateTimeBackground, color);
             SetImageColor(topCenterBossHealthFrame, color);
@@ -674,6 +676,7 @@ namespace CircleWar
             Text text = textObject.AddComponent<Text>();
             text.font = GetFallbackFont();
             text.fontSize = fontSize;
+            PixelHudTypography.ApplyToGeneratedText(text, yearText);
             text.alignment = alignment;
             text.color = Color.white;
             text.raycastTarget = false;

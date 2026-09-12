@@ -1,0 +1,36 @@
+using UnityEngine;using UnityEditor;using CircleWar;using System.Collections.Generic;using System.IO;
+internal class CommandScript:IRunCommand{
+public void Execute(ExecutionResult result){
+if(!Application.isPlaying)throw new System.Exception("Play required");
+var map=CircleMapView.Active;float radius=map.GroundSurfaceRadius;var center=map.DiskCenter;
+var root=new GameObject("Summer Grounding Validation");result.RegisterObjectCreation(root);root.transform.localScale=new Vector3(.4f,.4f,1);
+var child=new GameObject("Image");child.transform.SetParent(root.transform,false);var primary=child.AddComponent<SpriteRenderer>();primary.sortingOrder=5;var segment=root.AddComponent<CircleMapSegment>();segment.Setup(primary,null,null,null,null,0);
+var floors=new Dictionary<Sprite,float>();int checks=0,nodes=0;float maxError=0;
+try{
+SpringPixelArtStyle.SetEnabled(true);
+foreach(var d in Resources.LoadAll<RoadSegmentDefinition>("GameData/RoadSegments")){
+if(d.Season==null||d.Season.DefinitionId!="summer")continue;nodes++;
+for(int rotation=0;rotation<8;rotation++){
+float angle=(-90f+rotation*45f)*Mathf.Deg2Rad;root.transform.position=(Vector3)(center+new Vector2(Mathf.Cos(angle),Mathf.Sin(angle))*radius);root.transform.rotation=Quaternion.Euler(0,0,angle*Mathf.Rad2Deg+90);
+segment.Show(new CircleRoadSegmentData(d,null));
+foreach(var sr in root.GetComponentsInChildren<SpriteRenderer>()){
+if(!sr.enabled||sr.sprite==null)continue;Sprite sprite=sr.sprite;string path=AssetDatabase.GetAssetPath(sprite);bool npc=path.Contains("/NpcRoadSprites/")||path.Contains("/NpcIdleAnimations/");
+if(!floors.TryGetValue(sprite,out float floor)){
+var tex=new Texture2D(2,2);ImageConversion.LoadImage(tex,File.ReadAllBytes(path));var pixels=tex.GetPixels32();var r=sprite.rect;var ys=new List<float>();
+for(int x=(int)(r.x+r.width*.05f);x<(int)(r.x+r.width*.95f);x++)for(int y=(int)r.y;y<r.y+r.height;y++)if(pixels[y*tex.width+x].a>=180){ys.Add((y-r.y+.5f)/sprite.pixelsPerUnit);break;}
+ys.Sort();floor=ys.Count>0?ys[Mathf.Min(ys.Count-1,Mathf.FloorToInt(ys.Count*.02f))]:0;floors.Add(sprite,floor);result.DestroyObject(tex);}
+var b=sprite.bounds;var foot=sr.transform.TransformPoint(new Vector3(b.center.x,b.min.y+floor,0));float target=radius+(npc ? .008f : .025f);float error=Mathf.Abs(Vector2.Distance(foot,center)-target);maxError=Mathf.Max(maxError,error);
+if(error>.003f)throw new System.Exception("Foot radius error "+d.name+" "+sprite.name+" "+error);
+if(!npc){if(sr.maskInteraction!=SpriteMaskInteraction.VisibleInsideMask)throw new System.Exception("Missing ground mask");var block=new MaterialPropertyBlock();sr.GetPropertyBlock(block);if(block.GetTexture("_MainTex")!=sprite.texture)throw new System.Exception("Stale sprite texture");}
+checks++;
+}}
+SpringPixelArtStyle.SetEnabled(false);segment.Show(new CircleRoadSegmentData(d,null));
+foreach(var sr in root.GetComponentsInChildren<SpriteRenderer>())if(sr.maskInteraction!=SpriteMaskInteraction.None)throw new System.Exception("Mask not released on style toggle");
+SpringPixelArtStyle.SetEnabled(true);
+}
+segment.Show(null);foreach(var sr in root.GetComponentsInChildren<SpriteRenderer>())if(sr.enabled)throw new System.Exception("Pooled sprite visible on empty road");
+var spring=Resources.Load<SeasonDefinition>("GameData/Seasons/Spring");
+foreach(var d in Resources.LoadAll<RoadSegmentDefinition>("GameData/RoadSegments")){if(d.Season!=spring||d.MapSpriteLayers.Count==0)continue;segment.Show(new CircleRoadSegmentData(d,null));foreach(var sr in root.GetComponentsInChildren<SpriteRenderer>())if(sr.maskInteraction!=SpriteMaskInteraction.None)throw new System.Exception("Summer mask leaked into spring");break;}
+result.Log("PASS: "+nodes+" summer nodes, "+checks+" roots/feet across 8 circle angles; max radial error "+maxError.ToString("F6")+"; current pixel textures, ground masks, style toggling, empty slots and spring mask reset.");
+}finally{SpringPixelArtStyle.SetEnabled(true);result.DestroyObject(root);}
+}}

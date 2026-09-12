@@ -1,0 +1,33 @@
+using UnityEngine;using UnityEditor;using CircleWar;using System.Collections;using System.Collections.Generic;using System.IO;
+internal class CommandScript:IRunCommand{
+ public void Execute(ExecutionResult result){
+ if(!Application.isPlaying)throw new System.Exception("Play required");
+ Object.FindFirstObjectByType<GameHud>().StartCoroutine(Capture());
+ result.Log("Capturing 40 summer nodes in four diagnostic sheets.");
+ }
+ private static IEnumerator Capture(){
+ var map=CircleMapView.Active;var camera=Camera.main;float oldTime=Time.timeScale;Time.timeScale=0;
+ var oldPos=camera.transform.position;float oldOrtho=camera.orthographicSize;var oldTarget=camera.targetTexture;
+ var hidden=new List<GameObject>();foreach(var s in Object.FindObjectsByType<CircleMapSegment>()){if(s.gameObject.activeSelf){hidden.Add(s.gameObject);s.gameObject.SetActive(false);}}
+ var canvases=new List<Canvas>();foreach(var c in Object.FindObjectsByType<Canvas>())if(c.enabled){canvases.Add(c);c.enabled=false;}
+ var player=new SerializedObject(map).FindProperty("playerTarget").objectReferenceValue as Transform;var players=new List<SpriteRenderer>();
+ if(player!=null)foreach(var s in player.GetComponentsInChildren<SpriteRenderer>())if(s.enabled){players.Add(s);s.enabled=false;}
+ var root=new GameObject("Summer Placement Audit");root.transform.position=(Vector3)map.DiskCenter+Vector3.down*map.GroundSurfaceRadius;root.transform.localScale=Vector3.one*.4f;
+ var image=new GameObject("Image");image.transform.SetParent(root.transform,false);var sr=image.AddComponent<SpriteRenderer>();sr.sortingOrder=5;
+ var segment=root.AddComponent<CircleMapSegment>();segment.Setup(sr,null,null,null,null,0);
+ var labelObj=new GameObject("Audit Label");var label=labelObj.AddComponent<TextMesh>();label.fontSize=40;label.characterSize=.065f;label.anchor=TextAnchor.UpperLeft;label.color=Color.white;
+ label.GetComponent<MeshRenderer>().sortingOrder=100;
+ var defs=new List<RoadSegmentDefinition>();foreach(var d in Resources.LoadAll<RoadSegmentDefinition>("GameData/RoadSegments"))if(d.Season!=null&&d.Season.DefinitionId=="summer")defs.Add(d);defs.Sort((a,b)=>a.RoadIndex.CompareTo(b.RoadIndex));
+ const int w=640,h=420;var rt=new RenderTexture(w,h,24);rt.Create();camera.targetTexture=rt;camera.orthographicSize=2.12f;
+ camera.transform.position=new Vector3(map.DiskCenter.x,map.DiskCenter.y-map.GroundSurfaceRadius+1.5f,oldPos.z);
+ labelObj.transform.position=new Vector3(camera.transform.position.x-3.15f,camera.transform.position.y+2.05f,0);
+ string dir="C:/Users/Administrator/Downloads/动作素材/summer-placement";Directory.CreateDirectory(dir);
+ try{
+ for(int page=0;page<4;page++){var atlas=new Texture2D(w*2,h*5,TextureFormat.RGB24,false);
+ for(int n=0;n<10;n++){var d=defs[page*10+n];segment.Show(new CircleRoadSegmentData(d,null));label.text="NODE "+d.RoadIndex.ToString("00");
+ yield return null;camera.Render();RenderTexture.active=rt;
+ atlas.ReadPixels(new Rect(0,0,w,h),(n%2)*w,(4-n/2)*h,false);RenderTexture.active=null;}
+ atlas.Apply();File.WriteAllBytes(dir+"/final-"+page+".png",atlas.EncodeToPNG());Object.Destroy(atlas);}
+ }finally{camera.targetTexture=oldTarget;camera.transform.position=oldPos;camera.orthographicSize=oldOrtho;RenderTexture.active=null;rt.Release();Object.Destroy(rt);Object.Destroy(root);Object.Destroy(labelObj);foreach(var o in hidden)if(o!=null)o.SetActive(true);foreach(var c in canvases)if(c!=null)c.enabled=true;foreach(var s in players)if(s!=null)s.enabled=true;Time.timeScale=oldTime;}
+ }
+}

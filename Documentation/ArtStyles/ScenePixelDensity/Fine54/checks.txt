@@ -1,0 +1,4 @@
+Shared world density=54
+Screen pixels per cell=2
+Active renderers using shared material=7
+Resolution=1920x1080

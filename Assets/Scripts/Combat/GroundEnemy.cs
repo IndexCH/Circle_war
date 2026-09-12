@@ -212,6 +212,7 @@ namespace CircleWar
             bodyRenderer.transform.localScale = new Vector3(fittedBodyScale, fittedBodyScale, 1f);
             bodyBaseLocalScale = bodyRenderer.transform.localScale;
             hasBodyBasePose = true;
+            ScenePixelDensity.ApplyEnemy(bodyRenderer);
             EnsureHealthBar();
 
             if (attackType != EnemyAttackType.GroundRanged)
@@ -247,6 +248,7 @@ namespace CircleWar
             }
 
             gunRenderer.enabled = configuredBodySprite == null;
+            ScenePixelDensity.ApplyEnemy(gunRenderer);
 
             if (shootPoint == null)
             {

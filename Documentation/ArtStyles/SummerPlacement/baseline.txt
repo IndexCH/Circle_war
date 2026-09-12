@@ -1,0 +1,176 @@
+[Log] 0 SummerLowHumidityShore00 NPC=none (0.00, 0.00)
+  0 summer-seaweed-large offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(2.79, 2.36, 0.20)
+1 SummerLowHumidityShore01 NPC=none (0.00, 0.00)
+  0 summer-cattails offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(5.72, 4.69, 0.20)
+2 SummerLowHumidityShore02 NPC=none (0.00, 0.00)
+  0 summer-fern offset=(2.00, 0.30) scale=(1.00, 1.00, 1.00) z=10 size=(3.36, 4.38, 0.20)
+  1 summer-storage-pod offset=(0.00, -0.20) scale=(1.00, 1.00, 1.00) z=3 size=(5.11, 2.51, 0.20)
+3 SummerLowHumidityShore03 NPC=none (0.00, 0.00)
+  0 summer-reeds offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(3.12, 4.18, 0.20)
+  1 summer-reeds offset=(1.00, 0.00) scale=(1.00, 1.00, 1.00) z=20 size=(3.12, 4.18, 0.20)
+  2 summer-dandelion offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(2.31, 3.24, 0.20)
+4 SummerLowHumidityShore04 NPC=none (0.00, 0.00)
+  0 summer-reeds offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=-2 size=(3.12, 4.18, 0.20)
+5 SummerLowHumidityShore05 NPC=none (0.00, 0.00)
+  0 summer-fern offset=(-2.00, 0.20) scale=(1.00, 1.00, 1.00) z=-15 size=(3.36, 4.38, 0.20)
+  1 summer-navigation-buoy offset=(0.00, 0.20) scale=(1.00, 1.00, 1.00) z=0 size=(3.66, 6.63, 0.20)
+6 SummerLowHumidityShore06 NPC=none (0.00, 0.00)
+  0 summer-marsh-leaves offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(8.32, 5.13, 0.20)
+7 SummerLowHumidityShore07 NPC=none (0.00, 0.00)
+  0 summer-cattails offset=(2.00, 0.40) scale=(1.00, 1.00, 1.00) z=20 size=(5.72, 4.69, 0.20)
+  1 upright-supply-crate offset=(0.00, 0.15) scale=(1.00, 1.00, 1.00) z=2 size=(2.03, 2.62, 0.20)
+8 SummerLowHumidityShore08 NPC=none (0.00, 0.00)
+9 SummerLowHumidityShore09 NPC=none (0.00, 0.00)
+  0 npc_inspector_idle offset=(0.00, -0.10) scale=(1.00, 1.00, 1.00) z=0 size=(4.27, 4.27, 0.20)
+10 SummerLowHumidityShore10 NPC=none (0.00, 0.00)
+  0 summer-marsh-leaves offset=(3.00, 0.50) scale=(1.00, 1.00, 1.00) z=20 size=(8.32, 5.13, 0.20)
+  1 wide-supply-chest offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(3.73, 1.47, 0.20)
+11 SummerLowHumidityShore11 NPC=none (0.00, 0.00)
+  0 broken-terminal offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(3.45, 3.75, 0.20)
+12 SummerLowHumidityShore12 NPC=none (0.00, 0.00)
+13 SummerLowHumidityShore13 NPC=none (0.00, 0.00)
+  0 summer-fern offset=(2.00, 0.30) scale=(1.00, 1.00, 1.00) z=25 size=(3.36, 4.38, 0.20)
+  1 summer-reeds offset=(-2.00, 0.30) scale=(1.00, 1.00, 1.00) z=-25 size=(3.12, 4.18, 0.20)
+  2 summer-dandelion offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(2.31, 3.24, 0.20)
+14 SummerLowHumidityShore14 NPC=none (0.00, 0.00)
+  0 summer-dandelion offset=(0.00, 0.00) scale=(1.20, 1.20, 1.00) z=0 size=(3.47, 4.86, 0.20)
+15 SummerLowHumidityShore15 NPC=none (0.00, 0.00)
+  0 upright-supply-crate offset=(-1.50, 0.30) scale=(1.00, 1.00, 1.00) z=-10 size=(2.03, 2.62, 0.20)
+  1 npc_inspector_idle offset=(0.00, -0.20) scale=(1.00, 1.00, 1.00) z=0 size=(4.27, 4.27, 0.20)
+16 SummerLowHumidityShore16 NPC=none (0.00, 0.00)
+  0 summer-marsh-leaves offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(8.32, 5.13, 0.20)
+17 SummerLowHumidityShore17 NPC=none (0.00, 0.00)
+  0 severed-cables offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(6.98, 1.73, 0.20)
+18 SummerLowHumidityShore18 NPC=none (0.00, 0.00)
+  0 summer-seaweed-small offset=(-2.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(1.59, 1.72, 0.20)
+  1 summer-fern offset=(1.50, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(3.36, 4.38, 0.20)
+  2 upright-supply-crate offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(2.03, 2.62, 0.20)
+19 SummerLowHumidityShore19 NPC=none (0.00, 0.00)
+  0 summer-reeds offset=(1.00, 0.20) scale=(1.00, 1.00, 1.00) z=5 size=(3.12, 4.18, 0.20)
+  1 summer-reeds offset=(2.00, 0.20) scale=(1.00, 1.50, 1.00) z=10 size=(3.12, 6.27, 0.20)
+  2 summer-water-purifier offset=(0.00, -0.25) scale=(0.50, 0.50, 1.00) z=0 size=(2.17, 5.02, 0.20)
+20 SummerLowHumidityShore20 NPC=none (0.00, 0.00)
+21 SummerLowHumidityShore21 NPC=none (0.00, 0.00)
+  0 summer-marsh-leaves offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(8.32, 5.13, 0.20)
+22 SummerLowHumidityShore22 NPC=none (0.00, 0.00)
+  0 summer-cattails offset=(0.00, 0.00) scale=(1.50, 1.30, 1.00) z=0 size=(8.58, 6.10, 0.20)
+23 SummerLowHumidityShore23 NPC=none (0.00, 0.00)
+  0 summer-marsh-leaves offset=(-2.00, 0.00) scale=(0.70, 1.00, 1.00) z=0 size=(5.82, 5.13, 0.20)
+  1 summer-ruined-doorway offset=(0.00, 0.00) scale=(0.70, 1.00, 1.00) z=0 size=(7.64, 4.96, 0.20)
+  2 summer-fern offset=(3.00, 0.40) scale=(0.70, 1.00, 1.00) z=20 size=(2.35, 4.38, 0.20)
+24 SummerLowHumidityShore24 NPC=none (0.00, 0.00)
+  0 summer-seaweed-small offset=(3.00, 0.50) scale=(1.00, 1.00, 1.00) z=20 size=(1.59, 1.72, 0.20)
+  1 wide-supply-chest offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(3.73, 1.47, 0.20)
+25 SummerLowHumidityShore25 NPC=none (0.00, 0.00)
+  0 summer-marsh-leaves offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(8.32, 5.13, 0.20)
+26 SummerLowHumidityShore26 NPC=none (0.00, 0.00)
+  0 summer-escape-pod offset=(0.00, -0.50) scale=(1.00, 1.00, 1.00) z=10 size=(7.71, 6.31, 0.20)
+  1 summer-fern offset=(2.30, 0.50) scale=(1.00, 1.00, 1.00) z=10 size=(3.36, 4.38, 0.20)
+27 SummerLowHumidityShore27 NPC=none (0.00, 0.00)
+28 SummerLowHumidityShore28 NPC=none (0.00, 0.00)
+  0 summer-reeds offset=(2.00, 0.30) scale=(1.00, 1.00, 1.00) z=15 size=(3.12, 4.18, 0.20)
+  1 npc_graff_from_veteran_idle offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(4.27, 4.27, 0.20)
+29 SummerLowHumidityShore29 NPC=none (0.00, 0.00)
+  0 summer-seaweed-small offset=(2.00, 0.00) scale=(1.50, 1.50, 1.00) z=0 size=(2.39, 2.58, 0.20)
+  1 summer-dandelion offset=(0.00, 0.00) scale=(1.50, 1.50, 1.00) z=0 size=(3.47, 4.86, 0.20)
+  2 summer-seaweed-small offset=(-2.00, 0.00) scale=(1.50, 1.50, 1.00) z=-20 size=(2.39, 2.58, 0.20)
+30 SummerLowHumidityShore30 NPC=none (0.00, 0.00)
+  0 summer-marsh-leaves offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(8.32, 5.13, 0.20)
+31 SummerLowHumidityShore31 NPC=none (0.00, 0.00)
+  0 industrial-ruins offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(7.81, 6.02, 0.20)
+  1 summer-reeds offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(3.12, 4.18, 0.20)
+  2 summer-fern offset=(2.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(3.36, 4.38, 0.20)
+32 SummerLowHumidityShore32 NPC=none (0.00, 0.00)
+  0 summer-navigation-buoy offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(3.66, 6.63, 0.20)
+  1 summer-reeds offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(3.12, 4.18, 0.20)
+  2 summer-fern offset=(3.00, 0.50) scale=(1.00, 1.00, 1.00) z=20 size=(3.36, 4.38, 0.20)
+33 SummerLowHumidityShore33 NPC=none (0.00, 0.00)
+  0 summer-water-purifier offset=(0.00, -0.30) scale=(0.50, 0.50, 1.00) z=0 size=(2.78, 6.43, 0.20)
+34 SummerLowHumidityShore34 NPC=none (0.00, 0.00)
+  0 summer-fern offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(3.36, 4.38, 0.20)
+  1 summer-reeds offset=(-1.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(3.12, 4.18, 0.20)
+35 SummerLowHumidityShore35 NPC=none (0.00, 0.00)
+  0 summer-marsh-leaves offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(8.32, 5.13, 0.20)
+  1 upright-supply-crate offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(2.03, 2.62, 0.20)
+36 SummerLowHumidityShore36 NPC=none (0.00, 0.00)
+  0 broken-terminal offset=(2.00, 0.20) scale=(1.00, 1.00, 1.00) z=20 size=(3.45, 3.75, 0.20)
+  1 npc_inspector_idle offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(4.27, 4.27, 0.20)
+37 SummerLowHumidityShore37 NPC=none (0.00, 0.00)
+  0 wide-supply-chest offset=(2.00, 0.50) scale=(1.00, 1.00, 1.00) z=20 size=(3.73, 1.47, 0.20)
+  1 upright-supply-crate offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(2.03, 2.62, 0.20)
+38 SummerLowHumidityShore38 NPC=none (0.00, 0.00)
+  0 summer-dandelion offset=(1.00, 0.20) scale=(1.50, 1.50, 1.00) z=8 size=(3.47, 4.86, 0.20)
+  1 summer-dandelion offset=(0.00, 0.00) scale=(1.50, 1.50, 1.00) z=0 size=(3.47, 4.86, 0.20)
+  2 summer-dandelion offset=(2.00, 0.20) scale=(1.50, 1.50, 1.00) z=15 size=(3.47, 4.86, 0.20)
+39 SummerLowHumidityShore39 NPC=none (0.00, 0.00)
+  0 summer-cattails offset=(0.00, 0.00) scale=(1.00, 1.00, 1.00) z=0 size=(5.72, 4.69, 0.20)
+  1 summer-cattails offset=(2.00, 0.20) scale=(1.00, 1.00, 1.00) z=15 size=(5.72, 4.69, 0.20)
+
+[Log] 0|0|Assets/ArtStyles/SummerPixel/summer-seaweed-large.png|gap=0.000|(x:0.00, y:0.00, width:1347.00, height:1143.00)|(673.50, 571.50)|100
+1|0|Assets/ArtStyles/SummerPixel/summer-cattails.png|gap=0.000|(x:0.00, y:0.00, width:1376.00, height:1122.00)|(688.00, 561.00)|100
+2|0|Assets/ArtStyles/SummerPixel/summer-fern.png|gap=0.020|(x:0.00, y:0.00, width:1082.00, height:1415.00)|(541.00, 707.50)|100
+2|1|Assets/ArtStyles/SummerPixel/summer-storage-pod.png|gap=-0.079|(x:0.00, y:0.00, width:1476.00, height:695.00)|(738.00, 347.50)|100
+3|0|Assets/ArtStyles/SummerPixel/summer-reeds.png|gap=0.000|(x:0.00, y:0.00, width:1051.00, height:1434.00)|(525.50, 717.00)|100
+3|1|Assets/ArtStyles/SummerPixel/summer-reeds.png|gap=-0.008|(x:0.00, y:0.00, width:1051.00, height:1434.00)|(525.50, 717.00)|100
+3|2|Assets/ArtStyles/SummerPixel/summer-dandelion.png|gap=0.000|(x:0.00, y:0.00, width:1050.00, height:1475.00)|(525.00, 737.50)|100
+4|0|Assets/ArtStyles/SummerPixel/summer-reeds.png|gap=0.000|(x:0.00, y:0.00, width:1051.00, height:1434.00)|(525.50, 717.00)|100
+5|0|Assets/ArtStyles/SummerPixel/summer-fern.png|gap=-0.021|(x:0.00, y:0.00, width:1082.00, height:1415.00)|(541.00, 707.50)|100
+5|1|Assets/ArtStyles/SummerPixel/summer-navigation-buoy.png|gap=0.080|(x:0.00, y:0.00, width:731.00, height:1438.00)|(365.50, 719.00)|100
+6|0|Assets/ArtStyles/SummerPixel/summer-marsh-leaves.png|gap=0.000|(x:0.00, y:0.00, width:1597.00, height:985.00)|(798.50, 492.50)|100
+7|0|Assets/ArtStyles/SummerPixel/summer-cattails.png|gap=0.057|(x:0.00, y:0.00, width:1376.00, height:1122.00)|(688.00, 561.00)|100
+7|1|Assets/ArtStyles/SpringPixel/upright-supply-crate.png|gap=0.060|(x:0.00, y:0.00, width:913.00, height:1280.00)|(456.50, 640.00)|100
+9|0|Assets/Resources/Scence/NpcIdleAnimations/inspector/frame_111.png|gap=0.013|(x:0.00, y:0.00, width:640.00, height:640.00)|(320.00, 320.00)|160
+10|0|Assets/ArtStyles/SummerPixel/summer-marsh-leaves.png|gap=-0.041|(x:0.00, y:0.00, width:1597.00, height:985.00)|(798.50, 492.50)|100
+10|1|Assets/ArtStyles/SpringPixel/wide-supply-chest.png|gap=0.000|(x:0.00, y:0.00, width:1750.00, height:677.00)|(875.00, 338.50)|100
+11|0|Assets/ArtStyles/SpringPixel/broken-terminal.png|gap=0.000|(x:0.00, y:0.00, width:1158.00, height:1255.00)|(579.00, 627.50)|100
+13|0|Assets/ArtStyles/SummerPixel/summer-fern.png|gap=0.029|(x:0.00, y:0.00, width:1082.00, height:1415.00)|(541.00, 707.50)|100
+13|1|Assets/ArtStyles/SummerPixel/summer-reeds.png|gap=0.031|(x:0.00, y:0.00, width:1051.00, height:1434.00)|(525.50, 717.00)|100
+13|2|Assets/ArtStyles/SummerPixel/summer-dandelion.png|gap=0.000|(x:0.00, y:0.00, width:1050.00, height:1475.00)|(525.00, 737.50)|100
+14|0|Assets/ArtStyles/SummerPixel/summer-dandelion.png|gap=0.000|(x:0.00, y:0.00, width:1050.00, height:1475.00)|(525.00, 737.50)|100
+15|0|Assets/ArtStyles/SpringPixel/upright-supply-crate.png|gap=0.068|(x:0.00, y:0.00, width:913.00, height:1280.00)|(456.50, 640.00)|100
+15|1|Assets/Resources/Scence/NpcRoadSprites/npc_inspector_idle.png|gap=-0.080|(x:0.00, y:0.00, width:640.00, height:640.00)|(320.00, 320.00)|150
+16|0|Assets/ArtStyles/SummerPixel/summer-marsh-leaves.png|gap=0.000|(x:0.00, y:0.00, width:1597.00, height:985.00)|(798.50, 492.50)|100
+17|0|Assets/ArtStyles/SpringPixel/severed-cables.png|gap=0.000|(x:0.00, y:0.00, width:1925.00, height:495.00)|(962.50, 247.50)|100
+18|0|Assets/ArtStyles/SummerPixel/summer-seaweed-small.png|gap=-0.078|(x:0.00, y:0.00, width:1087.00, height:1178.00)|(543.50, 589.00)|100
+18|1|Assets/ArtStyles/SummerPixel/summer-fern.png|gap=-0.044|(x:0.00, y:0.00, width:1082.00, height:1415.00)|(541.00, 707.50)|100
+18|2|Assets/ArtStyles/SpringPixel/upright-supply-crate.png|gap=0.000|(x:0.00, y:0.00, width:913.00, height:1280.00)|(456.50, 640.00)|100
+19|0|Assets/ArtStyles/SummerPixel/summer-reeds.png|gap=0.055|(x:0.00, y:0.00, width:1051.00, height:1434.00)|(525.50, 717.00)|100
+19|1|Assets/ArtStyles/SummerPixel/summer-reeds.png|gap=-0.029|(x:0.00, y:0.00, width:1051.00, height:1434.00)|(525.50, 717.00)|100
+19|2|Assets/ArtStyles/SummerPixel/summer-water-purifier.png|gap=-0.100|(x:0.00, y:0.00, width:651.00, height:1471.00)|(325.50, 735.50)|100
+21|0|Assets/ArtStyles/SummerPixel/summer-marsh-leaves.png|gap=0.000|(x:0.00, y:0.00, width:1597.00, height:985.00)|(798.50, 492.50)|100
+22|0|Assets/ArtStyles/SummerPixel/summer-cattails.png|gap=0.000|(x:0.00, y:0.00, width:1376.00, height:1122.00)|(688.00, 561.00)|100
+23|0|Assets/ArtStyles/SummerPixel/summer-marsh-leaves.png|gap=-0.078|(x:0.00, y:0.00, width:1597.00, height:985.00)|(798.50, 492.50)|100
+23|1|Assets/ArtStyles/SummerPixel/summer-ruined-doorway.png|gap=0.000|(x:0.00, y:0.00, width:1520.00, height:752.00)|(760.00, 376.00)|100
+23|2|Assets/ArtStyles/SummerPixel/summer-fern.png|gap=-0.068|(x:0.00, y:0.00, width:1082.00, height:1415.00)|(541.00, 707.50)|100
+24|0|Assets/ArtStyles/SummerPixel/summer-seaweed-small.png|gap=0.002|(x:0.00, y:0.00, width:1087.00, height:1178.00)|(543.50, 589.00)|100
+24|1|Assets/ArtStyles/SpringPixel/wide-supply-chest.png|gap=0.000|(x:0.00, y:0.00, width:1750.00, height:677.00)|(875.00, 338.50)|100
+25|0|Assets/ArtStyles/SummerPixel/summer-marsh-leaves.png|gap=0.000|(x:0.00, y:0.00, width:1597.00, height:985.00)|(798.50, 492.50)|100
+26|0|Assets/ArtStyles/SummerPixel/summer-escape-pod.png|gap=-0.186|(x:0.00, y:0.00, width:1365.00, height:1080.00)|(682.50, 540.00)|100
+26|1|Assets/ArtStyles/SummerPixel/summer-fern.png|gap=0.067|(x:0.00, y:0.00, width:1082.00, height:1415.00)|(541.00, 707.50)|100
+28|0|Assets/ArtStyles/SummerPixel/summer-reeds.png|gap=0.019|(x:0.00, y:0.00, width:1051.00, height:1434.00)|(525.50, 717.00)|100
+28|1|Assets/Resources/Scence/NpcRoadSprites/npc_graff_from_veteran_idle.png|gap=0.000|(x:0.00, y:0.00, width:640.00, height:640.00)|(320.00, 320.00)|150
+29|0|Assets/ArtStyles/SummerPixel/summer-seaweed-small.png|gap=-0.078|(x:0.00, y:0.00, width:1087.00, height:1178.00)|(543.50, 589.00)|100
+29|1|Assets/ArtStyles/SummerPixel/summer-dandelion.png|gap=0.000|(x:0.00, y:0.00, width:1050.00, height:1475.00)|(525.00, 737.50)|100
+29|2|Assets/ArtStyles/SummerPixel/summer-seaweed-small.png|gap=-0.085|(x:0.00, y:0.00, width:1087.00, height:1178.00)|(543.50, 589.00)|100
+30|0|Assets/ArtStyles/SummerPixel/summer-marsh-leaves.png|gap=0.000|(x:0.00, y:0.00, width:1597.00, height:985.00)|(798.50, 492.50)|100
+31|0|Assets/ArtStyles/SpringPixel/industrial-ruins.png|gap=0.000|(x:0.00, y:0.00, width:1460.00, height:991.00)|(730.00, 495.50)|100
+31|1|Assets/ArtStyles/SummerPixel/summer-reeds.png|gap=0.000|(x:0.00, y:0.00, width:1051.00, height:1434.00)|(525.50, 717.00)|100
+31|2|Assets/ArtStyles/SummerPixel/summer-fern.png|gap=-0.078|(x:0.00, y:0.00, width:1082.00, height:1415.00)|(541.00, 707.50)|100
+32|0|Assets/ArtStyles/SummerPixel/summer-navigation-buoy.png|gap=0.000|(x:0.00, y:0.00, width:731.00, height:1438.00)|(365.50, 719.00)|100
+32|1|Assets/ArtStyles/SummerPixel/summer-reeds.png|gap=0.000|(x:0.00, y:0.00, width:1051.00, height:1434.00)|(525.50, 717.00)|100
+32|2|Assets/ArtStyles/SummerPixel/summer-fern.png|gap=-0.030|(x:0.00, y:0.00, width:1082.00, height:1415.00)|(541.00, 707.50)|100
+33|0|Assets/ArtStyles/SummerPixel/summer-water-purifier.png|gap=-0.120|(x:0.00, y:0.00, width:651.00, height:1471.00)|(325.50, 735.50)|100
+34|0|Assets/ArtStyles/SummerPixel/summer-fern.png|gap=0.000|(x:0.00, y:0.00, width:1082.00, height:1415.00)|(541.00, 707.50)|100
+34|1|Assets/ArtStyles/SummerPixel/summer-reeds.png|gap=-0.020|(x:0.00, y:0.00, width:1051.00, height:1434.00)|(525.50, 717.00)|100
+35|0|Assets/ArtStyles/SummerPixel/summer-marsh-leaves.png|gap=0.000|(x:0.00, y:0.00, width:1597.00, height:985.00)|(798.50, 492.50)|100
+35|1|Assets/ArtStyles/SpringPixel/upright-supply-crate.png|gap=0.000|(x:0.00, y:0.00, width:913.00, height:1280.00)|(456.50, 640.00)|100
+36|0|Assets/ArtStyles/SpringPixel/broken-terminal.png|gap=-0.013|(x:0.00, y:0.00, width:1158.00, height:1255.00)|(579.00, 627.50)|100
+36|1|Assets/Resources/Scence/NpcRoadSprites/npc_inspector_idle.png|gap=0.000|(x:0.00, y:0.00, width:640.00, height:640.00)|(320.00, 320.00)|150
+37|0|Assets/ArtStyles/SpringPixel/wide-supply-chest.png|gap=0.114|(x:0.00, y:0.00, width:1750.00, height:677.00)|(875.00, 338.50)|100
+37|1|Assets/ArtStyles/SpringPixel/upright-supply-crate.png|gap=0.000|(x:0.00, y:0.00, width:913.00, height:1280.00)|(456.50, 640.00)|100
+38|0|Assets/ArtStyles/SummerPixel/summer-dandelion.png|gap=0.054|(x:0.00, y:0.00, width:1050.00, height:1475.00)|(525.00, 737.50)|100
+38|1|Assets/ArtStyles/SummerPixel/summer-dandelion.png|gap=0.000|(x:0.00, y:0.00, width:1050.00, height:1475.00)|(525.00, 737.50)|100
+38|2|Assets/ArtStyles/SummerPixel/summer-dandelion.png|gap=-0.024|(x:0.00, y:0.00, width:1050.00, height:1475.00)|(525.00, 737.50)|100
+39|0|Assets/ArtStyles/SummerPixel/summer-cattails.png|gap=0.000|(x:0.00, y:0.00, width:1376.00, height:1122.00)|(688.00, 561.00)|100
+39|1|Assets/ArtStyles/SummerPixel/summer-cattails.png|gap=-0.023|(x:0.00, y:0.00, width:1376.00, height:1122.00)|(688.00, 561.00)|100
+

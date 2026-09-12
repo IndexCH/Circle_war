@@ -1,0 +1,11 @@
+PASS All environment sprites share density 36 logical pixels per world unit
+PASS All 18 unique environment textures use the same density material
+PASS Decorative circle overlay uses the same pixel grid as terrain
+PASS F6 restores original background, terrain and decorative circle materials
+PASS Repeated F6 switching preserves terrain and background mask dimensions
+PASS Existing original-UI pixel style and layout preserved
+PASS Animated characters do not receive the environment material
+PASS Player path, position and road progress unchanged
+PASS Background still centered and covers the full circle
+PASS A crate scaled to 150 percent keeps the same world pixel size
+PASS Rotating scenery uses the same world pixel grid as the stationary background

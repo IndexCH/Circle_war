@@ -1,0 +1,27 @@
+Chinese characters=708; missing=0
+Measured dialogue strings=178; overflow=0; bodyFont=unifont-17.0.04; size=16; spacing=1.25
+Ground and overlay use 1.3 material=True
+Ground sampling at current resolution=1.3px; resolution=1920x1080
+AutumnEliteTurret|pixel=True|portraitPreserved=True
+AutumnRangedMonster|pixel=True|portraitPreserved=True
+AutumnTurretMonster|pixel=True|portraitPreserved=True
+AutumnTurretRemnant|pixel=True|portraitPreserved=True
+EliteSwampMonster|pixel=True|portraitPreserved=True
+RangedWaterMonster|pixel=True|portraitPreserved=True
+RollingCrystal|pixel=True|portraitPreserved=True
+SaltDustEliteOutpost|pixel=True|portraitPreserved=True
+SaltDustGroundShooter|pixel=True|portraitPreserved=True
+SaltDustMeleeMonster|pixel=True|portraitPreserved=True
+SaltDustOrdinaryMonster|pixel=True|portraitPreserved=True
+SaltDustRemoteRobot|pixel=True|portraitPreserved=True
+WaterEdgeMonster|pixel=True|portraitPreserved=True
+WinterDroneLaunchShaft|pixel=True|portraitPreserved=True
+WinterDroneScout|pixel=True|portraitPreserved=True
+WinterTacticalDroneElite|pixel=True|portraitPreserved=True
+YoungOfficerEliBossEnemy|pixel=True|portraitPreserved=True
+YoungOfficerEliDroneSwarmBoss|pixel=True|portraitPreserved=True
+Original mode restored=18/18; off-mode spawn original=True
+Pixel mode reapplied=19/19; ring size unchanged=True
+Hit tint remains visible on pixel material=4/4
+Corrected point sampling: rendered identities verified against original portraits; hit tint=4/4
+Independent death feedback created=True
